@@ -1,0 +1,7 @@
+{% extends 'prime_base.html' %}
+
+{% block content %}
+    {% for article in articles %}
+        <img src="{{ MEDIA_URL }}{{ article.lead_photo }}"/>
+    {% endfor %}
+{% endblock %}
