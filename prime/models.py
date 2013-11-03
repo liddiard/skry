@@ -7,6 +7,9 @@ class Issue(models.Model):
     slug = models.SlugField(max_length=32)
     release_date = models.DateField()
 
+    class Meta:
+        ordering = ['-release_date']
+
     def __unicode__(self):
         return self.name
 
