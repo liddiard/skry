@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
+from main.views import Front
 
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
@@ -12,6 +12,14 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin:
+    # front
+    url(r'^$', Front.as_view(), name='front'),
+
+    # admin
     url(r'^admin/', include(admin.site.urls)),
+
+    # mainsite
+
+    # other apps
+    url(r'^prime/', include('prime.urls')),
 )

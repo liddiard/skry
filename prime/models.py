@@ -15,6 +15,7 @@ class Article(models.Model):
         return "prime/%s/lead/%s" % (instance.issue.slug, filename)
 
     title = models.CharField(max_length=64)
+    slug = models.SlugField(max_length=64)
     lead_photo = models.ImageField(upload_to=getUploadPath)
     author = models.ForeignKey('main.Author')
     body = models.TextField()

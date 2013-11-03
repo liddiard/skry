@@ -1,2 +1,3 @@
 *.pyc
+uploads/
 dailybruin/settings/local.py

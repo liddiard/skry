@@ -1,1 +1,5 @@
-# Create your views here.
+from main.models import Author
+from django.views.generic.list import ListView
+
+class Front(ListView):
+    pass
