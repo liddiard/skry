@@ -11,17 +11,14 @@ class Issue(models.Model):
         return self.name
 
 class Article(models.Model):
-    __upload_path = "prime"
+    def getUploadPath(instance, filename):
+        return "prime/%s/lead/%s" % (instance.issue.slug, filename)
 
     title = models.CharField(max_length=64)
-    lead_photo = models.ImageField(upload_to=__upload_path)
+    lead_photo = models.ImageField(upload_to=getUploadPath)
     author = models.ForeignKey('main.Author')
     body = models.TextField()
     issue = models.ForeignKey('Issue')
 
     def __unicode__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        __upload_path = 'prime/%s/lead' % self.issue.slug
-        super(Article, self).save(*args, **kwargs)
