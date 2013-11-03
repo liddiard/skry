@@ -13,3 +13,6 @@ class Author(models.Model):
     facebook = models.CharField(max_length=32)
     mug = models.ImageField(upload_to='mug/%Y')
     bio = models.TextField()
+
+    def __unicode__(self):
+        "%s %s" % (self.first_name, self.last_name)

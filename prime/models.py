@@ -7,6 +7,9 @@ class Issue(models.Model):
     slug = models.SlugField(max_length=32)
     release_date = models.DateField()
 
+    def __unicode__(self):
+        return self.name
+
 class Article(models.Model):
     __upload_path = "prime"
 
@@ -15,6 +18,9 @@ class Article(models.Model):
     author = models.ForeignKey('main.Author')
     body = models.TextField()
     issue = models.ForeignKey('Issue')
+
+    def __unicode__(self):
+        return self.title
 
     def save(self, *args, **kwargs):
         __upload_path = 'prime/%s/lead' % self.issue.slug
