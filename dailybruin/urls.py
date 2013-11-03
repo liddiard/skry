@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
 from main.views import Front
 from dailybruin.settings.base import MEDIA_URL, MEDIA_ROOT
 
@@ -27,4 +28,4 @@ urlpatterns = patterns('',
 
     # other apps
     url(r'^prime/', include('prime.urls')),
-)
+) + static(MEDIA_URL, document_root=MEDIA_ROOT)
