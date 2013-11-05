@@ -20,10 +20,6 @@ urlpatterns = patterns('',
     # admin
     url(r'^admin/', include(admin.site.urls)),
 
-    # media
-    (r'^%s(?P<path>.*)$' % MEDIA_URL[1:], 'django.views.static.serve', {
-                 'document_root': MEDIA_ROOT}),
-
     # mainsite
 
     # other apps
