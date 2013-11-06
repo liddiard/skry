@@ -1,9 +1,10 @@
 {% extends 'prime_base.html' %}
+{% load shortcodes %}
 
 {% block content %}
     <div class="article">
         <h1>{{ article.title }}</h1>
         <span class="author">by {{ article.author }}</span>
-        {{ article.body|safe }}
+        {{ article.body|shortcode|safe }}
     </div>
 {% endblock %}
