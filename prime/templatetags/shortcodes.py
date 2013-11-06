@@ -16,4 +16,17 @@ def imgHTML(match):
         image = Image.objects.get(pk=match.groups()[0])
     except Image.DoesNotExist:
         return ""
-    return '<img src="%s%s"/>' % (MEDIA_URL, image.image)
+    data = {'MEDIA_URL': MEDIA_URL,
+            'filename': image.image,
+            'author': image.author,
+            'caption': image.caption
+    }
+    return '''
+           <figure>
+               <div class="image">
+                   <img src="%(MEDIA_URL)s%(filename)s"/>
+                   <div class="credit">%(author)s</div>
+               </div>
+               <figcaption>%(caption)s</figcaption>
+           </figure>
+           ''' % data
