@@ -8,6 +8,10 @@
     {% block header %}
         <header>
             <h1>Prime</h1>
+            <h2>{{ issue.name }}</h2>
+            {% for issue in recent_issues %}
+                <span class="issue">{{ issue.name }}</span>
+            {% endfor %}
         </header>
     {% endblock %}
     {% block content %}{% endblock %}

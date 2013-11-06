@@ -1,7 +1,9 @@
 {% extends 'prime_base.html' %}
 
 {% block content %}
-    {{ article.title }}
-    {{ article.author }}
-    {{ article.body }}
+    <div class="article">
+        <h1>{{ article.title }}</h1>
+        <span class="author">by {{ article.author }}</span>
+        {{ article.body }}
+    </div>
 {% endblock %}
