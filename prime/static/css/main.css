@@ -57,7 +57,7 @@ header {
     }
 
         header .previous-issues a {
-            padding: 0 5px;
+            padding: 0 0.5em;
         }
 
 header a, footer a {

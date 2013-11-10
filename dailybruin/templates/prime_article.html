@@ -7,6 +7,6 @@
         <h1 class="headline">{{ article.title }}</h1>
         <span class="author">by {{ article.author }}</span>
         {{ article.body|markdown|shortcode }}
-        <a class="refer-back" href="{% url 'prime_issue' article.issue.slug %}">&larr; back to the main page</a>
+        <a class="refer-back" href="{% url 'prime_issue' article.issue.slug %}">&larr; back to the articles</a>
     </div>
 {% endblock %}
