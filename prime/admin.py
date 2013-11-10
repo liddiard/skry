@@ -13,7 +13,7 @@ class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     formfield_overrides = {
         models.TextField: {
-            'widget': Textarea(attrs={'rows': 40, 'cols': 140})
+            'widget': Textarea(attrs={'rows': 40, 'cols': 120})
         },
     }
 admin.site.register(Article, ArticleAdmin)
