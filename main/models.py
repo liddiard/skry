@@ -8,7 +8,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=32)
     organization = models.CharField(max_length=32, default="Daily Bruin",
                                     blank=True)
-    # title = models.CharField(max_length=32, null=True, blank=True)
+    # title = models.CharField(max_length=32, blank=True)
     email = models.EmailField(blank=True)
     twitter = models.CharField(max_length=15, blank=True)
                                # current max handle length
