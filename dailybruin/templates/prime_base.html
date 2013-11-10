@@ -40,9 +40,12 @@
                     <a class="article-refer" href="{% url 'prime_article' article.issue.slug article.slug %}">{{ article.title }}</a>
                 {% endfor %}
                 <div class="print-refer">
-                    <h2>Read the {{ issue.name }} print issue online.<h2>
-                    <a href="{{ MEDIA_URL }}{{ pdf.pdf }}"><img src="{{ MEDIA_URL }}{{ pdf.image }}"/></a>
+                    <a target="blank" href="{{ MEDIA_URL }}{{ pdf.pdf }}">
+                        <h2>Read the {{ issue.name }} print issue online:</h2>
+                        <img src="{{ MEDIA_URL }}{{ pdf.image }}"/>
+                   </a>
                 </div>
+                <span class="copyright">&copy; {{ issue.release_date|date:"Y" }} Daily Bruin</div>
             </div>
         </footer>
     {% endblock %}

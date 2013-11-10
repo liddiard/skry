@@ -98,8 +98,12 @@ footer {
         border-top: 1px solid rgba(255,255,255, 0.5);
     }
 
+        footer .print-refer h2 {
+            text-align: center;
+        }
+
         footer .print-refer img {
-            text-align: right;
+            display: block;
         }
 
 figure {
@@ -177,4 +181,12 @@ figure .credit {
 
 #articles {
     text-align: center;
+    padding-bottom: 1em;
+}
+
+.copyright {
+    display: block;
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 1em;
 }
