@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <title>Prime | Daily Bruin</title>
     <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.stalactite.min.js"></script>
     <script src="{{ STATIC_URL }}js/main.js"></script>
 </head>
 <body>
+    <script>
+        $(document).ready(function(){
+            $('header').css({
+                "background": "url('{{ MEDIA_URL }}{{ issue.header_image }}') no-repeat center center",
+                "-webkit-background-size": "cover",
+                "-moz-background-size": "cover",
+                "-o-background-size": "cover",
+                "background-size": "cover"
+            });
+        });
+    </script>
     {% block header %}
         <header>
-            <h1>Prime</h1>
-            <h2>{{ issue.name }}</h2>
-            {% for issue in recent_issues %}
-                <span class="issue">{{ issue.name }}</span>
-            {% endfor %}
+            <a class="banner" href="{% url 'prime_issue' '' %}"><img src="{{ STATIC_URL }}img/logo_banner.png" alt="Prime"/></a>
+            <a class="current-issue" href="{% url 'prime_issue' issue.slug %}">{{ issue.name }}</a>
+            <div class="previous-issues">
+                {% for issue in recent_issues %}
+                    <a href="{% url 'prime_issue' issue.slug %}"><span class="issue">{{ issue.name }}</span></a>
+                {% endfor %}
+            </div>
         </header>
     {% endblock %}
     {% block content %}{% endblock %}

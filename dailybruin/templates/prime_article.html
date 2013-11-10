@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="article">
-        <h1>{{ article.title }}</h1>
+        <h1 class="headline">{{ article.title }}</h1>
         <span class="author">by {{ article.author }}</span>
         {{ article.body|markdown|shortcode }}
     </div>

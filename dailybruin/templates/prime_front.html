@@ -3,7 +3,7 @@
 {% block content %}
     <div id="articles">
         {% for article in articles %}
-            <div class="box size 11"><img src="{{ MEDIA_URL }}{{ article.lead_photo }}"/></div>
+            <a href="{% url 'prime_article' article.issue.slug article.slug %}"><img src="{{ MEDIA_URL }}{{ article.lead_photo }}"/></a>
         {% endfor %}
     </div>
 {% endblock %}
