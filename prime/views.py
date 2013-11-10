@@ -3,7 +3,7 @@ from django.views.generic import View
 from django.views.generic.detail import DetailView
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import Http404
-from dailybruin.settings.base import MEDIA_URL
+from dailybruin.settings.base import MEDIA_URL, STATIC_URL
 
 class IssueView(View):
     def get(self, context, slug):
@@ -18,7 +18,8 @@ class IssueView(View):
                 recent_issues = Issue.objects.order_by('-release_date')[0:3]
         articles = Article.objects.filter(issue=issue)
         context = {'issue': issue, 'recent_issues': recent_issues,
-                   'articles': articles, 'MEDIA_URL': MEDIA_URL}
+                   'articles': articles, 'MEDIA_URL': MEDIA_URL,
+                   'STATIC_URL': STATIC_URL}
         return render_to_response('prime_front.html', context)
 
 class ArticleView(View):
@@ -29,5 +30,5 @@ class ArticleView(View):
         except Article.DoesNotExist:
             raise Http404
         context = {'issue': issue, 'article': article,
-                   'MEDIA_URL': MEDIA_URL}
+                   'MEDIA_URL': MEDIA_URL, 'STATIC_URL': STATIC_URL}
         return render_to_response('prime_article.html', context)
