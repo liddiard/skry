@@ -11,8 +11,8 @@
 <body>
     <script>
         $(document).ready(function(){
-            $('header').css({
-                "background": "url('{{ MEDIA_URL }}{{ issue.header_image }}') no-repeat center center",
+            $('header, footer').css({
+                "background": "url('{{ MEDIA_URL }}{{ issue.header_image }}') no-repeat center center fixed",
                 "-webkit-background-size": "cover",
                 "-moz-background-size": "cover",
                 "-o-background-size": "cover",
@@ -32,5 +32,19 @@
         </header>
     {% endblock %}
     {% block content %}{% endblock %}
+    {% block footer %}
+        <footer>
+            <div class="refer">
+                <h1>prime {{ issue.name }}</h1>
+                {% for article in articles %}
+                    <a class="article-refer" href="{% url 'prime_article' article.issue.slug article.slug %}">{{ article.title }}</a>
+                {% endfor %}
+                <div class="print-refer">
+                    <h2>Read the {{ issue.name }} print issue online.<h2>
+                    <a href="{{ MEDIA_URL }}{{ pdf.pdf }}"><img src="{{ MEDIA_URL }}{{ pdf.image }}"/></a>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
 </body>
 </html>

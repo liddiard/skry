@@ -60,13 +60,46 @@ header {
             padding: 0 5px;
         }
 
-    header a {
-        color: white;
+header a, footer a {
+    color: white;
+}
+
+header a:hover, footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+footer {
+    box-shadow: 0 1px 0 0 rgba(0,0,0, 0.2) inset;
+}
+
+    footer a.article-refer {
+        font-size: 150%;
+        display: block;
+        border-top: 1px solid rgba(255,255,255, 0.5);
+        padding: 0.25em 0;
     }
 
-        header a:hover {
-            color: white;
-            text-decoration: underline;
+    footer .refer {
+        width: 480px;
+        padding: 10px;
+        color: white;
+        margin: 0 auto;
+        background-color: rgba(0,0,0, 0.5);
+    }
+
+        footer .refer h1 {
+            margin: 0.5em 0;
+            font-size: 300%; 
+        }
+    
+    footer .print-refer {
+        padding-top: 0.5em;
+        border-top: 1px solid rgba(255,255,255, 0.5);
+    }
+
+        footer .print-refer img {
+            text-align: right;
         }
 
 figure {
@@ -133,7 +166,7 @@ figure .credit {
 
 .article {
     width: 500px;
-    margin: 0 auto;
+    margin: 0 auto 2.5em auto;
 }
 
 .author {

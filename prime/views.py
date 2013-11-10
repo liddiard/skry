@@ -1,4 +1,4 @@
-from prime.models import Issue, Article
+from prime.models import Issue, Article, PDF
 from django.views.generic import View
 from django.views.generic.detail import DetailView
 from django.shortcuts import render_to_response, get_object_or_404
@@ -22,8 +22,9 @@ class IssueView(View):
     def get(self, context, slug):
         issue, recent_issues = getRecentIssues(slug)
         articles = Article.objects.filter(issue=issue).order_by('position')
+        pdf = PDF.objects.get(issue=issue)
         context = {'issue': issue, 'recent_issues': recent_issues,
-                   'articles': articles, 'MEDIA_URL': MEDIA_URL,
+                   'articles': articles, 'pdf': pdf, 'MEDIA_URL': MEDIA_URL,
                    'STATIC_URL': STATIC_URL}
         return render_to_response('prime_front.html', context)
 
@@ -34,7 +35,9 @@ class ArticleView(View):
             article = Article.objects.filter(issue=issue).get(slug=article_slug)
         except Article.DoesNotExist:
             raise Http404
+        articles = Article.objects.filter(issue=issue).order_by('position')
+        pdf = PDF.objects.get(issue=issue)
         context = {'issue': issue, 'recent_issues': recent_issues,
-                   'article': article, 'MEDIA_URL': MEDIA_URL, 
-                   'STATIC_URL': STATIC_URL}
+                   'article': article, 'articles': articles, 'pdf': pdf,
+                   'MEDIA_URL': MEDIA_URL, 'STATIC_URL': STATIC_URL}
         return render_to_response('prime_article.html', context)
