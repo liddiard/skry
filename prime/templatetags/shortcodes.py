@@ -15,7 +15,7 @@ def imgHTML(match):
     try:
         image = Image.objects.get(pk=match.group('pk'))
     except Image.DoesNotExist:
-        return ""
+        return "" # IDEA: don't fail silently?
     given_display = match.group('display')
     # IDEA: check if given_display is in a list of valid dispaly options.
     # If not, assign it to default value.
