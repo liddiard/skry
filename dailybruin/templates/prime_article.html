@@ -1,11 +1,11 @@
 {% extends 'prime_base.html' %}
 {% load shortcodes %}
-{% load markup %}
+{% load markdown %}
 
 {% block content %}
     <div class="article">
         <h1>{{ article.title }}</h1>
         <span class="author">by {{ article.author }}</span>
-        {{ article.body|markdown:"safe"|shortcode|safe }}
+        {{ article.body|markdown|shortcode }}
     </div>
 {% endblock %}

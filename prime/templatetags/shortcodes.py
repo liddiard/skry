@@ -5,7 +5,7 @@ from dailybruin.settings.base import MEDIA_URL
 from prime.models import Image
 register = template.Library()
 
-@register.filter
+@register.filter(is_safe=True)
 @stringfilter
 def shortcode(value):
     img = r'\[img(?P<pk>\d+)\s*(?P<display>\S+)?\]'
