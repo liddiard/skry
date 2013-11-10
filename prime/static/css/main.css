@@ -6,6 +6,7 @@ body {
 }
 
 a {
+    border: 0;
     color: #05a;
     text-decoration: none;
 }
@@ -40,6 +41,7 @@ header {
     header .banner {
         position: absolute;
         bottom: 10px;
+        left: 40px;
     }
 
     header .current-issue {

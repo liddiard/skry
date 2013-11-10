@@ -22,6 +22,7 @@
     </script>
     {% block header %}
         <header>
+            <a href="http://dailybruin.com"><img src="{{ STATIC_URL }}img/nameplate.png"/></a>
             <a class="banner" href="{% url 'prime_issue' '' %}"><img src="{{ STATIC_URL }}img/logo_banner.png" alt="Prime"/></a>
             <a class="current-issue" href="{% url 'prime_issue' issue.slug %}">{{ issue.name }}</a>
             <div class="previous-issues">
