@@ -30,6 +30,7 @@ class Article(models.Model):
     lead_photo = models.ImageField(upload_to=getUploadPath)
     author = models.ForeignKey('main.Author')
     body = models.TextField()
+    position = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return self.title

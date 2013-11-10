@@ -1,3 +1,3 @@
 $(document).ready(function(){
-    $('img').nested();
+    $('#articles').stalactite();
 });

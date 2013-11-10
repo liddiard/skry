@@ -1,7 +1,9 @@
 {% extends 'prime_base.html' %}
 
 {% block content %}
-    {% for article in articles %}
-        <img src="{{ MEDIA_URL }}{{ article.lead_photo }}"/>
-    {% endfor %}
+    <div id="articles">
+        {% for article in articles %}
+            <div class="box size 11"><img src="{{ MEDIA_URL }}{{ article.lead_photo }}"/></div>
+        {% endfor %}
+    </div>
 {% endblock %}

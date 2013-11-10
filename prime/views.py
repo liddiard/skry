@@ -16,7 +16,7 @@ class IssueView(View):
                 recent_issues = Issue.objects.order_by('-release_date')[1:4]
             else:
                 recent_issues = Issue.objects.order_by('-release_date')[0:3]
-        articles = Article.objects.filter(issue=issue)
+        articles = Article.objects.filter(issue=issue).order_by('position')
         context = {'issue': issue, 'recent_issues': recent_issues,
                    'articles': articles, 'MEDIA_URL': MEDIA_URL,
                    'STATIC_URL': STATIC_URL}
