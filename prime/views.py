@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import Http404
 from dailybruin.settings.base import MEDIA_URL, STATIC_URL
 
-def getRecentIssues(issue_slug):
+def getRecentIssues(issue_slug=None):
     if issue_slug is None:
         issue = Issue.objects.latest('release_date')
         recent_issues = Issue.objects.order_by('-release_date')[1:4]
@@ -41,3 +41,10 @@ class ArticleView(View):
                    'article': article, 'articles': articles, 'pdf': pdf,
                    'MEDIA_URL': MEDIA_URL, 'STATIC_URL': STATIC_URL}
         return render_to_response('prime_article.html', context)
+
+def error404(request): # not currently implemented
+    issue, recent_issues = getRecentIssues()
+    print "hello"
+    context = {'issue': issue, 'recent_issues': recent_issues,
+               'MEDIA_URL': MEDIA_URL, 'STATIC_URL': STATIC_URL}
+    return render_to_response('404.html', context)

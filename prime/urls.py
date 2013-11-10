@@ -6,3 +6,4 @@ urlpatterns = patterns('',
     url(r'^(?P<issue_slug>[-_\w]+)/(?P<article_slug>[-_\w]+)/$',
         ArticleView.as_view(), name='prime_article'),
 )
+
