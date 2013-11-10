@@ -209,12 +209,12 @@ figure .credit {
 
         #articles a .teaser {
             width: 300px;
-            height: 200px;
+            height: 150px;
             position: absolute;
             left: 50%;
             top: 50%; 
             margin-left: -150px;
-            margin-top: -100px;
+            margin-top: -75px;
             color: white;
             font-size: 1.5em;
             text-shadow: 0 0 20px black;
