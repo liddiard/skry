@@ -184,6 +184,47 @@ figure .credit {
     padding-bottom: 1em;
 }
 
+    #articles .mask {
+        position: absolute;
+        width: 100%; height: 100%;
+        background-color: rgba(0,0,0, 0.2);
+        opacity: 0;
+        -moz-transition: opacity 0.25s, -moz-transform 0.25s;
+        -webkit-transition: opacity 0.25s, -webkit-transform 0.25s;
+        -o-transition: opacity 0.25s, -o-transform 0.25s;
+        transition: opacity 0.25s, transform 0.25s;
+    }
+
+    #articles a {
+        position: relative;
+    }
+
+        #articles a:hover .teaser {
+            opacity: 1;
+        }
+
+        #articles a:hover .mask {
+            opacity: 1;
+        }
+
+        #articles a .teaser {
+            width: 300px;
+            height: 200px;
+            position: absolute;
+            left: 50%;
+            top: 50%; 
+            margin-left: -150px;
+            margin-top: -100px;
+            color: white;
+            font-size: 1.5em;
+            text-shadow: 0 0 20px black;
+            opacity: 0;
+            -moz-transition: opacity 0.25s, -moz-transform 0.25s;
+            -webkit-transition: opacity 0.25s, -webkit-transform 0.25s;
+            -o-transition: opacity 0.25s, -o-transform 0.25s;
+            transition: opacity 0.25s, transform 0.25s;
+        }
+
 .copyright {
     display: block;
     font-size: 0.8em;

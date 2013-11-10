@@ -35,6 +35,7 @@ class Article(models.Model):
     slug = models.SlugField(max_length=64)
     get_upload_path = createUploadPath('lead')
     lead_photo = models.ImageField(upload_to=get_upload_path)
+    teaser = models.CharField(max_length=256)
     author = models.ForeignKey('main.Author')
     body = models.TextField()
     position = models.PositiveIntegerField(default=0)
