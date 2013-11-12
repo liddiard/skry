@@ -31,8 +31,8 @@ class Issue(models.Model):
 
 class Article(models.Model):
     issue = models.ForeignKey('Issue', default=None, null=True, blank=True)
-    title = models.CharField(max_length=64)
-    slug = models.SlugField(max_length=64)
+    title = models.CharField(max_length=128)
+    slug = models.SlugField(max_length=128)
     get_upload_path = createUploadPath('lead')
     lead_photo = models.ImageField(upload_to=get_upload_path)
     teaser = models.CharField(max_length=200)
