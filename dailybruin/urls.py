@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
-from main.views import Front
 from dailybruin.settings.base import MEDIA_URL, MEDIA_ROOT
 
 from django.contrib import admin
@@ -14,8 +13,6 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # front
-    url(r'^$', Front.as_view(), name='front'),
 
     # admin
     url(r'^admin/', include(admin.site.urls)),

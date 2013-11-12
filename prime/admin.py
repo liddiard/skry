@@ -16,7 +16,7 @@ class ArticleAdmin(admin.ModelAdmin):
             'widget': Textarea(attrs={'rows': 40, 'cols': 120})
         },
     }
-admin.site.register(Article, ArticleAdmin)
+#admin.site.register(Article, ArticleAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'caption', 'author', 'issue')

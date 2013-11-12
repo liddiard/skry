@@ -30,7 +30,7 @@ class Issue(models.Model):
         return self.name
 
 class Article(models.Model):
-    issue = models.ForeignKey('Issue', default=getLatestIssue)
+    issue = models.ForeignKey('Issue', default=None, null=True, blank=True)
     title = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64)
     get_upload_path = createUploadPath('lead')
@@ -46,7 +46,7 @@ class Article(models.Model):
 class Image(models.Model):
     get_upload_path = createUploadPath('article')
     image = models.ImageField(upload_to=get_upload_path)
-    issue = models.ForeignKey('Issue', default=getLatestIssue)
+    issue = models.ForeignKey('Issue', default=None, null=True, blank=True)
     author = models.ForeignKey('main.Author')
     caption = models.TextField(blank=True)
 
