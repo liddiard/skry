@@ -84,7 +84,8 @@ footer {
     }
 
     footer .refer {
-        width: 480px;
+        width: 750px;
+        max-width: 90%;
         padding: 10px;
         color: white;
         margin: 0 auto;
@@ -107,6 +108,7 @@ footer {
 
         footer .print-refer img {
             display: block;
+            margin: 0 auto;
         }
 
 figure {
