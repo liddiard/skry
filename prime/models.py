@@ -36,7 +36,7 @@ class Article(models.Model):
     get_upload_path = createUploadPath('lead')
     lead_photo = models.ImageField(upload_to=get_upload_path)
     teaser = models.CharField(max_length=200)
-    author = models.ForeignKey('main.Author')
+    author = models.ManyToManyField('main.Author')
     body = models.TextField()
     position = models.PositiveIntegerField(default=0)
 
