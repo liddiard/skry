@@ -19,7 +19,7 @@ class ArticleAdmin(admin.ModelAdmin):
 admin.site.register(Article, ArticleAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'caption', 'author', 'issue')
+    list_display = ('id', 'image', 'caption', 'author', 'issue')
     readonly_fields = ('id',)
 admin.site.register(Image, ImageAdmin)
 
