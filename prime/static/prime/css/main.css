@@ -35,7 +35,7 @@ header {
     padding: 20px 40px;
     margin-bottom: 20px;
     box-shadow: 0 -1px 0 0 rgba(0,0,0, 0.2) inset;
-    height: 200px;
+    height: 150px;
 }
 
     header .banner {
@@ -79,7 +79,8 @@ footer {
         font-size: 150%;
         display: block;
         border-top: 1px solid rgba(255,255,255, 0.5);
-        padding: 0.25em 0;
+        padding: 0.5em 0;
+        line-height: 1.2;
     }
 
     footer .refer {
