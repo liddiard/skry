@@ -9,17 +9,17 @@ class IssueAdmin(admin.ModelAdmin):
 admin.site.register(Issue, IssueAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'issue')
+    list_display = ('title', 'issue')
     prepopulated_fields = {"slug": ("title",)}
     formfield_overrides = {
         models.TextField: {
             'widget': Textarea(attrs={'rows': 40, 'cols': 120})
         },
     }
-#admin.site.register(Article, ArticleAdmin)
+admin.site.register(Article, ArticleAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'caption', 'author', 'issue')
+    list_display = ('id', 'image', 'caption', 'author', 'issue')
     readonly_fields = ('id',)
 admin.site.register(Image, ImageAdmin)
 
