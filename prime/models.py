@@ -39,6 +39,9 @@ class Article(models.Model):
     author = models.ManyToManyField('main.Author')
     body = models.TextField()
     position = models.PositiveIntegerField(default=0)
+    
+    def getPrettyAuthors(self):
+        return ' and '.join([str(a) for a in self.author])
 
     def __unicode__(self):
         return self.title
