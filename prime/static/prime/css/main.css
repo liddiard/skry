@@ -122,6 +122,7 @@ figure figcaption {
     margin: 0.5em 0 1.5em 0;
     line-height: 1.216;
     color: gray;
+    font-size: 0.9em;
 }
 
 figure.right, figure.left {
