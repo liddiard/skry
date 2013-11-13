@@ -2,7 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Prime | Daily Bruin</title>
+    {% if article.title %}
+        <title>{{ article.title }} | prime | Daily Bruin</title>
+    {% else %}
+        <title>prime | Daily Bruin</title>
+    {% endif %}
     <link href="{{ STATIC_URL }}prime/css/main.css" rel="stylesheet" type="text/css">
     <link href="{{ STATIC_URL }}prime/css/minishare.css" rel="stylesheet" type="text/css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

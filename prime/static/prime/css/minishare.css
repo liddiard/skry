@@ -5,7 +5,7 @@ div#minishare {
   position: fixed;
   display: block;
   background: rgb(245,245,245);
-  padding: 8px;
+  padding: 6px;
   text-align: center;
 }
 
@@ -53,7 +53,7 @@ div#minishare p#message {
   margin: 0;
   padding: 0;
   margin-bottom: 6px;
-  font-size: 14px;
+  font-size: 13px;
   color: rgb(100,100,100);
   font-family: Arial, sans-serif;
 }
