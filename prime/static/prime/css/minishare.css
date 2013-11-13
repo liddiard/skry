@@ -2,7 +2,7 @@
 div#minishare {
   left: 50%;
   margin-left: 270px; 
-  bottom: 20px;
+  top: 225px;
   position: fixed;
   display: block;
   background: rgba(0,0,0, 0.05);
