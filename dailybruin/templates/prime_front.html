@@ -1,6 +1,9 @@
 {% extends 'prime_base.html' %}
 
 {% block content %}
+    <script>
+        $(document).ready(function(){ $('#articles').stalactite(); });
+    </script>
     <div id="articles">
         {% for article in articles %}
             <a href="{% url 'prime_article' article.issue.slug article.slug %}">

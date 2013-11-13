@@ -9,7 +9,7 @@ class IssueAdmin(admin.ModelAdmin):
 admin.site.register(Issue, IssueAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'issue')
+    list_display = ('title', 'issue', 'position')
     prepopulated_fields = {"slug": ("title",)}
     formfield_overrides = {
         models.TextField: {

@@ -3,6 +3,15 @@
 {% load markdown %}
 
 {% block content %}
+    <script>
+        $(document).ready(function(){
+            $.miniShare( { 
+                message: "Share this", 
+                done_message: "Thanks!",
+                twitter_message: "{{ article.title }}, from @dailybruinprime's {{ article.issue.name }} issue"
+            });
+        });
+    </script>
     <div class="article">
         <h1 class="headline">{{ article.title }}</h1>
         <span class="author">by 

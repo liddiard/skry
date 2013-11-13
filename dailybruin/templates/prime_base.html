@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Prime | Daily Bruin</title>
-    <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}prime/css/main.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}prime/css/minishare.css" rel="stylesheet" type="text/css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.stalactite.min.js"></script>
-    <script src="{{ STATIC_URL }}js/main.js"></script>
+    <script src="{{ STATIC_URL }}prime/js/jquery.stalactite.min.js"></script>
+    <script src="{{ STATIC_URL }}prime/js/minishare.js"></script>
 </head>
 <body>
     <script>
@@ -22,8 +23,8 @@
     </script>
     {% block header %}
         <header>
-            <a href="http://dailybruin.com"><img src="{{ STATIC_URL }}img/nameplate.png"/></a>
-            <a class="banner" href="{% url 'prime_issue' '' %}"><img src="{{ STATIC_URL }}img/logo_banner.png" alt="Prime"/></a>
+            <a href="http://dailybruin.com"><img src="{{ STATIC_URL }}prime/img/nameplate.png"/></a>
+            <a class="banner" href="{% url 'prime_issue' '' %}"><img src="{{ STATIC_URL }}prime/img/logo_banner.png" alt="Prime"/></a>
             <a class="current-issue" href="{% url 'prime_issue' issue.slug %}">{{ issue.name }}</a>
             <div class="previous-issues">
                 {% for issue in recent_issues %}
