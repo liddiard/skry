@@ -1,10 +1,11 @@
 
 div#minishare {
-  right: 20px; 
+  left: 50%;
+  margin-left: 270px; 
   bottom: 20px;
   position: fixed;
   display: block;
-  background: rgb(245,245,245);
+  background: rgba(0,0,0, 0.05);
   padding: 6px;
   text-align: center;
 }
