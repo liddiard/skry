@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
+
+from django.conf import settings
 from django.conf.urls.static import static
-from dailybruin.settings.base import MEDIA_URL, MEDIA_ROOT
 
 from django.contrib import admin
 admin.autodiscover()
@@ -21,4 +22,4 @@ urlpatterns = patterns('',
 
     # other apps
     url(r'^prime/', include('prime.urls')),
-) + static(MEDIA_URL, document_root=MEDIA_ROOT)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
