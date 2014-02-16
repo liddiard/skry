@@ -1,7 +1,10 @@
 from .base import *
-from .secret import SECRET_KEY
 
-DEBUG = False
+DEBUG = True
+
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ['SECRET_KEY']
 
 
 # Database
