@@ -1,6 +1,11 @@
 from django.db import models
 from django.utils.text import slugify
 
+from PIL import Image as PyImage
+
+
+# utility functions
+
 def createUploadPath(directory, same_model=False):
     def getUploadPath(instance, filename):
         if same_model:
@@ -14,6 +19,9 @@ def createUploadPath(directory, same_model=False):
 
 def getLatestIssue():
     return Issue.objects.latest('release_date')
+
+
+# models
 
 class Issue(models.Model):
     name = models.CharField(max_length=32)
@@ -53,6 +61,23 @@ class Image(models.Model):
     issue = models.ForeignKey('Issue', default=None, null=True, blank=True)
     author = models.ForeignKey('main.Author')
     caption = models.TextField(blank=True)
+
+    __original_image = None
+
+    def __init__(self, *args, **kwargs):
+        super(Image, self).__init__(*args, **kwargs)
+        self.__original_image = self.image
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        if self.image != self.__original_image:
+            size = 500, 1000
+            super(Image, self).save(force_insert, force_update, *args, **kwargs)
+            image = PyImage.open(self.image)
+            image.thumbnail(size, PyImage.ANTIALIAS)
+            image.save(self.image.path)
+        else:
+            super(Image, self).save(force_insert, force_update, *args, **kwargs)
+        self.__original_image = self.image
 
     def __unicode__(self):
         return "%s photo by %s (%s...)" % (self.issue, self.author,
