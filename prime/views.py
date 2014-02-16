@@ -1,7 +1,7 @@
 from prime.models import Issue, Article, PDF
 from django.views.generic import View
 from django.views.generic.detail import DetailView
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.http import Http404
 from django.conf import settings
 
@@ -44,6 +44,8 @@ class ArticleView(View):
             article = Article.objects.filter(issue=issue).get(slug=article_slug)
         except Article.DoesNotExist:
             raise Http404
+        if article.redirect:
+            return redirect(article.redirect)
         articles = Article.objects.filter(issue=issue).order_by('position')
         pdf = PDF.objects.get(issue=issue)
         context = {'issue': issue, 'recent_issues': recent_issues,
