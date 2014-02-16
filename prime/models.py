@@ -37,7 +37,8 @@ class Article(models.Model):
     lead_photo = models.ImageField(upload_to=get_upload_path)
     teaser = models.CharField(max_length=200)
     author = models.ManyToManyField('main.Author')
-    body = models.TextField()
+    body = models.TextField(blank=True)
+    redirect = models.URLField(blank=True)
     position = models.PositiveIntegerField(default=0)
     
     def getPrettyAuthors(self):
