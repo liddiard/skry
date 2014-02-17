@@ -27,11 +27,15 @@ def imgHTML(match):
               'author': image.author,
               'caption': image.caption
     }
-    organization = image.author.organization
-    if organization:
-        params['organization'] = " / %s" % organization
+    if image.author:
+        organization = image.author.organization
+        if organization:
+            params['organization'] = " / %s" % organization
+        else:
+            params['organization'] = ""
     else:
         params['organization'] = ""
+        params['author'] = ""
     return '''
            <figure class="%(display)s">
                <div class="image">
