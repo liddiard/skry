@@ -87,6 +87,7 @@ MEDIA_URL = '/media/'
 # Example: "/var/www/example.com/static/"
 
 STATIC_ROOT = BASE_DIR + "/../static"
+MEDIA_ROOT = BASE_DIR + "/../uploads"
 
 
 TEMPLATE_DIRS = (
