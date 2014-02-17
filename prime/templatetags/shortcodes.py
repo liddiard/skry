@@ -24,10 +24,10 @@ def imgHTML(match):
     params = {'display': display,
               'MEDIA_URL': MEDIA_URL,
               'filename': image.image,
-              'author': image.author,
               'caption': image.caption
     }
     if image.author:
+        params['author'] = image.author
         organization = image.author.organization
         if organization:
             params['organization'] = " / %s" % organization
