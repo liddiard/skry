@@ -59,7 +59,7 @@ class Image(models.Model):
     get_upload_path = createUploadPath('article')
     image = models.ImageField(upload_to=get_upload_path)
     issue = models.ForeignKey('Issue', default=None, null=True, blank=True)
-    author = models.ForeignKey('main.Author')
+    author = models.ForeignKey('main.Author', null=True, blank=True)
     caption = models.TextField(blank=True)
 
     __original_image = None
