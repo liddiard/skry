@@ -1,7 +1,6 @@
 Django==1.6.2
-PIL==1.1.7
+Pillow==2.4.0
 South==0.8.2
-argparse==1.2.1
 markdown2==2.1.0
 psycopg2==2.5.1
 wsgiref==0.1.2
