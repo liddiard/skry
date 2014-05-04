@@ -34,6 +34,7 @@
                 {% for issue in recent_issues %}
                     <a href="{% url 'prime_issue' issue.slug %}"><span class="issue">{{ issue.name }}</span></a>
                 {% endfor %}
+                <a href="http://dailybruin.com/prime/"><span class="issue">Older issues</span></a>
             </div>
         </header>
     {% endblock %}
