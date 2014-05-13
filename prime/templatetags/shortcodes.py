@@ -7,9 +7,16 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 @stringfilter
-def shortcode(value):
+def image(value):
     img = r'\[img(?P<pk>\d+)\s*(?P<display>\S+)?\]'
     return re.sub(img, imgHTML, value)
+    
+@register.filter(is_safe=True)
+@stringfilter
+def youtube(value):
+    yt = r'\[youtube\]http://youtu\.be/(?P<uid>\S+)\[/youtube\]'
+    return re.sub(yt, ytHTML, value)
+
 
 def imgHTML(match):
     try:
@@ -46,3 +53,11 @@ def imgHTML(match):
                <figcaption>%(caption)s</figcaption>
            </figure>
            ''' % params
+
+def ytHTML(match):
+    uid = match.group('uid')
+    return '''
+        <iframe width="500" height="218" 
+                src="//www.youtube.com/embed/%s" frameborder="0" 
+                allowfullscreen></iframe>
+           ''' % uid
