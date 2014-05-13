@@ -57,7 +57,7 @@ def imgHTML(match):
 def ytHTML(match):
     uid = match.group('uid')
     return '''
-        <iframe width="500" height="218" 
+        <iframe width="500" height="281" 
                 src="//www.youtube.com/embed/%s" frameborder="0" 
                 allowfullscreen></iframe>
            ''' % uid
