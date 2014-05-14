@@ -8,5 +8,9 @@ class MainView(TemplateView):
 
     template_name = 'music/front.html'
 
-    def getContextData(self, context):
-        pass
+    def get_context_data(self, **kwargs):
+        context = super(MainView, self).get_context_data(**kwargs)
+        context['albums'] = Album.objects.all()
+
+        return context
+

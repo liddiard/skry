@@ -1,5 +1,11 @@
 {% extends "music/base.html" %}
 
 {% block content %}
-    Hello World
+    <ul>
+        {% for album in albums %}
+            <li>
+                {{ album.title }}
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
