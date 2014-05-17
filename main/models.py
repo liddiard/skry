@@ -28,13 +28,19 @@ class Author(models.Model):
 
 
 class Article(models.Model):
+    DRAFT = 1
+    FIRST_EDITING = 2
+    SECOND_EDITING = 3
+    RIMMING = 4
+    PROOFING = 5
+    READY_TO_PUBLISH = 6
     STATUS_CHOICES = (
-        ('dr', 'draft'),
-        ('e1', 'first editing'),
-        ('e2', 'second editing'),
-        ('ri', 'rimming'),
-        ('pr', 'proofing'),
-        ('pb', 'ready to publish')
+        (DRAFT, 'draft'),
+        (FIRST_EDITING, 'first editing'),
+        (SECOND_EDITING, 'second editing'),
+        (RIMMING, 'rimming'),
+        (PROOFING, 'proofing'),
+        (READY_TO_PUBLISH, 'ready to publish')
     )
 
     # primary content
@@ -44,7 +50,7 @@ class Article(models.Model):
     author = models.ManyToManyField('Author', related_name='main_article', null=True, blank=True)
     subhead = models.CharField(max_length=128)
     teaser = models.CharField(max_length=128)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES)
+    status = models.PositiveIntegerField(choices=STATUS_CHOICES)
     body = models.TextField()
     template = models.ForeignKey('Template') # TODO: add default
 
