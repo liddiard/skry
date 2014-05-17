@@ -41,11 +41,11 @@ class Article(models.Model):
     title = models.CharField(max_length=128)
     url_slug = models.CharField(max_length=128)
     assignment_slug = models.CharField(max_length=128)
-    author = models.ManyToManyField('Author', null=True, blank=True)
+    author = models.ManyToManyField('Author', related_name='main_article', null=True, blank=True)
     subhead = models.CharField(max_length=128)
     teaser = models.CharField(max_length=128)
     status = models.CharField(max_length=2, choices=STATUS_CHOICES)
-    body = models.CharField()
+    body = models.TextField()
     template = models.ForeignKey('Template') # TODO: add default
 
     # organization
@@ -125,7 +125,6 @@ class Page(models.Model):
 
 class Media(models.Model):
     caption = models.TextField()
-    credit = models.ManyToManyField('Author', blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -137,6 +136,7 @@ class Image(Media):
     image_full_2x = models.ImageField() # TODO: missing upload_to
     image_float = models.ImageField() # TODO: missing upload_to
     image_float_2x = models.ImageField() # TODO: missing upload_to
+    credit = models.ManyToManyField('Author', related_name='main_image', blank=True, null=True)
 
     def __unicode__(self):
         return self.image # TODO: check if needs str() coercion
@@ -145,6 +145,7 @@ class Image(Media):
 class Video(Media):
     title = models.CharField(max_length=128, blank=True, null=True)
     url = models.URLField()
+    credit = models.ManyToManyField('Author', related_name='main_video', blank=True, null=True)
 
     def __unicode__(self):
         return self.title
@@ -154,6 +155,7 @@ class Audio(Media):
     title = models.CharField(max_length=128, blank=True, null=True)
     mp3 = models.FileField() # TODO: add upload_to
     ogg = models.FileField() # TODO: add upload_to
+    credit = models.ManyToManyField('Author', related_name='main_audio', blank=True, null=True)
 
     def __unicode__(self):
         return self.title
@@ -176,7 +178,7 @@ class Poll(models.Model):
         return self.question
 
 
-class PollChoice(models.Model)
+class PollChoice(models.Model):
     question = models.ForeignKey('Question')
     choice = models.CharField(max_length=128)
     votes = models.PositiveIntegerField(default=0)
