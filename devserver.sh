@@ -1,1 +1,1 @@
-python manage.py runserver --settings=dailybruin.settings.local
+python manage.py runserver --settings=project.settings.local

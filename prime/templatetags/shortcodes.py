@@ -1,7 +1,7 @@
 import re
 from django import template
 from django.template.defaultfilters import stringfilter
-from dailybruin.settings.base import MEDIA_URL
+from project.settings.base import MEDIA_URL
 from prime.models import Image
 register = template.Library()
 
