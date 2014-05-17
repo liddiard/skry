@@ -73,10 +73,16 @@ class Article(models.Model):
     review = models.ForeignKey('Review', null=True, blank=True)
     # social_media_post = models.OneToOneField('scheduler.SMPost', null=True, blank=True)
 
+    def __unicode__(self):
+        return self.assignment_slug
+
 
 class CardSize(models.Model):
     width = models.PositiveIntegerField()
     height = models.PositiveIntegerField()
+
+    def __unicode__(self):
+        return "%dx%d" % (self.width, self.height)
 
 
 class Category(models.Model):
@@ -86,15 +92,24 @@ class Category(models.Model):
     default_card_2x = models.ImageField() # TODO: missing upload_to
     default_card_crop = models.CharField(max_length=1, choices=CARD_CROP_CHOICES, default='c')
 
+    def __unicode__(self):
+        return self.name
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=32, unique=True)
     slug = models.CharField(max_length=32, unique=True)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Template(models.Model):
     filename = models.CharField(max_length=64, unique=True)
     verbose_name = models.CharField(max_length=64, unique=True)
+
+    def __unicode__(self):
+        return "%s (%s)" % self.verbose_name, self.filename
 
 
 class Page(models.Model):
@@ -103,6 +118,9 @@ class Page(models.Model):
     slug = models.CharField(max_length=128)
     template = models.ForeignKey('Template')
     body = models.TextField()
+
+    def __unicode__(self):
+        return self.title
 
 
 class Media(models.Model):
@@ -120,10 +138,16 @@ class Image(Media):
     image_float = models.ImageField() # TODO: missing upload_to
     image_float_2x = models.ImageField() # TODO: missing upload_to
 
+    def __unicode__(self):
+        return self.image # TODO: check if needs str() coercion
+
 
 class Video(Media):
     title = models.CharField(max_length=128, blank=True, null=True)
     url = models.URLField()
+
+    def __unicode__(self):
+        return self.title
 
 
 class Audio(Media):
@@ -131,19 +155,31 @@ class Audio(Media):
     mp3 = models.FileField() # TODO: add upload_to
     ogg = models.FileField() # TODO: add upload_to
 
+    def __unicode__(self):
+        return self.title
+
 
 class Review(models.Model):
     item = models.CharField(max_length=64)
     info = models.TextField(blank=True)
     rating = models.PositiveIntegerField(null=True, blank=True) # TODO: limit to range
 
+    def __unicode__(self):
+        return self.item
+
 
 class Poll(models.Model):
     question = models.CharField(max_length=128)
     is_open = models.BooleanField(default=True)
 
+    def __unicode__(self):
+        return self.question
+
 
 class PollChoice(models.Model)
     question = models.ForeignKey('Question')
-    text = models.CharField(max_length=128)
+    choice = models.CharField(max_length=128)
     votes = models.PositiveIntegerField(default=0)
+
+    def __unicode__(self):
+        return self.choice
