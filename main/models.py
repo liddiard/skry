@@ -78,6 +78,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     publish_time = models.DateTimeField()
+    breaking_duration = models.PositiveIntegerField(default=0)
 
     # linked media
     featured_image = models.ImageField(upload_to='main/article/featured_image/'
