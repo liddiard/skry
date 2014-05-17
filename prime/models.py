@@ -44,7 +44,7 @@ class Article(models.Model):
     get_upload_path = createUploadPath('lead')
     lead_photo = models.ImageField(upload_to=get_upload_path)
     teaser = models.CharField(max_length=200)
-    author = models.ManyToManyField('main.Author')
+    author = models.ManyToManyField('main.Author', related_name='prime_article')
     body = models.TextField(blank=True)
     redirect = models.URLField(blank=True)
     position = models.PositiveIntegerField(default=0)
@@ -59,7 +59,7 @@ class Image(models.Model):
     get_upload_path = createUploadPath('article')
     image = models.ImageField(upload_to=get_upload_path)
     issue = models.ForeignKey('Issue', default=None, null=True, blank=True)
-    author = models.ForeignKey('main.Author', null=True, blank=True)
+    author = models.ForeignKey('main.Author', related_name="prime_image", null=True, blank=True)
     caption = models.TextField(blank=True)
 
     __original_image = None
