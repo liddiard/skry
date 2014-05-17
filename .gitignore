@@ -1,5 +1,5 @@
 *.pyc
 uploads/
-dailybruin/settings/secret.py
+project/settings/secret.py
 *.DS_Store
 
