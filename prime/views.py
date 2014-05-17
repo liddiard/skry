@@ -33,7 +33,7 @@ class IssueView(View):
                    'articles': articles, 'pdf': pdf, 
                    'MEDIA_URL': settings.MEDIA_URL,
                    'STATIC_URL': settings.STATIC_URL}
-        return render_to_response('prime_front.html', context)
+        return render_to_response('prime/front.html', context)
 
 
 class ArticleView(View):
@@ -52,7 +52,7 @@ class ArticleView(View):
                    'article': article, 'articles': articles, 'pdf': pdf,
                    'MEDIA_URL': settings.MEDIA_URL, 
                    'STATIC_URL': settings.STATIC_URL}
-        return render_to_response('prime_article.html', context)
+        return render_to_response('prime/article.html', context)
 
 
 # special handlers
