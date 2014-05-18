@@ -3,4 +3,5 @@ Pillow==2.4.0
 South==0.8.2
 markdown2==2.1.0
 psycopg2==2.5.1
+pytz==2014.3
 wsgiref==0.1.2
