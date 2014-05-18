@@ -15,15 +15,14 @@ CARD_CROP_CHOICES = (
 
 class Author(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
+    first_name = models.CharField(max_length=32, blank=True)
+    last_name = models.CharField(max_length=32, blank=True)
     organization = models.CharField(max_length=32, default="Daily Bruin",
                                     blank=True)
     # title = models.CharField(max_length=32, blank=True)
     email = models.EmailField(blank=True)
     twitter = models.CharField(max_length=15, blank=True)
                                # current max handle length
-    facebook = models.CharField(max_length=32, blank=True)
     mug = models.ImageField(upload_to='news/mug/%Y', null=True, blank=True)
     bio = models.TextField(blank=True)
 
@@ -36,13 +35,15 @@ class Article(models.Model):
     FIRST_EDITING = 2
     SECOND_EDITING = 3
     RIMMING = 4
-    PROOFING = 5
-    READY_TO_PUBLISH = 6
+    SLOTTING = 5
+    PROOFING = 6
+    READY_TO_PUBLISH = 7
     STATUS_CHOICES = (
         (DRAFT, 'draft'),
         (FIRST_EDITING, 'first editing'),
         (SECOND_EDITING, 'second editing'),
         (RIMMING, 'rimming'),
+        (SLOTTING, 'slotting'),
         (PROOFING, 'proofing'),
         (READY_TO_PUBLISH, 'ready to publish')
     )
