@@ -140,8 +140,15 @@ class Tag(models.Model):
 
 
 class Template(models.Model):
+    INCLUDE_CSS_CHOICES = (
+        ('fd5', 'Foundation 5'),
+        ('bs3.1.0', 'Bootstrap 3.1.0'),
+        ('bs2.3.2', 'Bootstrap 2.3.2'),
+    )
     filename = models.CharField(max_length=64, unique=True)
     verbose_name = models.CharField(max_length=64, unique=True)
+    include_css = models.CharField(max_length=8, choices=INCLUDE_CSS_CHOICES, 
+                                   unique=True)
 
     def __unicode__(self):
         return "%s (%s)" % self.verbose_name, self.filename
