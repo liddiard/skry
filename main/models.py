@@ -49,8 +49,8 @@ class Article(models.Model):
 
     # primary content
     title = models.CharField(max_length=128)
-    url_slug = models.CharField(max_length=128)
-    assignment_slug = models.CharField(max_length=128)
+    url_slug = models.SlugField(max_length=128)
+    assignment_slug = models.SlugField(max_length=128)
     author = models.ManyToManyField('Author', related_name='main_article', 
                                     null=True, blank=True)
     subhead = models.CharField(max_length=128)
@@ -96,6 +96,16 @@ class Article(models.Model):
         return self.assignment_slug
 
 
+class InternalArticleComment(models.Model):
+    user = models.ForeignKey(User)
+    time_posted = models.DateTimeField(auto_now_add=True)
+    article = models.ForeignKey('Article')
+    text = models.TextField()
+
+    def __unicode__(self):
+        return "%s on %s at %s" % (self.user, self.article, self.time_posted)
+
+
 class CardSize(models.Model):
     width = models.PositiveIntegerField()
     height = models.PositiveIntegerField()
@@ -107,6 +117,8 @@ class CardSize(models.Model):
 class Category(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
     name = models.CharField(max_length=32, unique=True)
+    slug = models.SlugField(max_length=32, unique=True)
+    color = models.CharField(max_length=6) # hex value
     default_card = models.ImageField(upload_to='main/category/default_card/1x/')
     default_card_2x = models.ImageField(upload_to='main/category/default_card/'
                                         '2x/') 
@@ -120,7 +132,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=32, unique=True)
-    slug = models.CharField(max_length=32, unique=True)
+    slug = models.SlugField(max_length=32, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -137,7 +149,7 @@ class Template(models.Model):
 class Page(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
     title = models.CharField(max_length=128)
-    slug = models.CharField(max_length=128)
+    slug = models.SlugField(max_length=128)
     template = models.ForeignKey('Template')
     body = models.TextField()
 
