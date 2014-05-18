@@ -24,7 +24,7 @@ class Author(models.Model):
     twitter = models.CharField(max_length=15, blank=True)
                                # current max handle length
     facebook = models.CharField(max_length=32, blank=True)
-    mug = models.ImageField(upload_to='main/mug/%Y', null=True, blank=True)
+    mug = models.ImageField(upload_to='news/mug/%Y', null=True, blank=True)
     bio = models.TextField(blank=True)
 
     def __unicode__(self):
@@ -51,7 +51,7 @@ class Article(models.Model):
     title = models.CharField(max_length=128)
     url_slug = models.SlugField(max_length=128)
     assignment_slug = models.SlugField(max_length=128)
-    author = models.ManyToManyField('Author', related_name='main_article', 
+    author = models.ManyToManyField('Author', related_name='news_article', 
                                     null=True, blank=True)
     subhead = models.CharField(max_length=128)
     teaser = models.CharField(max_length=128)
@@ -65,9 +65,9 @@ class Article(models.Model):
     tags = models.ManyToManyField('Tag', null=True, blank=True)
 
     # card
-    card = models.ImageField(upload_to='main/article/card/%Y/%m/%d/1x/', 
+    card = models.ImageField(upload_to='news/article/card/%Y/%m/%d/1x/', 
                              null=True, blank=True)
-    card_2x = models.ImageField(upload_to='main/article/card/%Y/%m/%d/2x/', 
+    card_2x = models.ImageField(upload_to='news/article/card/%Y/%m/%d/2x/', 
                                 null=True, blank=True)
     card_size = models.ForeignKey('CardSize')
     card_crop = models.CharField(max_length=1, choices=CARD_CROP_CHOICES, 
@@ -81,9 +81,9 @@ class Article(models.Model):
     breaking_duration = models.PositiveIntegerField(default=0)
 
     # linked media
-    featured_image = models.ImageField(upload_to='main/article/featured_image/'
+    featured_image = models.ImageField(upload_to='news/article/featured_image/'
                                        '%Y/%m/%d/1x/', null=True, blank=True)
-    featured_image_2x = models.ImageField(upload_to='main/article/'
+    featured_image_2x = models.ImageField(upload_to='news/article/'
                                           'featured_image/%Y/%m/%d/2x/', 
                                           null=True, blank=True)
     featured_video = models.ForeignKey('Video', null=True, blank=True)
@@ -119,8 +119,8 @@ class Category(models.Model):
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
     color = models.CharField(max_length=6) # hex value
-    default_card = models.ImageField(upload_to='main/category/default_card/1x/')
-    default_card_2x = models.ImageField(upload_to='main/category/default_card/'
+    default_card = models.ImageField(upload_to='news/category/default_card/1x/')
+    default_card_2x = models.ImageField(upload_to='news/category/default_card/'
                                         '2x/') 
     default_card_crop = models.CharField(max_length=1, 
                                          choices=CARD_CROP_CHOICES, 
@@ -165,13 +165,13 @@ class Media(models.Model):
 
 
 class Image(Media):
-    image = models.ImageField(upload_to='main/image/%Y/%m/%d/original/')
-    image_full = models.ImageField(upload_to='main/image/%Y/%m/%d/full/1x/')
-    image_full_2x = models.ImageField(upload_to='main/image/%Y/%m/%d/full/2x/')
-    image_float = models.ImageField(upload_to='main/image/%Y/%m/%d/float/1x/')
-    image_float_2x = models.ImageField(upload_to='main/image/%Y/%m/%d/float/'
+    image = models.ImageField(upload_to='news/image/%Y/%m/%d/original/')
+    image_full = models.ImageField(upload_to='news/image/%Y/%m/%d/full/1x/')
+    image_full_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/full/2x/')
+    image_float = models.ImageField(upload_to='news/image/%Y/%m/%d/float/1x/')
+    image_float_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/float/'
                                        '2x/')
-    credit = models.ManyToManyField('Author', related_name='main_image', 
+    credit = models.ManyToManyField('Author', related_name='news_image', 
                                     blank=True, null=True)
 
     def __unicode__(self):
@@ -181,7 +181,7 @@ class Image(Media):
 class Video(Media):
     title = models.CharField(max_length=128, blank=True, null=True)
     url = models.URLField()
-    credit = models.ManyToManyField('Author', related_name='main_video', 
+    credit = models.ManyToManyField('Author', related_name='news_video', 
                                     blank=True, null=True)
 
     def __unicode__(self):
@@ -190,9 +190,9 @@ class Video(Media):
 
 class Audio(Media):
     title = models.CharField(max_length=128, blank=True, null=True)
-    mp3 = models.FileField(upload_to='main/audio/%Y/%m/%d/mp3/')
-    ogg = models.FileField(upload_to='main/audio/%Y/%m/%d/ogg/')
-    credit = models.ManyToManyField('Author', related_name='main_audio', 
+    mp3 = models.FileField(upload_to='news/audio/%Y/%m/%d/mp3/')
+    ogg = models.FileField(upload_to='news/audio/%Y/%m/%d/ogg/')
+    credit = models.ManyToManyField('Author', related_name='news_audio', 
                                     blank=True, null=True)
 
     def __unicode__(self):

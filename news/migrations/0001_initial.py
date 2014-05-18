@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Author'
-        db.create_table(u'main_author', (
+        db.create_table(u'news_author', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
             ('first_name', self.gf('django.db.models.fields.CharField')(max_length=32)),
@@ -21,12 +21,12 @@ class Migration(SchemaMigration):
             ('mug', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
             ('bio', self.gf('django.db.models.fields.TextField')(blank=True)),
         ))
-        db.send_create_signal(u'main', ['Author'])
+        db.send_create_signal(u'news', ['Author'])
 
 
     def backwards(self, orm):
         # Deleting model 'Author'
-        db.delete_table(u'main_author')
+        db.delete_table(u'news_author')
 
 
     models = {
@@ -66,7 +66,7 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'main.author': {
+        u'news.author': {
             'Meta': {'object_name': 'Author'},
             'bio': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
@@ -81,4 +81,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['main']
+    complete_apps = ['news']

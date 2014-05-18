@@ -60,7 +60,7 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'main.author': {
+        u'news.author': {
             'Meta': {'object_name': 'Author'},
             'bio': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
@@ -75,7 +75,7 @@ class Migration(SchemaMigration):
         },
         u'prime.article': {
             'Meta': {'object_name': 'Article'},
-            'author': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['main.Author']", 'symmetrical': 'False'}),
+            'author': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['news.Author']", 'symmetrical': 'False'}),
             'body': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'issue': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'to': u"orm['prime.Issue']", 'null': 'True', 'blank': 'True'}),
@@ -87,7 +87,7 @@ class Migration(SchemaMigration):
         },
         u'prime.image': {
             'Meta': {'object_name': 'Image'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['main.Author']"}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['news.Author']"}),
             'caption': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),

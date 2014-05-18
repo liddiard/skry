@@ -1,6 +1,6 @@
 from django.views.generic.base import View, TemplateView
 
-from main.models import Author
+from .models import Author
 
 
 class FrontView(TemplateView):

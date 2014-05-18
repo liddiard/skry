@@ -15,7 +15,7 @@ class Migration(SchemaMigration):
             ('artist', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('rating', self.gf('django.db.models.fields.IntegerField')()),
             ('review_url', self.gf('django.db.models.fields.URLField')(max_length=200)),
-            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['main.Author'])),
+            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['news.Author'])),
             ('artwork', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
             ('spotify_url', self.gf('django.db.models.fields.CharField')(max_length=64)),
         ))
@@ -64,7 +64,7 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'main.author': {
+        u'news.author': {
             'Meta': {'object_name': 'Author'},
             'bio': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
@@ -81,7 +81,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Album'},
             'artist': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'artwork': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['main.Author']"}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['news.Author']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'rating': ('django.db.models.fields.IntegerField', [], {}),
             'review_url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
