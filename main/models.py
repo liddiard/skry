@@ -191,7 +191,7 @@ class Video(Media):
 class Audio(Media):
     title = models.CharField(max_length=128, blank=True, null=True)
     mp3 = models.FileField(upload_to='main/audio/%Y/%m/%d/mp3/')
-    ogg = models.FileField(uplaod_to='main/audio/%Y/%m/%d/ogg/')
+    ogg = models.FileField(upload_to='main/audio/%Y/%m/%d/ogg/')
     credit = models.ManyToManyField('Author', related_name='main_audio', 
                                     blank=True, null=True)
 
