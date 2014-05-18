@@ -1,7 +1,20 @@
+# The one. The only. The web framework for perfectionists with deadlines.
 Django==1.6.2
+
+# Image processing library, formerly known as and backwards compatible with PIL. Used primarily for image resizing in this project.
 Pillow==2.4.0
+
+# Database migrations. Will no longer be needed in Django 1.7.
 South==0.8.2
+
+# http://daringfireball.net/projects/markdown/ - used for parsing markdown in templates.
 markdown2==2.1.0
+
+# PostgreSQL database driver for Python.
 psycopg2==2.5.1
+
+# Python timezone library.
 pytz==2014.3
+
+# WSGI (Web Server Gateway Interface) utilities.
 wsgiref==0.1.2
