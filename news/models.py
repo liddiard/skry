@@ -63,7 +63,8 @@ class Article(models.Model):
     # organization
     position = models.PositiveIntegerField(unique=True, db_index=True)
     category = models.ForeignKey('Category')
-    tags = models.ManyToManyField('Tag', null=True, blank=True)
+    tag = models.ForeignKey('Tag', null=True, blank=True)
+    series = models.BooleanField(default=False)
 
     # card
     card = models.ImageField(upload_to='news/article/card/%Y/%m/%d/1x/', 
@@ -134,6 +135,7 @@ class Category(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
+    description = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.name
