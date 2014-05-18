@@ -27,7 +27,10 @@ class Author(models.Model):
     bio = models.TextField(blank=True)
 
     def __unicode__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        if self.first_name:
+            return "%s %s" % (self.first_name, self.last_name)
+        else:
+            return self.organization
 
 
 class Article(models.Model):
