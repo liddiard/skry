@@ -87,9 +87,8 @@ class Article(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
 
     # linked media
-    featured_image = models.ForeignKey(null=True, blank=True, 
-                                       related_name='news_article_featured_'
-                                                    'image')
+    featured_image = models.ForeignKey('Image', null=True, blank=True, 
+                                    related_name='news_article_featured_image')
     featured_video = models.ForeignKey('Video', null=True, blank=True)
     featured_audio = models.ForeignKey('Audio', null=True, blank=True)
     review = models.ForeignKey('Review', null=True, blank=True)

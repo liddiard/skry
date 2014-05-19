@@ -35,22 +35,22 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Poll',
+            name='CardSize',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('question', models.CharField(max_length=128)),
-                ('is_open', models.BooleanField(default=True)),
+                ('width', models.PositiveIntegerField()),
+                ('height', models.PositiveIntegerField()),
             ],
             options={
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='CardSize',
+            name='Poll',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('width', models.PositiveIntegerField()),
-                ('height', models.PositiveIntegerField()),
+                ('question', models.CharField(max_length=128)),
+                ('is_open', models.BooleanField(default=True)),
             ],
             options={
             },
