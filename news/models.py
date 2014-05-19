@@ -1,12 +1,10 @@
-import pytz
 from PIL import Image as PyImage
-from cStringIO import StringIO
 from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
-from django.core.files.uploadedfile import SimpleUploadedFile
+from django.utils.timezone import now as django_now
 
 
 CARD_CROP_CHOICES = (
@@ -55,7 +53,7 @@ class Article(models.Model):
     )
 
     # primary content
-    assignment_slug = models.SlugField(max_length=128)
+    assignment_slug = models.CharField(max_length=128)
     status = models.PositiveIntegerField(choices=STATUS_CHOICES, default=DRAFT)
     title = models.CharField(max_length=128, blank=True)
     url_slug = models.SlugField(max_length=128, blank=True)
@@ -63,8 +61,8 @@ class Article(models.Model):
                                     null=True, blank=True)
     teaser = models.CharField(max_length=128, blank=True)
     subhead = models.CharField(max_length=128, blank=True)
-    body = models.TextField()
-    template = models.ForeignKey('Template') # TODO: add default
+    body = models.TextField(blank=True)
+    alternate_template = models.ForeignKey('Template', blank=True, null=True) 
 
     # organization
     position = models.PositiveIntegerField(unique=True, db_index=True)
@@ -96,6 +94,13 @@ class Article(models.Model):
     # social_media_post = models.OneToOneField('scheduler.SMPost', null=True, 
     #                                          blank=True)
 
+    class Meta:
+        ordering = ['-position']
+
+    def is_published(self):
+        return (self.status == self.READY_TO_PUBLISH and
+                self.publish_time < django_now())
+
     def __unicode__(self):
         return self.assignment_slug
 
@@ -125,7 +130,6 @@ class Category(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
-    color = models.CharField(max_length=6) # hex value
     default_card = models.ImageField(upload_to='news/category/default_card/')
     default_card_crop = models.CharField(max_length=1, 
                                          choices=CARD_CROP_CHOICES, 
