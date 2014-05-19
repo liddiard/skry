@@ -1,6 +1,7 @@
 from .base import *
 
 DEBUG = True
+THUMBNAIL_DEBUG = True
 
 STATIC_ROOT = BASE_DIR + "/static"
 
