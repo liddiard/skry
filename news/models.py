@@ -126,12 +126,13 @@ class Category(models.Model):
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
     color = models.CharField(max_length=6) # hex value
-    default_card = models.ImageField(upload_to='news/category/default_card/1x/')
-    default_card_2x = models.ImageField(upload_to='news/category/default_card/'
-                                        '2x/') 
+    default_card = models.ImageField(upload_to='news/category/default_card/')
     default_card_crop = models.CharField(max_length=1, 
                                          choices=CARD_CROP_CHOICES, 
                                          default='c')
+    twitter = models.CharField(max_length=15, blank=True)
+    twitter_profile_image = models.ImageField(upload_to='news/category/twitter_profile/',
+                                              null=True, blank=True)
 
     def __unicode__(self):
         return self.name
