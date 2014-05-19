@@ -230,7 +230,7 @@ class Poll(models.Model):
 
 
 class PollChoice(models.Model):
-    question = models.ForeignKey('Question')
+    question = models.ForeignKey('Poll')
     choice = models.CharField(max_length=128)
     votes = models.PositiveIntegerField(default=0)
 

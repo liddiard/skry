@@ -17,6 +17,12 @@ def createUploadPath(directory, same_model=False):
              'filename': filename}
     return getUploadPath
 
+get_issue_upload_path = createUploadPath('header', same_model=True)
+get_lead_photo_upload_path = createUploadPath('lead')
+get_image_upload_path = createUploadPath('article')
+get_pdf_upload_path = createUploadPath('pdf')
+get_pdf_image_upload_path = createUploadPath('pdf_image')
+
 def getLatestIssue():
     return Issue.objects.latest('release_date')
 
@@ -27,9 +33,8 @@ class Issue(models.Model):
     name = models.CharField(max_length=32)
     slug = models.SlugField(max_length=32)
     release_date = models.DateField()
-    get_upload_path = createUploadPath('header', same_model=True)
-    header_image = models.ImageField(upload_to=get_upload_path, blank=True,
-                                     null=True)
+    header_image = models.ImageField(upload_to=get_issue_upload_path, 
+                                     blank=True, null=True)
 
     class Meta:
         ordering = ['release_date']
@@ -41,8 +46,7 @@ class Article(models.Model):
     issue = models.ForeignKey('Issue', default=None, null=True, blank=True)
     title = models.CharField(max_length=128)
     slug = models.SlugField(max_length=128)
-    get_upload_path = createUploadPath('lead')
-    lead_photo = models.ImageField(upload_to=get_upload_path)
+    lead_photo = models.ImageField(upload_to=get_lead_photo_upload_path)
     teaser = models.CharField(max_length=200)
     author = models.ManyToManyField('news.Author', related_name='prime_article')
     body = models.TextField(blank=True)
@@ -56,8 +60,7 @@ class Article(models.Model):
         return self.title
 
 class Image(models.Model):
-    get_upload_path = createUploadPath('article')
-    image = models.ImageField(upload_to=get_upload_path)
+    image = models.ImageField(upload_to=get_image_upload_path)
     issue = models.ForeignKey('Issue', default=None, null=True, blank=True)
     author = models.ForeignKey('news.Author', related_name="prime_image", null=True, blank=True)
     caption = models.TextField(blank=True)
@@ -84,10 +87,8 @@ class Image(models.Model):
                                            self.caption[0:50])
 
 class PDF(models.Model):
-    get_upload_path_pdf = createUploadPath('pdf')
-    get_upload_path_pdf_image = createUploadPath('pdf_image')
-    pdf = models.FileField(upload_to=get_upload_path_pdf)
-    image = models.ImageField(upload_to=get_upload_path_pdf_image)
+    pdf = models.FileField(upload_to=get_pdf_upload_path)
+    image = models.ImageField(upload_to=get_pdf_image_upload_path)
     issue = models.OneToOneField(Issue)
 
     def __unicode__(self):
