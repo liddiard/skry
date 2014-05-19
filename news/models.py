@@ -101,6 +101,10 @@ class Article(models.Model):
         return (self.status == self.READY_TO_PUBLISH and
                 self.publish_time < django_now())
 
+    def get_path(self):
+        return "/%s/%s/" % (self.publish_time.strftime("%Y/%m/%d"), 
+                            self.url_slug)
+
     def __unicode__(self):
         return self.assignment_slug
 
