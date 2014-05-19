@@ -35,7 +35,9 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
 )
 
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    'sorl.thumbnail',
+)
 
 LOCAL_APPS = (
     'news',
@@ -84,7 +86,31 @@ MEDIA_URL = '/media/'
 # Example: "/var/www/example.com/static/"
 
 STATIC_ROOT = BASE_DIR + "/../static"
-MEDIA_ROOT = BASE_DIR + "/../uploads"
+MEDIA_ROOT = BASE_DIR + "/../media"
 
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211'
+    }
+}
+
+IMAGE_DIMENSIONS = {
+    'full': {
+        'width': 640, 
+    },
+    'float': {
+        'width': 320,
+    },
+    'card_1': {
+        'width': 300,
+        'height': 300
+    },
+    'card_2': {
+        'width': 610,
+        'height': 610
+    },
+}

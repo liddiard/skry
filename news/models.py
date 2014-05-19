@@ -1,9 +1,12 @@
 import pytz
+from PIL import Image as PyImage
+from cStringIO import StringIO
 from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 CARD_CROP_CHOICES = (
@@ -71,9 +74,7 @@ class Article(models.Model):
 
     # card
     card = models.ForeignKey('Image', null=True, blank=True, 
-                             related_name='news_article')
-    card_2x = models.ForeignKey('Image', null=True, blank=True,
-                                related_name='news_article_2x')
+                             related_name='news_article_card')
     card_size = models.ForeignKey('CardSize')
     card_crop = models.CharField(max_length=1, choices=CARD_CROP_CHOICES, 
                                 default='c')
@@ -86,11 +87,9 @@ class Article(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
 
     # linked media
-    featured_image = models.ImageField(upload_to='news/article/featured_image/'
-                                       '%Y/%m/%d/1x/', null=True, blank=True)
-    featured_image_2x = models.ImageField(upload_to='news/article/'
-                                          'featured_image/%Y/%m/%d/2x/', 
-                                          null=True, blank=True)
+    featured_image = models.ForeignKey(null=True, blank=True, 
+                                       related_name='news_article_featured_'
+                                                    'image')
     featured_video = models.ForeignKey('Video', null=True, blank=True)
     featured_audio = models.ForeignKey('Audio', null=True, blank=True)
     review = models.ForeignKey('Review', null=True, blank=True)
@@ -115,6 +114,9 @@ class InternalArticleComment(models.Model):
 class CardSize(models.Model):
     width = models.PositiveIntegerField()
     height = models.PositiveIntegerField()
+
+    def area(self):
+        return width * height
 
     def __unicode__(self):
         return "%dx%d" % (self.width, self.height)
@@ -197,8 +199,26 @@ class Image(Media):
     credit = models.ManyToManyField('Author', related_name='news_image', 
                                     blank=True, null=True)
 
+    def get_full(self):
+        if not self.image_full:
+            width = settings.IMAGE_DIMENSIONS['full']['width']
+            resized = self.resize_to_width(width=width)
+            self.image_full = resized
+            self.save()
+        return self.image_full
+
+    def resize_to_width(self, width):
+        img = PyImage.open(self.image)
+        wpercent = (width / float(img.size[0]))
+        hsize = int((float(img.size[1]) * float(wpercent)))
+        img = img.resize((width, hsize), PyImage.ANTIALIAS)
+        temp_handle = StringIO()
+        image.save(temp_handle, 'JPEG')
+        temp_handle.seek(0)
+        return img
+
     def __unicode__(self):
-        return self.image # TODO: check if needs str() coercion
+        return self.image.name # TODO: check if needs str() coercion
 
 
 class Video(Media):
