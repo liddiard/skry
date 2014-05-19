@@ -1,14 +1,28 @@
 from django.views.generic.base import View, TemplateView
+from django.shortcuts import get_object_or_404
 
-from .models import Author
+from . import models
+from . import utils
 
 
 class FrontView(TemplateView):
-    pass
+
+    template_name = "news/list.html"
+
+    def get_context_data(self):
+        context = super(FrontView, self).get_context_data()
+        context['articles'] = utils.get_published_articles()[:12]
+        return context
 
 
 class CategoryView(TemplateView):
-    pass
+    
+    def get_context_data(self):
+        context = super(CategoryView, self).get_context_data()
+        category = self.kwargs.get('category')
+        context['category'] = get_object_or_404(models.Category, 
+                                                    slug=category)
+        return context
 
 
 class ArticleView(TemplateView):

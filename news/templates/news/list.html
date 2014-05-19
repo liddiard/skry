@@ -1,0 +1,9 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+
+    {% for article in articles %}
+        {{ article.assignment_slug }}
+    {% endfor %}
+
+{% endblock %}

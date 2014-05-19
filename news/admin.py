@@ -11,7 +11,7 @@ admin.site.register(models.Author, AuthorAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {'url_slug': ('title',)}
-    readonly_fields = ('created', 'last_updated', 'position')
+    readonly_fields = ('created', 'last_updated')
     fieldsets = (
         ('Primary content', {
             'fields': (
@@ -20,7 +20,7 @@ class ArticleAdmin(admin.ModelAdmin):
                 ('author'),
                 ('teaser', 'subhead'),
                 ('body'),
-                ('template'),
+                ('alternate_template'),
             )
         }),
         ('Organization', {
@@ -64,13 +64,13 @@ admin.site.register(models.CardSize, CardSizeAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {'slug': ('name',)}
 
 admin.site.register(models.Category, CategoryAdmin)
 
 
 class TagAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {'slug': ('name',)}
 
 admin.site.register(models.Tag, TagAdmin)
 
