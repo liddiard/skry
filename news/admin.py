@@ -88,19 +88,31 @@ admin.site.register(models.Page, PageAdmin)
 
 
 class ImageAdmin(admin.ModelAdmin):
-    pass
+    fieldsets = (
+        (None, {
+            'fields': ('image', 'credit', 'caption')
+        }),
+    )
 
 admin.site.register(models.Image, ImageAdmin)
 
 
 class VideoAdmin(admin.ModelAdmin):
-    pass
+    fieldsets = (
+        (None, {
+            'fields': ('url', 'title', 'credit', 'caption')
+        }),
+    )
 
 admin.site.register(models.Video, VideoAdmin)
 
 
 class AudioAdmin(admin.ModelAdmin):
-    pass
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'mp3', 'ogg', 'credit', 'caption')
+        }),
+    )
 
 admin.site.register(models.Audio, AudioAdmin)
 
