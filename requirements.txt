@@ -4,9 +4,6 @@ Django==1.6.2
 # Image processing library, formerly known as and backwards compatible with PIL. Used primarily for image resizing in this project.
 Pillow==2.4.0
 
-# Database migrations. Will no longer be needed in Django 1.7.
-South==0.8.2
-
 # http://daringfireball.net/projects/markdown/ - used for parsing markdown in templates.
 markdown2==2.1.0
 
