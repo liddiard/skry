@@ -42,24 +42,24 @@ class Article(models.Model):
     PROOFING = 6
     READY_TO_PUBLISH = 7
     STATUS_CHOICES = (
-        (DRAFT, 'draft'),
-        (FIRST_EDITING, 'first editing'),
-        (SECOND_EDITING, 'second editing'),
-        (RIMMING, 'rimming'),
-        (SLOTTING, 'slotting'),
-        (PROOFING, 'proofing'),
-        (READY_TO_PUBLISH, 'ready to publish')
+        (DRAFT, 'Draft'),
+        (FIRST_EDITING, 'First editing'),
+        (SECOND_EDITING, 'Second editing'),
+        (RIMMING, 'Rimming'),
+        (SLOTTING, 'Slotting'),
+        (PROOFING, 'Proofing'),
+        (READY_TO_PUBLISH, 'Ready to publish')
     )
 
     # primary content
-    title = models.CharField(max_length=128)
-    url_slug = models.SlugField(max_length=128)
     assignment_slug = models.SlugField(max_length=128)
+    status = models.PositiveIntegerField(choices=STATUS_CHOICES, default=DRAFT)
+    title = models.CharField(max_length=128, blank=True)
+    url_slug = models.SlugField(max_length=128, blank=True)
     author = models.ManyToManyField('Author', related_name='news_article', 
                                     null=True, blank=True)
-    subhead = models.CharField(max_length=128)
-    teaser = models.CharField(max_length=128)
-    status = models.PositiveIntegerField(choices=STATUS_CHOICES)
+    teaser = models.CharField(max_length=128, blank=True)
+    subhead = models.CharField(max_length=128, blank=True)
     body = models.TextField()
     template = models.ForeignKey('Template') # TODO: add default
 
@@ -80,10 +80,10 @@ class Article(models.Model):
     feature_card_image = models.BooleanField(default=True)
 
     # dates and times
-    created = models.DateTimeField(auto_now_add=True)
-    last_updated = models.DateTimeField(auto_now=True)
     publish_time = models.DateTimeField()
     breaking_duration = models.PositiveIntegerField(default=0)
+    created = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     # linked media
     featured_image = models.ImageField(upload_to='news/article/featured_image/'
@@ -173,7 +173,7 @@ class Page(models.Model):
 # abstract base class
 # https://docs.djangoproject.com/en/1.7/topics/db/models/#abstract-base-classes
 class Media(models.Model):
-    caption = models.TextField()
+    caption = models.TextField(blank=True)
 
     class Meta:
         abstract = True
