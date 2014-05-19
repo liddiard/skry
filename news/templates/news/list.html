@@ -3,7 +3,18 @@
 {% block content %}
 
     {% for article in articles %}
-        {{ article.assignment_slug }}
+    
+    <a href="http://dailybruin.com/2013/01/18/uc-president-to-step-down-at-the-end-of-august/">
+        <div class="tile"; style="background-image: url(image/300x/president.jpg)"><h3 class="blogs">blog</h3>
+            <div class="tile-decoration">
+                <div class="caption">
+                    <h1>{{ article.title }}</h1>
+                    <h2>{{ article.teaser }}</h2>
+                </div>
+            </div>
+        </div>
+    </a>
+
     {% endfor %}
 
 {% endblock %}
