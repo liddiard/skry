@@ -10,7 +10,42 @@ admin.site.register(models.Author, AuthorAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {'url_slug': ('title',)}
+    readonly_fields = ('created', 'last_updated', 'position')
+    fieldsets = (
+        ('Primary content', {
+            'fields': (
+                ('assignment_slug', 'status'),
+                ('title', 'url_slug'),
+                ('author'),
+                ('teaser', 'subhead'),
+                ('body'),
+                ('template'),
+            )
+        }),
+        ('Organization', {
+            'fields': (
+                ('category', 'position'), 
+                ('tag', 'series'),
+            )
+        }),
+        ('Card', {
+            'fields': (
+                ('card', 'card_size', 'card_crop', 'feature_card_image'), 
+            )
+        }),
+        ('Dates and times', {
+            'fields': (
+                ('publish_time', 'breaking_duration'), 
+                ('created', 'last_updated'), 
+            )
+        }),
+        ('Linked media', {
+            'fields': (
+                ('featured_image', 'featured_video', 'featured_audio', 'review'),
+            )
+        }),
+    )
 
 admin.site.register(models.Article, ArticleAdmin)
 
