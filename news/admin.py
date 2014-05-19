@@ -42,7 +42,8 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ('Linked media', {
             'fields': (
-                ('featured_image', 'featured_video', 'featured_audio', 'review'),
+                ('featured_image', 'featured_video', 'featured_audio'),
+                ('review', 'poll'),
             )
         }),
     )
