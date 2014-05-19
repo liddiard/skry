@@ -94,6 +94,7 @@ class Article(models.Model):
     featured_video = models.ForeignKey('Video', null=True, blank=True)
     featured_audio = models.ForeignKey('Audio', null=True, blank=True)
     review = models.ForeignKey('Review', null=True, blank=True)
+    poll = models.ForeignKey('Poll', null=True, blank=True)
     # social_media_post = models.OneToOneField('scheduler.SMPost', null=True, 
     #                                          blank=True)
 
