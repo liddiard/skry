@@ -131,8 +131,9 @@ class Category(models.Model):
                                          choices=CARD_CROP_CHOICES, 
                                          default='c')
     twitter = models.CharField(max_length=15, blank=True)
-    twitter_profile_image = models.ImageField(upload_to='news/category/twitter_profile/',
-                                              null=True, blank=True)
+    facebook = models.CharField(max_length=32, blank=True)
+    profile_image = models.ImageField(upload_to='news/category/profile/',
+                                      null=True, blank=True)
 
     def __unicode__(self):
         return self.name
