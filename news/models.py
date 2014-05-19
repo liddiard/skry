@@ -170,6 +170,8 @@ class Page(models.Model):
         return self.title
 
 
+# abstract base class
+# https://docs.djangoproject.com/en/1.7/topics/db/models/#abstract-base-classes
 class Media(models.Model):
     caption = models.TextField()
 
