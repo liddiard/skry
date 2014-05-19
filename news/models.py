@@ -70,10 +70,10 @@ class Article(models.Model):
     series = models.BooleanField(default=False)
 
     # card
-    card = models.ImageField(upload_to='news/article/card/%Y/%m/%d/1x/', 
-                             null=True, blank=True)
-    card_2x = models.ImageField(upload_to='news/article/card/%Y/%m/%d/2x/', 
-                                null=True, blank=True)
+    card = models.ForeignKey('Image', null=True, blank=True, 
+                             related_name='news_article')
+    card_2x = models.ForeignKey('Image', null=True, blank=True,
+                                related_name='news_article_2x')
     card_size = models.ForeignKey('CardSize')
     card_crop = models.CharField(max_length=1, choices=CARD_CROP_CHOICES, 
                                 default='c')
@@ -182,11 +182,18 @@ class Media(models.Model):
 
 class Image(Media):
     image = models.ImageField(upload_to='news/image/%Y/%m/%d/original/')
-    image_full = models.ImageField(upload_to='news/image/%Y/%m/%d/full/1x/')
-    image_full_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/full/2x/')
-    image_float = models.ImageField(upload_to='news/image/%Y/%m/%d/float/1x/')
+    image_full = models.ImageField(upload_to='news/image/%Y/%m/%d/full/1x/',
+                                   null=True, blank=True)
+    image_full_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/full/2x/',
+                                      null=True, blank=True)
+    image_float = models.ImageField(upload_to='news/image/%Y/%m/%d/float/1x/',
+                                    null=True, blank=True)
     image_float_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/float/'
-                                       '2x/')
+                                       '2x/', null=True, blank=True)
+    image_card = models.ImageField(upload_to='news/image/%Y/%m/%d/card/1x/', 
+                                   null=True, blank=True)
+    image_card_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/card/2x/', 
+                                      null=True, blank=True)
     credit = models.ManyToManyField('Author', related_name='news_image', 
                                     blank=True, null=True)
 

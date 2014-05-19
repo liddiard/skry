@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: utf8
 from __future__ import unicode_literals
 
 from django.db import models, migrations
@@ -40,8 +40,8 @@ class Migration(migrations.Migration):
                 ('position', models.PositiveIntegerField(unique=True, db_index=True)),
                 ('tag', models.ForeignKey(to_field='id', blank=True, to='news.Tag', null=True)),
                 ('series', models.BooleanField(default=False)),
-                ('card', models.ImageField(null=True, upload_to=b'news/article/card/%Y/%m/%d/1x/', blank=True)),
-                ('card_2x', models.ImageField(null=True, upload_to=b'news/article/card/%Y/%m/%d/2x/', blank=True)),
+                ('card', models.ForeignKey(to_field='id', blank=True, to='news.Image', null=True)),
+                ('card_2x', models.ForeignKey(to_field='id', blank=True, to='news.Image', null=True)),
                 ('card_size', models.ForeignKey(to='news.CardSize', to_field='id')),
                 ('card_crop', models.CharField(default=b'c', max_length=1, choices=[(b'c', b'center'), (b't', b'top/left'), (b'b', b'bottom/right')])),
                 ('feature_card_image', models.BooleanField(default=True)),
