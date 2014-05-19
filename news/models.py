@@ -184,38 +184,8 @@ class Media(models.Model):
 
 class Image(Media):
     image = models.ImageField(upload_to='news/image/%Y/%m/%d/original/')
-    image_full = models.ImageField(upload_to='news/image/%Y/%m/%d/full/1x/',
-                                   null=True, blank=True)
-    image_full_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/full/2x/',
-                                      null=True, blank=True)
-    image_float = models.ImageField(upload_to='news/image/%Y/%m/%d/float/1x/',
-                                    null=True, blank=True)
-    image_float_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/float/'
-                                       '2x/', null=True, blank=True)
-    image_card = models.ImageField(upload_to='news/image/%Y/%m/%d/card/1x/', 
-                                   null=True, blank=True)
-    image_card_2x = models.ImageField(upload_to='news/image/%Y/%m/%d/card/2x/', 
-                                      null=True, blank=True)
     credit = models.ManyToManyField('Author', related_name='news_image', 
                                     blank=True, null=True)
-
-    def get_full(self):
-        if not self.image_full:
-            width = settings.IMAGE_DIMENSIONS['full']['width']
-            resized = self.resize_to_width(width=width)
-            self.image_full = resized
-            self.save()
-        return self.image_full
-
-    def resize_to_width(self, width):
-        img = PyImage.open(self.image)
-        wpercent = (width / float(img.size[0]))
-        hsize = int((float(img.size[1]) * float(wpercent)))
-        img = img.resize((width, hsize), PyImage.ANTIALIAS)
-        temp_handle = StringIO()
-        image.save(temp_handle, 'JPEG')
-        temp_handle.seek(0)
-        return img
 
     def __unicode__(self):
         return self.image.name # TODO: check if needs str() coercion
