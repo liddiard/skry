@@ -1,5 +1,5 @@
 *.pyc
-uploads/
+media/
 project/settings/secret.py
 *.DS_Store
 
