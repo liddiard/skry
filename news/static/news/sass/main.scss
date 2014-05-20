@@ -15,8 +15,8 @@ a {
 }
 
 article {
-    $width: 620px;
-    $horizontal_padding: 10px;
+    $horizontal_padding: 15px;
+    $width: 640px - ($horizontal_padding*2);
     padding: 0 $horizontal_padding;
     position: absolute;
     width: $width;
@@ -28,6 +28,8 @@ article {
     z-index: 100;
     box-shadow: 0 0 20px black;
     text-rendering: optimizeLegibility;
+    overflow-y: scroll;
+    font-size: 0.9em;
 
     p {
         line-height: 1.6;
