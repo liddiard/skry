@@ -92,23 +92,26 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
   border: 0;
-  padding: 0;
-  text-align: center; }
+  padding: 0; }
 
 a {
   text-decoration: none;
   color: #888; }
 
 article {
+  padding: 0 10px;
   position: absolute;
-  width: 640px;
+  width: 620px;
   height: 100%;
   top: 0;
   left: 50%;
   margin-left: -320px;
   background-color: white;
   z-index: 100;
-  box-shadow: 0 0 20px black; }
+  box-shadow: 0 0 20px black;
+  text-rendering: optimizeLegibility; }
+  article p {
+    line-height: 1.6; }
 
 #mask {
   position: absolute;
@@ -122,3 +125,6 @@ article {
   cursor: pointer; }
   #mask:hover {
     background-color: rgba(0, 0, 0, 0.6); }
+
+.cards {
+  text-align: center; }

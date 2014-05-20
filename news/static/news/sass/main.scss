@@ -1,12 +1,12 @@
 @import 'card';
 
 $helvetica: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$roboto_condensed: 'Roboto Condensed', sans-serif;
 
 body {
     background-color: #222;
     font-family: $helvetica;
     margin: 0; border: 0; padding: 0;
-    text-align: center;
 }
 
 a {
@@ -15,16 +15,23 @@ a {
 }
 
 article {
-    $width: 640px;
+    $width: 620px;
+    $horizontal_padding: 10px;
+    padding: 0 $horizontal_padding;
     position: absolute;
     width: $width;
     height: 100%;
     top: 0;
     left: 50%;
-    margin-left: -$width/2;
+    margin-left: -$width/2 - $horizontal_padding;
     background-color: white;
     z-index: 100;
     box-shadow: 0 0 20px black;
+    text-rendering: optimizeLegibility;
+
+    p {
+        line-height: 1.6;
+    }
 }
 
 #mask {
@@ -39,4 +46,8 @@ article {
     &:hover {
         background-color: rgba(0,0,0, 0.6);
     }
+}
+
+.cards {
+    text-align: center;
 }

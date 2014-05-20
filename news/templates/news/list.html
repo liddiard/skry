@@ -3,11 +3,12 @@
 
 {% block content %}
     
-    <div id="mask"></div>
-    <article></article>
+<div id="mask"></div>
+<article></article>
 
+<div class="cards">
     {% for article in articles %}
-    
+
     <a data-id="{{ article.pk }}" href="{{ article.get_path }}" class="card {{ article.get_card_crop_display }}" style="background-image: url({% if article.card|is_portrait %}{% thumbnail article.card "300" %}{% else %}{% thumbnail article.card "x300" %}{% endif %})"><div class="category {% if article.category.parent %}{{ article.category.parent.slug }}{% else %}{{ article.category.slug }}">{{ article.category.name }}{% endif %}</div>
         <div class="card-decoration">
             <div class="caption">
@@ -18,5 +19,6 @@
     </a>
 
     {% endfor %}
+</div>
 
 {% endblock %}

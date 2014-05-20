@@ -16,7 +16,7 @@ function showArticle(id) {
     console.log(id);
     ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
         console.log(response)
-        $('article').html(response[0].fields.body);
+        $('article').html(response.body);
     });
 }
 
