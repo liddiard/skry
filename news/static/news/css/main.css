@@ -98,3 +98,27 @@ body {
 a {
   text-decoration: none;
   color: #888; }
+
+article {
+  position: absolute;
+  width: 640px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  margin-left: -320px;
+  background-color: white;
+  z-index: 100;
+  box-shadow: 0 0 20px black; }
+
+#mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 90;
+  transition: background-color 0.15s;
+  cursor: pointer; }
+  #mask:hover {
+    background-color: rgba(0, 0, 0, 0.6); }
