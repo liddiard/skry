@@ -17,6 +17,7 @@ function showArticle(id) {
     ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
         console.log(response)
         $('article').html(response.body);
+        $('article').jScrollPane();
     });
 }
 
