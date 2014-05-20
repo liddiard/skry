@@ -9,8 +9,8 @@ from django.utils.timezone import now as django_now
 
 CARD_CROP_CHOICES = (
     ('c', 'center'), 
-    ('t', 'top/left'), 
-    ('b', 'bottom/right')
+    ('t', 'top-left'), 
+    ('b', 'bottom-right')
 )
 
 
@@ -75,7 +75,7 @@ class Article(models.Model):
                              related_name='news_article_card')
     card_size = models.ForeignKey('CardSize')
     card_crop = models.CharField(max_length=1, choices=CARD_CROP_CHOICES, 
-                                default='c')
+                                 default='c')
     feature_card_image = models.BooleanField(default=True)
 
     # dates and times

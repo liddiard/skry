@@ -5,13 +5,11 @@
 
     {% for article in articles %}
     
-    <a href="http://dailybruin.com/2013/01/18/uc-president-to-step-down-at-the-end-of-august/">
-        <div class="tile" style="background-image: url({% thumbnail article.card "300x300" %})"><h3 class="blogs">blog</h3>
-            <div class="tile-decoration">
-                <div class="caption">
-                    <h1>{{ article.title }}</h1>
-                    <h2>{{ article.teaser }}</h2>
-                </div>
+    <a href="{{ article.get_path }}" class="card {{ article.get_card_crop_display }}" style="background-image: url({% if article.card|is_portrait %}{% thumbnail article.card "300" %}{% else %}{% thumbnail article.card "x300" %}{% endif %})"><div class="category {% if article.category.parent %}{{ article.category.parent.slug }}{% else %}{{ article.category.slug }}">{{ article.category.name }}{% endif %}</div>
+        <div class="card-decoration">
+            <div class="caption">
+                <h2>{{ article.title }}</h2>
+                <span class="teaser">{{ article.teaser }}</span>
             </div>
         </div>
     </a>
