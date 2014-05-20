@@ -16,7 +16,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # main site
-    url(r'^$', news.views.FrontView.as_view()),
+    url(r'^$', news.views.FrontView.as_view(), name='news_front'),
+
+    # api
+
+    url(r'^api/get_article_by_id/$', news.views.ArticleJSONView.as_view()),
 
     # other apps
     url(r'^prime/', include('prime.urls')),

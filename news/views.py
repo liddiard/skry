@@ -1,8 +1,13 @@
+import json
+
 from django.views.generic.base import View, TemplateView
 from django.shortcuts import get_object_or_404
+from django.core import serializers
+from django.http import HttpResponse
 
 from . import models
 from . import utils
+from prime.templatetags import markdown
 
 
 class FrontView(TemplateView):
@@ -40,28 +45,28 @@ class RelatedArticlesView(View):
 class AjaxView(View):
 
     def json_response(self, **kwargs):
-    return HttpResponse(json.dumps(kwargs), content_type="application/json")
+        return HttpResponse(json.dumps(kwargs), content_type="application/json")
 
     def success(self, **kwargs):
-    return self.json_response(result=0, **kwargs)
+        return self.json_response(result=0, **kwargs)
 
     def error(self, error, message):
-    return self.json_response(result=1, error=error, message=message)
+        return self.json_response(result=1, error=error, message=message)
 
     def authentication_error(self):
-    return self.error("AuthenticationError", "User is not authenticated.")
+        return self.error("AuthenticationError", "User is not authenticated.")
 
     def access_error(self, message):
-    return self.error("AccessError", message)
+        return self.error("AccessError", message)
 
     def key_error(self, message):
-    return self.error("KeyError", message)
+        return self.error("KeyError", message)
 
     def does_not_exist(self, message):
-    return self.error("DoesNotExist", message)
+        return self.error("DoesNotExist", message)
 
     def validation_error(self, message):
-    return self.error("ValidationError", message)
+        return self.error("ValidationError", message)
 
 
 class AuthenticatedAjaxView(AjaxView):
@@ -72,3 +77,14 @@ class AuthenticatedAjaxView(AjaxView):
                          **kwargs)
         else:
             return self.authentication_error()
+
+
+class ArticleJSONView(AjaxView):
+    
+    def get(self, request):
+        article_id = request.GET.get('id')
+        if article_id is None:
+            return self.key_error('Key (id) missing from request.')
+        article = get_object_or_404(models.Article, pk=article_id)
+        data = serializers.serialize('json', [article,])
+        return HttpResponse(data, content_type="application/json")

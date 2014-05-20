@@ -3,6 +3,7 @@ $(document).ready(function(){
         $('.card').click(function(event){
             event.preventDefault();
             $('article, #mask').show();
+            showArticle($(this).attr('data-id'));
         });
     }
     $('#mask').click(function(){
@@ -10,6 +11,16 @@ $(document).ready(function(){
     });
 });
 
+
+function showArticle(id) {
+    console.log(id);
+    ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
+        console.log(response)
+        $('article').html(response[0].fields.body);
+    });
+}
+
+/* utility functions */
 
 function ajaxGet(params, endpoint, callback_success) {
     $.ajax({

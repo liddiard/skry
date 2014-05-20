@@ -8,7 +8,7 @@
 
     {% for article in articles %}
     
-    <a href="{{ article.get_path }}" class="card {{ article.get_card_crop_display }}" style="background-image: url({% if article.card|is_portrait %}{% thumbnail article.card "300" %}{% else %}{% thumbnail article.card "x300" %}{% endif %})"><div class="category {% if article.category.parent %}{{ article.category.parent.slug }}{% else %}{{ article.category.slug }}">{{ article.category.name }}{% endif %}</div>
+    <a data-id="{{ article.pk }}" href="{{ article.get_path }}" class="card {{ article.get_card_crop_display }}" style="background-image: url({% if article.card|is_portrait %}{% thumbnail article.card "300" %}{% else %}{% thumbnail article.card "x300" %}{% endif %})"><div class="category {% if article.category.parent %}{{ article.category.parent.slug }}{% else %}{{ article.category.slug }}">{{ article.category.name }}{% endif %}</div>
         <div class="card-decoration">
             <div class="caption">
                 <h2>{{ article.title }}</h2>
