@@ -1,3 +1,4 @@
+import json
 from PIL import Image as PyImage
 from datetime import datetime
 
@@ -5,6 +6,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils.timezone import now as django_now
+from django.forms.models import model_to_dict
+
+from prime.templatetags import markdown # TODO: move to this app
+from . import utils
 
 
 CARD_CROP_CHOICES = (
@@ -97,6 +102,12 @@ class Article(models.Model):
     class Meta:
         ordering = ['-position']
 
+    def as_public_json(self):
+        article = model_to_dict(self, exclude=['status', 'assignment_slug'])
+        article['body'] = markdown.markdown(self.body)
+        article = json.dumps(article, cls=utils.DatetimeEncoder)
+        return article
+
     def is_published(self):
         return (self.status == self.READY_TO_PUBLISH and
                 self.publish_time < django_now())
@@ -107,6 +118,11 @@ class Article(models.Model):
 
     def __unicode__(self):
         return self.assignment_slug
+
+
+def get_published_articles(): # TODO: cache
+    return (Article.objects.filter(status=7)
+            .filter(publish_time__lt=django_now()))
 
 
 class InternalArticleComment(models.Model):

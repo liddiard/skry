@@ -6,7 +6,6 @@ from django.core import serializers
 from django.http import HttpResponse
 
 from . import models
-from . import utils
 from prime.templatetags import markdown
 
 
@@ -16,7 +15,7 @@ class FrontView(TemplateView):
 
     def get_context_data(self):
         context = super(FrontView, self).get_context_data()
-        context['articles'] = utils.get_published_articles()[:12]
+        context['articles'] = models.get_published_articles()[:12]
         return context
 
 
@@ -86,5 +85,5 @@ class ArticleJSONView(AjaxView):
         if article_id is None:
             return self.key_error('Key (id) missing from request.')
         article = get_object_or_404(models.Article, pk=article_id)
-        data = serializers.serialize('json', [article,])
+        data = article.as_public_json()
         return HttpResponse(data, content_type="application/json")
