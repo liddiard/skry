@@ -20,10 +20,12 @@ function showArticle(id) {
     console.log(id);
     ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
         console.log(response)
-        $('article .featured-image').prop('src', response.featured_image);
+        $('article .featured-image img').prop('src', response.featured_image);
+        $('article .featured-image figcaption').html(response.featured_image_caption);
         $('article .title').html(response.title);
         $('article .subhead').html(response.subhead);
-        $('article .author').html(response.author);
+        if (response.author)
+            $('article .author').html('By ' + response.author);
         $('article .body').html(response.body);
     });
 }

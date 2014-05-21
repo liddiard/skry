@@ -108,6 +108,9 @@ class Article(models.Model):
         article = model_to_dict(self, exclude=['status', 'assignment_slug'])
         if self.featured_image:
             article['featured_image'] = self.featured_image.get_full()
+            article['featured_image_caption'] = self.featured_image.caption
+        if self.author:
+            article['author'] = self.get_pretty_authors()
         article['body'] = markdown.markdown(self.body)
         article = json.dumps(article, cls=utils.DatetimeEncoder)
         return article

@@ -113,6 +113,8 @@ article {
   font-size: 1.2em; }
   article p {
     line-height: 1.6; }
+  article figure {
+    margin: 0; }
   article .title {
     font-size: 2em; }
   article .subhead {
