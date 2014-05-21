@@ -120,6 +120,11 @@ class Article(models.Model):
         return "/%s/%s/" % (self.publish_time.strftime("%Y/%m/%d"), 
                             self.url_slug)
 
+    def get_pretty_authors(self):
+        authors = self.author.all()
+        return ", ".join([str(a) for a in authors if a != authors.last()]) + \
+               " and " + str(authors.last())
+
     def __unicode__(self):
         return self.assignment_slug
 
