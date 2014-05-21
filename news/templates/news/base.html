@@ -18,11 +18,29 @@
 
     <div id="mask"></div>
     <article>
-        <img class="featured-image" src="{% thumbnail "640" article.featured_image.image %}"/>
+        <figure class="featured-image">
+            <div class="image">
+                <img src="{% thumbnail "640" article.featured_image.image %}"/>
+                <div class="credit">{{ article.featured_image.credit }}</div>
+            </div>
+            <figcaption>{{ article.featured_image.caption }}</figcaption>
+        </figure>
+        <figure class="featured-video">
+            <div class="video"></div>
+            <div class="credit">{{ article.featured_video.credit }}</div>
+            <figcaption>{{ article.featured_video.caption }}</figcaption>
+        </figure>
+        <figure class="featured-audio">
+            <div class="audio"></div>
+            <div class="credit">{{ article.featured_audio.credit }}</div>
+            <figcaption>{{ article.featured_audio.caption }}</figcaption>
+        </figure>
         <h1 class="title">{{ article.title }}</h1>
         <h2 class="subhead">{{ article.subhead }}</h2>
         <div class="author">{{ article.author }}</div>
         <div class="body">{{ article.body }}</div>
+        <div class="about-author"></div>
+        <div class="about-category"></div>
     </article>
 
     <div id="main">
