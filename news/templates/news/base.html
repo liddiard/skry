@@ -1,3 +1,5 @@
+{% load thumbnail %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,15 +10,24 @@
     <link href="{{ STATIC_URL }}news/css/main.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="image/favicon.ico"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}news/js/mousewheel.js"></script>
-    <script src="{{ STATIC_URL }}news/js/jscrollpane.js"></script>
     <script src="{{ STATIC_URL }}news/js/main.js"></script>
 </head>
 <body>
     <header>
     </header>
-    {% block content %}
-    {% endblock %}
+
+    <div id="mask"></div>
+    <article>
+        <img class="featured-image" src="{% thumbnail "640" article.featured_image.image %}"/>
+        <h1 class="title">{{ article.title }}</h1>
+        <h2 class="subhead">{{ article.subhead }}</h2>
+        <div class="author">{{ article.author }}</div>
+        <div class="body">{{ article.body }}</div>
+    </article>
+
+    <div id="main">
+    {% block content %}{% endblock %}
+    </div>
     <footer>
     </footer>
 </body>

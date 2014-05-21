@@ -3,11 +3,15 @@ $(document).ready(function(){
         $('.card').click(function(event){
             event.preventDefault();
             $('article, #mask').show();
+            window.originalScrollY = window.scrollY;
+            $('#main').css({position: 'fixed', top: -window.originalScrollY})
             showArticle($(this).attr('data-id'));
         });
     }
     $('#mask').click(function(){
         $('article, #mask').hide();
+        $('#main').css({position: '', top: ''})
+        $(document).scrollTop(window.originalScrollY);
     });
 });
 
@@ -16,8 +20,11 @@ function showArticle(id) {
     console.log(id);
     ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
         console.log(response)
-        $('article').html(response.body);
-        $('article').jScrollPane();
+        $('article .featured-image').prop('src', response.featured_image);
+        $('article .title').html(response.title);
+        $('article .subhead').html(response.subhead);
+        $('article .author').html(response.author);
+        $('article .body').html(response.body);
     });
 }
 

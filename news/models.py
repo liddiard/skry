@@ -8,6 +8,8 @@ from django.conf import settings
 from django.utils.timezone import now as django_now
 from django.forms.models import model_to_dict
 
+from sorl.thumbnail import get_thumbnail
+
 from prime.templatetags import markdown # TODO: move to this app
 from . import utils
 
@@ -104,6 +106,8 @@ class Article(models.Model):
 
     def as_public_json(self):
         article = model_to_dict(self, exclude=['status', 'assignment_slug'])
+        if self.featured_image:
+            article['featured_image'] = self.featured_image.get_full()
         article['body'] = markdown.markdown(self.body)
         article = json.dumps(article, cls=utils.DatetimeEncoder)
         return article
@@ -211,6 +215,15 @@ class Image(Media):
     image = models.ImageField(upload_to='news/image/%Y/%m/%d/original/')
     credit = models.ManyToManyField('Author', related_name='news_image', 
                                     blank=True, null=True)
+
+    def get_image_at_resolution(self, resolution):
+        return get_thumbnail(self.image, resolution).url
+
+    def get_full(self):
+        return self.get_image_at_resolution("640")
+
+    def get_float(self):
+        return self.get_image_at_resolution("320")
 
     def __unicode__(self):
         return self.image.name # TODO: check if needs str() coercion
