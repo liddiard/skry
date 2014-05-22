@@ -116,8 +116,7 @@ class Article(models.Model):
             article['featured_image']['courtesy'] = self.featured_image\
                                                         .display_courtesy()
             article['featured_image']['organization'] = self.featured_image\
-                                                            .credit.last()\
-                                                            .organization
+                                                        .display_organization()
         if self.author:
             article['author'] = self.get_pretty_authors()
         article['body'] = markdown.markdown(self.body)
@@ -227,11 +226,20 @@ class Media(models.Model):
 
     def display_courtesy(self):
         first_author = self.credit.first()
-        if ((first_author.first_name or first_author.last_name)
-            and not first_author.organization):
+        if (not (first_author.first_name or first_author.last_name) or not 
+            first_author.organization):
             return True
         else:
             return False
+
+    def display_organization(self):
+        last_author = self.credit.last()
+        if (not (last_author.first_name or last_author.last_name) and
+            last_author.organization):
+            return False
+        else:
+            return last_author.organization
+
 
     class Meta:
         abstract = True
