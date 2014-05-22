@@ -28,7 +28,7 @@
         </div>
         <figure class="full featured-image">
             <div class="image">
-                <img src="{% thumbnail "640" article.featured_image.image %}"/>
+                <img src="{% if article.get_featured_image %}{% thumbnail "640" article.get_featured_image.image %}{% endif %}"/>
                 <div class="credit"><span class="courtesy">{% if article.featured_image.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ article.featured_image.get_pretty_credit }}</span><span class="organization">{% if article.featured_image.display_organization %} / {{ article.featured_image.display_organization }}{% endif %}</span></div>
             </div>
             <figcaption>{{ article.featured_image.caption }}</figcaption>

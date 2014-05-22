@@ -25,13 +25,15 @@ function showArticle(id) {
         $('article .publish-time').html(response.publish_time);
         $('article .publish-day').html(response.publish_day);
         // featured image
-        $('article .featured-image img').prop('src', response.featured_image.url);
-        $('article .featured-image figcaption').html(response.featured_image.caption);
-        $('article .featured-image .credit .name').html(response.featured_image.credit);
-        if (response.featured_image.courtesy)
-            $('article .featured-image .courtesy').html('Courtesy of ');
-        if (response.featured_image.organization)
-            $('article .featured-image .organization').html(' / '+response.featured_image.organization);
+        if (response.featured_image) {
+            $('article .featured-image img').prop('src', response.featured_image.url);
+            $('article .featured-image figcaption').html(response.featured_image.caption);
+            $('article .featured-image .credit .name').html(response.featured_image.credit);
+            if (response.featured_image.courtesy)
+                $('article .featured-image .courtesy').html('Courtesy of ');
+            if (response.featured_image.organization)
+                $('article .featured-image .organization').html(' / '+response.featured_image.organization);
+        }
         // article content
         $('article .title').html(response.title);
         $('article .subhead').html(response.subhead);
