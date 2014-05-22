@@ -21,7 +21,7 @@
         <figure class="featured-image">
             <div class="image">
                 <img src="{% thumbnail "640" article.featured_image.image %}"/>
-                <div class="credit">{{ article.featured_image.credit }}</div>
+                <div class="credit">{{ article.featured_image.get_pretty_credit }}</div>
             </div>
             <figcaption>{{ article.featured_image.caption }}</figcaption>
         </figure>

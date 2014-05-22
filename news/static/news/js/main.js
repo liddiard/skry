@@ -22,6 +22,7 @@ function showArticle(id) {
         console.log(response)
         $('article .featured-image img').prop('src', response.featured_image);
         $('article .featured-image figcaption').html(response.featured_image_caption);
+        $('article .featured-image .credit').html(response.featured_image_credit);
         $('article .title').html(response.title);
         $('article .subhead').html(response.subhead);
         if (response.author)

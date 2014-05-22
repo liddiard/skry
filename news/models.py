@@ -25,8 +25,8 @@ class Author(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
     first_name = models.CharField(max_length=32, blank=True)
     last_name = models.CharField(max_length=32, blank=True)
-    organization = models.CharField(max_length=32, default="Daily Bruin",
-                                    blank=True)
+    organization = models.CharField(max_length=32, 
+                                    settings.DEFAULT_ORGANIZATION, blank=True)
     # title = models.CharField(max_length=32, blank=True)
     email = models.EmailField(blank=True)
     twitter = models.CharField(max_length=15, blank=True)
@@ -109,6 +109,8 @@ class Article(models.Model):
         if self.featured_image:
             article['featured_image'] = self.featured_image.get_full()
             article['featured_image_caption'] = self.featured_image.caption
+            article['featured_image_credit'] = self.featured_image\
+                                               .get_pretty_credit()
         if self.author:
             article['author'] = self.get_pretty_authors()
         article['body'] = markdown.markdown(self.body)
@@ -124,9 +126,7 @@ class Article(models.Model):
                             self.url_slug)
 
     def get_pretty_authors(self):
-        authors = self.author.all()
-        return ", ".join([str(a) for a in authors if a != authors.last()]) + \
-               " and " + str(authors.last())
+        return utils.pretty_list_from_queryset(self.author.all())
 
     def __unicode__(self):
         return self.assignment_slug
@@ -214,6 +214,9 @@ class Page(models.Model):
 # https://docs.djangoproject.com/en/1.7/topics/db/models/#abstract-base-classes
 class Media(models.Model):
     caption = models.TextField(blank=True)
+
+    def get_pretty_credit(self):
+        return utils.pretty_list_from_queryset(self.credit.all())
 
     class Meta:
         abstract = True

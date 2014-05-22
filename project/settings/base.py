@@ -114,3 +114,7 @@ IMAGE_DIMENSIONS = {
         'height': 610
     },
 }
+
+# default organization for authors and possibly other things 
+# TODO: make this description actually descriptive
+DEFAULT_ORGANIZATION = "Daily Bruin"
