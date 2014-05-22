@@ -33,7 +33,7 @@ function showArticle(id) {
         $('article .subhead').html(response.subhead);
         if (response.author)
             $('article .author').html('By ' + response.author);
-        $('article .body').html(response.body);
+        $('article .body').html(response.body).readingTime('.reading-time');
     });
 }
 
@@ -52,3 +52,43 @@ function ajaxGet(params, endpoint, callback_success) {
         }
     }); 
 }
+
+(function($) {
+    /*!
+    A simple version of:
+
+    Name: Reading Time
+    Dependencies: jQuery
+    Author: Michael Lynch
+    Author URL: http://michaelynch.com
+    Date Created: August 14, 2013
+    Date Updated: January 24, 2014
+    Licensed under the MIT license
+
+    */
+    $.fn.readingTime = function(selector) {
+
+        //return if no element was bound
+        //so chained events can continue
+        if(!this.length) { 
+            return this; 
+        }
+
+        //define plugin
+        var plugin = this;
+
+        //define element
+        var el = $(this);
+
+        // words per minute
+        var wpm = 270;
+
+        var reading_time = Math.round(el.text().split(' ').length / wpm);
+
+        // don't display anything if reading time is less that 30 secs
+        if (reading_time < 1)
+            return this;
+        else
+            $(selector).text(reading_time + ' min. read');
+    }
+})(jQuery);

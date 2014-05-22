@@ -1,10 +1,17 @@
 @import 'card';
 
+// fonts
 $helvetica: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $roboto_condensed: 'Roboto Condensed', sans-serif;
 
+// colors
+$DARK_GRAY: #222;
+$PRIMARY_BLUE: #0cf;
+$SECONDARY_BLUE: #08a;
+
+
 body {
-    background-color: #222;
+    background-color: $DARK_GRAY;
     font-family: $helvetica;
     margin: 0; border: 0; padding: 0;
 }
@@ -73,6 +80,18 @@ article {
                 margin-left: $horizontal_padding;
                 margin-right: $horizontal_padding;
             }
+        }
+    }
+
+    .infobar {
+        margin: 0 (-$horizontal_padding);
+        padding: 5px $horizontal_padding;
+        background-color: black;
+        font-size: 0.9rem;
+        color: white;
+
+        .reading-time {
+            font-style: italic;
         }
     }
 
