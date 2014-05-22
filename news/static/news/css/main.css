@@ -145,9 +145,8 @@ article {
     padding: 5px 15px;
     background-color: black;
     font-size: 0.9rem;
-    color: white; }
-    article .infobar .reading-time {
-      font-style: italic; }
+    color: white;
+    font-style: italic; }
   article .title {
     font-size: 2em;
     margin-top: 0;

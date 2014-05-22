@@ -20,6 +20,10 @@ function showArticle(id) {
     console.log(id);
     ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
         console.log(response);
+        // infobar
+        $('article .category').html(response.category);
+        $('article .publish-time').html(response.publish_time);
+        $('article .publish-day').html(response.publish_day);
         // featured image
         $('article .featured-image img').prop('src', response.featured_image.url);
         $('article .featured-image figcaption').html(response.featured_image.caption);
@@ -89,6 +93,6 @@ function ajaxGet(params, endpoint, callback_success) {
         if (reading_time < 1)
             return this;
         else
-            $(selector).text(reading_time + ' min. read');
+            $(selector).html(reading_time + ' min. read &ndash; ');
     }
 })(jQuery);

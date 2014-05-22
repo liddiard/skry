@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils.timezone import now as django_now
 from django.forms.models import model_to_dict
+from django.contrib.humanize.templatetags import humanize
 
 from sorl.thumbnail import get_thumbnail
 
@@ -119,6 +120,9 @@ class Article(models.Model):
                                                         .display_organization()
         if self.author:
             article['author'] = self.get_pretty_authors()
+        article['category'] = self.category.name
+        article['publish_day'] = humanize.naturalday(self.publish_time)
+        article['publish_time'] = humanize.naturaltime(self.publish_time)
         article['body'] = markdown.markdown(self.body)
         article = json.dumps(article, cls=utils.DatetimeEncoder)
         return article

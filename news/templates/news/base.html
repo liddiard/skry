@@ -1,3 +1,4 @@
+{% load humanize %}
 {% load thumbnail %}
 
 <!DOCTYPE html>
@@ -20,7 +21,10 @@
     <article>
         <div class="infobar">
             <span class="reading-time"><!-- gets populated in main.js --></span>
-            <span class="date-published"></span>
+            <span class="category">{{ article.category.name }}</span>
+            story published
+            <span class="publish-day">{{ article.date_published|naturalday }}</span> 
+            (<span class="publish-time">{{ article.date_published|naturaltime }}</span>)
         </div>
         <figure class="full featured-image">
             <div class="image">
