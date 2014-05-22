@@ -106,18 +106,35 @@ class Article(models.Model):
     class Meta:
         ordering = ['-position']
 
+    def get_featured_image(self):
+        """
+        Custom accessor for featured image. Needed because the
+        `feature_card_image` field determines whether the image stored in the
+        `card` field or the image stored in `featured_image` field should be
+        displayed as the 'featured image' for an article.
+        """
+        if self.card and self.feature_card_image:
+            return self.card
+        else:
+            return self.featured_image
+
     def as_public_json(self):
+        """
+        Returns a JSON object with all of the public article fields to display 
+        on an article template.
+        """
         article = model_to_dict(self, exclude=['status', 'assignment_slug'])
-        if self.featured_image:
+        featured_image = self.get_featured_image()
+        if featured_image:
             article['featured_image'] = {}
-            article['featured_image']['url'] = self.featured_image.get_full()
-            article['featured_image']['caption'] = self.featured_image.caption
-            article['featured_image']['credit'] = self.featured_image\
-                                                      .get_pretty_credit()
-            article['featured_image']['courtesy'] = self.featured_image\
-                                                        .display_courtesy()
-            article['featured_image']['organization'] = self.featured_image\
-                                                        .display_organization()
+            article['featured_image']['url'] = featured_image.get_full()
+            article['featured_image']['caption'] = featured_image.caption
+            article['featured_image']['credit'] = featured_image\
+                                                          .get_pretty_credit()
+            article['featured_image']['courtesy'] = featured_image\
+                                                           .display_courtesy()
+            article['featured_image']['organization'] = featured_image\
+                                                       .display_organization()
         if self.author:
             article['author'] = self.get_pretty_authors()
         article['category'] = self.category.name
@@ -128,14 +145,25 @@ class Article(models.Model):
         return article
 
     def is_published(self):
+        """
+        Returns True if the article's status is 'Ready to publish' and the
+        current time is greater than (later than) the publish time.
+        """
         return (self.status == self.READY_TO_PUBLISH and
                 self.publish_time < django_now())
 
     def get_path(self):
+        """
+        Get the URL path to the article from the website root.
+        """
         return "/%s/%s/" % (self.publish_time.strftime("%Y/%m/%d"), 
                             self.url_slug)
 
     def get_pretty_authors(self):
+        """
+        Creates a comma/'and'-separated list of names for multiple authors in
+        the format you would write out a list of items in AP style.
+        """
         return utils.pretty_list_from_queryset(self.author.all())
 
     def __unicode__(self):
@@ -230,7 +258,7 @@ class Media(models.Model):
 
     def display_courtesy(self):
         first_author = self.credit.first()
-        if (not (first_author.first_name or first_author.last_name) or not 
+        if ((first_author.first_name or first_author.last_name) and not 
             first_author.organization):
             return True
         else:
