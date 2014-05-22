@@ -18,10 +18,10 @@
 
     <div id="mask"></div>
     <article>
-        <figure class="featured-image">
+        <figure class="full featured-image">
             <div class="image">
                 <img src="{% thumbnail "640" article.featured_image.image %}"/>
-                <div class="credit">{{ article.featured_image.get_pretty_credit }}</div>
+                <div class="credit"><span class="courtesy">{% if article.featured_image.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ article.featured_image.get_pretty_credit }}</span><span class="organization">{% if article.featured_image.credit.last.organization %} / {{ article.featured_image.credit.last.organization }}{% endif %}</span></div>
             </div>
             <figcaption>{{ article.featured_image.caption }}</figcaption>
         </figure>

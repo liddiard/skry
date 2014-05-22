@@ -19,10 +19,16 @@ $(document).ready(function(){
 function showArticle(id) {
     console.log(id);
     ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
-        console.log(response)
-        $('article .featured-image img').prop('src', response.featured_image);
-        $('article .featured-image figcaption').html(response.featured_image_caption);
-        $('article .featured-image .credit').html(response.featured_image_credit);
+        console.log(response);
+        // featured image
+        $('article .featured-image img').prop('src', response.featured_image.url);
+        $('article .featured-image figcaption').html(response.featured_image.caption);
+        $('article .featured-image .credit .name').html(response.featured_image.credit);
+        if (response.featured_image.courtesy)
+            $('article .featured-image .courtesy').html('Courtesy of ');
+        if (response.featured_image.organization)
+            $('article .featured-image .organization').html(' / '+response.featured_image.organization);
+        // article content
         $('article .title').html(response.title);
         $('article .subhead').html(response.subhead);
         if (response.author)

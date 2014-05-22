@@ -26,7 +26,8 @@ class Author(models.Model):
     first_name = models.CharField(max_length=32, blank=True)
     last_name = models.CharField(max_length=32, blank=True)
     organization = models.CharField(max_length=32, 
-                                    settings.DEFAULT_ORGANIZATION, blank=True)
+                                    default=settings.DEFAULT_ORGANIZATION, 
+                                    blank=True)
     # title = models.CharField(max_length=32, blank=True)
     email = models.EmailField(blank=True)
     twitter = models.CharField(max_length=15, blank=True)
@@ -107,10 +108,16 @@ class Article(models.Model):
     def as_public_json(self):
         article = model_to_dict(self, exclude=['status', 'assignment_slug'])
         if self.featured_image:
-            article['featured_image'] = self.featured_image.get_full()
-            article['featured_image_caption'] = self.featured_image.caption
-            article['featured_image_credit'] = self.featured_image\
-                                               .get_pretty_credit()
+            article['featured_image'] = {}
+            article['featured_image']['url'] = self.featured_image.get_full()
+            article['featured_image']['caption'] = self.featured_image.caption
+            article['featured_image']['credit'] = self.featured_image\
+                                                      .get_pretty_credit()
+            article['featured_image']['courtesy'] = self.featured_image\
+                                                        .display_courtesy()
+            article['featured_image']['organization'] = self.featured_image\
+                                                            .credit.last()\
+                                                            .organization
         if self.author:
             article['author'] = self.get_pretty_authors()
         article['body'] = markdown.markdown(self.body)
@@ -217,6 +224,14 @@ class Media(models.Model):
 
     def get_pretty_credit(self):
         return utils.pretty_list_from_queryset(self.credit.all())
+
+    def display_courtesy(self):
+        first_author = self.credit.first()
+        if ((first_author.first_name or first_author.last_name)
+            and not first_author.organization):
+            return True
+        else:
+            return False
 
     class Meta:
         abstract = True
