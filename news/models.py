@@ -127,7 +127,9 @@ class Article(models.Model):
         featured_image = self.get_featured_image()
         if featured_image:
             article['featured_image'] = {}
-            article['featured_image']['url'] = featured_image.get_full()
+            article['featured_image']['url'] = {}
+            article['featured_image']['url']['original'] = featured_image.image.url
+            article['featured_image']['url']['full'] = featured_image.get_full()
             article['featured_image']['caption'] = featured_image.caption
             article['featured_image']['credit'] = featured_image\
                                                           .get_pretty_credit()

@@ -11,6 +11,7 @@
     <link href="{{ STATIC_URL }}news/css/main.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="image/favicon.ico"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}news/js/magnific-popup.min.js"></script>
     <script src="{{ STATIC_URL }}news/js/main.js"></script>
 </head>
 <body>
@@ -27,10 +28,10 @@
             (<span class="publish-time">{{ article.date_published|naturaltime }}</span>)
         </div>
         <figure class="full featured-image">
-            <div class="image">
+            <a class="popup image" href="{{ article.get_featured_image.url }}">
                 <img src="{% if article.get_featured_image %}{% thumbnail "640" article.get_featured_image.image %}{% endif %}"/>
                 <div class="credit"><span class="courtesy">{% if article.featured_image.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ article.featured_image.get_pretty_credit }}</span><span class="organization">{% if article.featured_image.display_organization %} / {{ article.featured_image.display_organization }}{% endif %}</span></div>
-            </div>
+            </a>
             <figcaption>{{ article.featured_image.caption }}</figcaption>
         </figure>
         <figure class="featured-video">

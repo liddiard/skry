@@ -26,7 +26,8 @@ function showArticle(id) {
         $('article .publish-day').html(response.publish_day);
         // featured image
         if (response.featured_image) {
-            $('article .featured-image img').prop('src', response.featured_image.url);
+            $('article .featured-image .image').prop('href', response.featured_image.url.original);
+            $('article .featured-image img').prop('src', response.featured_image.url.full);
             $('article .featured-image figcaption').html(response.featured_image.caption);
             $('article .featured-image .credit .name').html(response.featured_image.credit);
             if (response.featured_image.courtesy)
@@ -40,6 +41,7 @@ function showArticle(id) {
         if (response.author)
             $('article .author').html('By ' + response.author);
         $('article .body').html(response.body).readingTime('.reading-time');
+        $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
     });
 }
 
