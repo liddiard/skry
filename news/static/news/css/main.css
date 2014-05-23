@@ -546,7 +546,7 @@ article {
     padding: 5px 15px;
     background-color: black;
     font-size: 0.9rem;
-    color: white;
+    color: lightgray;
     font-style: italic; }
   article .title {
     font-size: 2em;
@@ -557,6 +557,18 @@ article {
     font-weight: normal; }
   article .author {
     color: gray; }
+  article .video {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    padding-top: 25px;
+    height: 0; }
+    article .video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
 
 #mask {
   position: fixed;

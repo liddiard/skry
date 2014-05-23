@@ -92,7 +92,7 @@ article {
         padding: 5px $horizontal_padding;
         background-color: black;
         font-size: 0.9rem;
-        color: white;
+        color: lightgray;
         font-style: italic;
     }
 
@@ -109,6 +109,19 @@ article {
 
     .author {
         color: gray;
+    }
+
+    .video {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        padding-top: 25px;
+        height: 0;
+
+        iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
     }
 }
 

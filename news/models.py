@@ -299,7 +299,7 @@ class Image(Media):
 
 class Video(Media):
     title = models.CharField(max_length=128, blank=True, null=True)
-    url = models.URLField()
+    youtube_id = models.CharField(max_length=16)
     credit = models.ManyToManyField('Author', related_name='news_video', 
                                     blank=True, null=True)
 

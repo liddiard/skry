@@ -27,6 +27,7 @@
             <span class="publish-day">{{ article.date_published|naturalday }}</span> 
             (<span class="publish-time">{{ article.date_published|naturaltime }}</span>)
         </div>
+
         <figure class="full featured-image">
             <a class="popup image" href="{{ article.get_featured_image.url }}">
                 <img src="{% if article.get_featured_image %}{% thumbnail "640" article.get_featured_image.image %}{% endif %}"/>
@@ -34,16 +35,23 @@
             </a>
             <figcaption>{{ article.featured_image.caption }}</figcaption>
         </figure>
-        <figure class="featured-video">
-            <div class="video"></div>
-            <div class="credit">{{ article.featured_video.credit }}</div>
+
+        <figure class="full featured-video">
+            <h1>{{ article.featured_video.title }}</h1>
+            <div class="video">
+                <iframe width="640" height="360" src="//www.youtube.com/embed/{{ article.featured_video.youtube_id }}?theme=light" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="credit"><span class="courtesy">{% if article.featured_video.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ article.featured_video.get_pretty_credit }}</span><span class="organization">{% if article.featured_video.display_organization %} / {{ article.featured_video.display_organization }}{% endif %}</span></div>
             <figcaption>{{ article.featured_video.caption }}</figcaption>
         </figure>
-        <figure class="featured-audio">
+
+        <figure class="full featured-audio">
+            <h1>{{ article.featured_audio.title }}</h1>
             <div class="audio"></div>
-            <div class="credit">{{ article.featured_audio.credit }}</div>
+            <div class="credit"><span class="courtesy">{% if article.featured_audio.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ article.featured_audio.get_pretty_credit }}</span><span class="organization">{% if article.featured_audio.display_organization %} / {{ article.featured_audio.display_organization }}{% endif %}</span></div>
             <figcaption>{{ article.featured_audio.caption }}</figcaption>
         </figure>
+
         <h1 class="title">{{ article.title }}</h1>
         <h2 class="subhead">{{ article.subhead }}</h2>
         <div class="author">{{ article.get_pretty_authors }}</div>
