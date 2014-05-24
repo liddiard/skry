@@ -1,0 +1,9 @@
+{% load thumbnail %}
+
+<figure class="full">
+    <a class="popup image" href="{{ image.image.url }}">
+        <img src="{% thumbnail image.image "640" %}"/>
+        <div class="credit"><span class="courtesy">{% if image.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ image.get_pretty_credit }}</span><span class="organization">{% if image.display_organization %} / {{ image.display_organization }}{% endif %}</span></div>
+    </a>
+    <figcaption>{{ image.caption }}</figcaption>
+</figure>

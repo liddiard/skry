@@ -25,16 +25,8 @@ function showArticle(id) {
         $('article .publish-time').html(response.publish_time);
         $('article .publish-day').html(response.publish_day);
         // featured image
-        if (response.featured_image) {
-            $('article .featured-image .image').prop('href', response.featured_image.url.original);
-            $('article .featured-image img').prop('src', response.featured_image.url.full);
-            $('article .featured-image figcaption').html(response.featured_image.caption);
-            $('article .featured-image .credit .name').html(response.featured_image.credit);
-            if (response.featured_image.courtesy)
-                $('article .featured-image .courtesy').html('Courtesy of ');
-            if (response.featured_image.organization)
-                $('article .featured-image .organization').html(' / '+response.featured_image.organization);
-        }
+        if (response.featured_image) 
+            $('article .featured-media').append(response.featured_image);
         // article content
         $('article .title').html(response.title);
         $('article .subhead').html(response.subhead);
@@ -44,6 +36,7 @@ function showArticle(id) {
         $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
     });
 }
+
 
 /* utility functions */
 
@@ -63,7 +56,7 @@ function ajaxGet(params, endpoint, callback_success) {
 
 (function($) {
     /*!
-    A simple version of:
+    A very simplified version of:
 
     Name: Reading Time
     Dependencies: jQuery
@@ -82,15 +75,13 @@ function ajaxGet(params, endpoint, callback_success) {
             return this; 
         }
 
-        //define plugin
-        var plugin = this;
-
         //define element
         var el = $(this);
 
         // words per minute
         var wpm = 270;
 
+        // calculate the reading time
         var reading_time = Math.round(el.text().split(' ').length / wpm);
 
         // don't display anything if reading time is less that 30 secs

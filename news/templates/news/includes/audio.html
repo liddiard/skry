@@ -1,0 +1,6 @@
+<figure class="full">
+    <h1>{{ audio.title }}</h1>
+    <div class="audio"></div>
+    <div class="credit"><span class="courtesy">{% if audio.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ audio.get_pretty_credit }}</span><span class="organization">{% if audio.display_organization %} / {{ audio.display_organization }}{% endif %}</span></div>
+    <figcaption>{{ audio.caption }}</figcaption>
+</figure>

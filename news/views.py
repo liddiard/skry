@@ -83,7 +83,7 @@ class ArticleJSONView(AjaxView):
     def get(self, request):
         article_id = request.GET.get('id')
         if article_id is None:
-            return self.key_error('Key (id) missing from request.')
+            return self.key_error('Required key (id) missing from request.')
         article = get_object_or_404(models.Article, pk=article_id)
-        data = article.as_public_json()
-        return HttpResponse(data, content_type="application/json")
+        response_content = article.ajax_json()
+        return HttpResponse(response_content, content_type="application/json")

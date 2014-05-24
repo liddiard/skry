@@ -1351,6 +1351,7 @@ article {
     padding-bottom: 56.25%;
     /* 16:9 */
     padding-top: 25px;
+    /* bottom control bar height */
     height: 0; }
     article .video iframe {
       position: absolute;

@@ -1,5 +1,4 @@
 {% load humanize %}
-{% load thumbnail %}
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +11,7 @@
     <link rel="shortcut icon" href="image/favicon.ico"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}news/js/magnific-popup.min.js"></script>
-    <script src="{{ STATIC_URL }}news/js/mediaelement.min.js"></script>
+    <script src="{{ STATIC_URL }}news/js/mediaelementplayer.min.js"></script>
     <script src="{{ STATIC_URL }}news/js/main.js"></script>
 </head>
 <body>
@@ -29,29 +28,23 @@
             (<span class="publish-time">{{ article.date_published|naturaltime }}</span>)
         </div>
 
-        <figure class="full featured-image">
-            <a class="popup image" href="{{ article.get_featured_image.url }}">
-                <img src="{% if article.get_featured_image %}{% thumbnail "640" article.get_featured_image.image %}{% endif %}"/>
-                <div class="credit"><span class="courtesy">{% if article.featured_image.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ article.featured_image.get_pretty_credit }}</span><span class="organization">{% if article.featured_image.display_organization %} / {{ article.featured_image.display_organization }}{% endif %}</span></div>
-            </a>
-            <figcaption>{{ article.featured_image.caption }}</figcaption>
-        </figure>
+        <div class="featured-media">
+            {% with image=article.get_featured_image video=article.featured_video audio=article.featured_audio %}
 
-        <figure class="full featured-video">
-            <h1>{{ article.featured_video.title }}</h1>
-            <div class="video">
-                <iframe width="640" height="360" src="//www.youtube.com/embed/{{ article.featured_video.youtube_id }}?theme=light&color=white" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="credit"><span class="courtesy">{% if article.featured_video.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ article.featured_video.get_pretty_credit }}</span><span class="organization">{% if article.featured_video.display_organization %} / {{ article.featured_video.display_organization }}{% endif %}</span></div>
-            <figcaption>{{ article.featured_video.caption }}</figcaption>
-        </figure>
+                {% if image %}
+                    {% include "news/includes/image.html" %}
+                {% endif %}
 
-        <figure class="full featured-audio">
-            <h1>{{ article.featured_audio.title }}</h1>
-            <div class="audio"></div>
-            <div class="credit"><span class="courtesy">{% if article.featured_audio.display_courtesy %}Courtesy of {% endif %}</span><span class="name">{{ article.featured_audio.get_pretty_credit }}</span><span class="organization">{% if article.featured_audio.display_organization %} / {{ article.featured_audio.display_organization }}{% endif %}</span></div>
-            <figcaption>{{ article.featured_audio.caption }}</figcaption>
-        </figure>
+                {% if video %}
+                    {% include "news/includes/video.html" %}
+                {% endif %}
+
+                {% if audio %}
+                    {% include "news/includes/audio.html" %}
+                {% endif %}
+
+            {% endwith %}
+        </div>
 
         <h1 class="title">{{ article.title }}</h1>
         <h2 class="subhead">{{ article.subhead }}</h2>

@@ -7,11 +7,13 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils.timezone import now as django_now
 from django.forms.models import model_to_dict
+from django.template import Context
+from django.template.loader import get_template
 from django.contrib.humanize.templatetags import humanize
 
 from sorl.thumbnail import get_thumbnail
 
-from prime.templatetags import markdown # TODO: move to this app
+from .templatetags import markdown
 from . import utils
 
 
@@ -118,25 +120,17 @@ class Article(models.Model):
         else:
             return self.featured_image
 
-    def as_public_json(self):
+    def ajax_json(self):
         """
         Returns a JSON object with all of the public article fields to display 
-        on an article template.
+        on an article template. NOT a public API method.
         """
         article = model_to_dict(self, exclude=['status', 'assignment_slug'])
         featured_image = self.get_featured_image()
         if featured_image:
-            article['featured_image'] = {}
-            article['featured_image']['url'] = {}
-            article['featured_image']['url']['original'] = featured_image.image.url
-            article['featured_image']['url']['full'] = featured_image.get_full()
-            article['featured_image']['caption'] = featured_image.caption
-            article['featured_image']['credit'] = featured_image\
-                                                          .get_pretty_credit()
-            article['featured_image']['courtesy'] = featured_image\
-                                                           .display_courtesy()
-            article['featured_image']['organization'] = featured_image\
-                                                       .display_organization()
+            template = get_template('news/includes/image.html')
+            context = Context({'image': featured_image})
+            article['featured_image'] = template.render(context)
         if self.author:
             article['author'] = self.get_pretty_authors()
         article['category'] = self.category.name
