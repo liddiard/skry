@@ -139,7 +139,8 @@ class Article(models.Model):
         featured_audio = self.featured_audio
         if featured_audio:
             template = get_template('news/includes/audio.html')
-            context = Context({'audio': featured_audio})
+            context = Context({'audio': featured_audio, 
+                               'MEDIA_URL': settings.MEDIA_URL})
             article['featured_audio'] = template.render(context)
         if self.author:
             article['author'] = self.get_pretty_authors()
@@ -206,6 +207,7 @@ class Category(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
+    description = models.CharField(max_length=128, blank=True)
     default_card = models.ImageField(upload_to='news/category/default_card/')
     default_card_crop = models.CharField(max_length=1, 
                                          choices=CARD_CROP_CHOICES, 
