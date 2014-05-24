@@ -109,6 +109,12 @@ article {
             }
         }
 
+        h1 {
+            font-size: 1.25em;
+            margin-top: 0.5em;
+            margin-bottom: 0.25em;
+        }
+
         .image {
             position: relative;
             display: block;
@@ -118,6 +124,10 @@ article {
                 width: 100%;
             }
 
+        }
+
+        audio {
+            width: 100%;
         }
 
         .credit {
@@ -135,6 +145,11 @@ article {
 
         &.full {
             margin: 0 (-$horizontal_padding);
+
+            h1 {
+                margin-left: $horizontal_padding;
+                margin-right: $horizontal_padding;
+            }
 
             figcaption {
                 padding-left: $horizontal_padding;

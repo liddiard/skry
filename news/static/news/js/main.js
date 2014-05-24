@@ -44,6 +44,7 @@ function showArticle(id) {
             $('article .author').html('By ' + response.author);
         $('article .body').html(response.body).readingTime('.reading-time');
         $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
+        $('audio').mediaelementplayer({audioWidth: '100%'});
         readingProgressBar();
     });
 }

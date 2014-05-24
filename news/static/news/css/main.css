@@ -1343,12 +1343,18 @@ article {
       position: relative;
       float: right;
       margin-top: -0.5rem; }
+  article figure h1 {
+    font-size: 1.25em;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em; }
   article figure .image {
     position: relative;
     display: block; }
     article figure .image img {
       display: block;
       width: 100%; }
+  article figure audio {
+    width: 100%; }
   article figure .credit {
     position: absolute;
     bottom: 0;
@@ -1361,6 +1367,9 @@ article {
       font-weight: bold; }
   article figure.full {
     margin: 0 -15px; }
+    article figure.full h1 {
+      margin-left: 15px;
+      margin-right: 15px; }
     article figure.full figcaption {
       padding-left: 15px;
       padding-right: 15px; }
