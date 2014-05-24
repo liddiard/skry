@@ -12,6 +12,7 @@ $(document).ready(function(){
         $('article, #mask').hide();
         $('#main').css({position: '', top: ''})
         $(document).scrollTop(window.originalScrollY);
+        readingProgressBar.reset();
     });
 });
 
@@ -39,6 +40,7 @@ function showArticle(id) {
             $('article .author').html('By ' + response.author);
         $('article .body').html(response.body).readingTime('.reading-time');
         $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
+        readingProgressBar();
     });
 }
 
@@ -57,6 +59,28 @@ function ajaxGet(params, endpoint, callback_success) {
                 console.error('Oh no! Something went wrong. Please report this error: \n'+errorThrown+xhr.status+xhr.responseText);
         }
     }); 
+}
+
+function readingProgressBar() {
+    // from: http://css-tricks.com/reading-position-indicator/
+    var winHeight = $(window).height(), 
+    docHeight = $(document).height(),
+    progressBar = $('progress'),
+    max, value;
+
+    /* Set the max scrollable area */
+    max = docHeight - winHeight;
+    progressBar.attr('max', max);
+
+    $(document).on('scroll', function(){
+        value = $(window).scrollTop();
+        progressBar.attr('value', value);
+    });
+
+    this.reset = function() {
+        $(document).unbind('scroll');
+        value = 0;
+    }
 }
 
 (function($) {

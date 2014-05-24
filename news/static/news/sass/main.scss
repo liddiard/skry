@@ -8,8 +8,8 @@ $roboto_condensed: 'Roboto Condensed', sans-serif;
 
 // colors
 $DARK_GRAY: #222;
-$PRIMARY_BLUE: #0cf;
-$SECONDARY_BLUE: #08a;
+$PRIMARY_COLOR: #0cf;
+$SECONDARY_COLOR: #08a;
 
 
 body {
@@ -25,6 +25,51 @@ a {
 
 figure {
     margin: 0;
+}
+
+progress {
+    /* from: http://css-tricks.com/reading-position-indicator/ */
+
+    $color: $PRIMARY_COLOR;
+    $width: 640px;
+
+    /* Positioning */
+    position: fixed;
+    left: 50%;
+    top: 0;
+    margin-left: -$width/2;
+    z-index: 100;
+
+    /* Dimensions */
+    width: $width;
+    height: 4px;
+
+    /* Reset the appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Get rid of the default border in Firefox/Opera. */
+    border: none;
+
+    /* Progress bar container for Firefox/IE10+ */
+    background-color: transparent;
+
+    /* Progress bar value for IE10+ */
+    color: $color;
+
+    /* Vendor prefixes */
+    &::-webkit-progress-bar {
+        background-color: transparent;
+    }
+
+    &::-webkit-progress-value {
+        background-color: $color;
+    }
+
+    &::-moz-progress-bar {
+        background-color: $color;
+    }
 }
 
 article {

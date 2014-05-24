@@ -1289,6 +1289,35 @@ a {
 figure {
   margin: 0; }
 
+progress {
+  /* from: http://css-tricks.com/reading-position-indicator/ */
+  /* Positioning */
+  position: fixed;
+  left: 50%;
+  top: 0;
+  margin-left: -320px;
+  z-index: 100;
+  /* Dimensions */
+  width: 640px;
+  height: 4px;
+  /* Reset the appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Get rid of the default border in Firefox/Opera. */
+  border: none;
+  /* Progress bar container for Firefox/IE10+ */
+  background-color: transparent;
+  /* Progress bar value for IE10+ */
+  color: #00ccff;
+  /* Vendor prefixes */ }
+  progress::-webkit-progress-bar {
+    background-color: transparent; }
+  progress::-webkit-progress-value {
+    background-color: #00ccff; }
+  progress::-moz-progress-bar {
+    background-color: #00ccff; }
+
 article {
   padding: 0 15px;
   position: absolute;
