@@ -131,6 +131,16 @@ class Article(models.Model):
             template = get_template('news/includes/image.html')
             context = Context({'image': featured_image})
             article['featured_image'] = template.render(context)
+        featured_video = self.featured_video
+        if featured_video:
+            template = get_template('news/includes/video.html')
+            context = Context({'video': featured_video})
+            article['featured_video'] = template.render(context)
+        featured_audio = self.featured_audio
+        if featured_audio:
+            template = get_template('news/includes/audio.html')
+            context = Context({'audio': featured_audio})
+            article['featured_audio'] = template.render(context)
         if self.author:
             article['author'] = self.get_pretty_authors()
         article['category'] = self.category.name
@@ -292,6 +302,7 @@ class Image(Media):
 
 
 class Video(Media):
+    title = models.CharField(max_length=64)
     youtube_id = models.CharField(max_length=16)
 
     def __unicode__(self):

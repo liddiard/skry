@@ -1,14 +1,8 @@
 <figure class="full">
-    <h1>{{ video.title }}</h1>
     <div class="video">
         <iframe width="640" height="360" src="//www.youtube.com/embed/{{ video.youtube_id }}?theme=light&color=white" frameborder="0" allowfullscreen></iframe>
     </div>
     <figcaption>
-        {% if video.credit.count %}
-            {% with media=video %}
-                {% include "news/includes/media_credit.html" %}
-            {% endwith %}
-        {% endif %}
         {{ video.caption }}
     </figcaption>
 </figure>
