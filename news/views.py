@@ -1,4 +1,5 @@
 import json
+import datetime
 
 from django.views.generic.base import View, TemplateView
 from django.shortcuts import get_object_or_404
@@ -26,8 +27,22 @@ class CategoryView(TemplateView):
         return context
 
 
-class ArticleView(TemplateView):
-    pass
+class ArticleView(CategoryView):
+    
+    template_name = "news/list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticleView, self).get_context_data(**kwargs)
+        year = int(self.kwargs.get('year'))
+        month = int(self.kwargs.get('month'))
+        day = int(self.kwargs.get('day'))
+        slug = self.kwargs.get('slug')
+        context['article'] = get_object_or_404(models.Article, 
+                                               publish_time__year=year, 
+                                               publish_time__month=month,
+                                               publish_time__day=day,
+                                               url_slug=slug)
+        return context
 
 
 class PageView(TemplateView):

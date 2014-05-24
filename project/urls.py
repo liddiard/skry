@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     # main site
     url(r'^$', news.views.CategoryView.as_view(), name='news_category'),
     url(r'^category/(?P<category>\S+)/$', news.views.CategoryView.as_view(), name='news_category'),
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>\S+)/$', news.views.ArticleView.as_view(), name='news_article'),
 
     # api
 
