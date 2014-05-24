@@ -16,7 +16,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # main site
-    url(r'^$', news.views.FrontView.as_view(), name='news_front'),
+    url(r'^$', news.views.CategoryView.as_view(), name='news_category'),
+    url(r'^category/(?P<category>\S+)/$', news.views.CategoryView.as_view(), name='news_category'),
 
     # api
 

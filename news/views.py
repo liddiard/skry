@@ -9,23 +9,20 @@ from . import models
 from prime.templatetags import markdown
 
 
-class FrontView(TemplateView):
+class CategoryView(TemplateView):
 
     template_name = "news/list.html"
-
-    def get_context_data(self):
-        context = super(FrontView, self).get_context_data()
-        context['articles'] = models.get_published_articles()[:12]
-        return context
-
-
-class CategoryView(TemplateView):
     
-    def get_context_data(self):
-        context = super(CategoryView, self).get_context_data()
-        category = self.kwargs.get('category')
-        context['category'] = get_object_or_404(models.Category, 
-                                                    slug=category)
+    def get_context_data(self, **kwargs):
+        context = super(CategoryView, self).get_context_data(**kwargs)
+        category_slug = self.kwargs.get('category')
+        all_articles = models.get_published_articles()
+        if category_slug:
+            category = get_object_or_404(models.Category, slug=category_slug)
+            context['category'] = category
+            context['articles'] = all_articles.filter(category=category)[:12]
+        else:
+            context['articles'] = all_articles[:12]
         return context
 
 
