@@ -302,7 +302,7 @@ class Image(Media):
 
 
 class Video(Media):
-    title = models.CharField(max_length=64)
+    title = models.CharField(max_length=128)
     youtube_id = models.CharField(max_length=16)
 
     def __unicode__(self):
@@ -310,7 +310,7 @@ class Video(Media):
 
 
 class Audio(Media):
-    title = models.CharField(max_length=128, blank=True, null=True)
+    title = models.CharField(max_length=128)
     mp3 = models.FileField(upload_to='news/audio/%Y/%m/%d/mp3/')
     ogg = models.FileField(upload_to='news/audio/%Y/%m/%d/ogg/')
     credit = models.ManyToManyField('Author', related_name='news_audio', 

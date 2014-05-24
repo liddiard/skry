@@ -1,6 +1,11 @@
 <figure class="full">
     <h1>{{ audio.title }}</h1>
-    <div class="audio"></div>
+    <div class="audio">
+        <audio>
+            <source src="{{ audio.mp3 }}" type="audio/mp3">
+            <source src="{{ audio.ogg }}" type="audio/ogg">
+        </audio>
+    </div>
     <figcaption>
         {% if audio.credit.count %}
             {% with media=audio %}
