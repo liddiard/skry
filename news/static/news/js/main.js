@@ -12,7 +12,6 @@ $(document).ready(function(){
         $('article, #mask').hide();
         $('#main').css({position: '', top: ''})
         $(document).scrollTop(window.originalScrollY);
-        readingProgressBar.reset();
     });
 });
 
@@ -77,10 +76,11 @@ function readingProgressBar() {
         progressBar.attr('value', value);
     });
 
-    this.reset = function() {
+    $('#mask').on('click', function(event){
         $(document).unbind('scroll');
-        value = 0;
-    }
+        progressBar.attr('value', 0);
+        $(this).unbind(event);
+    });
 }
 
 (function($) {
