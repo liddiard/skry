@@ -2,16 +2,21 @@ $(document).ready(function(){
     if (history.pushState) {
         $('.card').click(function(event){
             event.preventDefault();
+            history.pushState({}, null, $(this).attr('href'));
             $('article, #mask').show();
             window.originalScrollY = window.scrollY;
             $('#main').css({position: 'fixed', top: -window.originalScrollY})
             showArticle($(this).attr('data-id'));
         });
     }
-    $('#mask').click(function(){
-        $('article, #mask').hide();
-        $('#main').css({position: '', top: ''})
-        $(document).scrollTop(window.originalScrollY);
+    $('#mask').click(function(event){
+        if (history.pushState) {
+            event.preventDefault();
+            history.pushState({}, null, '/');
+            $('article, #mask').hide();
+            $('#main').css({position: '', top: ''})
+            $(document).scrollTop(window.originalScrollY);
+        }
     });
 });
 
