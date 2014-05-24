@@ -24,9 +24,14 @@ function showArticle(id) {
         $('article .category').html(response.category);
         $('article .publish-time').html(response.publish_time);
         $('article .publish-day').html(response.publish_day);
-        // featured image
+        // featured media
+        var $featured_media = $('article .featured-media');
         if (response.featured_image) 
-            $('article .featured-media').append(response.featured_image);
+            $featured_media.append(response.featured_image);
+        if (response.featured_video) 
+            $featured_media.append(response.featured_video);
+        if (response.featured_audio) 
+            $featured_media.append(response.featured_audio);
         // article content
         $('article .title').html(response.title);
         $('article .subhead').html(response.subhead);

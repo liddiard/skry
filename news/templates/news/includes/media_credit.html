@@ -1,0 +1,5 @@
+<div class="credit">
+    <span class="courtesy">{% if media.display_courtesy %}Courtesy of {% endif %}</span>
+    <span class="name">{{ media.get_pretty_credit }}</span>
+    <span class="organization">{% if media.display_organization %} / {{ media.display_organization }}{% endif %}</span>
+</div>

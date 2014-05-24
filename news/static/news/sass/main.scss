@@ -48,11 +48,20 @@ article {
     }
 
     figure {
+        $caption_padding_top: 0.5rem;
+
         figcaption {
+            position: relative;
             color: gray;
             line-height: 1.216;
             font-size: 0.9em;
-            margin: 0.5em 0 1.5em 0;
+            padding: $caption_padding_top 0 1.5em 0;
+
+            .credit {
+                position: relative;
+                float: right;
+                margin-top: -$caption_padding_top;
+            }
         }
 
         .image {
@@ -63,6 +72,7 @@ article {
                 display: block;
                 width: 100%;
             }
+
         }
 
         .credit {
@@ -82,8 +92,12 @@ article {
             margin: 0 (-$horizontal_padding);
 
             figcaption {
-                margin-left: $horizontal_padding;
-                margin-right: $horizontal_padding;
+                padding-left: $horizontal_padding;
+                padding-right: $horizontal_padding;
+
+                .credit {
+                    margin-right: -$horizontal_padding;
+                }
             }
         }
     }
