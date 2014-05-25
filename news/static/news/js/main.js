@@ -28,23 +28,7 @@ function showArticle(id) {
     ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
         console.log(response);
         // infobar
-        $('article .category').html(response.category);
-        $('article .publish-time').html(response.publish_time);
-        $('article .publish-day').html(response.publish_day);
-        // featured media
-        var $featured_media = $('article .featured-media');
-        if (response.featured_image) 
-            $featured_media.append(response.featured_image);
-        if (response.featured_video) 
-            $featured_media.append(response.featured_video);
-        if (response.featured_audio) 
-            $featured_media.append(response.featured_audio);
-        // article content
-        $('article .title').html(response.title);
-        $('article .subhead').html(response.subhead);
-        if (response.author)
-            $('article .author').html('By ' + response.author);
-        $('article .body').html(response.body);
+        $('article').html(response.html);
         setUpArticle();
     });
 }
@@ -74,8 +58,7 @@ function setUpArticle() {
 }
 
 function clearArticle() {
-    $('article').children().not('.infobar').empty();
-    $('article .infobar').children().empty();
+    $('article').empty();
 }
 
 function readingProgressBar() {

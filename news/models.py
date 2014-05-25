@@ -122,40 +122,17 @@ class Article(models.Model):
         else:
             return self.featured_image
 
-    def ajax_json(self):
+    def as_html(self):
         """
         Returns a JSON object with all of the public article fields to display 
         on an article template. NOT a public API method.
         """
-        # import templatetags here to avoid circular import
-        from .templatetags import markdown, shortcodes
-
-        article = model_to_dict(self, exclude=['status', 'assignment_slug'])
-        featured_image = self.get_featured_image()
-        if featured_image:
-            template = get_template('news/inc/image.html')
-            context = Context({'image': featured_image, 'featured': True})
-            article['featured_image'] = template.render(context)
-        featured_video = self.featured_video
-        if featured_video:
-            template = get_template('news/inc/video.html')
-            context = Context({'video': featured_video})
-            article['featured_video'] = template.render(context)
-        featured_audio = self.featured_audio
-        if featured_audio:
-            template = get_template('news/inc/audio.html')
-            context = Context({'audio': featured_audio, 
-                               'MEDIA_URL': settings.MEDIA_URL})
-            article['featured_audio'] = template.render(context)
-        if self.author:
-            article['author'] = self.get_pretty_authors()
-        article['category'] = self.category.name
-        article['publish_day'] = humanize.naturalday(self.publish_time)
-        article['publish_time'] = humanize.naturaltime(self.publish_time)
-        article['body'] = shortcodes.all_shortcodes(markdown.markdown(
-                                                    self.body))
-        article = json.dumps(article, cls=utils.DatetimeEncoder)
-        return article
+        context = Context({'article': self, 'MEDIA_URL': settings.MEDIA_URL})
+        template = get_template('news/inc/article.html')
+        html = template.render(context)
+        response_dict = {'pk': self.pk, 'html': html}
+        response_json = json.dumps(response_dict)
+        return response_json
 
     def is_published(self):
         """

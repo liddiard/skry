@@ -1,7 +1,3 @@
-{% load humanize %}
-{% load markdown %}
-{% load shortcodes %}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,54 +23,7 @@
 
     <a id="mask" href="/"></a>
     <article>
-        <progress value="0"></progress>
-        <div class="infobar">
-            <span class="reading-time"><!-- gets populated in main.js --></span>
-            <span class="category">{{ article.category.name }}</span>
-            story published
-            <span class="publish-day">{{ article.publish_time|naturalday }}</span> 
-            (<span class="publish-time">{{ article.publish_time|naturaltime }}</span>)
-        </div>
-
-        <div class="featured-media">
-            {% with featured=True image=article.get_featured_image video=article.featured_video audio=article.featured_audio %}
-
-                {% if image %}
-                    {% include "news/inc/image.html" %}
-                {% endif %}
-
-                {% if video %}
-                    {% include "news/inc/video.html" %}
-                {% endif %}
-
-                {% if audio %}
-                    {% include "news/inc/audio.html" %}
-                {% endif %}
-
-            {% endwith %}
-        </div>
-
-        <h1 class="title">{{ article.title }}</h1>
-        <h2 class="subhead">{{ article.subhead }}</h2>
-        <div class="author">By {{ article.get_pretty_authors }}</div>
-        <div class="body">{{ article.body|markdown|all_shortcodes }}</div>
-        {% for author in article.author.all %}
-        <div class="about-author">
-            <h1>About the author</h1>
-            <h2>{{ author.full_name }}</h2>
-            {{ author.bio|markdown }}
-            <div class="social-media">
-                <a class="twitter" href="http://twitter.com/{{ author.twitter }}">{{ author.twitter }}</a>
-                <a class="email" href="mailto:{{ author.email }}">{{ author.email }}</a>
-            </div>
-        </div>
-        {% endfor %}
-        <div class="about-category">
-            <h1>{{ article.category }}</h1>
-            <p>{{ article.category.description }}</p>
-            <span class="facebook">{{ article.category.facebook }}</span>
-            <span class="twitter">{{ article.category.twitter }}</span>
-        </div>
+        {% if article %}{% include "news/inc/article.html" %}{% endif %}
     </article>
 
     <div id="main">
