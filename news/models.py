@@ -128,17 +128,17 @@ class Article(models.Model):
         article = model_to_dict(self, exclude=['status', 'assignment_slug'])
         featured_image = self.get_featured_image()
         if featured_image:
-            template = get_template('news/includes/image.html')
-            context = Context({'image': featured_image})
+            template = get_template('news/inc/image.html')
+            context = Context({'image': featured_image, 'featured': True})
             article['featured_image'] = template.render(context)
         featured_video = self.featured_video
         if featured_video:
-            template = get_template('news/includes/video.html')
+            template = get_template('news/inc/video.html')
             context = Context({'video': featured_video})
             article['featured_video'] = template.render(context)
         featured_audio = self.featured_audio
         if featured_audio:
-            template = get_template('news/includes/audio.html')
+            template = get_template('news/inc/audio.html')
             context = Context({'audio': featured_audio, 
                                'MEDIA_URL': settings.MEDIA_URL})
             article['featured_audio'] = template.render(context)

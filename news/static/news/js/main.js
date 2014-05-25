@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    if (window.context.article) articleSetup();
+    if (window.context.article) setUpArticle();
     if (history.pushState) {
         $('.card').click(function(event){
             event.preventDefault();
@@ -15,6 +15,7 @@ $(document).ready(function(){
             event.preventDefault();
             history.pushState({}, null, '/');
             $('article, #mask').hide();
+            clearArticle();
             $('#main').css({position: '', top: ''})
             $(document).scrollTop(window.originalScrollY);
         }
@@ -44,7 +45,7 @@ function showArticle(id) {
         if (response.author)
             $('article .author').html('By ' + response.author);
         $('article .body').html(response.body);
-        articleSetup();
+        setUpArticle();
     });
 }
 
@@ -65,11 +66,16 @@ function ajaxGet(params, endpoint, callback_success) {
     }); 
 }
 
-function articleSetup() {
+function setUpArticle() {
     $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
     $('article audio').mediaelementplayer({audioWidth: '100%'});
     $('article .body').readingTime('.reading-time');
     readingProgressBar();
+}
+
+function clearArticle() {
+    $('article').children().not('.infobar').empty();
+    $('article .infobar').children().empty();
 }
 
 function readingProgressBar() {

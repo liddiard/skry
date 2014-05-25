@@ -36,18 +36,18 @@
         </div>
 
         <div class="featured-media">
-            {% with image=article.get_featured_image video=article.featured_video audio=article.featured_audio %}
+            {% with featured=True image=article.get_featured_image video=article.featured_video audio=article.featured_audio %}
 
                 {% if image %}
-                    {% include "news/includes/image.html" %}
+                    {% include "news/inc/image.html" %}
                 {% endif %}
 
                 {% if video %}
-                    {% include "news/includes/video.html" %}
+                    {% include "news/inc/video.html" %}
                 {% endif %}
 
                 {% if audio %}
-                    {% include "news/includes/audio.html" %}
+                    {% include "news/inc/audio.html" %}
                 {% endif %}
 
             {% endwith %}
@@ -55,7 +55,7 @@
 
         <h1 class="title">{{ article.title }}</h1>
         <h2 class="subhead">{{ article.subhead }}</h2>
-        <div class="author">{{ article.get_pretty_authors }}</div>
+        <div class="author">By {{ article.get_pretty_authors }}</div>
         <div class="body">{{ article.body|markdown }}</div>
         <div class="about-author"></div>
         <div class="about-category"></div>

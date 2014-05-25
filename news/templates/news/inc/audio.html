@@ -1,0 +1,17 @@
+<figure class="full">
+    <h1>{{ audio.title }}</h1>
+    <div class="audio">
+        <audio controls="controls">
+            <source src="{{ MEDIA_URL }}{{ audio.mp3 }}" type="audio/mp3">
+            <source src="{{ MEDIA_URL }}{{ audio.ogg }}" type="audio/ogg">
+        </audio>
+    </div>
+    <figcaption>
+        {% if audio.credit.count %}
+            {% with media=audio %}
+                {% include "news/inc/media_credit.html" %}
+            {% endwith %}
+        {% endif %}
+        {{ audio.caption }}
+    </figcaption>
+</figure>

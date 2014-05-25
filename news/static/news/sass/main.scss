@@ -27,54 +27,10 @@ figure {
     margin: 0;
 }
 
-progress {
-    /* from: http://css-tricks.com/reading-position-indicator/ */
-
-    $color: $PRIMARY_COLOR;
-    $width: 640px;
-
-    /* Positioning */
-    position: fixed;
-    left: 50%;
-    top: 0;
-    margin-left: -$width/2;
-    z-index: 100;
-
-    /* Dimensions */
-    width: $width;
-    height: 4px;
-
-    /* Reset the appearance */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    /* Get rid of the default border in Firefox/Opera. */
-    border: none;
-
-    /* Progress bar container for Firefox/IE10+ */
-    background-color: transparent;
-
-    /* Progress bar value for IE10+ */
-    color: $color;
-
-    /* Vendor prefixes */
-    &::-webkit-progress-bar {
-        background-color: transparent;
-    }
-
-    &::-webkit-progress-value {
-        background-color: $color;
-    }
-
-    &::-moz-progress-bar {
-        background-color: $color;
-    }
-}
-
 article {
-    $horizontal_padding: 15px;
-    $width: 640px - ($horizontal_padding*2);
+    $horizontal_padding: 30px;
+    $total_width: 640px;
+    $width: $total_width - ($horizontal_padding*2);
     padding: 0 $horizontal_padding;
     position: absolute;
     width: $width;
@@ -86,7 +42,7 @@ article {
     z-index: 100;
     box-shadow: 0 0 20px black;
     text-rendering: optimizeLegibility;
-    font-size: 1.2em;
+    font-size: 1.15em;
 
     p {
         line-height: 1.6;
@@ -160,6 +116,83 @@ article {
                 }
             }
         }
+
+        &.left, &.right {
+            width: $total_width/2;
+        }
+
+        &.left {
+            float: left;
+            margin-left: -$horizontal_padding;
+            margin-right: 20px;
+
+            h1 {
+                margin-left: $horizontal_padding;
+            }
+
+            figcaption {
+                margin-left: $horizontal_padding;
+            }
+        }
+
+        &.right {
+            float: right;
+            margin-right: -$horizontal_padding;
+            margin-left: 20px;
+
+            h1 {
+                margin-right: $horizontal_padding;
+            }
+
+            figcaption {
+                margin-right: $horizontal_padding;
+            }
+        }
+    }
+
+    progress {
+        /* from: http://css-tricks.com/reading-position-indicator/ */
+
+        $color: $PRIMARY_COLOR;
+        $width: $total_width;
+
+        /* Positioning */
+        position: fixed;
+        left: 50%;
+        top: 0;
+        margin-left: -$width/2;
+        z-index: 100;
+
+        /* Dimensions */
+        width: $width;
+        height: 4px;
+
+        /* Reset the appearance */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        /* Get rid of the default border in Firefox/Opera. */
+        border: none;
+
+        /* Progress bar container for Firefox/IE10+ */
+        background-color: transparent;
+
+        /* Progress bar value for IE10+ */
+        color: $color;
+
+        /* Vendor prefixes */
+        &::-webkit-progress-bar {
+            background-color: transparent;
+        }
+
+        &::-webkit-progress-value {
+            background-color: $color;
+        }
+
+        &::-moz-progress-bar {
+            background-color: $color;
+        }
     }
 
     .infobar {
@@ -169,6 +202,7 @@ article {
         font-size: 0.9rem;
         color: lightgray;
         font-style: italic;
+        text-align: center;
     }
 
     .title {
