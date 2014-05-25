@@ -58,8 +58,23 @@
         <h2 class="subhead">{{ article.subhead }}</h2>
         <div class="author">By {{ article.get_pretty_authors }}</div>
         <div class="body">{{ article.body|markdown|all_shortcodes }}</div>
-        <div class="about-author"></div>
-        <div class="about-category"></div>
+        {% for author in article.author.all %}
+        <div class="about-author">
+            <h1>About the author</h1>
+            <h2>{{ author.full_name }}</h2>
+            {{ author.bio|markdown }}
+            <div class="social-media">
+                <a class="twitter" href="http://twitter.com/{{ author.twitter }}">{{ author.twitter }}</a>
+                <a class="email" href="mailto:{{ author.email }}">{{ author.email }}</a>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="about-category">
+            <h1>{{ article.category }}</h1>
+            <p>{{ article.category.description }}</p>
+            <span class="facebook">{{ article.category.facebook }}</span>
+            <span class="twitter">{{ article.category.twitter }}</span>
+        </div>
     </article>
 
     <div id="main">

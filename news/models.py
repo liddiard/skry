@@ -37,9 +37,12 @@ class Author(models.Model):
     mug = models.ImageField(upload_to='news/mug/%Y', null=True, blank=True)
     bio = models.TextField(blank=True)
 
+    def full_name(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
     def __unicode__(self):
-        if self.first_name:
-            return "%s %s" % (self.first_name, self.last_name)
+        if self.full_name:
+            return self.full_name()
         else:
             return self.organization
 
