@@ -1,4 +1,4 @@
-<figure class="full">
+<figure class="{% if align == "right" %}right{% elif align == "left" %}left{% else %}full{% endif %}">
     <div class="video">
         <iframe width="640" height="360" src="//www.youtube.com/embed/{{ video.youtube_id }}?theme=light&color=white" frameborder="0" allowfullscreen></iframe>
     </div>

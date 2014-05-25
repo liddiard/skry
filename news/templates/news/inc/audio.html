@@ -1,4 +1,4 @@
-<figure class="full">
+<figure class="{% if align == "right" %}right{% elif align == "left" %}left{% else %}full{% endif %}">
     <h1>{{ audio.title }}</h1>
     <div class="audio">
         <audio controls="controls">

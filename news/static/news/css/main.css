@@ -1313,7 +1313,8 @@ article {
     article figure figcaption .credit {
       position: relative;
       float: right;
-      margin-top: -0.5rem; }
+      margin-top: -0.5rem;
+      margin-bottom: 0.5em; }
   article figure h1 {
     font-size: 1.25em;
     margin-top: 0.5em;
@@ -1348,6 +1349,9 @@ article {
         margin-right: -30px; }
   article figure.left, article figure.right {
     width: 320px; }
+    article figure.left.infobox h1, article figure.right.infobox h1 {
+      margin-left: 0;
+      margin-right: 0; }
   article figure.left {
     float: left;
     margin-left: -30px;
@@ -1364,6 +1368,12 @@ article {
       margin-right: 30px; }
     article figure.right figcaption {
       margin-right: 30px; }
+      article figure.right figcaption .credit {
+        margin-right: -30px; }
+  article figure.infobox {
+    padding: 1em 30px;
+    background-color: #eee;
+    box-sizing: border-box; }
   article progress {
     /* from: http://css-tricks.com/reading-position-indicator/ */
     /* Positioning */
@@ -1384,14 +1394,14 @@ article {
     /* Progress bar container for Firefox/IE10+ */
     background-color: transparent;
     /* Progress bar value for IE10+ */
-    color: #00ccff;
+    color: #0099ff;
     /* Vendor prefixes */ }
     article progress::-webkit-progress-bar {
       background-color: transparent; }
     article progress::-webkit-progress-value {
-      background-color: #00ccff; }
+      background-color: #0099ff; }
     article progress::-moz-progress-bar {
-      background-color: #00ccff; }
+      background-color: #0099ff; }
   article .infobar {
     margin: 0 -30px;
     padding: 5px 30px;
@@ -1402,7 +1412,7 @@ article {
     text-align: center; }
   article .title {
     font-size: 2em;
-    margin-top: 0;
+    margin-top: 0.5em;
     margin-bottom: 0.4em; }
   article .subhead {
     margin-top: 0;

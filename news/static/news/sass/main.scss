@@ -8,8 +8,8 @@ $roboto_condensed: 'Roboto Condensed', sans-serif;
 
 // colors
 $DARK_GRAY: #222;
-$PRIMARY_COLOR: #0cf;
-$SECONDARY_COLOR: #08a;
+$PRIMARY_COLOR: #09f;
+$SECONDARY_COLOR: #06a;
 
 
 body {
@@ -62,6 +62,7 @@ article {
                 position: relative;
                 float: right;
                 margin-top: -$caption_padding_top;
+                margin-bottom: 0.5em;
             }
         }
 
@@ -119,6 +120,13 @@ article {
 
         &.left, &.right {
             width: $total_width/2;
+
+            &.infobox {
+                h1 {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+            }
         }
 
         &.left {
@@ -146,7 +154,17 @@ article {
 
             figcaption {
                 margin-right: $horizontal_padding;
+
+                .credit {
+                    margin-right: -$horizontal_padding;
+                }
             }
+        }
+
+        &.infobox {
+            padding: 1em $horizontal_padding;
+            background-color: #eee;
+            box-sizing: border-box;
         }
     }
 
@@ -207,7 +225,7 @@ article {
 
     .title {
         font-size: 2em;
-        margin-top: 0;
+        margin-top: 0.5em;
         margin-bottom: 0.4em;
     }
 
