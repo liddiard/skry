@@ -1,7 +1,7 @@
 {% load thumbnail %}
 
 <figure class="{% if featured and image.image|is_portrait or align == "right" %}right{% elif align == "left" %}left{% else %}full{% endif %}">
-    <a class="popup image" href="{{ image.image.url }}">
+    <a class="popup image" href="{{ image.image.url }}" title="{{ image.caption }}">
         {% if featured and image.image|is_portrait or align == "right" or align == "left" %}
         <img src="{% thumbnail image.image "320" %}"/>
         {% else %}
