@@ -13,7 +13,6 @@ from django.contrib.humanize.templatetags import humanize
 
 from sorl.thumbnail import get_thumbnail
 
-from .templatetags import markdown
 from . import utils
 
 
@@ -125,6 +124,9 @@ class Article(models.Model):
         Returns a JSON object with all of the public article fields to display 
         on an article template. NOT a public API method.
         """
+        # import templatetags here to avoid circular import
+        from .templatetags import markdown, shortcodes
+
         article = model_to_dict(self, exclude=['status', 'assignment_slug'])
         featured_image = self.get_featured_image()
         if featured_image:
@@ -147,7 +149,8 @@ class Article(models.Model):
         article['category'] = self.category.name
         article['publish_day'] = humanize.naturalday(self.publish_time)
         article['publish_time'] = humanize.naturaltime(self.publish_time)
-        article['body'] = markdown.markdown(self.body)
+        article['body'] = shortcodes.all_shortcodes(markdown.markdown(
+                                                    self.body))
         article = json.dumps(article, cls=utils.DatetimeEncoder)
         return article
 

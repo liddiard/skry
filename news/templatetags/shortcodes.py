@@ -75,3 +75,9 @@ def infHTML(match):
     template = get_template('news/inc/infobox.html')
     context = Context({'content': content, 'align': align})
     return template.render(context)
+
+
+@register.filter(is_safe=True)
+@stringfilter
+def all_shortcodes(value):
+    return audio(video(image(infobox(value))))
