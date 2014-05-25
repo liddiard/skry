@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load markdown %}
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,11 @@
     <script src="{{ STATIC_URL }}news/js/magnific-popup.min.js"></script>
     <script src="{{ STATIC_URL }}news/js/mediaelement-and-player.min.js"></script>
     <script src="{{ STATIC_URL }}news/js/main.js"></script>
+    <script>
+        window.context = {
+            article: {% if article %}true{% else %}false{% endif %},
+        };
+    </script>
 </head>
 <body>
     <header>
@@ -25,8 +31,8 @@
             <span class="reading-time"><!-- gets populated in main.js --></span>
             <span class="category">{{ article.category.name }}</span>
             story published
-            <span class="publish-day">{{ article.date_published|naturalday }}</span> 
-            (<span class="publish-time">{{ article.date_published|naturaltime }}</span>)
+            <span class="publish-day">{{ article.publish_time|naturalday }}</span> 
+            (<span class="publish-time">{{ article.publish_time|naturaltime }}</span>)
         </div>
 
         <div class="featured-media">
@@ -50,7 +56,7 @@
         <h1 class="title">{{ article.title }}</h1>
         <h2 class="subhead">{{ article.subhead }}</h2>
         <div class="author">{{ article.get_pretty_authors }}</div>
-        <div class="body">{{ article.body }}</div>
+        <div class="body">{{ article.body|markdown }}</div>
         <div class="about-author"></div>
         <div class="about-category"></div>
     </article>

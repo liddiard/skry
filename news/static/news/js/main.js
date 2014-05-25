@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    if (window.context.article) articleSetup();
     if (history.pushState) {
         $('.card').click(function(event){
             event.preventDefault();
@@ -42,10 +43,8 @@ function showArticle(id) {
         $('article .subhead').html(response.subhead);
         if (response.author)
             $('article .author').html('By ' + response.author);
-        $('article .body').html(response.body).readingTime('.reading-time');
-        $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
-        $('audio').mediaelementplayer({audioWidth: '100%'});
-        readingProgressBar();
+        $('article .body').html(response.body);
+        articleSetup();
     });
 }
 
@@ -64,6 +63,13 @@ function ajaxGet(params, endpoint, callback_success) {
                 console.error('Oh no! Something went wrong. Please report this error: \n'+errorThrown+xhr.status+xhr.responseText);
         }
     }); 
+}
+
+function articleSetup() {
+    $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
+    $('article audio').mediaelementplayer({audioWidth: '100%'});
+    $('article .body').readingTime('.reading-time');
+    readingProgressBar();
 }
 
 function readingProgressBar() {
