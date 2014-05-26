@@ -1,0 +1,23 @@
+@import 'globals';
+
+
+@media (max-width: $CARD_COLUMN*4) {
+    /* rules that only apply for canvases narrower than 4 columns */
+    #main {
+        width: $CARD_COLUMN*3;
+    }
+}
+
+@media (max-width: $CARD_COLUMN*3) {
+    /* rules that only apply for canvases narrower than 3 columns */
+    #main {
+        width: $CARD_COLUMN*2;
+    }
+}
+
+@media (max-width: $CARD_COLUMN*2) {
+    /* rules that only apply for canvases narrower than 2 columns */
+    #main {
+        width: $CARD_COLUMN*1;
+    }
+}

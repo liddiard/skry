@@ -1,17 +1,13 @@
-$roboto_condensed: 'Roboto Condensed', sans-serif;
+@import 'globals';
 
 .card {
     position: relative;
-    display: inline-block;
-    width: 300px;
-    height: 300px;
-    margin: 5px;
+    float: left;
+    width: $CARD_DIMENSION;
+    height: $CARD_DIMENSION;
+    margin: $CARD_MARGIN;
     background-repeat: no-repeat;
     text-align: left;
-
-    + .card {
-        margin-left: 1px;
-    }
 
     &.center {
         background-position: center;
@@ -79,7 +75,7 @@ $roboto_condensed: 'Roboto Condensed', sans-serif;
         margin: 0.5em;
 
         h2 {
-            font-family: $roboto_condensed;
+            font-family: $ROBOTO_CONDENSED;
             line-height: 1.2em;
             color: #fff;
             font-size: 1.3em;

@@ -1,13 +1,11 @@
 .card {
   position: relative;
-  display: inline-block;
+  float: left;
   width: 300px;
   height: 300px;
   margin: 5px;
   background-repeat: no-repeat;
   text-align: left; }
-  .card + .card {
-    margin-left: 1px; }
   .card.center {
     background-position: center; }
   .card.top-left {
@@ -1491,6 +1489,13 @@ article {
   #mask:hover {
     background-color: rgba(0, 0, 0, 0.6); }
 
+#wrap {
+  width: 100%; }
+
+#main {
+  margin: 0 auto;
+  width: 1240px; }
+
 .cards {
   text-align: center; }
 
@@ -1498,3 +1503,16 @@ article {
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in; }
+
+@media (max-width: 1240px) {
+  /* rules that only apply for canvases narrower than 4 columns */
+  #main {
+    width: 930px; } }
+@media (max-width: 930px) {
+  /* rules that only apply for canvases narrower than 3 columns */
+  #main {
+    width: 620px; } }
+@media (max-width: 620px) {
+  /* rules that only apply for canvases narrower than 2 columns */
+  #main {
+    width: 310px; } }

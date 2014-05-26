@@ -1,20 +1,12 @@
+@import 'globals';
 @import 'card';
 @import 'magnific-popup';
 @import 'mediaelementplayer';
 
-// fonts
-$helvetica: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$roboto_condensed: 'Roboto Condensed', sans-serif;
-
-// colors
-$DARK_GRAY: #222;
-$PRIMARY_COLOR: #09f;
-$SECONDARY_COLOR: #06a;
-
 
 body {
     background-color: $DARK_GRAY;
-    font-family: $helvetica;
+    font-family: $HELVETICA;
     margin: 0; border: 0; padding: 0;
 }
 
@@ -297,12 +289,12 @@ article {
 
     .follow {
         float: left;
-        font-family: $roboto_condensed;
+        font-family: $ROBOTO_CONDENSED;
     }
 
     .share {
         float: right;
-        font-family: $roboto_condensed;
+        font-family: $ROBOTO_CONDENSED;
         font-weight: bold;
         margin-bottom: 1.5em;
 
@@ -332,6 +324,15 @@ article {
     }
 }
 
+#wrap {
+    width: 100%;
+}
+
+#main {
+    margin: 0 auto;
+    width: $CARD_COLUMN*4;
+}
+
 .cards {
     text-align: center;
 }
@@ -341,3 +342,5 @@ article {
     cursor: -webkit-zoom-in;
     cursor: zoom-in;
 }
+
+@import 'responsive'; // imported at the bottom of file so it overrides styles with the same specificity defined earlier

@@ -25,9 +25,11 @@
     <article>
         {% if article %}{% include "news/inc/article.html" %}{% endif %}
     </article>
-
-    <div id="main">
-    {% block content %}{% endblock %}
+    
+    <div id="wrap">
+        <div id="main">
+        {% block content %}{% endblock %}
+        </div>
     </div>
     <footer>
     </footer>

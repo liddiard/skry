@@ -6,7 +6,7 @@ $(document).ready(function(){
             history.pushState({}, null, $(this).attr('href'));
             $('article, #mask').show();
             window.originalScrollY = window.scrollY;
-            $('#main').css({position: 'fixed', top: -window.originalScrollY})
+            $('#wrap').css({position: 'fixed', top: -window.originalScrollY})
             showArticle($(this).attr('data-id'));
         });
     }
@@ -16,7 +16,7 @@ $(document).ready(function(){
             history.pushState({}, null, '/');
             $('article, #mask').hide();
             clearArticle();
-            $('#main').css({position: '', top: ''})
+            $('#wrap').css({position: '', top: ''})
             $(document).scrollTop(window.originalScrollY);
         }
     });
