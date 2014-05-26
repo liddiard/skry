@@ -32,6 +32,13 @@
 <h1 class="title">{{ article.title }}</h1>
 <h2 class="subhead">{{ article.subhead }}</h2>
 <div class="author">By {{ article.get_pretty_authors }}</div>
+
+{% if article.review %}
+    {% with review=article.review %}
+        {% include "news/inc/review.html" %}
+    {% endwith %}
+{% endif %}
+
 <div class="body">{{ article.body|markdown|all_shortcodes }}</div>
 <div class="share">
     Share this story 
