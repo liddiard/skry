@@ -257,6 +257,8 @@ article {
         padding: 1em;
         font-size: 0.8em;
         line-height: 1;
+        clear: both;
+        margin-bottom: 2em;
 
         h1 {
             position: absolute;
@@ -278,6 +280,39 @@ article {
 
         .social-media {
             text-align: right;
+
+            a {
+                display: inline-block;
+                margin: 0 0.4em;
+            }
+
+            img {
+                display: inline-block;
+                width: 20px;
+                vertical-align: sub;
+                margin-right: 0.2em;
+            }
+        }
+    }
+
+    .follow {
+        float: left;
+        font-family: $roboto_condensed;
+    }
+
+    .share {
+        float: right;
+        font-family: $roboto_condensed;
+        font-weight: bold;
+        margin-bottom: 1.5em;
+
+        img {
+            width: 30px;
+            vertical-align: text-bottom;
+
+            &:hover {
+                background-color: rgba(0,0,0, 0.05);
+            }
         }
     }
 }

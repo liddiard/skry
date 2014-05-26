@@ -51,9 +51,14 @@ function ajaxGet(params, endpoint, callback_success) {
 }
 
 function setUpArticle() {
+    var FB_SHARE_URL = "https://www.facebook.com/sharer/sharer.php?u="
     $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
     $('article audio').mediaelementplayer({audioWidth: '100%'});
     $('article .body').readingTime('.reading-time');
+    $('article .facebook').prop('href', FB_SHARE_URL+document.URL);
+    var tweet = $('article .twitter').prop('href');
+    tweet += (' '+document.URL);
+    $('article .twitter').prop('href', tweet);
     readingProgressBar();
 }
 

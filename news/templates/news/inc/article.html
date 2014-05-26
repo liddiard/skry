@@ -33,19 +33,26 @@
 <h2 class="subhead">{{ article.subhead }}</h2>
 <div class="author">By {{ article.get_pretty_authors }}</div>
 <div class="body">{{ article.body|markdown|all_shortcodes }}</div>
+<div class="share">
+    Share this story 
+    <a class="facebook" target="_blank"><!-- href property populated in main.js--><img src="{{ STATIC_URL }}news/img/facebook-icon-color.svg"/></a>
+    <a class="twitter" target="_blank" href="https://twitter.com/home?status={{ article.title }}"><img src="{{ STATIC_URL }}news/img/twitter-icon-color.svg"/></a>
+</div>
+
 {% for author in article.author.all %}
 <div class="about-author">
     <h1>About the author</h1>
     <h2>{{ author.full_name }}</h2>
     {{ author.bio|markdown }}
     <div class="social-media">
-        <a class="twitter" href="http://twitter.com/{{ author.twitter }}">{{ author.twitter }}</a>
-        <a class="email" href="mailto:{{ author.email }}">{{ author.email }}</a>
+        <a class="twitter" href="http://twitter.com/{{ author.twitter }}"><img src="{{ STATIC_URL }}news/img/twitter-icon-monochrome.svg"/>{{ author.twitter }}</a>
+        <a class="email" href="mailto:{{ author.email }}"><img src="{{ STATIC_URL }}news/img/email-icon.svg"/>{{ author.email }}</a>
     </div>
 </div>
 {% endfor %}
-<div class="about-category">
-    <h1>{{ article.category }}</h1>
+
+<div class="follow">
+    Follow Daily Bruin <strong>{{ article.category }}</strong> on <strong>Facebook</strong> / <strong>Twitter</strong>
     <p>{{ article.category.description }}</p>
     <span class="facebook">{{ article.category.facebook }}</span>
     <span class="twitter">{{ article.category.twitter }}</span>
