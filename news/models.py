@@ -38,10 +38,13 @@ class Author(models.Model):
     bio = models.TextField(blank=True)
 
     def full_name(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        if self.first_name or self.last_name:
+            return "%s %s" % (self.first_name, self.last_name)
+        else:
+            return ""
 
     def __unicode__(self):
-        if self.full_name:
+        if self.full_name():
             return self.full_name()
         else:
             return self.organization
@@ -127,7 +130,8 @@ class Article(models.Model):
         Returns a JSON object with all of the public article fields to display 
         on an article template. NOT a public API method.
         """
-        context = Context({'article': self, 'MEDIA_URL': settings.MEDIA_URL})
+        context = Context({'article': self, 'STATIC_URL': settings.STATIC_URL, 
+                           'MEDIA_URL': settings.MEDIA_URL})
         template = get_template('news/inc/article.html')
         html = template.render(context)
         response_dict = {'pk': self.pk, 'html': html}

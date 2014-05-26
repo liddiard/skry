@@ -12,6 +12,17 @@
     background-position: top left; }
   .card.bottom-right {
     background-position: bottom right; }
+  .card.no-image .card-decoration {
+    display: table; }
+    .card.no-image .card-decoration .caption {
+      display: table-cell;
+      vertical-align: middle;
+      position: initial;
+      padding: 0 1.5em;
+      font-size: 1.2em;
+      line-height: 1.4; }
+      .card.no-image .card-decoration .caption h2 {
+        line-height: 1.3; }
   .card .category {
     position: absolute;
     right: 0;
@@ -48,11 +59,11 @@
     margin: 0.5em; }
     .card .caption h2 {
       font-family: "Roboto Condensed", sans-serif;
-      line-height: 1.2em;
+      line-height: 1.15;
       color: #fff;
       font-size: 1.3em;
       font-weight: 400;
-      margin: 0 0 4px 0;
+      margin: 0 0 0.25em;
       text-shadow: 0.05em 0.05em #000; }
     .card .caption .teaser {
       display: block;
