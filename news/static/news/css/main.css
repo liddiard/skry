@@ -1282,7 +1282,11 @@ body {
 
 a {
   text-decoration: none;
-  color: #888; }
+  color: #0066aa; }
+  a:hover {
+    color: #004488; }
+  a:active {
+    color: #002266; }
 
 figure {
   margin: 0; }

@@ -12,7 +12,15 @@ body {
 
 a {
     text-decoration: none;
-    color: #888;
+    color: $SECONDARY_COLOR;
+
+    &:hover {
+        color: $SECONDARY_COLOR - #222;
+    }
+
+    &:active {
+        color: $SECONDARY_COLOR - #444;
+    }
 }
 
 figure {
