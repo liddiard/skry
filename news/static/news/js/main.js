@@ -20,6 +20,7 @@ $(document).ready(function(){
             $(document).scrollTop(window.originalScrollY);
         }
     });
+    $('.cards').shapeshift({gutterX: 10, gutterY: 10, paddingX: 0, paddingY: 0});
 });
 
 

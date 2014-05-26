@@ -1,5 +1,5 @@
 .card {
-  position: relative;
+  position: absolute;
   float: left;
   width: 300px;
   height: 300px;
@@ -1512,7 +1512,8 @@ article {
   width: 1240px; }
 
 .cards {
-  text-align: center; }
+  text-align: center;
+  position: relative; }
 
 .popup {
   cursor: -moz-zoom-in;

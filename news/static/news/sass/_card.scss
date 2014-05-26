@@ -1,7 +1,7 @@
 @import 'globals';
 
 .card {
-    position: relative;
+    position: absolute;
     float: left;
     width: $CARD_DIMENSION;
     height: $CARD_DIMENSION;
