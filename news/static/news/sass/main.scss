@@ -12,14 +12,14 @@ body {
 
 a {
     text-decoration: none;
-    color: $SECONDARY_COLOR;
+    color: $PRIMARY_COLOR;
 
     &:hover {
-        color: $SECONDARY_COLOR - #222;
+        color: $SECONDARY_DARK_COLOR;
     }
 
     &:active {
-        color: $SECONDARY_COLOR - #444;
+        color: $SECONDARY_LIGHT_COLOR;
     }
 }
 
@@ -171,7 +171,7 @@ article {
     progress {
         /* from: http://css-tricks.com/reading-position-indicator/ */
 
-        $color: $PRIMARY_COLOR;
+        $color: $SECONDARY_LIGHT_COLOR;
         $width: $total_width;
 
         /* Positioning */

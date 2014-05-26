@@ -1282,11 +1282,11 @@ body {
 
 a {
   text-decoration: none;
-  color: #0066aa; }
+  color: #0e51a7; }
   a:hover {
-    color: #004488; }
+    color: #05326d; }
   a:active {
-    color: #002266; }
+    color: #4282d3; }
 
 figure {
   margin: 0; }
@@ -1396,14 +1396,14 @@ article {
     /* Progress bar container for Firefox/IE10+ */
     background-color: transparent;
     /* Progress bar value for IE10+ */
-    color: #0099ff;
+    color: #4282d3;
     /* Vendor prefixes */ }
     article progress::-webkit-progress-bar {
       background-color: transparent; }
     article progress::-webkit-progress-value {
-      background-color: #0099ff; }
+      background-color: #4282d3; }
     article progress::-moz-progress-bar {
-      background-color: #0099ff; }
+      background-color: #4282d3; }
   article .infobar {
     margin: 0 -30px;
     padding: 5px 30px;
