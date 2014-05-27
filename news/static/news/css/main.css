@@ -13,7 +13,20 @@
   .card.bottom-right {
     background-position: bottom right; }
   .card.no-image .card-decoration {
-    display: table; }
+    display: table;
+    /* gradient (generated with http://www.colorzilla.com/gradient-editor/) */
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0.4)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* W3C */ }
     .card.no-image .card-decoration .caption {
       display: table-cell;
       vertical-align: middle;
@@ -77,20 +90,18 @@
     width: 100%;
     height: 100%;
     /* gradient (generated with http://www.colorzilla.com/gradient-editor/) */
-    background: -moz-linear-gradient(top, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 99%, rgba(0, 0, 0, 0.8) 100%);
+    background: -moz-linear-gradient(top, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
     /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(50%, transparent), color-stop(99%, rgba(0, 0, 0, 0.8)), color-stop(100%, rgba(0, 0, 0, 0.8)));
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(50%, transparent), color-stop(100%, rgba(0, 0, 0, 0.8)));
     /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 99%, rgba(0, 0, 0, 0.8) 100%);
+    background: -webkit-linear-gradient(top, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
     /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 99%, rgba(0, 0, 0, 0.8) 100%);
+    background: -o-linear-gradient(top, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
     /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 99%, rgba(0, 0, 0, 0.8) 100%);
+    background: -ms-linear-gradient(top, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
     /* IE10+ */
-    background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 99%, rgba(0, 0, 0, 0.8) 100%);
-    /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
-    /* IE6-9 */ }
+    background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
+    /* W3C */ }
   .card:hover .card-decoration {
     -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3);
     -moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3);
