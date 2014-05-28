@@ -9,6 +9,30 @@
     background-repeat: no-repeat;
     text-align: left;
 
+    &[data-ss-colspan="2"] {
+        @include multicolumn_card(2);
+    }
+
+    &[data-ss-colspan="3"] {
+        @include multicolumn_card(3);
+    }
+
+    &[data-ss-colspan="4"] {
+        @include multicolumn_card(4);
+    }
+
+    &.row-2 {
+        @include multirow_card(2);
+    }
+
+    &.row-3 {
+        @include multirow_card(3);
+    }
+
+    &.row-4 {
+        @include multirow_card(4);
+    }
+
     &.center {
         background-position: center;
     }

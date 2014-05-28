@@ -7,8 +7,10 @@
     {% for article in articles %}
 
     <a data-id="{{ article.pk }}" 
+       data-ss-colspan="{{ article.card_size.width }}"
+       data-ss-original-colspan="{{ article.card_size.width }}"
        href="{{ article.get_path }}" 
-       class="card {% if article.card %}{{ article.get_card_crop_display }}{% else %}no-image{% endif %}" 
+       class="card {% if article.card %}{{ article.get_card_crop_display }}{% else %}no-image{% endif %} row-{{ article.card_size.height }}" 
        style="background-image: url({% if article.card|is_portrait %}{% thumbnail article.card "300" %}{% else %}{% thumbnail article.card "x300" %}{% endif %})">
         <div class="category {% if article.category.parent %}{{ article.category.parent.slug }}{% else %}{{ article.category.slug }}{% endif %}">
             {{ article.category.name }}

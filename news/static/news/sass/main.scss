@@ -8,6 +8,7 @@ body {
     background-color: $DARK_GRAY;
     font-family: $HELVETICA;
     margin: 0; border: 0; padding: 0;
+    overflow-x: hidden;
 }
 
 a {
@@ -338,7 +339,7 @@ article {
 
 #main {
     margin: 0 auto;
-    width: $CARD_COLUMN*4;
+    width: $CARD_UNIT*4;
 }
 
 .cards {

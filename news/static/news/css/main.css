@@ -6,6 +6,18 @@
   margin: 5px;
   background-repeat: no-repeat;
   text-align: left; }
+  .card[data-ss-colspan="2"] {
+    width: 610px; }
+  .card[data-ss-colspan="3"] {
+    width: 920px; }
+  .card[data-ss-colspan="4"] {
+    width: 1230px; }
+  .card.row-2 {
+    height: 610px; }
+  .card.row-3 {
+    height: 920px; }
+  .card.row-4 {
+    height: 1230px; }
   .card.center {
     background-position: center; }
   .card.top-left {
@@ -1300,7 +1312,8 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
   border: 0;
-  padding: 0; }
+  padding: 0;
+  overflow-x: hidden; }
 
 a {
   text-decoration: none;
@@ -1534,12 +1547,43 @@ article {
 @media (max-width: 1240px) {
   /* rules that only apply for canvases narrower than 4 columns */
   #main {
-    width: 930px; } }
+    width: 930px; }
+
+  .card[data-ss-colspan="4"] {
+    width: 610px; }
+  .card[data-ss-colspan="3"] {
+    width: 610px; }
+  .card.row-4 {
+    height: 920px; } }
 @media (max-width: 930px) {
   /* rules that only apply for canvases narrower than 3 columns */
   #main {
-    width: 620px; } }
+    width: 620px; }
+
+  .card[data-ss-colspan="4"] {
+    width: 300px; }
+  .card[data-ss-colspan="3"] {
+    width: 300px; }
+  .card[data-ss-colspan="2"] {
+    width: 300px; }
+  .card.row-4 {
+    height: 610px; }
+  .card.row-3 {
+    height: 610px; } }
 @media (max-width: 620px) {
   /* rules that only apply for canvases narrower than 2 columns */
   #main {
-    width: 310px; } }
+    width: 310px; }
+
+  .card[data-ss-colspan="4"] {
+    width: 300px; }
+  .card[data-ss-colspan="3"] {
+    width: 300px; }
+  .card[data-ss-colspan="2"] {
+    width: 300px; }
+  .card.row-4 {
+    height: 300px; }
+  .card.row-3 {
+    height: 300px; }
+  .card.row-2 {
+    height: 300px; } }

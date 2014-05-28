@@ -1,23 +1,85 @@
 @import 'globals';
 
 
-@media (max-width: $CARD_COLUMN*4) {
+@media (max-width: $CARD_UNIT*4) {
     /* rules that only apply for canvases narrower than 4 columns */
     #main {
-        width: $CARD_COLUMN*3;
+        width: $CARD_UNIT*3;
+    }
+
+    .card {
+        &[data-ss-colspan="4"] {
+            @include multicolumn_card(2);
+        }
+
+        &[data-ss-colspan="3"] {
+            @include multicolumn_card(2);
+        }
+
+        &.row-4 {
+            @include multirow_card(3);
+        }
     }
 }
 
-@media (max-width: $CARD_COLUMN*3) {
+@media (max-width: $CARD_UNIT*3) {
     /* rules that only apply for canvases narrower than 3 columns */
     #main {
-        width: $CARD_COLUMN*2;
+        width: $CARD_UNIT*2;
+    }
+
+    .card {
+        &[data-ss-colspan="4"] {
+            @include multicolumn_card(1);
+        }
+
+        &[data-ss-colspan="3"] {
+            @include multicolumn_card(1);
+        }
+
+        &[data-ss-colspan="2"] {
+            @include multicolumn_card(1);
+        }
+
+        &.row-4 {
+            @include multirow_card(2);
+        }
+
+        &.row-3 {
+            @include multirow_card(2);
+        }
     }
 }
 
-@media (max-width: $CARD_COLUMN*2) {
+@media (max-width: $CARD_UNIT*2) {
     /* rules that only apply for canvases narrower than 2 columns */
     #main {
-        width: $CARD_COLUMN*1;
+        width: $CARD_UNIT*1;
+    }
+
+    .card {
+        &[data-ss-colspan="4"] {
+            width: $CARD_DIMENSION;
+        }
+
+        &[data-ss-colspan="3"] {
+            width: $CARD_DIMENSION;
+        }
+
+        &[data-ss-colspan="2"] {
+            width: $CARD_DIMENSION;
+        }
+
+        &.row-4 {
+            height: $CARD_DIMENSION;
+        }
+
+        &.row-3 {
+            height: $CARD_DIMENSION;
+        }
+
+        &.row-2 {
+            height: $CARD_DIMENSION;
+        }
     }
 }

@@ -20,12 +20,34 @@ $(document).ready(function(){
             $(document).scrollTop(window.originalScrollY);
         }
     });
-    $('.cards').shapeshift({gutterX: 10, gutterY: 10, paddingX: 0, paddingY: 0});
+    shapeshiftCards();
+    $(window).on('resize', function(){
+        resizeCards();
+    });
 });
 
+function resizeCards() {
+    var width = $('.cards').width();
+    var card_unit = 310;
+    var rearrange_needed = false;
+    $('.card').each(function(){
+        var colspan_current = $(this).attr('data-ss-colspan');
+        var colspan_original = $(this).attr('data-ss-original-colspan');
+        if (colspan_current*card_unit >= width) {
+            $(this).attr('data-ss-colspan', Math.floor(width/card_unit)-1);
+            rearrange_needed = true;
+        }
+        else if (colspan_current != colspan_original && width-card_unit >= colspan_original*card_unit) {
+            $(this).attr('data-ss-colspan', colspan_original);
+            rearrange_needed = true;
+        }
+    });
+    if (rearrange_needed) {
+        window.setTimeout(shapeshiftCards, 500); // TODO: Fix. Magic number delay shouldn't be necessary but is for layout to function properly.
+    }
+}
 
 function showArticle(id) {
-    console.log(id);
     ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
         console.log(response);
         // infobar
@@ -51,15 +73,25 @@ function ajaxGet(params, endpoint, callback_success) {
     }); 
 }
 
+function shapeshiftCards() {
+    var widest_card = 1;
+    $('.card').each(function(){
+        var colspan = $(this).attr('data-ss-colspan');
+        if (colspan > widest_card)
+            widest_card = colspan;
+    });
+    $('.cards').shapeshift({gutterX: 10, gutterY: 10, paddingX: 0, paddingY: 0, minColumns: widest_card, animated: false});
+}
+
 function setUpArticle() {
-    var FB_SHARE_URL = "https://www.facebook.com/sharer/sharer.php?u="
+    var FB_SHARE_URL = "https://www.facebook.com/sharer/sharer.php?u=";
     $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
     $('article audio').mediaelementplayer({audioWidth: '100%'});
     $('article .body').readingTime('.reading-time');
     $('article .facebook').prop('href', FB_SHARE_URL+document.URL);
-    var tweet = $('article .twitter').prop('href');
+    var tweet = $('article .share .twitter').prop('href');
     tweet += (' '+document.URL);
-    $('article .twitter').prop('href', tweet);
+    $('article .share .twitter').prop('href', tweet);
     readingProgressBar();
 }
 
