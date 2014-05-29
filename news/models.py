@@ -203,6 +203,7 @@ class Category(models.Model):
     facebook = models.CharField(max_length=32, blank=True)
     profile_image = models.ImageField(upload_to='news/category/profile/',
                                       null=True, blank=True)
+    position = models.PositiveIntegerField()
 
     def __unicode__(self):
         return self.name
