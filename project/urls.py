@@ -21,8 +21,8 @@ urlpatterns = patterns('',
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>\S+)/$', news.views.ArticleView.as_view(), name='news_article'),
 
     # api
-
-    url(r'^api/get_article_by_id/$', news.views.ArticleJSONView.as_view()),
+    url(r'^api/article/get-by-id/$', news.views.ArticleJSONView.as_view()),
+    url(r'^api/article/position-change/$', news.views.ArticlePositionChangeView.as_view()),
 
     # other apps
     url(r'^prime/', include('prime.urls')),

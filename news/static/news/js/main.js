@@ -1,5 +1,12 @@
 $(document).ready(function(){
+    // initial setup
+    shapeshiftCards();
     if (window.context.article) setUpArticle();
+
+    // event bindings
+    $(window).on('resize', function(){
+        resizeCards();
+    });
     if (history.pushState) {
         $('.card').click(function(event){
             event.preventDefault();
@@ -20,9 +27,14 @@ $(document).ready(function(){
             $(document).scrollTop(window.originalScrollY);
         }
     });
-    shapeshiftCards();
-    $(window).on('resize', function(){
-        resizeCards();
+    $('.cards').on('ss-rearranged', function(event, selected){
+        var id = $(selected).attr('data-id');
+        var new_position = window.context.first_position - $(selected).index();
+        ajaxPost(
+            {id: id, new_position: new_position},
+            '/api/article/position-change/',
+            function(response) { console.log(response) }
+        );
     });
 });
 
@@ -48,9 +60,8 @@ function resizeCards() {
 }
 
 function showArticle(id) {
-    ajaxGet({id: id}, '/api/get_article_by_id/', function(response){
+    ajaxGet({id: id}, '/api/article/get-by-id/', function(response){
         console.log(response);
-        // infobar
         $('article').html(response.html);
         setUpArticle();
     });
@@ -58,6 +69,35 @@ function showArticle(id) {
 
 
 /* utility functions */
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function ajaxPost(params, endpoint, callback_success) {
+    params.csrfmiddlewaretoken = getCookie('csrftoken');
+        $.ajax({
+        type: "POST",
+        url: endpoint,
+        data: params,
+        success: callback_success,
+        error: function(xhr, textStatus, errorThrown) {
+            console.log("Oh no! Something went wrong. Please report this error: \n"+errorThrown+xhr.status+xhr.responseText);
+        }
+    }); 
+}
 
 function ajaxGet(params, endpoint, callback_success) {
     $.ajax({
@@ -67,8 +107,7 @@ function ajaxGet(params, endpoint, callback_success) {
         crossDomain: true,
         success: callback_success,
         error: function(xhr, textStatus, errorThrown) {
-            if (xhr.status != 0)
-                console.error('Oh no! Something went wrong. Please report this error: \n'+errorThrown+xhr.status+xhr.responseText);
+            console.error('Oh no! Something went wrong. Please report this error: \n'+errorThrown+xhr.status+xhr.responseText);
         }
     }); 
 }

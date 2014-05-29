@@ -7,6 +7,7 @@
     {% for article in articles %}
 
     <a data-id="{{ article.pk }}" 
+       data-position="{{ article.position }}"
        data-ss-colspan="{{ article.card_size.width }}"
        data-ss-original-colspan="{{ article.card_size.width }}"
        href="{{ article.get_path }}" 

@@ -16,6 +16,7 @@
     <script>
         window.context = {
             article: {% if article %}true{% else %}false{% endif %},
+            first_position: {% if articles %}{{ articles.first.position }}{% else %}false{% endif %}
         };
     </script>
 </head>
