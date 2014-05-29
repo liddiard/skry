@@ -149,4 +149,4 @@ class ArticlePositionChangeView(AuthenticatedAjaxView):
                 a.save()
             article.position = new_position
             article.save()
-        return self.success()
+        return self.success(card=article.pk, new_position=article.position)
