@@ -205,6 +205,9 @@ class Category(models.Model):
                                       null=True, blank=True)
     position = models.PositiveIntegerField()
 
+    class Meta:
+        ordering = ['-position']
+
     def __unicode__(self):
         return self.name
 

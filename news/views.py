@@ -19,6 +19,9 @@ class CategoryView(TemplateView):
         context = super(CategoryView, self).get_context_data(**kwargs)
         category_slug = self.kwargs.get('category')
         all_articles = models.get_published_articles()
+        context['other_categories'] = models.Category.objects\
+                                            .filter(parent=None)\
+                                            .exclude(slug=category_slug)
         if category_slug:
             category = get_object_or_404(models.Category, slug=category_slug)
             context['category'] = category
@@ -47,10 +50,6 @@ class ArticleView(CategoryView):
 
 
 class PageView(TemplateView):
-    pass
-
-
-class RelatedArticlesView(View):
     pass
 
 
@@ -100,6 +99,10 @@ class ArticleJSONView(AjaxView):
         article = get_object_or_404(models.Article, pk=article_id)
         response_content = article.as_html()
         return HttpResponse(response_content, content_type="application/json")
+
+
+class RelatedArticlesView(AjaxView):
+    pass
 
 
 class ArticlePositionChangeView(AuthenticatedAjaxView):

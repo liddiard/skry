@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="description" content="Student-run newspaper of the University of California, Los Angeles."/>
     <title>Daily Bruin</title>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700' rel='stylesheet' type='text/css'/>
     <link href="{{ STATIC_URL }}news/css/main.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="image/favicon.ico"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -21,9 +21,6 @@
     </script>
 </head>
 <body>
-    <header>
-    </header>
-
     <a id="mask" href="/"></a>
     <article>
         {% if article %}{% include "news/inc/article.html" %}{% endif %}
@@ -31,6 +28,19 @@
     
     <div id="wrap">
         <div id="main">
+        <header>
+            <nav>
+                <h2>{% if category %}{{ category.name }}{% else %}All{% endif %}</h2> 
+                <ul>
+                    {% if category %}
+                    <li>All</li>
+                    {% endif %}
+                    {% for category in other_categories %}
+                    <li class="{{ category.slug }}">{{ category.name }}</li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </header>
         {% block content %}{% endblock %}
         </div>
     </div>
