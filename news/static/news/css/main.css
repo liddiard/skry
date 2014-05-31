@@ -1,3 +1,20 @@
+.category.news {
+  background-color: #bd1e49; }
+.category.sports {
+  background-color: #d74f2a; }
+.category.arts-entertainment {
+  background-color: #0091a5; }
+.category.opinion {
+  background-color: #9900a1; }
+.category.video {
+  background-color: #004c9a; }
+.category.radio {
+  background-color: #66a0d2; }
+.category.blogs {
+  background-color: #009a00; }
+.category.classifieds {
+  background-color: #666666; }
+
 .card {
   position: absolute;
   float: left;
@@ -60,22 +77,6 @@
     font-weight: normal;
     font-size: 0.7em;
     text-transform: uppercase; }
-    .card .category.news {
-      background-color: #bd1e49; }
-    .card .category.sports {
-      background-color: #d74f2a; }
-    .card .category.arts-entertainment {
-      background-color: #0091a5; }
-    .card .category.opinion {
-      background-color: #9900a1; }
-    .card .category.video {
-      background-color: #004c9a; }
-    .card .category.radio {
-      background-color: #66a0d2; }
-    .card .category.blogs {
-      background-color: #009a00; }
-    .card .category.classifieds {
-      background-color: #666666; }
   .card .caption {
     position: absolute;
     bottom: 0;
@@ -118,6 +119,194 @@
     -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3);
     -moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3);
     box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3); }
+
+article {
+  padding: 0 30px;
+  position: absolute;
+  width: 580px;
+  min-height: 100%;
+  top: 0;
+  left: 50%;
+  margin-left: -320px;
+  background-color: white;
+  z-index: 100;
+  box-shadow: 0 0 20px black;
+  text-rendering: optimizeLegibility;
+  font-size: 1.15em; }
+  article p {
+    line-height: 1.6; }
+  article figure figcaption {
+    position: relative;
+    color: gray;
+    line-height: 1.216;
+    font-size: 0.9em;
+    padding: 0.5rem 0 0.5em 0; }
+    article figure figcaption .credit {
+      position: relative;
+      float: right;
+      margin-top: -0.5rem;
+      margin-bottom: 0.5em; }
+  article figure h1 {
+    font-size: 1.25em;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em; }
+  article figure .image {
+    position: relative;
+    display: block; }
+    article figure .image img {
+      display: block;
+      width: 100%; }
+  article figure audio {
+    width: 100%; }
+  article figure .credit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 4px;
+    font-size: 0.7rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.9); }
+    article figure .credit .name {
+      font-weight: bold; }
+  article figure.full {
+    margin: 0 -30px; }
+    article figure.full h1 {
+      margin-left: 30px;
+      margin-right: 30px; }
+    article figure.full figcaption {
+      padding-left: 30px;
+      padding-right: 30px; }
+      article figure.full figcaption .credit {
+        margin-right: -30px; }
+  article figure.left, article figure.right {
+    width: 320px; }
+    article figure.left.infobox h1, article figure.right.infobox h1 {
+      margin-left: 0;
+      margin-right: 0; }
+  article figure.left {
+    float: left;
+    margin-left: -30px;
+    margin-right: 20px; }
+    article figure.left h1 {
+      margin-left: 30px; }
+    article figure.left figcaption {
+      margin-left: 30px; }
+  article figure.right {
+    float: right;
+    margin-right: -30px;
+    margin-left: 20px; }
+    article figure.right h1 {
+      margin-right: 30px; }
+    article figure.right figcaption {
+      margin-right: 30px; }
+      article figure.right figcaption .credit {
+        margin-right: -30px; }
+  article figure.infobox {
+    padding: 1em 30px;
+    background-color: #eee;
+    box-sizing: border-box; }
+  article progress {
+    /* from: http://css-tricks.com/reading-position-indicator/ */
+    /* Positioning */
+    position: fixed;
+    left: 50%;
+    top: 0;
+    margin-left: -320px;
+    z-index: 100;
+    /* Dimensions */
+    width: 640px;
+    height: 4px;
+    /* Reset the appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Get rid of the default border in Firefox/Opera. */
+    border: none;
+    /* Progress bar container for Firefox/IE10+ */
+    background-color: transparent;
+    /* Progress bar value for IE10+ */
+    color: #4282d3;
+    /* Vendor prefixes */ }
+    article progress::-webkit-progress-bar {
+      background-color: transparent; }
+    article progress::-webkit-progress-value {
+      background-color: #4282d3; }
+    article progress::-moz-progress-bar {
+      background-color: #4282d3; }
+  article .infobar {
+    margin: 0 -30px;
+    padding: 5px 30px;
+    background-color: black;
+    font-size: 0.9rem;
+    color: lightgray;
+    font-style: italic;
+    text-align: center; }
+  article .title {
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.4em; }
+  article .subhead {
+    margin-top: 0;
+    font-weight: normal; }
+  article .author {
+    color: gray; }
+  article .video {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    padding-top: 25px;
+    /* bottom control bar height */
+    height: 0; }
+    article .video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+  article .about-author {
+    position: relative;
+    border: 4px solid black;
+    padding: 1em;
+    font-size: 0.8em;
+    line-height: 1;
+    clear: both;
+    margin-bottom: 2em; }
+    article .about-author h1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      font-size: 1em;
+      padding: 0.1em 0.4em;
+      color: white;
+      background-color: black; }
+    article .about-author h2 {
+      margin: 0.3em 0; }
+    article .about-author p {
+      line-height: 1.3; }
+    article .about-author .social-media {
+      text-align: right; }
+      article .about-author .social-media a {
+        display: inline-block;
+        margin: 0 0.4em; }
+      article .about-author .social-media img {
+        display: inline-block;
+        width: 20px;
+        vertical-align: sub;
+        margin-right: 0.2em; }
+  article .follow {
+    float: left;
+    font-family: "Roboto Condensed", sans-serif; }
+  article .share {
+    float: right;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: bold;
+    margin-bottom: 1.5em; }
+    article .share img {
+      width: 30px;
+      vertical-align: text-bottom; }
+      article .share img:hover {
+        background-color: rgba(0, 0, 0, 0.05); }
 
 /* Magnific Popup CSS */
 .mfp-bg {
@@ -1327,224 +1516,47 @@ figure {
   margin: 0; }
 
 nav {
+  display: inline-block;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 300;
   color: #888;
   text-shadow: 0.05em 0.05em black;
   font-size: 1.5em; }
-  nav h2 {
-    margin: 0;
-    font-weight: inherit; }
+  nav:hover ul {
+    display: block; }
+  nav .category.current {
+    color: inherit;
+    font-size: 1.5em; }
+    nav .category.current:hover {
+      color: #bbb; }
   nav ul {
     position: absolute;
     margin: 0;
     list-style-type: none;
-    padding: 0.5em 1em;
+    padding: 0.5em 0;
     background-color: rgba(0, 0, 0, 0.9);
     box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.5);
-    z-index: 90; }
+    z-index: 70;
+    display: none; }
     nav ul li {
       position: relative; }
-      nav ul li:before {
-        height: 24px;
-        width: 6px;
-        background-color: red;
-        content: '';
-        position: absolute;
-        left: -0.5em;
-        display: none; }
-      nav ul li:hover {
-        color: #bbb; }
-        nav ul li:hover:before {
-          display: block; }
-
-article {
-  padding: 0 30px;
-  position: absolute;
-  width: 580px;
-  min-height: 100%;
-  top: 0;
-  left: 50%;
-  margin-left: -320px;
-  background-color: white;
-  z-index: 100;
-  box-shadow: 0 0 20px black;
-  text-rendering: optimizeLegibility;
-  font-size: 1.15em; }
-  article p {
-    line-height: 1.6; }
-  article figure figcaption {
-    position: relative;
-    color: gray;
-    line-height: 1.216;
-    font-size: 0.9em;
-    padding: 0.5rem 0 0.5em 0; }
-    article figure figcaption .credit {
-      position: relative;
-      float: right;
-      margin-top: -0.5rem;
-      margin-bottom: 0.5em; }
-  article figure h1 {
-    font-size: 1.25em;
-    margin-top: 0.5em;
-    margin-bottom: 0.25em; }
-  article figure .image {
-    position: relative;
-    display: block; }
-    article figure .image img {
-      display: block;
-      width: 100%; }
-  article figure audio {
-    width: 100%; }
-  article figure .credit {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 0 4px;
-    font-size: 0.7rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: rgba(255, 255, 255, 0.9); }
-    article figure .credit .name {
-      font-weight: bold; }
-  article figure.full {
-    margin: 0 -30px; }
-    article figure.full h1 {
-      margin-left: 30px;
-      margin-right: 30px; }
-    article figure.full figcaption {
-      padding-left: 30px;
-      padding-right: 30px; }
-      article figure.full figcaption .credit {
-        margin-right: -30px; }
-  article figure.left, article figure.right {
-    width: 320px; }
-    article figure.left.infobox h1, article figure.right.infobox h1 {
-      margin-left: 0;
-      margin-right: 0; }
-  article figure.left {
-    float: left;
-    margin-left: -30px;
-    margin-right: 20px; }
-    article figure.left h1 {
-      margin-left: 30px; }
-    article figure.left figcaption {
-      margin-left: 30px; }
-  article figure.right {
-    float: right;
-    margin-right: -30px;
-    margin-left: 20px; }
-    article figure.right h1 {
-      margin-right: 30px; }
-    article figure.right figcaption {
-      margin-right: 30px; }
-      article figure.right figcaption .credit {
-        margin-right: -30px; }
-  article figure.infobox {
-    padding: 1em 30px;
-    background-color: #eee;
-    box-sizing: border-box; }
-  article progress {
-    /* from: http://css-tricks.com/reading-position-indicator/ */
-    /* Positioning */
-    position: fixed;
-    left: 50%;
-    top: 0;
-    margin-left: -320px;
-    z-index: 100;
-    /* Dimensions */
-    width: 640px;
-    height: 4px;
-    /* Reset the appearance */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    /* Get rid of the default border in Firefox/Opera. */
-    border: none;
-    /* Progress bar container for Firefox/IE10+ */
-    background-color: transparent;
-    /* Progress bar value for IE10+ */
-    color: #4282d3;
-    /* Vendor prefixes */ }
-    article progress::-webkit-progress-bar {
-      background-color: transparent; }
-    article progress::-webkit-progress-value {
-      background-color: #4282d3; }
-    article progress::-moz-progress-bar {
-      background-color: #4282d3; }
-  article .infobar {
-    margin: 0 -30px;
-    padding: 5px 30px;
-    background-color: black;
-    font-size: 0.9rem;
-    color: lightgray;
-    font-style: italic;
-    text-align: center; }
-  article .title {
-    font-size: 2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.4em; }
-  article .subhead {
-    margin-top: 0;
-    font-weight: normal; }
-  article .author {
-    color: gray; }
-  article .video {
-    position: relative;
-    padding-bottom: 56.25%;
-    /* 16:9 */
-    padding-top: 25px;
-    /* bottom control bar height */
-    height: 0; }
-    article .video iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%; }
-  article .about-author {
-    position: relative;
-    border: 4px solid black;
-    padding: 1em;
-    font-size: 0.8em;
-    line-height: 1;
-    clear: both;
-    margin-bottom: 2em; }
-    article .about-author h1 {
-      position: absolute;
-      top: 0;
-      right: 0;
-      margin: 0;
-      font-size: 1em;
-      padding: 0.1em 0.4em;
-      color: white;
-      background-color: black; }
-    article .about-author h2 {
-      margin: 0.3em 0; }
-    article .about-author p {
-      line-height: 1.3; }
-    article .about-author .social-media {
-      text-align: right; }
-      article .about-author .social-media a {
-        display: inline-block;
-        margin: 0 0.4em; }
-      article .about-author .social-media img {
-        display: inline-block;
-        width: 20px;
-        vertical-align: sub;
-        margin-right: 0.2em; }
-  article .follow {
-    float: left;
-    font-family: "Roboto Condensed", sans-serif; }
-  article .share {
-    float: right;
-    font-family: "Roboto Condensed", sans-serif;
-    font-weight: bold;
-    margin-bottom: 1.5em; }
-    article .share img {
-      width: 30px;
-      vertical-align: text-bottom; }
-      article .share img:hover {
-        background-color: rgba(0, 0, 0, 0.05); }
+      nav ul li a {
+        display: block;
+        color: inherit;
+        padding: 0 0.75em; }
+        nav ul li a .category {
+          height: 24px;
+          width: 6px;
+          background-color: white;
+          content: '';
+          position: absolute;
+          top: 0.1em;
+          left: 0;
+          display: none; }
+        nav ul li a:hover {
+          color: #bbb; }
+          nav ul li a:hover .category {
+            display: block; }
 
 #mask {
   position: fixed;

@@ -14,7 +14,7 @@
     <script src="{{ STATIC_URL }}news/js/mediaelement-and-player.min.js"></script>
     <script src="{{ STATIC_URL }}news/js/main.js"></script>
     <script>
-        window.context = {
+        window.context = { // values passed from the backend that need to be used in various js functions
             article: {% if article %}true{% else %}false{% endif %},
             first_position: {% if articles %}{{ articles.first.position }}{% else %}false{% endif %}
         };
@@ -30,13 +30,13 @@
         <div id="main">
         <header>
             <nav>
-                <h2>{% if category %}{{ category.name }}{% else %}All{% endif %}</h2> 
+                <a class="current category" href="#">{% if category %}{{ category.name }}{% else %}All{% endif %} stories</a> 
                 <ul>
                     {% if category %}
-                    <li>All</li>
+                    <li><a href="{% url 'news_front' %}"><span class="front category"></span>All</a></li>
                     {% endif %}
                     {% for category in other_categories %}
-                    <li class="{{ category.slug }}">{{ category.name }}</li>
+                    <li><a href="{% url 'news_category' category.slug %}"><span class="{{ category.slug }} category"></span>{{ category.name }}</a></li>
                     {% endfor %}
                 </ul>
             </nav>
