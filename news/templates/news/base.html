@@ -40,6 +40,13 @@
                     {% endfor %}
                 </ul>
             </nav>
+            {% if category.category_set.all %}
+            <ul class="subcategories">
+            {% for subcategory in category.category_set.all %}
+                <li>{{ subcategory.name }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
         </header>
         {% block content %}{% endblock %}
         </div>
