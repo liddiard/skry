@@ -186,6 +186,9 @@ class CardSize(models.Model):
     def area(self):
         return width * height
 
+    def aspect_ratio(self):
+        return float(self.width) / self.height
+
     def __unicode__(self):
         return "%dx%d" % (self.width, self.height)
 
@@ -289,6 +292,9 @@ class Image(Media):
 
     def get_float(self):
         return self.get_image_at_resolution("320")
+
+    def aspect_ratio(self):
+        return float(self.image.width) / self.image.height
 
     def __unicode__(self):
         return self.image.name # TODO: check if needs str() coercion
