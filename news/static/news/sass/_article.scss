@@ -19,6 +19,12 @@ article {
         line-height: 1.6;
     }
 
+    blockquote {
+        margin: 0;
+        border-left: 4px solid lightgrey;
+        padding-left: 1em;
+    }
+
     figure {
         $caption_padding_top: 0.5rem;
 

@@ -139,6 +139,10 @@ article {
   font-size: 1.15em; }
   article p {
     line-height: 1.6; }
+  article blockquote {
+    margin: 0;
+    border-left: 4px solid lightgrey;
+    padding-left: 1em; }
   article figure figcaption {
     position: relative;
     color: gray;
