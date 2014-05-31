@@ -52,7 +52,7 @@
     <h2>{{ author.full_name }}</h2>
     {{ author.bio|markdown }}
     <div class="social-media">
-        <a class="twitter" href="http://twitter.com/{{ author.twitter }}"><img src="{{ STATIC_URL }}news/img/twitter-icon-monochrome.svg"/>{{ author.twitter }}</a>
+        <a class="twitter" href="http://twitter.com/{{ author.twitter }}"><img src="{{ STATIC_URL }}news/img/twitter-icon-monochrome.svg"/>@{{ author.twitter }}</a>
         <a class="email" href="mailto:{{ author.email }}"><img src="{{ STATIC_URL }}news/img/email-icon.svg"/>{{ author.email }}</a>
     </div>
 </div>
