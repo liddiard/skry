@@ -11,7 +11,7 @@ admin.site.register(models.Author, AuthorAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {'url_slug': ('title',)}
-    readonly_fields = ('created', 'last_updated')
+    readonly_fields = ('created', 'last_updated', 'position')
     fieldsets = (
         ('Primary content', {
             'fields': (
