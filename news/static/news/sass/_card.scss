@@ -83,6 +83,12 @@
         font-weight: normal;
         font-size: 0.7em;
         text-transform: uppercase;
+
+        &.breaking {
+            background-color: red;
+            font-size: 0.95em;
+            font-weight: bold;
+        }
     }
 
     .caption {

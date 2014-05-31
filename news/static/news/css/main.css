@@ -77,6 +77,10 @@
     font-weight: normal;
     font-size: 0.7em;
     text-transform: uppercase; }
+    .card .category.breaking {
+      background-color: red;
+      font-size: 0.95em;
+      font-weight: bold; }
   .card .caption {
     position: absolute;
     bottom: 0;

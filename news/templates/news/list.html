@@ -31,14 +31,19 @@
                                         {% endif %}
                                         {% thumbnail article.card "x"|add:height %}
                                     {% endif %})">
+        {% if article.is_breaking %}
+        <div class="category breaking">
+            Breaking
+        </div>
+        {% else %}
         <div class="category {% if article.category.parent %}
                                  {{ article.category.parent.slug }}
                              {% else %}
                                  {{ article.category.slug }}
                              {% endif %}">
             {{ article.category.name }}
-            
         </div>
+        {% endif %}
         <div class="card-decoration">
             <div class="caption">
                 <h2>{{ article.title }}</h2>

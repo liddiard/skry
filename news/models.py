@@ -1,6 +1,6 @@
 import json
 from PIL import Image as PyImage
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -145,6 +145,10 @@ class Article(models.Model):
         """
         return (self.status == self.READY_TO_PUBLISH and
                 self.publish_time < django_now())
+
+    def is_breaking(self):
+        return (self.publish_time + timedelta(hours=self.breaking_duration) > 
+                django_now())
 
     def get_path(self):
         """
