@@ -1,0 +1,25 @@
+// fonts
+$HELVETICA: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$ROBOTO_CONDENSED: 'Roboto Condensed', sans-serif;
+
+// colors
+$DARK_GRAY: #222;
+$PRIMARY_COLOR: #0E51A7;
+$SECONDARY_DARK_COLOR: #05326D;
+$SECONDARY_LIGHT_COLOR: #4282D3;
+$TERTIARY_DARK_COLOR: #274D7E;
+$TERTIARY_LIGHT_COLOR: #6997D3;
+
+// card
+$CARD_DIMENSION: 300px;
+$CARD_MARGIN: 5px;
+$CARD_UNIT: $CARD_DIMENSION + ($CARD_MARGIN*2);
+
+// mixins
+@mixin multicolumn_card($num_cols) {
+    width: ($CARD_UNIT * $num_cols) - ($CARD_MARGIN * 2);
+}
+
+@mixin multirow_card($num_rows) {
+    height: ($CARD_UNIT * $num_rows) - ($CARD_MARGIN * 2);
+}
