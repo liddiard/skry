@@ -211,6 +211,28 @@ class Category(models.Model):
     class Meta:
         ordering = ['-position']
 
+    def get_top_level_parent(self):
+        """
+        Get the highest category in the hierarchy under which this category
+        resides. If the category has no parent, returns itself.
+        """
+        category = self
+        while category.parent is not None:
+            category = category.parent
+        return category
+
+    def hierarchy_level(self):
+        """
+        Returns the number of levels deep the category is nested, where zero 
+        is the top level.
+        """
+        level = 0
+        category = self
+        while category.parent is not None:
+            level += 1
+            category = category.parent
+        return level
+
     def __unicode__(self):
         return self.name
 
@@ -255,6 +277,9 @@ class Page(models.Model):
 class Media(models.Model):
     caption = models.TextField(blank=True)
 
+    class Meta:
+        abstract = True
+
     def get_pretty_credit(self):
         return utils.pretty_list_from_queryset(self.credit.all())
 
@@ -273,10 +298,6 @@ class Media(models.Model):
             return False
         else:
             return last_author.organization
-
-
-    class Meta:
-        abstract = True
 
 
 class Image(Media):
