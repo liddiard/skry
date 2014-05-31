@@ -194,6 +194,17 @@ article {
         text-align: center;
     }
 
+    .breaking {
+        position: absolute;
+        right: 0;
+        text-transform: uppercase;
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        padding: 0.1em 0.3em 0.1em 0.4em;
+        font-size: 0.95em;
+    }
+
     .title {
         font-size: 2em;
         margin-top: 0.5em;
