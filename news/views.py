@@ -23,9 +23,9 @@ class CategoryView(TemplateView):
         if category_slug:
             category = get_object_or_404(models.Category, slug=category_slug)
             context['category'] = category
-            context['articles'] = all_articles.filter(category=category)[:3]
+            context['articles'] = all_articles.filter(category=category)[:12]
         else:
-            context['articles'] = all_articles[:3]
+            context['articles'] = all_articles[:12]
         return context
 
 

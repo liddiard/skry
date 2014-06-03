@@ -5,7 +5,7 @@
    data-ss-colspan="{{ article.card_size.width }}"
    data-ss-original-colspan="{{ article.card_size.width }}"
    href="{{ article.get_path }}" 
-   class="card {% if article.card %}{{ article.get_card_crop_display }}{% else %}no-image{% endif %} row-{{ article.card_size.height }}
+   class="card {% if not article.card %}no-image{% endif %} row-{{ article.card_size.height }}
              {% if article.category.parent %}
                  {{ article.category.parent.slug }}
              {% else %}
@@ -30,7 +30,8 @@
                                         {% widthratio "300" 1 article.card_size.height as height %}
                                     {% endif %}
                                     {% thumbnail article.card "x"|add:height %}
-                                {% endif %})">
+                                {% endif %});
+        background-position: {{ article.get_card_crop_display }}">
     {% if article.is_breaking %}
     <div class="category breaking">
         Breaking

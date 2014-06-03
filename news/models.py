@@ -17,9 +17,15 @@ from . import utils
 
 
 CARD_CROP_CHOICES = (
-    ('c', 'center'), 
-    ('t', 'top-left'), 
-    ('b', 'bottom-right')
+    ('cc', 'center center'), 
+    ('cl', 'center left'),
+    ('cl', 'center right'),
+    ('tl', 'top left'), 
+    ('tc', 'top center'),
+    ('tr', 'top right'),
+    ('bl', 'bottom left'),
+    ('bc', 'bottom center'),
+    ('br', 'bottom right'),
 )
 
 
@@ -90,8 +96,8 @@ class Article(models.Model):
     card = models.ForeignKey('Image', null=True, blank=True, 
                              related_name='news_article_card')
     card_size = models.ForeignKey('CardSize')
-    card_crop = models.CharField(max_length=1, choices=CARD_CROP_CHOICES, 
-                                 default='c')
+    card_crop = models.CharField(max_length=2, choices=CARD_CROP_CHOICES, 
+                                 default='cc')
     feature_card_image = models.BooleanField(default=True)
 
     # dates and times
