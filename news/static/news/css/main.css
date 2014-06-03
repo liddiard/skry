@@ -125,6 +125,7 @@
     box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3); }
 
 article {
+  display: none;
   padding: 0 30px;
   position: absolute;
   width: 580px;
@@ -1577,7 +1578,7 @@ nav {
 
 #mask {
   position: fixed;
-  display: block;
+  display: none;
   top: 0;
   left: 0;
   width: 100%;
@@ -1597,8 +1598,8 @@ nav {
   width: 1240px; }
 
 .cards {
-  text-align: center;
-  position: relative; }
+  position: relative;
+  width: 100%; }
 
 .popup {
   cursor: -moz-zoom-in;

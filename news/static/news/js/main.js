@@ -36,6 +36,17 @@ $(document).ready(function(){
             function(response) { console.log(response) }
         );
     });
+    $('nav li a').click(function(event){
+        event.preventDefault();
+        var params = {};
+        var $current_category = $('nav .current.category');
+        if ($current_category.attr('data-category') === 'all')
+            params.start_after = $('.card').last().attr('data-position');
+        params.quantity = 12;
+        params.category = $(this).attr('id');
+        addCards(params);
+        $current_category.attr('data-category', params.category);
+    });
 });
 
 function resizeCards() {
@@ -55,7 +66,7 @@ function resizeCards() {
         }
     });
     if (rearrange_needed) {
-        window.setTimeout(shapeshiftCards, 500); // TODO: Fix. Magic number delay shouldn't be necessary but is for layout to function properly.
+        window.setTimeout(shapeshiftCards, 500); // TODO: Fix. Magic number delay shouldn't be necessary for layout to function properly.
     }
 }
 
@@ -65,6 +76,41 @@ function showArticle(id) {
         $('article').html(response.html);
         setUpArticle();
     });
+}
+
+function addCards(params) {
+    var new_cards_retrieved = false;
+    if (typeof params.category !== 'undefined') {
+        $('.card').not('.'+params.category).fadeOut('fast', function(){ 
+            $(this).remove();
+            if (!new_cards_retrieved) { 
+                // only call getNewCards once in total, not once per selected element
+                getNewCards(params);
+                new_cards_retrieved = true;
+            }
+        });
+    }
+    else
+        getNewCards(params);
+}
+
+function getNewCards(params) {
+    ajaxGet(
+        params,
+        '/api/article/get-cards/',
+        function(response) {
+            var cards = response.cards;
+            for (var i = 0; i < cards.length; i++) {
+                $('.cards').append($.parseHTML(cards[i].html)).css('opacity', 0).animate({opacity: 1}, 250);
+                // use opacity animation instead of .hide().fadeIn() because elements need to be 
+                // consuming space in the DOM when shapeshift rearrange is called
+            }
+            if (cards.length)
+                shapeshiftCards(); // if new cards were added, we need to re-instantiate shapeshift
+            else
+                $('.cards').trigger('ss-rearrange'); // otherwise, just trigger a rearrange
+        }
+    );
 }
 
 
@@ -112,14 +158,17 @@ function ajaxGet(params, endpoint, callback_success) {
     }); 
 }
 
-function shapeshiftCards() {
+function shapeshiftCards(custom_options) {
     var widest_card = 1;
     $('.card').each(function(){
+        // find the widest card
         var colspan = $(this).attr('data-ss-colspan');
         if (colspan > widest_card)
             widest_card = colspan;
     });
-    $('.cards').shapeshift({gutterX: 10, gutterY: 10, paddingX: 0, paddingY: 0, minColumns: widest_card, animated: false});
+    var default_options = {gutterX: 10, gutterY: 10, paddingX: 0, paddingY: 0, minColumns: widest_card, animated: true, align: 'left'};
+    var options = $.extend({}, default_options, custom_options);
+    $('.cards').shapeshift(options);
 }
 
 function setUpArticle() {

@@ -5,7 +5,13 @@
    data-ss-colspan="{{ article.card_size.width }}"
    data-ss-original-colspan="{{ article.card_size.width }}"
    href="{{ article.get_path }}" 
-   class="card {% if article.card %}{{ article.get_card_crop_display }}{% else %}no-image{% endif %} row-{{ article.card_size.height }}" 
+   class="card {% if article.card %}{{ article.get_card_crop_display }}{% else %}no-image{% endif %} row-{{ article.card_size.height }}
+             {% if article.category.parent %}
+                 {{ article.category.parent.slug }}
+             {% else %}
+                 {{ article.category.slug }}
+             {% endif %}
+         " 
    style="background-image: url({% if article.card.aspect_ratio < article.card_size.aspect_ratio %} 
                                     {# image is narrower than card #}
                                     {% if article.card_size.width > 1 %} 

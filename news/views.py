@@ -3,12 +3,10 @@ import datetime
 
 from django.views.generic.base import View, TemplateView
 from django.shortcuts import get_object_or_404
-from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.db import transaction
 
 from . import models
-from prime.templatetags import markdown
 
 
 class CategoryView(TemplateView):
@@ -25,9 +23,9 @@ class CategoryView(TemplateView):
         if category_slug:
             category = get_object_or_404(models.Category, slug=category_slug)
             context['category'] = category
-            context['articles'] = all_articles.filter(category=category)[:12]
+            context['articles'] = all_articles.filter(category=category)[:3]
         else:
-            context['articles'] = all_articles[:12]
+            context['articles'] = all_articles[:3]
         return context
 
 
@@ -101,6 +99,47 @@ class ArticleJSONView(AjaxView):
         return HttpResponse(response_content, content_type="application/json")
 
 
+class CardsJSONView(AjaxView):
+    
+    def get(self, request):
+        MAX_QUANTITY = 50
+        start_after = request.GET.get('start_after')
+        quantity = request.GET.get('quantity')
+        if not quantity:
+            return self.key_error('Required key (quantity) missing from '
+                                  'request.')
+        category = request.GET.get('category')
+        try:
+            quantity = int(quantity)
+        except ValueError:
+            return self.key_error('quantity %s is not an integer.' % quantity)
+        # All requested articles are loaded into memory, so we don't want
+        # a malicious user to be able to craft a request for more than a 
+        # reasonable quantity and crash the application.
+        if quantity > MAX_QUANTITY:
+            return self.error(error='RangeError', message='Quantity requested '
+                              'exceeds maximum allowed (%d).' % MAX_QUANTITY)
+        articles = models.get_published_articles()
+        if start_after:
+            articles = articles.filter(position__lt=start_after)
+        if category:
+            try:
+                c = models.Category.objects.get(slug=category)
+            except models.Category.DoesNotExist:
+                return self.does_not_exist('Category matching slug %s does '
+                                           'not exist.' % category)
+            articles = articles.filter(category=c)
+        try:
+            articles = articles[:quantity]
+        except AssertionError:
+            return self.error(error='AssertionError', message='quantity %d is '
+                              'invalid.' % quantity)
+        response_list = []
+        for a in articles:
+            response_list.append(a.card_html())
+        return self.success(cards=response_list)
+
+
 class RelatedArticlesView(AjaxView):
     pass
 
@@ -115,7 +154,11 @@ class ArticlePositionChangeView(AuthenticatedAjaxView):
         if not new_position:
             return self.key_error('Required key (new_position) missing from '
                                   'request.')
-        new_position = int(new_position) # unicode to int for later comparison
+        try:
+            new_position = int(new_position) # str to int for later comparison
+        except ValueError:
+            return self.key_error('new_positon %s is not an integer.'\
+                                  % new_position)
         try:
             article = models.Article.objects.get(pk=article_id)
         except models.Article.DoesNotExist:

@@ -30,13 +30,13 @@
         <div id="main">
         <header>
             <nav>
-                <a class="current category" href="#">{% if category %}{{ category.name }}{% else %}All{% endif %} stories</a> 
+                <a class="current category" data-category="{% if category %}{{ category.name }}{% else %}all{% endif %}" href="#">{% if category %}{{ category.name }}{% else %}All{% endif %} stories</a> 
                 <ul>
                     {% if category %}
                     <li><a href="{% url 'news_front' %}"><span class="front category"></span>All</a></li>
                     {% endif %}
                     {% for category in other_categories %}
-                    <li><a href="{% url 'news_category' category.slug %}"><span class="{{ category.slug }} category"></span>{{ category.name }}</a></li>
+                    <li><a id="{{ category.slug }}" href="{% url 'news_category' category.slug %}"><span class="{{ category.slug }} category"></span>{{ category.name }}</a></li>
                     {% endfor %}
                 </ul>
             </nav>

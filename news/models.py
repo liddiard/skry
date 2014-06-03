@@ -127,8 +127,8 @@ class Article(models.Model):
 
     def as_html(self):
         """
-        Returns a JSON object with all of the public article fields to display 
-        on an article template. NOT a public API method.
+        Returns a JSON object containing the HTML to display in an article 
+        template. NOT a public API method.
         """
         context = Context({'article': self, 'STATIC_URL': settings.STATIC_URL, 
                            'MEDIA_URL': settings.MEDIA_URL})
@@ -137,6 +137,17 @@ class Article(models.Model):
         response_dict = {'pk': self.pk, 'html': html}
         response_json = json.dumps(response_dict)
         return response_json
+
+    def card_html(self):
+        """
+        Returns a JSON object containing the HTML for the card. NOT a public 
+        API method.
+        """
+        context = Context({'article': self, 'MEDIA_URL': settings.MEDIA_URL})
+        template = get_template('news/inc/card.html')
+        html = template.render(context)
+        response_dict = {'pk': self.pk, 'html': html}
+        return response_dict
 
     def is_published(self):
         """
@@ -147,6 +158,9 @@ class Article(models.Model):
                 self.publish_time < django_now())
 
     def is_breaking(self):
+        """
+        Whether or not the article is currently breaking news
+        """
         return (self.publish_time + timedelta(hours=self.breaking_duration) > 
                 django_now())
 
@@ -163,6 +177,11 @@ class Article(models.Model):
         the format you would write out a list of items in AP style.
         """
         return utils.pretty_list_from_queryset(self.author.all())
+
+    def save(self, *args, **kwargs):
+        if self.position is None:
+            self.position = Article.objects.first().position + 1
+        super(Article, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.assignment_slug
