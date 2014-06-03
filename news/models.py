@@ -19,7 +19,7 @@ from . import utils
 CARD_CROP_CHOICES = (
     ('cc', 'center center'), 
     ('cl', 'center left'),
-    ('cl', 'center right'),
+    ('cr', 'center right'),
     ('tl', 'top left'), 
     ('tc', 'top center'),
     ('tr', 'top right'),
