@@ -21,8 +21,8 @@
     </script>
 </head>
 <body>
-    <a id="mask" href="/"></a>
-    <article>
+    <a id="mask" class="{% if not article %}hidden{% endif %}" href="/"></a>
+    <article class="{% if not article %}hidden{% endif %}">
         {% if article %}{% include "news/inc/article.html" %}{% endif %}
     </article>
     

@@ -125,7 +125,6 @@
     box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3); }
 
 article {
-  display: none;
   padding: 0 30px;
   position: absolute;
   width: 580px;
@@ -1578,7 +1577,6 @@ nav {
 
 #mask {
   position: fixed;
-  display: none;
   top: 0;
   left: 0;
   width: 100%;
@@ -1605,6 +1603,9 @@ nav {
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in; }
+
+.hidden {
+  display: none; }
 
 @media (max-width: 1240px) {
   /* rules that only apply for canvases narrower than 4 columns */

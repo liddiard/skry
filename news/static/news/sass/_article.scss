@@ -2,7 +2,6 @@ article {
     $horizontal_padding: 30px;
     $total_width: 640px;
     $width: $total_width - ($horizontal_padding*2);
-    display: none;
     padding: 0 $horizontal_padding;
     position: absolute;
     width: $width;
