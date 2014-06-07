@@ -284,10 +284,10 @@ class Template(models.Model):
     filename = models.CharField(max_length=64, unique=True)
     verbose_name = models.CharField(max_length=64, unique=True)
     include_css = models.CharField(max_length=8, choices=INCLUDE_CSS_CHOICES, 
-                                   unique=True)
+                                   blank=True, unique=True)
 
     def __unicode__(self):
-        return "%s (%s)" % self.verbose_name, self.filename
+        return "%s (%s)" % (self.verbose_name, self.filename)
 
 
 class Page(models.Model):

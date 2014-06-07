@@ -2,7 +2,8 @@ import json
 import datetime
 
 from django.views.generic.base import View, TemplateView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext 
 from django.http import HttpResponse, Http404
 from django.db import transaction
 
@@ -29,22 +30,37 @@ class CategoryView(TemplateView):
         return context
 
 
+def article_view(request, year, month, day, slug):
+    article = get_object_or_404(models.Article, publish_time__year=year, 
+                                publish_time__month=month, 
+                                publish_time__day=day, url_slug=slug)
+    if article.alternate_template:
+        template = article.alternate_template
+    else:
+        template = "news/base.html"
+    context = {
+        'article': article,
+    }
+    return render_to_response(template, context, 
+                              context_instance=RequestContext(request))
+    
+
 class ArticleView(CategoryView):
     
     template_name = "news/list.html"
 
-    def get_context_data(self, **kwargs):
+    def get(self, request, year, month, day, slug, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
-        year = int(self.kwargs.get('year'))
-        month = int(self.kwargs.get('month'))
-        day = int(self.kwargs.get('day'))
-        slug = self.kwargs.get('slug')
-        context['article'] = get_object_or_404(models.Article, 
-                                               publish_time__year=year, 
-                                               publish_time__month=month,
-                                               publish_time__day=day,
-                                               url_slug=slug)
-        return context
+        article = get_object_or_404(models.Article, publish_time__year=year, 
+                                    publish_time__month=month, 
+                                    publish_time__day=day, url_slug=slug)
+        if article.alternate_template:
+            template = article.alternate_template
+        else:
+            template = "news/list.html"
+        context['article'] = article
+        return render_to_response(template, context, 
+                                  context_instance=RequestContext(request))
 
 
 class PageView(TemplateView):
