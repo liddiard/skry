@@ -17,6 +17,7 @@
 </div>
 {% endif %}
 
+{% block article %}
 <div class="featured-media">
     {% with featured=True image=article.get_featured_image video=article.featured_video audio=article.featured_audio %}
 
@@ -47,7 +48,11 @@
     {% endwith %}
 {% endif %}
 
-<div class="body">{{ article.body|markdown|all_shortcodes }}</div>
+<div class="body">
+{% block body %}
+    {{ article.body|markdown|all_shortcodes }}
+{% endblock %}
+</div>
 <div class="share">
     Share this story 
     <a class="facebook" target="_blank"><!-- href property populated in main.js--><img src="{{ STATIC_URL }}news/img/facebook-icon-color.svg"/></a>
@@ -72,3 +77,4 @@
     <span class="facebook">{{ article.category.facebook }}</span>
     <span class="twitter">{{ article.category.twitter }}</span>
 </div>
+{% endblock %}
