@@ -3,8 +3,10 @@ import datetime
 
 from django.views.generic.base import View, TemplateView
 from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext 
+from django.template import Context, RequestContext 
+from django.template.loader import get_template
 from django.http import HttpResponse, Http404
+from django.conf import settings
 from django.db import transaction
 
 from . import models
@@ -36,25 +38,31 @@ class ArticleView(CategoryView):
 
     def get(self, request, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
+        # if an id paramater was passed, we'll look up the article with that
         if kwargs.get('id'):
             article = get_object_or_404(models.Article, id=kwargs.get('id')) 
-        else:
+        else: # otherwise we'll look it up with the pretty url scheme
             article = get_object_or_404(models.Article, 
                                         publish_time__year=kwargs.get('year'),
                                         publish_time__month=kwargs.get('month'),
                                         publish_time__day=kwargs.get('day'), 
                                         url_slug=kwargs.get('slug'))
-        if article.alternate_template:
-            template = article.alternate_template
-        else:
-            template = "news/list.html"
         context['article'] = article
+        template_name = "news/list.html"
         if request.GET.get('format') == "json":
-            response_content = article.as_html()
-            return HttpResponse(response_content, 
+            if article.alternate_template:
+                template_name = article.alternate_template.filename
+            template = get_template(template_name)
+            context = Context({'article': article, 
+                               'STATIC_URL': settings.STATIC_URL, 
+                               'MEDIA_URL': settings.MEDIA_URL})
+            html = template.render(context)
+            response_dict = {'pk': article.pk, 'html': html}
+            response_json = json.dumps(response_dict)
+            return HttpResponse(response_json, 
                                 content_type="application/json")
         else:
-            return render_to_response(template, context, 
+            return render_to_response(template_name, context, 
                                       context_instance=RequestContext(request))
 
 

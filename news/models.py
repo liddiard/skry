@@ -131,19 +131,6 @@ class Article(models.Model):
         else:
             return self.featured_image
 
-    def as_html(self):
-        """
-        Returns a JSON object containing the HTML to display in an article 
-        template. NOT a public API method.
-        """
-        context = Context({'article': self, 'STATIC_URL': settings.STATIC_URL, 
-                           'MEDIA_URL': settings.MEDIA_URL})
-        template = get_template('news/inc/article.html')
-        html = template.render(context)
-        response_dict = {'pk': self.pk, 'html': html}
-        response_json = json.dumps(response_dict)
-        return response_json
-
     def card_html(self):
         """
         Returns a JSON object containing the HTML for the card. NOT a public 

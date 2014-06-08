@@ -11,6 +11,19 @@
     (<span class="publish-time">{{ article.publish_time|naturaltime }}</span>)
 </div>
 
+{% with article.alternate_template.include_css as include_css %}
+    {% if include_css %}
+        {% if include_css == 'fd5' %}
+        <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/foundation.min.css" rel="stylesheet" type="text/css"/>
+        {% elif include_css == 'bs3.1.1' %}
+        <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        {% elif include_css == 'bs2.3.2' %}
+        <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        {% endif %}
+    {% endif %}
+{% endwith %}
+    
+
 {% if article.is_breaking %}
 <div class="breaking">
     Breaking

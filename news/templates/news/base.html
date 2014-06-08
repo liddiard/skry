@@ -23,9 +23,13 @@
 <body>
     <a id="mask" class="{% if not article %}hidden{% endif %}" href="/"></a>
     <article class="{% if not article %}hidden{% endif %}">
-    {% block article %}
-        {% if article %}{% include "news/inc/article.html" %}{% endif %}
-    {% endblock %}
+    {% if article %}
+        {% if article.alternate_template %}
+            {% include article.alternate_template.filename %}
+        {% else %}
+            {% include "news/inc/article.html" %}
+        {% endif %}
+    {% endif %}
     </article>
     
     <div id="wrap">
