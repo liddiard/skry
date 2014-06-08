@@ -30,37 +30,32 @@ class CategoryView(TemplateView):
         return context
 
 
-def article_view(request, year, month, day, slug):
-    article = get_object_or_404(models.Article, publish_time__year=year, 
-                                publish_time__month=month, 
-                                publish_time__day=day, url_slug=slug)
-    if article.alternate_template:
-        template = article.alternate_template
-    else:
-        template = "news/base.html"
-    context = {
-        'article': article,
-    }
-    return render_to_response(template, context, 
-                              context_instance=RequestContext(request))
-    
-
 class ArticleView(CategoryView):
     
     template_name = "news/list.html"
 
-    def get(self, request, year, month, day, slug, **kwargs):
+    def get(self, request, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
-        article = get_object_or_404(models.Article, publish_time__year=year, 
-                                    publish_time__month=month, 
-                                    publish_time__day=day, url_slug=slug)
+        if kwargs.get('id'):
+            article = get_object_or_404(models.Article, id=kwargs.get('id')) 
+        else:
+            article = get_object_or_404(models.Article, 
+                                        publish_time__year=kwargs.get('year'),
+                                        publish_time__month=kwargs.get('month'),
+                                        publish_time__day=kwargs.get('day'), 
+                                        url_slug=kwargs.get('slug'))
         if article.alternate_template:
             template = article.alternate_template
         else:
             template = "news/list.html"
         context['article'] = article
-        return render_to_response(template, context, 
-                                  context_instance=RequestContext(request))
+        if request.GET.get('format') == "json":
+            response_content = article.as_html()
+            return HttpResponse(response_content, 
+                                content_type="application/json")
+        else:
+            return render_to_response(template, context, 
+                                      context_instance=RequestContext(request))
 
 
 class PageView(TemplateView):
@@ -102,17 +97,6 @@ class AuthenticatedAjaxView(AjaxView):
                          **kwargs)
         else:
             return self.authentication_error()
-
-
-class ArticleJSONView(AjaxView):
-    
-    def get(self, request):
-        article_id = request.GET.get('id')
-        if article_id is None:
-            return self.key_error('Required key (id) missing from request.')
-        article = get_object_or_404(models.Article, pk=article_id)
-        response_content = article.as_html()
-        return HttpResponse(response_content, content_type="application/json")
 
 
 class CardsJSONView(AjaxView):

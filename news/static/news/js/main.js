@@ -71,7 +71,7 @@ function resizeCards() {
 }
 
 function showArticle(id) {
-    ajaxGet({id: id}, '/api/article/get-by-id/', function(response){
+    ajaxGet({format: 'json'}, '/article/'+id+'/', function(response){
         console.log(response);
         $('article').html(response.html);
         setUpArticle();
