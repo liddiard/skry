@@ -49,7 +49,7 @@
             {% if category.category_set.all %}
             <ul class="subcategories">
             {% for subcategory in category.category_set.all %}
-                <li>{{ subcategory.name }}</li>
+                <li><a href="{% url 'news_category' subcategory.slug %}">{{ subcategory.name }}</a></li>
             {% endfor %}
             </ul>
             {% endif %}

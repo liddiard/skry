@@ -15,6 +15,18 @@ article {
     text-rendering: optimizeLegibility;
     font-size: 1.15em;
 
+    a {
+        color: $PRIMARY_COLOR;
+
+        &:hover {
+            color: $SECONDARY_DARK_COLOR;
+        }
+
+        &:active {
+            color: $SECONDARY_LIGHT_COLOR;
+        }
+    }
+
     p {
         line-height: 1.6;
     }

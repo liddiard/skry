@@ -15,19 +15,30 @@ body {
 
 a {
     text-decoration: none;
-    color: $PRIMARY_COLOR;
+    color: #bbb;
 
     &:hover {
-        color: $SECONDARY_DARK_COLOR;
-    }
-
-    &:active {
-        color: $SECONDARY_LIGHT_COLOR;
+        color: #ddd;
     }
 }
 
 figure {
     margin: 0;
+}
+
+header {
+    ul.subcategories {
+        list-style-type: none;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: $ROBOTO_CONDENSED;
+        padding: 0;
+
+        li {
+            display: inline-block;
+            margin: 0 0.5em;
+        }
+    }
 }
 
 nav {

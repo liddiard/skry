@@ -137,6 +137,12 @@ article {
   box-shadow: 0 0 20px black;
   text-rendering: optimizeLegibility;
   font-size: 1.15em; }
+  article a {
+    color: #0e51a7; }
+    article a:hover {
+      color: #05326d; }
+    article a:active {
+      color: #4282d3; }
   article p {
     line-height: 1.6; }
   article blockquote {
@@ -1523,14 +1529,22 @@ body {
 
 a {
   text-decoration: none;
-  color: #0e51a7; }
+  color: #bbb; }
   a:hover {
-    color: #05326d; }
-  a:active {
-    color: #4282d3; }
+    color: #ddd; }
 
 figure {
   margin: 0; }
+
+header ul.subcategories {
+  list-style-type: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
+  padding: 0; }
+  header ul.subcategories li {
+    display: inline-block;
+    margin: 0 0.5em; }
 
 nav {
   display: inline-block;
