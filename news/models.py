@@ -358,7 +358,8 @@ class Audio(Media):
 
 class Review(models.Model):
     item = models.CharField(max_length=64)
-    info = models.TextField(blank=True)
+    line_1 = models.CharField(max_length=128, blank=True)
+    line_2 = models.CharField(max_length=128, blank=True)
     rating = models.PositiveIntegerField(null=True, blank=True) # TODO: limit to range
 
     def __unicode__(self):
