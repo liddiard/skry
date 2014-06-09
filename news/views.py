@@ -48,10 +48,11 @@ class ArticleView(CategoryView):
                                         publish_time__day=kwargs.get('day'), 
                                         url_slug=kwargs.get('slug'))
         context['article'] = article
-        template_name = "news/list.html"
         if request.GET.get('format') == "json":
             if article.alternate_template:
                 template_name = article.alternate_template.filename
+            else:
+                template_name = "news/inc/article.html"
             template = get_template(template_name)
             context = Context({'article': article, 
                                'STATIC_URL': settings.STATIC_URL, 
@@ -62,6 +63,7 @@ class ArticleView(CategoryView):
             return HttpResponse(response_json, 
                                 content_type="application/json")
         else:
+            template_name = "news/list.html"
             return render_to_response(template_name, context, 
                                       context_instance=RequestContext(request))
 
