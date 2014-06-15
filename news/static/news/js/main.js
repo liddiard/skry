@@ -1,5 +1,6 @@
 $(document).ready(function(){
     // initial setup
+    window.originalScrollY = 0;
     shapeshiftCards();
     if (window.context.article) setUpArticle();
 
@@ -79,7 +80,6 @@ function showArticle(event, $el) {
     history.pushState({}, null, $el.attr('href'));
     $('article, #mask').show();
     window.originalScrollY = window.scrollY;
-    $('#wrap').css({position: 'fixed', top: -window.originalScrollY})
     loadArticle($el.attr('data-id'));
 }
 
@@ -189,6 +189,7 @@ function shapeshiftCards(custom_options) {
 
 function setUpArticle() {
     var FB_SHARE_URL = "https://www.facebook.com/sharer/sharer.php?u=";
+    $('#wrap').css({position: 'fixed', top: -window.originalScrollY})
     $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
     $('article audio').mediaelementplayer({audioWidth: '100%'});
     $('article .body').readingTime('.reading-time');
