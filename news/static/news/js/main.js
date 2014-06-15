@@ -31,8 +31,17 @@ $(document).ready(function(){
             function(response) { console.log(response) }
         );
     });
+    $('nav').hover(
+        function(){
+            $(this).find('ul').show();
+        },
+        function(){
+            $(this).find('ul').hide();
+        }
+    );
     $('nav li a').click(function(event){
         event.preventDefault();
+        $(this).parent().parent().hide();
         var params = {};
         var $current_category = $('nav .current.category .name');
         if ($current_category.text() === 'All')
