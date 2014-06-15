@@ -154,6 +154,13 @@ article {
             padding: 1em $horizontal_padding;
             background-color: #eee;
             box-sizing: border-box;
+
+            &.review {
+                cite {
+                    display: block;
+                    font-style: normal;
+                }
+            }
         }
     }
 

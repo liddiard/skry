@@ -219,6 +219,9 @@ article {
     padding: 1em 30px;
     background-color: #eee;
     box-sizing: border-box; }
+    article figure.infobox.review cite {
+      display: block;
+      font-style: normal; }
   article progress {
     /* from: http://css-tricks.com/reading-position-indicator/ */
     /* Positioning */
