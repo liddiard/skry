@@ -15,9 +15,10 @@
     <script src="{{ STATIC_URL }}news/js/mediaelement-and-player.min.js"></script>
     <script src="{{ STATIC_URL }}news/js/main.js"></script>
     <script>
-        window.context = { // values passed from the backend that need to be used in various js functions
+        window.context = { // values passed from the backend to use in various js functions
             article: {% if article %}true{% else %}false{% endif %},
-            first_position: {% if articles %}{{ articles.first.position }}{% else %}false{% endif %}
+            first_position: {% if articles %}{{ articles.first.position }}{% else %}false{% endif %},
+            front_page_url: '{% url 'news_front' %}'
         };
     </script>
 </head>

@@ -37,10 +37,10 @@ $(document).ready(function(){
         var $current_category = $('nav .current.category .name');
         if ($current_category.text() === 'All')
             params.start_after = $('.card').last().attr('data-position');
+        $current_category.text($(this).attr('data-category'));
         params.quantity = 12;
         params.category = $(this).attr('id');
         addCards(params);
-        $current_category.text($(this).attr('data-category'));
     });
 });
 
