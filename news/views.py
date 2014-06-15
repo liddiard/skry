@@ -109,6 +109,19 @@ class AuthenticatedAjaxView(AjaxView):
             return self.authentication_error()
 
 
+class SubcategoriesJSONView(AjaxView):
+
+    def get(self, request):
+        category_slug = request.GET.get('category')
+        try:
+            category = models.Category.objects.get(slug=category_slug)
+        except models.Category.DoesNotExist:
+            return self.does_not_exist('Category matching slug %s does not '
+                                       'exist.' % category_slug)
+        subcategories = category.category_set.all()
+        # TODO: serialize queryset to JSON, return it
+
+
 class CardsJSONView(AjaxView):
     
     def get(self, request):

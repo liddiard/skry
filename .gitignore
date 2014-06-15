@@ -1,6 +1,7 @@
 *.pyc
-media/
-project/settings/secret.py
+*.swp
 *.DS_Store
 *.sass-cache/
+media/
 migrations/
+project/settings/secret.py
