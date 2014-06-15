@@ -9,12 +9,7 @@ $(document).ready(function(){
     });
     if (history.pushState) {
         $('.card').click(function(event){
-            event.preventDefault();
-            history.pushState({}, null, $(this).attr('href'));
-            $('article, #mask').show();
-            window.originalScrollY = window.scrollY;
-            $('#wrap').css({position: 'fixed', top: -window.originalScrollY})
-            showArticle($(this).attr('data-id'));
+            showArticle(event, $(this));
         });
     }
     $('#mask').click(function(event){
@@ -39,13 +34,13 @@ $(document).ready(function(){
     $('nav li a').click(function(event){
         event.preventDefault();
         var params = {};
-        var $current_category = $('nav .current.category');
-        if ($current_category.attr('data-category') === 'all')
+        var $current_category = $('nav .current.category .name');
+        if ($current_category.text() === 'All')
             params.start_after = $('.card').last().attr('data-position');
         params.quantity = 12;
         params.category = $(this).attr('id');
         addCards(params);
-        $current_category.attr('data-category', params.category);
+        $current_category.text($(this).attr('data-category'));
     });
 });
 
@@ -70,7 +65,16 @@ function resizeCards() {
     }
 }
 
-function showArticle(id) {
+function showArticle(event, $el) {
+    event.preventDefault();
+    history.pushState({}, null, $el.attr('href'));
+    $('article, #mask').show();
+    window.originalScrollY = window.scrollY;
+    $('#wrap').css({position: 'fixed', top: -window.originalScrollY})
+    loadArticle($el.attr('data-id'));
+}
+
+function loadArticle(id) {
     ajaxGet({format: 'json'}, '/article/'+id+'/', function(response){
         console.log(response);
         $('article').html(response.html);
@@ -105,6 +109,9 @@ function getNewCards(params) {
                 // use opacity animation instead of .hide().fadeIn() because elements need to be 
                 // consuming space in the DOM when shapeshift rearrange is called
             }
+            $('.card').unbind('click').click(function(event){
+                showArticle(event, $(this));
+            });
             if (cards.length)
                 shapeshiftCards(); // if new cards were added, we need to re-instantiate shapeshift
             else
