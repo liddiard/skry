@@ -74,22 +74,26 @@
 </div>
 
 {% for author in article.author.all %}
+{% if author.bio or author.twitter or author.email %}
 <div class="about-author">
     <h1>About the author</h1>
     <img class="mug" src="{% thumbnail author.mug "x120" %}"/>
     <h2>{{ author.full_name }}</h2>
     {{ author.bio|markdown }}
     <div class="social-media">
+        {% if author.twitter %}
         <a class="twitter" href="http://twitter.com/{{ author.twitter }}"><img src="{{ STATIC_URL }}news/img/twitter-icon-monochrome.svg"/>@{{ author.twitter }}</a>
+        {% endif %}
+        {% if author.email %}
         <a class="email" href="mailto:{{ author.email }}"><img src="{{ STATIC_URL }}news/img/email-icon.svg"/>{{ author.email }}</a>
+        {% endif %}
     </div>
 </div>
+{% endif %}
 {% endfor %}
 
 <div class="follow">
     Follow Daily Bruin <strong>{{ article.category }}</strong> on <strong>Facebook</strong> / <strong>Twitter</strong>
     <p>{{ article.category.description }}</p>
-    <span class="facebook">{{ article.category.facebook }}</span>
-    <span class="twitter">{{ article.category.twitter }}</span>
 </div>
 {% endblock %}
