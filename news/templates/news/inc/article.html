@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load thumbnail %}
 {% load markdown %}
 {% load shortcodes %}
 
@@ -75,6 +76,7 @@
 {% for author in article.author.all %}
 <div class="about-author">
     <h1>About the author</h1>
+    <img class="mug" src="{% thumbnail author.mug "x120" %}"/>
     <h2>{{ author.full_name }}</h2>
     {{ author.bio|markdown }}
     <div class="social-media">
