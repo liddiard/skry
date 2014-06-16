@@ -167,7 +167,7 @@ class Article(models.Model):
     def get_pretty_authors(self):
         """
         Creates a comma/'and'-separated list of names for multiple authors in
-        the format you would write out a list of items in AP style.
+        AP style format.
         """
         return utils.pretty_list_from_queryset(self.author.all())
 
@@ -231,7 +231,7 @@ class Category(models.Model):
     def get_top_level_parent(self):
         """
         Get the highest category in the hierarchy under which this category
-        resides. If the category has no parent, returns itself.
+        resides. If the category has no parent, return self.
         """
         category = self
         while category.parent is not None:
@@ -335,7 +335,7 @@ class Image(Media):
         return float(self.image.width) / self.image.height
 
     def __unicode__(self):
-        return self.image.name # TODO: check if needs str() coercion
+        return self.image.name 
 
 
 class Video(Media):
