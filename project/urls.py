@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^$', news.views.CategoryView.as_view(), name='news_front'),
     url(r'^category/(?P<category>\S+)/$', news.views.CategoryView.as_view(), name='news_category'),
     url(r'^article/(?P<id>\S+)/$', news.views.ArticleView.as_view()),
+    url(r'^tag/(?P<tag>\S+)/$', news.views.TagView.as_view(), name='news_tag'),
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>\S+)/$', news.views.ArticleView.as_view(), name='news_article'),
 
     # api

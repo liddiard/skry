@@ -32,6 +32,10 @@ class CategoryView(TemplateView):
         return context
 
 
+class TagView(TemplateView):
+    pass
+
+
 class ArticleView(CategoryView):
     
     template_name = "news/list.html"
