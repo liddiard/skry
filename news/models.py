@@ -9,7 +9,6 @@ from django.utils.timezone import now as django_now
 from django.forms.models import model_to_dict
 from django.template import Context
 from django.template.loader import get_template
-from django.contrib.humanize.templatetags import humanize
 
 from sorl.thumbnail import get_thumbnail
 
