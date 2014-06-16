@@ -280,10 +280,10 @@ class Template(models.Model):
 
 class Page(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, blank=True)
     slug = models.SlugField(max_length=128)
-    template = models.ForeignKey('Template')
-    body = models.TextField()
+    alternate_template = models.ForeignKey('Template', null=True, blank=True)
+    body = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.title

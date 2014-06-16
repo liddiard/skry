@@ -82,7 +82,7 @@ admin.site.register(models.Template, TemplateAdmin)
 
 
 class PageAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(models.Page, PageAdmin)
 
