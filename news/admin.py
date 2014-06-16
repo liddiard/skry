@@ -4,7 +4,8 @@ from . import models
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['first_name', 'last_name', 'organization', 'email', 
+                    'twitter', 'user']
 
 admin.site.register(models.Author, AuthorAdmin)
 
@@ -12,6 +13,7 @@ admin.site.register(models.Author, AuthorAdmin)
 class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {'url_slug': ('title',)}
     readonly_fields = ('created', 'last_updated', 'position')
+    list_display = ['assignment_slug', 'title', 'publish_time', 'status']
     fieldsets = (
         ('Primary content', {
             'fields': (
@@ -52,7 +54,7 @@ admin.site.register(models.Article, ArticleAdmin)
 
 
 class InternalArticleCommentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['user', 'article', 'time_posted']
 
 admin.site.register(models.InternalArticleComment, InternalArticleCommentAdmin)
 
@@ -65,6 +67,7 @@ admin.site.register(models.CardSize, CardSizeAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
+    list_display = ['name', 'parent', 'position']
 
 admin.site.register(models.Category, CategoryAdmin)
 
@@ -124,12 +127,12 @@ admin.site.register(models.Review, ReviewAdmin)
 
 
 class PollAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['question', 'is_open']
 
 admin.site.register(models.Poll, PollAdmin)
 
 
 class PollChoiceAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['choice', 'votes', 'question']
 
 admin.site.register(models.PollChoice, PollChoiceAdmin)
