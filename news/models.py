@@ -225,6 +225,7 @@ class Category(models.Model):
     position = models.PositiveIntegerField()
 
     class Meta:
+        verbose_name_plural = "Categories" 
         ordering = ['-position']
 
     def get_top_level_parent(self):
@@ -351,6 +352,9 @@ class Audio(Media):
     ogg = models.FileField(upload_to='news/audio/%Y/%m/%d/ogg/')
     credit = models.ManyToManyField('Author', related_name='news_audio', 
                                     blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = "Audio" 
 
     def __unicode__(self):
         return self.title
