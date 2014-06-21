@@ -273,7 +273,7 @@ class Tag(models.Model):
 class Template(models.Model):
     INCLUDE_CSS_CHOICES = (
         ('fd5', 'Foundation 5'),
-        ('bs3.1.0', 'Bootstrap 3.1.0'),
+        ('bs3.1.1', 'Bootstrap 3.1.1'),
         ('bs2.3.2', 'Bootstrap 2.3.2'),
     )
     filename = models.CharField(max_length=64, unique=True)
