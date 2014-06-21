@@ -227,6 +227,14 @@ class Category(models.Model):
         verbose_name_plural = "Categories" 
         ordering = ['-position']
 
+    def get_path(self):
+        path_components = []
+        category = self
+        while category is not None:
+            path_components.append(category.slug)
+            category = category.parent
+        return "/" + "/".join(path_components[::-1]) + "/"
+
     def get_top_level_parent(self):
         """
         Get the highest category in the hierarchy under which this category
