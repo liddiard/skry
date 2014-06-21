@@ -46,19 +46,17 @@
                     <li><a href="{% url 'news_front' %}"><span class="front category"></span>All</a></li>
                     {% endif %}
                     {% for category in other_categories %}
-                    <li><a id="{{ category.slug }}" data-category="{{ category.name }}" href="{% url 'news_category' category.slug %}">
+                    <li><a id="{{ category.slug }}" href="{% url 'news_category' category.slug %}">
                         <span class="{{ category.slug }} category"></span>{{ category.name }}
                     </a></li>
                     {% endfor %}
                 </ul>
             </nav>
-            {% if category.category_set.all %}
             <ul class="subcategories">
             {% for subcategory in category.category_set.all %}
                 <li><a href="{% url 'news_category' subcategory.slug %}">{{ subcategory.name }}</a></li>
             {% endfor %}
             </ul>
-            {% endif %}
         </header>
         {% block content %}{% endblock %}
         </div>

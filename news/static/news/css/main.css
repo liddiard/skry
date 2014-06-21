@@ -1547,10 +1547,11 @@ header ul.subcategories {
   text-align: center;
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
-  padding: 0; }
+  padding: 0;
+  margin: 0; }
   header ul.subcategories li {
     display: inline-block;
-    margin: 0 0.5em; }
+    margin: 0.5em; }
 
 nav {
   display: inline-block;

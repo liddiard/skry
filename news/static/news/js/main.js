@@ -41,16 +41,11 @@ $(document).ready(function(){
         }
     );
     $('nav li a').click(function(event){
-        event.preventDefault();
         $(this).parent().parent().hide();
-        var params = {};
-        var $current_category = $('nav .current.category .name');
-        if ($current_category.text() === 'All')
-            params.start_after = $('.card').last().attr('data-position');
-        $current_category.text($(this).attr('data-category'));
-        params.quantity = 12;
-        params.category = $(this).attr('id');
-        addCards(params);
+        showCategory(event, $(this));
+    });
+    $('.subcategories li a').click(function(event){
+        showCategory(event, $(this));
     });
 });
 
@@ -81,6 +76,42 @@ function showArticle(event, $el) {
     $('article, #mask').show();
     window.originalScrollY = window.scrollY;
     loadArticle($el.attr('data-id'));
+}
+
+function showCategory(event, $el) {
+    event.preventDefault();
+    var params = {};
+    var $current_category = $('nav .current.category .name');
+    if ($current_category.text() === 'All')
+        params.start_after = $('.card').last().attr('data-position');
+    $current_category.text($el.text());
+    params.quantity = 12;
+    params.category = $el.attr('id');
+    addCards(params);
+    if (params.category)
+        loadSubcategories(params.category);
+}
+
+function loadSubcategories(slug) {
+    ajaxGet({category: slug}, '/api/category/get-subcategories/', function(response) {
+        $subcategories = $('ul.subcategories');
+        $subcategories.slideUp(function(){
+            $(this).empty();
+            var subcategories = response.subcategories;
+            for (var i = 0; i < subcategories.length; i++) {
+                var $li = $('<li/>', {}).appendTo($subcategories);
+                $('<a/>', {
+                    href: subcategories[i].url,
+                    text: subcategories[i].name,
+                    id: subcategories[i].slug
+                }).appendTo($li);
+            }
+            $('.subcategories li a').click(function(){
+                showCategory(event, $(this));
+            });
+            $(this).slideDown();
+        });
+    });
 }
 
 function loadArticle(id) {
@@ -132,48 +163,6 @@ function getNewCards(params) {
 
 /* utility functions */
 
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-function ajaxPost(params, endpoint, callback_success) {
-    params.csrfmiddlewaretoken = getCookie('csrftoken');
-        $.ajax({
-        type: "POST",
-        url: endpoint,
-        data: params,
-        success: callback_success,
-        error: function(xhr, textStatus, errorThrown) {
-            console.log("Oh no! Something went wrong. Please report this error: \n"+errorThrown+xhr.status+xhr.responseText);
-        }
-    }); 
-}
-
-function ajaxGet(params, endpoint, callback_success) {
-    $.ajax({
-        type: "GET",
-        url: endpoint,
-        data: params,
-        crossDomain: true,
-        success: callback_success,
-        error: function(xhr, textStatus, errorThrown) {
-            console.error('Oh no! Something went wrong. Please report this error: \n'+errorThrown+xhr.status+xhr.responseText);
-        }
-    }); 
-}
-
 function shapeshiftCards(custom_options) {
     var widest_card = 1;
     $('.card').each(function(){
@@ -193,7 +182,7 @@ function setUpArticle() {
     $('article .popup').magnificPopup({type: 'image', closeOnContentClick: true});
     $('article audio').mediaelementplayer({audioWidth: '100%'});
     $('article .body').readingTime('.reading-time');
-    $('article .facebook').prop('href', FB_SHARE_URL+document.URL);
+    $('article .facebook').prop('href', FB_SHARE_URL+document.URL); // TODO: this is gross. Figure out how to get it in the template.
     var tweet = $('article .share .twitter').prop('href');
     tweet += (' '+document.URL);
     $('article .share .twitter').prop('href', tweet);
@@ -264,3 +253,45 @@ function readingProgressBar() {
             $(selector).html(reading_time + ' min. read &ndash; ');
     }
 })(jQuery);
+
+function ajaxPost(params, endpoint, callback_success) {
+    params.csrfmiddlewaretoken = getCookie('csrftoken');
+        $.ajax({
+        type: "POST",
+        url: endpoint,
+        data: params,
+        success: callback_success,
+        error: function(xhr, textStatus, errorThrown) {
+            console.log("Oh no! Something went wrong. Please report this error: \n"+errorThrown+xhr.status+xhr.responseText);
+        }
+    }); 
+}
+
+function ajaxGet(params, endpoint, callback_success) {
+    $.ajax({
+        type: "GET",
+        url: endpoint,
+        data: params,
+        crossDomain: true,
+        success: callback_success,
+        error: function(xhr, textStatus, errorThrown) {
+            console.error('Oh no! Something went wrong. Please report this error: \n'+errorThrown+xhr.status+xhr.responseText);
+        }
+    }); 
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

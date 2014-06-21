@@ -8,6 +8,7 @@ from django.template.loader import get_template
 from django.http import HttpResponse, Http404
 from django.conf import settings
 from django.db import transaction
+from django.core import urlresolvers
 
 from . import models
 
@@ -120,10 +121,19 @@ class SubcategoriesJSONView(AjaxView):
         try:
             category = models.Category.objects.get(slug=category_slug)
         except models.Category.DoesNotExist:
-            return self.does_not_exist('Category matching slug %s does not '
+            return self.does_not_exist('Category matching slug (%s) does not '
                                        'exist.' % category_slug)
         subcategories = category.category_set.all()
-        # TODO: serialize queryset to JSON, return it
+        response_list = []
+        for subcategory in subcategories:
+            s = {}
+            s['name'] = subcategory.name
+            s['url'] = urlresolvers.reverse('news_category', 
+                                            kwargs={'category': 
+                                            subcategory.slug})
+            s['slug'] = subcategory.slug
+            response_list.append(s)
+        return self.success(subcategories=response_list)
 
 
 class CardsJSONView(AjaxView):
@@ -153,14 +163,14 @@ class CardsJSONView(AjaxView):
             try:
                 c = models.Category.objects.get(slug=category)
             except models.Category.DoesNotExist:
-                return self.does_not_exist('Category matching slug %s does '
+                return self.does_not_exist('Category matching slug (%s) does '
                                            'not exist.' % category)
             articles = articles.filter(category=c)
         try:
             articles = articles[:quantity]
         except AssertionError:
-            return self.error(error='AssertionError', message='quantity %d is '
-                              'invalid.' % quantity)
+            return self.error(error='AssertionError', message='quantity (%d) '
+                              'is invalid.' % quantity)
         response_list = []
         for a in articles:
             response_list.append(a.card_html())
@@ -184,12 +194,12 @@ class ArticlePositionChangeView(AuthenticatedAjaxView):
         try:
             new_position = int(new_position) # str to int for later comparison
         except ValueError:
-            return self.key_error('new_positon %s is not an integer.'\
+            return self.key_error('new_positon (%s) is not an integer.'\
                                   % new_position)
         try:
             article = models.Article.objects.get(pk=article_id)
         except models.Article.DoesNotExist:
-            return self.does_not_exist('Article matching id %s was not found.'\
+            return self.does_not_exist('Article matching id (%s) was not found.'\
                                         % article_id)
         current_position = article.position
         # (bool) will the displaced adjacent articles be shifted higher in

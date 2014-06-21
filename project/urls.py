@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     # api
     url(r'^api/article/position-change/$', news.views.ArticlePositionChangeView.as_view()),
     url(r'^api/article/get-cards/$', news.views.CardsJSONView.as_view()),
+    url(r'^api/category/get-subcategories/$', news.views.SubcategoriesJSONView.as_view()),
 
     # other apps
     url(r'^prime/', include('prime.urls')),
