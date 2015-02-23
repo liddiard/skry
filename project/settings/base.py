@@ -43,7 +43,8 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'news',
     'prime',
-    'music'
+    'music',
+    'research'
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -69,7 +70,7 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'America/Los_Angeles'
 
-USE_I18N = False 
+USE_I18N = False
 
 USE_TZ = True
 
@@ -101,7 +102,7 @@ CACHES = {
 
 IMAGE_DIMENSIONS = {
     'full': {
-        'width': 640, 
+        'width': 640,
     },
     'float': {
         'width': 320,
@@ -116,6 +117,6 @@ IMAGE_DIMENSIONS = {
     },
 }
 
-# default organization for authors and possibly other things 
+# default organization for authors and possibly other things
 # TODO: make this description actually descriptive
 DEFAULT_ORGANIZATION = "Daily Bruin"
