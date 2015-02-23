@@ -3,6 +3,9 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+# TODO: admin autodiscovery should be implicit as of Django 1.7.
+# remove if not needed 
 from django.contrib import admin
 admin.autodiscover()
 
@@ -29,5 +32,6 @@ urlpatterns = patterns('',
 
     # other apps
     url(r'^prime/', include('prime.urls')),
+    url(r'^research/', include('research.urls')),
     url(r'^music/', include('music.urls'))
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
