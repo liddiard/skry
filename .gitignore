@@ -3,5 +3,4 @@
 *.DS_Store
 *.sass-cache/
 media/
-migrations/
 project/settings/secret.py
