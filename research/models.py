@@ -11,7 +11,7 @@ class Post(models.Model):
     body = models.TextField()
     published = models.DateTimeField(auto_now_add=True)
     featured_image = models.ImageField(upload_to='research/post/'
-                                       'featured_image')
+                                       'featured_image', null=True, blank=True)
     project = models.ForeignKey('Project', null=True, blank=True)
 
     class Meta:

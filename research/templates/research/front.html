@@ -9,7 +9,9 @@
         <span class="author">
             by {{ post.get_pretty_authors }}
         </span>
-        
+        <p class="teaser">
+            {{ post.teaser }}
+        </p>
     </li>
     {% endfor %}
 </ul>
