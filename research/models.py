@@ -1,16 +1,28 @@
 from django.db import models
 
+from . import utils
+
 
 class Post(models.Model):
     title = models.CharField(max_length=128)
     slug = models.SlugField(max_length=128)
-    body = models.TextField()
+    teaser = models.CharField(max_length=256)
     authors = models.ManyToManyField('news.Author')
+    body = models.TextField()
     published = models.DateTimeField(auto_now_add=True)
+    featured_image = models.ImageField(upload_to='research/post/'
+                                       'featured_image')
     project = models.ForeignKey('Project', null=True, blank=True)
 
     class Meta:
         ordering = ('-published',)
+
+    def get_pretty_authors(self):
+        """
+        Creates a comma/'and'-separated list of names for multiple authors in
+        AP style format.
+        """
+        return utils.pretty_list_from_queryset(self.authors.all())
 
     def __unicode__(self):
         return self.title
