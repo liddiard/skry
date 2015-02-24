@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
+        <title>Page title</title>
+        <meta name="description" content="Page description, shows up in search results. Should be no longer than 150-160 characters." />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="The title of this page, excluding any branding." />
+        <meta property="og:site_name" content="Name of this website." />
+        <meta property="og:url" content="Canonical URL of this page, excluding session and user-identifying variables." />
+        <meta property="og:image" content="URL to an image for this page. Should be at least 1200x630 pixels." />
+
+        <!-- CSS -->
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css" />
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
+
+        <!-- JavaScript -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <header></header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <footer></footer>
+    </body>
+</html>

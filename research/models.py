@@ -33,3 +33,23 @@ class Project(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to='research/image/%Y/%m/%d/original/')
+    caption = models.TextField(blank=True)
+
+    def get_image_at_resolution(self, resolution):
+        return get_thumbnail(self.image, resolution).url
+
+    def get_full(self):
+        return self.get_image_at_resolution("640")
+
+    def get_float(self):
+        return self.get_image_at_resolution("320")
+
+    def aspect_ratio(self):
+        return float(self.image.width) / self.image.height
+
+    def __unicode__(self):
+        return self.image.name
