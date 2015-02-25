@@ -13,7 +13,7 @@ class FrontView(TemplateView):
     template_name = "research/front.html"
 
     def get_context_data(self, **kwargs):
-        context = super(TemplateView, self).get_context_data(**kwargs)
+        context = super(FrontView, self).get_context_data(**kwargs)
         context['projects'] = Project.objects.all()[:10]
         context['posts'] = Post.objects.all()[:10]
         return context
