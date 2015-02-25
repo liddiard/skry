@@ -1,0 +1,51 @@
+$BODY_FONT: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: $BODY_FONT;
+}
+
+.posts {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1em;
+    list-style-type: none;
+
+    .post {
+        padding: 2em 0;
+        overflow: hidden;
+        border-bottom: 2px solid #ddd;
+    }
+
+    a {
+        color: initial;
+        text-decoration: none;
+    }
+
+    h2 {
+        font-size: 3em;
+        margin: 0 0 0.3em;
+        line-height: 1.1;
+    }
+
+    .featured-image {
+        display: block;
+        margin-bottom: 0.5em;
+    }
+
+    .teaser {
+        display: block;
+        font-size: 1.3em;
+        color: gray;
+        margin-bottom: 0.5em;
+    }
+
+    .authors {
+        font-size: 0.8em;
+        float: right;
+        border-top: 1px solid black;
+        padding-top: 0.3em;
+    }
+}
