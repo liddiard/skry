@@ -26,9 +26,3 @@ def imgHTML(match):
     template = get_template('research/inc/image.html')
     context = Context({'image': image, 'align': align})
     return template.render(context)
-
-
-@register.filter(is_safe=True)
-@stringfilter
-def all_shortcodes(value):
-    return image(value)
