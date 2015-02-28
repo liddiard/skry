@@ -1,5 +1,6 @@
 *.pyc
 *.swp
+*.map
 *.DS_Store
 *.sass-cache/
 media/

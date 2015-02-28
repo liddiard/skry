@@ -4,34 +4,48 @@ body {
   border: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-.posts {
+article h1 {
+  font-size: 3em; }
+article .post-body p {
+  max-width: 640px;
+  font-size: 1.3em;
+  line-height: 1.4; }
+
+main {
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 1em;
-  list-style-type: none; }
-  .posts .post {
+  padding: 0 1em; }
+
+ul.posts {
+  margin: 0 auto;
+  list-style-type: none;
+  padding: 0; }
+  ul.posts li.post {
     padding: 2em 0;
     overflow: hidden;
     border-bottom: 2px solid #ddd; }
-  .posts a {
+  ul.posts a {
     color: initial;
     text-decoration: none; }
-  .posts h2 {
+  ul.posts h2 {
     font-size: 3em;
     margin: 0 0 0.3em;
     line-height: 1.1; }
-  .posts .featured-image {
+  ul.posts .featured-image {
     display: block;
     margin-bottom: 0.5em; }
-  .posts .teaser {
+  ul.posts .teaser {
     display: block;
     font-size: 1.3em;
     color: gray;
     margin-bottom: 0.5em; }
-  .posts .authors {
+  ul.posts .authors {
     font-size: 0.8em;
     float: right;
     border-top: 1px solid black;
     padding-top: 0.3em; }
+
+.featured-image {
+  width: 100%; }
 
 /*# sourceMappingURL=main.css.map */

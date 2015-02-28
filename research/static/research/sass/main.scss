@@ -1,4 +1,7 @@
 $BODY_FONT: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$HEADLINE_FONT: 'Muli', monospace;
+
+$LARGE_WIDTH: 960px;
 
 body {
     margin: 0;
@@ -7,13 +10,38 @@ body {
     font-family: $BODY_FONT;
 }
 
-.posts {
+h1, h2, h3, h4, h5, h6 {
+    // font-family: $HEADLINE_FONT;
+    // font-weight: normal;
+}
+
+article {
+    h1 {
+        font-size: 3em;
+    }
+
+    .post-body {
+
+        p {
+            max-width: 640px;
+            font-size: 1.3em;
+            line-height: 1.4;
+        }
+    }
+}
+
+main {
     max-width: 960px;
     margin: 0 auto;
     padding: 0 1em;
-    list-style-type: none;
+}
 
-    .post {
+ul.posts {
+    margin: 0 auto;
+    list-style-type: none;
+    padding: 0;
+
+    li.post {
         padding: 2em 0;
         overflow: hidden;
         border-bottom: 2px solid #ddd;
@@ -48,4 +76,8 @@ body {
         border-top: 1px solid black;
         padding-top: 0.3em;
     }
+}
+
+.featured-image {
+    width: 100%;
 }

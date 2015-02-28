@@ -10,7 +10,7 @@
     <li class="post">
         <a href="{% url 'research_post' post.slug %}">
             {% thumbnail post.featured_image "960x320" crop="center" as im %}
-            <img class="featured-image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            <img class="featured-image" src="{{ im.url }}">
             {% endthumbnail %}
 
             <h2>{{ post.title }}</h2>

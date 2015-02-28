@@ -2,12 +2,23 @@
 
 {% load markdown_safe %}
 {% load shortcodes %}
+{% load thumbnail %}
 
 {% block content %}
 
-<h1>{{ post.title }}</h1>
-<span class="authors">by {{ post.get_pretty_authors }}</span>
+<article>
 
-{{ post.body|markdown_safe|image|safe }}
+    {% thumbnail post.featured_image "960" crop="center" as im %}
+    <img class="featured-image" src="{{ im.url }}">
+    {% endthumbnail %}
+
+    <h1>{{ post.title }}</h1>
+    <span class="authors">by {{ post.get_pretty_authors }}</span>
+
+    <div class="post-body">
+        {{ post.body|markdown_safe|image|safe }}
+    </div>
+
+</article>
 
 {% endblock %}
