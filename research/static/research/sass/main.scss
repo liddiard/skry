@@ -1,5 +1,6 @@
 $BODY_FONT: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$HEADLINE_FONT: 'Muli', monospace;
+$HEADLINE_FONT: 'Merriweather', serif;
+$DB_BLUE: #0080c6;
 
 $LARGE_WIDTH: 960px;
 
@@ -10,22 +11,70 @@ body {
     font-family: $BODY_FONT;
 }
 
+a {
+    text-decoration: none;
+    box-shadow: inset 0 -1px 0 rgba($DB_BLUE, 0.4);
+    border-bottom: 1px solid rgba($DB_BLUE, 0.4);
+    color: $DB_BLUE - #444;
+
+    &:hover {
+        color: $DB_BLUE;
+    }
+}
+
+blockquote {
+    background-color: rgba($DB_BLUE, 0.07);
+    border-left: 2px solid $DB_BLUE - #444;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 1em 2em;
+}
+
 h1, h2, h3, h4, h5, h6 {
-    // font-family: $HEADLINE_FONT;
-    // font-weight: normal;
+    font-family: $HEADLINE_FONT;
 }
 
 article {
+    margin: 2em 0;
+
     h1 {
         font-size: 3em;
+        margin: 0.3em 0 0.6em;
+    }
+
+    h2, h3, h4, h5, h6 {
+        margin: 1.2em 0 0.6em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    h3 {
+        font-size: 1.8em;
+    }
+
+    .authors {
+        float: left;
+        margin-top: -1em;
     }
 
     .post-body {
-
         p {
             max-width: 640px;
             font-size: 1.3em;
-            line-height: 1.4;
+            line-height: 1.5;
+            margin: 0.8em auto;
+        }
+
+        & > p {
+            &:first-child:first-letter {
+                float: left;
+                font-size: 75px;
+                line-height: 70px;
+                padding: 4px 8px 0 3px;
+                font-family: $HEADLINE_FONT;
+            }
         }
     }
 }
@@ -49,13 +98,19 @@ ul.posts {
 
     a {
         color: initial;
-        text-decoration: none;
+        display: inline-block;
+        border: 0;
+        box-shadow: none;
+
+        &:hover {
+            color: $DB_BLUE - #444;
+        }
     }
 
     h2 {
         font-size: 3em;
-        margin: 0 0 0.3em;
-        line-height: 1.1;
+        margin: 0.3em 0;
+        line-height: 1.2;
     }
 
     .featured-image {
@@ -66,18 +121,24 @@ ul.posts {
     .teaser {
         display: block;
         font-size: 1.3em;
-        color: gray;
+        color: #444;
         margin-bottom: 0.5em;
+        line-height: 1.3;
     }
 
     .authors {
-        font-size: 0.8em;
+        margin-top: 0.5em;
         float: right;
-        border-top: 1px solid black;
-        padding-top: 0.3em;
     }
+}
+
+.authors {
+    border-top: 2px solid $DB_BLUE - #444;
+    padding-top: 0.2em;
 }
 
 .featured-image {
     width: 100%;
 }
+
+@import 'responsive';

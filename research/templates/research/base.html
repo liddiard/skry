@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
-        <title>Page title</title>
+        <title>{% block title %}The Stack{% endblock %}</title>
         <meta name="description" content="Page description, shows up in search results. Should be no longer than 150-160 characters." />
 
         <!-- Open Graph -->
@@ -15,7 +15,7 @@
         <meta property="og:image" content="URL to an image for this page. Should be at least 1200x630 pixels." />
 
         <!-- CSS -->
-        <link href='http://fonts.googleapis.com/css?family=Muli:300,400' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700' rel='stylesheet' type='text/css'>
         <link href="{{ STATIC_URL }}research/css/main.css" rel="stylesheet" type="text/css" />
 
         <!-- JavaScript -->

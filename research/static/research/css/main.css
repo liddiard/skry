@@ -4,12 +4,49 @@ body {
   border: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-article h1 {
-  font-size: 3em; }
-article .post-body p {
+a {
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 rgba(0, 128, 198, 0.4);
+  border-bottom: 1px solid rgba(0, 128, 198, 0.4);
+  color: #003c82; }
+  a:hover {
+    color: #0080c6; }
+
+blockquote {
+  background-color: rgba(0, 128, 198, 0.07);
+  border-left: 2px solid #003c82;
   max-width: 640px;
-  font-size: 1.3em;
-  line-height: 1.4; }
+  margin: 0 auto;
+  padding: 1em 2em; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Merriweather", serif; }
+
+article {
+  margin: 2em 0; }
+  article h1 {
+    font-size: 3em;
+    margin: 0.3em 0 0.6em; }
+  article h2, article h3, article h4, article h5, article h6 {
+    margin: 1.2em 0 0.6em; }
+  article h2 {
+    font-size: 2em; }
+  article h3 {
+    font-size: 1.8em; }
+  article .authors {
+    float: left;
+    margin-top: -1em; }
+  article .post-body p {
+    max-width: 640px;
+    font-size: 1.3em;
+    line-height: 1.5;
+    margin: 0.8em auto; }
+  article .post-body > p:first-child:first-letter {
+    float: left;
+    font-size: 75px;
+    line-height: 70px;
+    padding: 4px 8px 0 3px;
+    font-family: "Merriweather", serif; }
 
 main {
   max-width: 960px;
@@ -26,26 +63,45 @@ ul.posts {
     border-bottom: 2px solid #ddd; }
   ul.posts a {
     color: initial;
-    text-decoration: none; }
+    display: inline-block;
+    border: 0;
+    box-shadow: none; }
+    ul.posts a:hover {
+      color: #003c82; }
   ul.posts h2 {
     font-size: 3em;
-    margin: 0 0 0.3em;
-    line-height: 1.1; }
+    margin: 0.3em 0;
+    line-height: 1.2; }
   ul.posts .featured-image {
     display: block;
     margin-bottom: 0.5em; }
   ul.posts .teaser {
     display: block;
     font-size: 1.3em;
-    color: gray;
-    margin-bottom: 0.5em; }
+    color: #444;
+    margin-bottom: 0.5em;
+    line-height: 1.3; }
   ul.posts .authors {
-    font-size: 0.8em;
-    float: right;
-    border-top: 1px solid black;
-    padding-top: 0.3em; }
+    margin-top: 0.5em;
+    float: right; }
+
+.authors {
+  border-top: 2px solid #003c82;
+  padding-top: 0.2em; }
 
 .featured-image {
   width: 100%; }
+
+@media (max-width: 480px) {
+  article h1 {
+    font-size: 2.5em; }
+  article .post-body p {
+    font-size: 1em; }
+
+  ul.posts h2 {
+    font-size: 2.5em; } }
+@media (max-width: 960px) {
+  article .authors {
+    float: none; } }
 
 /*# sourceMappingURL=main.css.map */
