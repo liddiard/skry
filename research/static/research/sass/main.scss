@@ -54,9 +54,19 @@ article {
         font-size: 1.8em;
     }
 
-    .authors {
+    .post-info {
         float: right;
-        margin: -1em 0 1em 1em;
+        margin: -1em 0 0.5em 1em;
+        text-align: right;
+    }
+
+    .authors {
+        margin-bottom: 0.25em;
+    }
+
+    .published {
+        font-size: .7em;
+        color: gray;
     }
 
     .post-body {

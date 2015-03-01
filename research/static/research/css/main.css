@@ -33,9 +33,15 @@ article {
     font-size: 2em; }
   article h3 {
     font-size: 1.8em; }
-  article .authors {
+  article .post-info {
     float: right;
-    margin: -1em 0 1em 1em; }
+    margin: -1em 0 0.5em 1em;
+    text-align: right; }
+  article .authors {
+    margin-bottom: 0.25em; }
+  article .published {
+    font-size: .7em;
+    color: gray; }
   article .post-body p {
     max-width: 640px;
     font-size: 1.3em;
