@@ -48,7 +48,7 @@ class Project(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='research/image/%Y/%m/%d/original/')
+    image = models.ImageField(upload_to='research/image/%Y/%m/%d/')
     caption = models.TextField(blank=True)
 
     def get_image_at_resolution(self, resolution):
