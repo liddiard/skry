@@ -53,16 +53,18 @@ header {
     display: block;
     float: left;
     text-align: center;
-    width: 375px; }
+    width: 260px; }
     header #banner img {
       width: 100px;
       float: left; }
     header #banner h1 {
-      margin-top: 0.4em;
-      font-family: 'Cambay';
+      margin: 0.3em 0 0;
+      font-family: 'Roboto Slab';
       font-weight: normal;
       color: black;
       font-size: 3.5em; }
+    header #banner .tagline {
+      color: gray; }
 
 article {
   margin: 2em 0; }

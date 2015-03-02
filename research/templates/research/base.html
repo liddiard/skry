@@ -9,7 +9,7 @@
         <meta name="description" content="Page description, shows up in search results. Should be no longer than 150-160 characters." />
 
         <!-- CSS -->
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700|Cambay:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700|Roboto+Slab:400' rel='stylesheet' type='text/css'>
         <link href="{{ STATIC_URL }}research/css/main.css" rel="stylesheet" type="text/css" />
 
         <!-- JavaScript -->
@@ -20,7 +20,8 @@
         <header>
             <a id="banner" href="{% url 'research_front' %}">
                 <img src="{{ STATIC_URL }}research/img/logo.svg"/>
-                <h1>The Stack</h1>
+                <h1>stack</h1>
+                <span class="tagline">by the Daily Bruin</span>
             </a>
             <nav>
                 <ul>
@@ -37,7 +38,7 @@
             {% block content %}{% endblock %}
         </main>
         <footer>
-            Content copyright &copy; Daily Bruin
+            Content copyright &copy; <a href="http://dailybruin.com/">Daily Bruin</a>
         </footer>
     </body>
 </html>
