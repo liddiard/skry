@@ -3,11 +3,24 @@ from django.db import models
 from . import utils
 
 
-class Post(models.Model):
+class CreatedContent(models.Model):
+    authors = models.ManyToManyField('news.Author')
+
+    class Meta:
+        abstract = True
+
+    def get_pretty_authors(self):
+        """
+        Creates a comma/'and'-separated list of names for multiple authors in
+        AP style format.
+        """
+        return utils.pretty_list_from_queryset(self.authors.all())
+
+
+class Post(CreatedContent):
     title = models.CharField(max_length=128)
     slug = models.SlugField(max_length=128)
     teaser = models.CharField(max_length=256)
-    authors = models.ManyToManyField('news.Author')
     body = models.TextField()
     published = models.DateTimeField(auto_now_add=True)
     featured_image = models.ImageField(upload_to='research/post/'
@@ -17,22 +30,14 @@ class Post(models.Model):
     class Meta:
         ordering = ('-published',)
 
-    def get_pretty_authors(self):
-        """
-        Creates a comma/'and'-separated list of names for multiple authors in
-        AP style format.
-        """
-        return utils.pretty_list_from_queryset(self.authors.all())
-
     def __unicode__(self):
         return self.title
 
 
-class Project(models.Model):
+class Project(CreatedContent):
     name = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64)
     description = models.TextField()
-    authors = models.ManyToManyField('news.Author')
     published = models.DateTimeField(auto_now_add=True)
     featured_image = models.ImageField(upload_to='research/project/'
                                        'featured_image')

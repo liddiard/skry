@@ -44,5 +44,5 @@ class ProjectView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(project=model)
+        context['posts'] = Post.objects.filter(project=self.model)
         return context

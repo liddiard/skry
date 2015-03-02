@@ -54,6 +54,10 @@ article {
         font-size: 1.8em;
     }
 
+    .featured-image {
+        width: 100%;
+    }
+
     .post-info {
         float: right;
         margin: -1em 0 0.5em 1em;
@@ -126,6 +130,7 @@ ul.posts {
     .featured-image {
         display: block;
         margin-bottom: 0.5em;
+        width: 100%;
     }
 
     .teaser {
@@ -142,13 +147,33 @@ ul.posts {
     }
 }
 
+ul.projects {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+        float: left;
+        margin: 0.75em 0.5em;
+    }
+
+    a {
+        color: black;
+        border: 0;
+        box-shadow: none;
+
+        &:hover {
+            color: $DB_BLUE - #444;
+        }
+    }
+
+    h2 {
+        margin: 0;
+    }
+}
+
 .authors {
     border-top: 2px solid $DB_BLUE - #444;
     padding-top: 0.2em;
-}
-
-.featured-image {
-    width: 100%;
 }
 
 @import 'responsive';

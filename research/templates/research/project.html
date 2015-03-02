@@ -4,7 +4,7 @@
 {% load shortcodes %}
 {% load thumbnail %}
 
-{% block title %}{{ project.title }} | The Stack{% endblock %}
+{% block title %}{{ project.name }} | The Stack{% endblock %}
 
 {% block content %}
 
@@ -14,14 +14,14 @@
     <img class="featured-image" src="{{ im.url }}">
     {% endthumbnail %}
 
-    <h1>{{ project.title }}</h1>
+    <h1>{{ project.name }}</h1>
     <div class="post-info">
         <div class="authors">by {{ project.get_pretty_authors }}</div>
         <div class="published">{{ project.published }}</div>
     </div>
 
     <div class="post-body">
-        {{ project.body|markdown_safe|image|safe }}
+        {{ project.description|markdown_safe|image|safe }}
     </div>
 
 </article>

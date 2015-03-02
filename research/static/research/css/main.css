@@ -33,6 +33,8 @@ article {
     font-size: 2em; }
   article h3 {
     font-size: 1.8em; }
+  article .featured-image {
+    width: 100%; }
   article .post-info {
     float: right;
     margin: -1em 0 0.5em 1em;
@@ -80,7 +82,8 @@ ul.posts {
     line-height: 1.2; }
   ul.posts .featured-image {
     display: block;
-    margin-bottom: 0.5em; }
+    margin-bottom: 0.5em;
+    width: 100%; }
   ul.posts .teaser {
     display: block;
     font-size: 1.3em;
@@ -91,12 +94,24 @@ ul.posts {
     margin-top: 0.5em;
     float: right; }
 
+ul.projects {
+  list-style-type: none;
+  padding: 0; }
+  ul.projects li {
+    float: left;
+    margin: 0.75em 0.5em; }
+  ul.projects a {
+    color: black;
+    border: 0;
+    box-shadow: none; }
+    ul.projects a:hover {
+      color: #003c82; }
+  ul.projects h2 {
+    margin: 0; }
+
 .authors {
   border-top: 2px solid #003c82;
   padding-top: 0.2em; }
-
-.featured-image {
-  width: 100%; }
 
 @media (max-width: 480px) {
   article h1 {
