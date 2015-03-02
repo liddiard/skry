@@ -40,6 +40,10 @@ h1 {
     margin: 0.25em 0;
 }
 
+h2.project-type {
+    margin: 2em 0 0;
+}
+
 header {
     max-width: $LARGE_WIDTH;
     margin: 0 auto 1em;
@@ -214,7 +218,7 @@ ul.projects {
         }
     }
 
-    h2 {
+    h3 {
         margin: 0.25em 0;
     }
 }
@@ -233,6 +237,7 @@ footer {
     font-size: 0.8em;
     text-align: center;
     color: gray;
+    clear: both;
 }
 
 .authors {

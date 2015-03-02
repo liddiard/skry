@@ -25,10 +25,16 @@ class PostsView(ListView):
     model = Post
 
 
-class ProjectsView(ListView):
+class ProjectsView(TemplateView):
 
     template_name = "research/projects.html"
-    model = Project
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectsView, self).get_context_data(**kwargs)
+        projects = Project.objects.all()
+        context['featured_projects'] = projects.filter(featured=True)
+        context['non_featured_projects'] = projects.filter(featured=False)
+        return context
 
 
 class PostView(DetailView):

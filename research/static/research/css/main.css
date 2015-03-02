@@ -26,6 +26,9 @@ h1 {
   font-size: 3em;
   margin: 0.25em 0; }
 
+h2.project-type {
+  margin: 2em 0 0; }
+
 header {
   max-width: 960px;
   margin: 0 auto 1em;
@@ -137,7 +140,7 @@ ul.projects {
     box-shadow: none; }
     ul.projects a:hover {
       color: #003c82; }
-  ul.projects h2 {
+  ul.projects h3 {
     margin: 0.25em 0; }
 
 p.lead {
@@ -152,7 +155,8 @@ footer {
   margin: 3em auto;
   font-size: 0.8em;
   text-align: center;
-  color: gray; }
+  color: gray;
+  clear: both; }
 
 .authors {
   border-top: 2px solid #003c82;
