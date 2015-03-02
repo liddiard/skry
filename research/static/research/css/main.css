@@ -26,6 +26,31 @@ h1 {
   font-size: 3em;
   margin: 0.25em 0; }
 
+header {
+  max-width: 960px;
+  margin: 0 auto 1em;
+  overflow: hidden; }
+  header nav {
+    float: right;
+    margin-top: 1.5em; }
+    header nav ul {
+      list-style-type: none;
+      padding: 0; }
+      header nav ul li {
+        font-size: 1.5em;
+        display: inline-block;
+        margin: 0 0.5em;
+        font-weight: normal; }
+    header nav a {
+      border: 0;
+      box-shadow: none; }
+  header #banner {
+    border: 0;
+    box-shadow: none;
+    display: block;
+    float: left;
+    text-align: center; }
+
 article {
   margin: 2em 0; }
   article h1 {
@@ -122,10 +147,26 @@ p.lead {
   margin: 0.5em 0;
   line-height: 1.3; }
 
+footer {
+  max-width: 960px;
+  margin: 3em auto;
+  font-size: 0.8em;
+  text-align: center;
+  color: gray; }
+
 .authors {
   border-top: 2px solid #003c82;
   padding-top: 0.2em; }
 
+@media (max-width: 640px) {
+  header nav {
+    clear: both;
+    float: none;
+    margin-top: 0.5em; }
+    header nav ul {
+      text-align: center; }
+  header #banner {
+    float: none; } }
 @media (max-width: 480px) {
   article h1 {
     font-size: 2.5em; }

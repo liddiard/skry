@@ -23,10 +23,26 @@
         <script src="js/main.js"></script>
     </head>
     <body>
-        <header></header>
+        <header>
+            <a id="banner" href="{% url 'research_front' %}">
+                <img src="http://placehold.it/350x100">
+            </a>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'research_front' %}">Blog</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'research_projects' %}">Projects</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
         <main>
             {% block content %}{% endblock %}
         </main>
-        <footer></footer>
+        <footer>
+            Content copyright &copy; Daily Bruin
+        </footer>
     </body>
 </html>

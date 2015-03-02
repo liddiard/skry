@@ -1,3 +1,21 @@
+@media (max-width: 640px) {
+    header {
+        nav {
+            clear: both;
+            float: none;
+            margin-top: 0.5em;
+
+            ul {
+                text-align: center;
+            }
+        }
+
+        #banner {
+            float: none;
+        }
+    }
+}
+
 @media (max-width: 480px) {
     article {
         h1 {
