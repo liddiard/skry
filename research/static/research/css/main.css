@@ -22,6 +22,10 @@ blockquote {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Merriweather", serif; }
 
+h1 {
+  font-size: 3em;
+  margin: 0.25em 0; }
+
 article {
   margin: 2em 0; }
   article h1 {
@@ -92,12 +96,6 @@ ul.posts {
     display: block;
     margin-bottom: 0.5em;
     width: 100%; }
-  ul.posts .teaser {
-    display: block;
-    font-size: 1.3em;
-    color: #444;
-    margin-bottom: 0.5em;
-    line-height: 1.3; }
   ul.posts .authors {
     margin-top: 0.5em;
     float: right; }
@@ -115,7 +113,14 @@ ul.projects {
     ul.projects a:hover {
       color: #003c82; }
   ul.projects h2 {
-    margin: 0; }
+    margin: 0.25em 0; }
+
+p.lead {
+  display: block;
+  font-size: 1.3em;
+  color: #444;
+  margin: 0.5em 0;
+  line-height: 1.3; }
 
 .authors {
   border-top: 2px solid #003c82;
