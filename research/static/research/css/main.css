@@ -33,6 +33,14 @@ article {
     font-size: 2em; }
   article h3 {
     font-size: 1.8em; }
+  article figure {
+    margin: 2em 0; }
+    article figure a {
+      border: 0;
+      box-shadow: none; }
+    article figure figcaption {
+      margin-top: 0.25em;
+      color: gray; }
   article .featured-image {
     width: 100%; }
   article .post-info {

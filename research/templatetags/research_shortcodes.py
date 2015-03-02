@@ -14,7 +14,7 @@ register = template.Library()
 @register.filter(is_safe=True)
 @stringfilter
 def image(value):
-    img_re = r'\[img(?P<pk>\d+)\s+(?P<align>\S+)?\]'
+    img_re = r'\[img(?P<pk>\d+)\]'
     return re.sub(img_re, imgHTML, value)
 
 def imgHTML(match):
@@ -22,7 +22,6 @@ def imgHTML(match):
         image = Image.objects.get(pk=match.group('pk'))
     except Image.DoesNotExist:
         return "" # fail silently
-    align = match.group('align')
     template = get_template('research/inc/image.html')
-    context = Context({'image': image, 'align': align})
+    context = Context({'image': image})
     return template.render(context)

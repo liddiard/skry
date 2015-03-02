@@ -1,6 +1,7 @@
 $BODY_FONT: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $HEADLINE_FONT: 'Merriweather', serif;
 $DB_BLUE: #0080c6;
+$DARK_BLUE: $DB_BLUE - #444;
 
 $LARGE_WIDTH: 960px;
 
@@ -15,7 +16,7 @@ a {
     text-decoration: none;
     box-shadow: inset 0 -1px 0 rgba($DB_BLUE, 0.4);
     border-bottom: 1px solid rgba($DB_BLUE, 0.4);
-    color: $DB_BLUE - #444;
+    color: $DARK_BLUE;
 
     &:hover {
         color: $DB_BLUE;
@@ -24,7 +25,7 @@ a {
 
 blockquote {
     background-color: rgba($DB_BLUE, 0.07);
-    border-left: 2px solid $DB_BLUE - #444;
+    border-left: 2px solid $DARK_BLUE;
     max-width: 640px;
     margin: 0 auto;
     padding: 1em 2em;
@@ -52,6 +53,20 @@ article {
 
     h3 {
         font-size: 1.8em;
+    }
+
+    figure {
+        margin: 2em 0;
+        
+        a {
+            border: 0;
+            box-shadow: none;
+        }
+
+        figcaption {
+            margin-top: 0.25em;
+            color: gray;
+        }
     }
 
     .featured-image {
@@ -117,7 +132,7 @@ ul.posts {
         box-shadow: none;
 
         &:hover {
-            color: $DB_BLUE - #444;
+            color: $DARK_BLUE;
         }
     }
 
@@ -162,7 +177,7 @@ ul.projects {
         box-shadow: none;
 
         &:hover {
-            color: $DB_BLUE - #444;
+            color: $DARK_BLUE;
         }
     }
 
@@ -172,7 +187,7 @@ ul.projects {
 }
 
 .authors {
-    border-top: 2px solid $DB_BLUE - #444;
+    border-top: 2px solid $DARK_BLUE;
     padding-top: 0.2em;
 }
 
