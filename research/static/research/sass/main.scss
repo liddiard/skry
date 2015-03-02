@@ -77,6 +77,20 @@ header {
         display: block;
         float: left;
         text-align: center;
+        width: 375px;
+
+        img {
+            width: 100px;
+            float: left;
+        }
+
+        h1 {
+            margin-top: 0.4em;
+            font-family: 'Cambay';
+            font-weight: normal;
+            color: black;
+            font-size: 3.5em;
+        }
     }
 }
 

@@ -52,7 +52,17 @@ header {
     box-shadow: none;
     display: block;
     float: left;
-    text-align: center; }
+    text-align: center;
+    width: 375px; }
+    header #banner img {
+      width: 100px;
+      float: left; }
+    header #banner h1 {
+      margin-top: 0.4em;
+      font-family: 'Cambay';
+      font-weight: normal;
+      color: black;
+      font-size: 3.5em; }
 
 article {
   margin: 2em 0; }

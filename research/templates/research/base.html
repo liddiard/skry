@@ -8,14 +8,8 @@
         <title>{% block title %}The Stack{% endblock %}</title>
         <meta name="description" content="Page description, shows up in search results. Should be no longer than 150-160 characters." />
 
-        <!-- Open Graph -->
-        <meta property="og:title" content="The title of this page, excluding any branding." />
-        <meta property="og:site_name" content="Name of this website." />
-        <meta property="og:url" content="Canonical URL of this page, excluding session and user-identifying variables." />
-        <meta property="og:image" content="URL to an image for this page. Should be at least 1200x630 pixels." />
-
         <!-- CSS -->
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700|Cambay:400,700' rel='stylesheet' type='text/css'>
         <link href="{{ STATIC_URL }}research/css/main.css" rel="stylesheet" type="text/css" />
 
         <!-- JavaScript -->
@@ -25,7 +19,8 @@
     <body>
         <header>
             <a id="banner" href="{% url 'research_front' %}">
-                <img src="http://placehold.it/350x100">
+                <img src="{{ STATIC_URL }}research/img/logo.svg"/>
+                <h1>The Stack</h1>
             </a>
             <nav>
                 <ul>
