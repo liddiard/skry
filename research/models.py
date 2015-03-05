@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 from . import utils
@@ -22,7 +24,7 @@ class Post(CreatedContent):
     slug = models.SlugField(max_length=128)
     teaser = models.CharField(max_length=256)
     body = models.TextField()
-    published = models.DateTimeField(auto_now_add=True)
+    published = models.DateTimeField(default=datetime.now)
     featured_image = models.ImageField(upload_to='research/post/'
                                        'featured_image', null=True, blank=True)
     project = models.ForeignKey('Project', null=True, blank=True)
@@ -38,7 +40,7 @@ class Project(CreatedContent):
     name = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64)
     description = models.TextField()
-    published = models.DateTimeField(auto_now_add=True)
+    published = models.DateTimeField(default=datetime.now)
     featured_image = models.ImageField(upload_to='research/project/'
                                        'featured_image')
     github = models.URLField(blank=True)
