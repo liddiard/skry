@@ -37,7 +37,8 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    'sorl.thumbnail',
+    'rest_framework',
+    'sorl.thumbnail'
 )
 
 LOCAL_APPS = (
@@ -98,6 +99,15 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211'
     }
+}
+
+# Django Rest Framework
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }
 
 IMAGE_DIMENSIONS = {
