@@ -16,10 +16,10 @@ from . import utils
 
 
 CARD_CROP_CHOICES = (
-    ('cc', 'center center'), 
+    ('cc', 'center center'),
     ('cl', 'center left'),
     ('cr', 'center right'),
-    ('tl', 'top left'), 
+    ('tl', 'top left'),
     ('tc', 'top center'),
     ('tr', 'top right'),
     ('bl', 'bottom left'),
@@ -32,8 +32,8 @@ class Author(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
     first_name = models.CharField(max_length=32, blank=True)
     last_name = models.CharField(max_length=32, blank=True)
-    organization = models.CharField(max_length=32, 
-                                    default=settings.DEFAULT_ORGANIZATION, 
+    organization = models.CharField(max_length=32,
+                                    default=settings.DEFAULT_ORGANIZATION,
                                     blank=True)
     # title = models.CharField(max_length=32, blank=True)
     email = models.EmailField(blank=True)
@@ -78,12 +78,12 @@ class Article(models.Model):
     status = models.PositiveIntegerField(choices=STATUS_CHOICES, default=DRAFT)
     title = models.CharField(max_length=128, blank=True)
     url_slug = models.SlugField(max_length=128, blank=True)
-    author = models.ManyToManyField('Author', related_name='news_article', 
-                                    null=True, blank=True)
+    author = models.ManyToManyField('Author', related_name='news_article',
+                                    blank=True)
     teaser = models.CharField(max_length=128, blank=True)
     subhead = models.CharField(max_length=128, blank=True)
     body = models.TextField(blank=True)
-    alternate_template = models.ForeignKey('Template', blank=True, null=True) 
+    alternate_template = models.ForeignKey('Template', blank=True, null=True)
 
     # organization
     position = models.PositiveIntegerField(unique=True, db_index=True)
@@ -92,10 +92,10 @@ class Article(models.Model):
     series = models.BooleanField(default=False)
 
     # card
-    card = models.ForeignKey('Image', null=True, blank=True, 
+    card = models.ForeignKey('Image', null=True, blank=True,
                              related_name='news_article_card')
     card_size = models.ForeignKey('CardSize')
-    card_crop = models.CharField(max_length=2, choices=CARD_CROP_CHOICES, 
+    card_crop = models.CharField(max_length=2, choices=CARD_CROP_CHOICES,
                                  default='cc')
     feature_card_image = models.BooleanField(default=True)
 
@@ -106,13 +106,13 @@ class Article(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
 
     # linked media
-    featured_image = models.ForeignKey('Image', null=True, blank=True, 
+    featured_image = models.ForeignKey('Image', null=True, blank=True,
                                     related_name='news_article_featured_image')
     featured_video = models.ForeignKey('Video', null=True, blank=True)
     featured_audio = models.ForeignKey('Audio', null=True, blank=True)
     review = models.ForeignKey('Review', null=True, blank=True)
     poll = models.ForeignKey('Poll', null=True, blank=True)
-    # social_media_post = models.OneToOneField('scheduler.SMPost', null=True, 
+    # social_media_post = models.OneToOneField('scheduler.SMPost', null=True,
     #                                          blank=True)
 
     class Meta:
@@ -132,7 +132,7 @@ class Article(models.Model):
 
     def card_html(self):
         """
-        Returns a JSON object containing the HTML for the card. NOT a public 
+        Returns a JSON object containing the HTML for the card. NOT a public
         API method.
         """
         context = Context({'article': self, 'MEDIA_URL': settings.MEDIA_URL})
@@ -153,14 +153,14 @@ class Article(models.Model):
         """
         Whether or not the article is currently breaking news
         """
-        return (self.publish_time + timedelta(hours=self.breaking_duration) > 
+        return (self.publish_time + timedelta(hours=self.breaking_duration) >
                 django_now())
 
     def get_path(self):
         """
         Get the URL path to the article from the website root.
         """
-        return "/%s/%s/" % (self.publish_time.strftime("%Y/%m/%d"), 
+        return "/%s/%s/" % (self.publish_time.strftime("%Y/%m/%d"),
                             self.url_slug)
 
     def get_pretty_authors(self):
@@ -214,8 +214,8 @@ class Category(models.Model):
     slug = models.SlugField(max_length=32, unique=True)
     description = models.CharField(max_length=128, blank=True)
     default_card = models.ImageField(upload_to='news/category/default_card/')
-    default_card_crop = models.CharField(max_length=1, 
-                                         choices=CARD_CROP_CHOICES, 
+    default_card_crop = models.CharField(max_length=1,
+                                         choices=CARD_CROP_CHOICES,
                                          default='c')
     twitter = models.CharField(max_length=15, blank=True)
     facebook = models.CharField(max_length=32, blank=True)
@@ -224,7 +224,7 @@ class Category(models.Model):
     position = models.PositiveIntegerField()
 
     class Meta:
-        verbose_name_plural = "Categories" 
+        verbose_name_plural = "Categories"
         ordering = ['-position']
 
     def get_path(self):
@@ -247,7 +247,7 @@ class Category(models.Model):
 
     def hierarchy_level(self):
         """
-        Returns the number of levels deep the category is nested, where zero 
+        Returns the number of levels deep the category is nested, where zero
         is the top level.
         """
         level = 0
@@ -278,7 +278,7 @@ class Template(models.Model):
     )
     filename = models.CharField(max_length=64, unique=True)
     verbose_name = models.CharField(max_length=64, unique=True)
-    include_css = models.CharField(max_length=8, choices=INCLUDE_CSS_CHOICES, 
+    include_css = models.CharField(max_length=8, choices=INCLUDE_CSS_CHOICES,
                                    blank=True, unique=True)
 
     def __unicode__(self):
@@ -309,7 +309,7 @@ class Media(models.Model):
 
     def display_courtesy(self):
         first_author = self.credit.first()
-        if ((first_author.first_name or first_author.last_name) and not 
+        if ((first_author.first_name or first_author.last_name) and not
             first_author.organization):
             return True
         else:
@@ -326,8 +326,8 @@ class Media(models.Model):
 
 class Image(Media):
     image = models.ImageField(upload_to='news/image/%Y/%m/%d/original/')
-    credit = models.ManyToManyField('Author', related_name='news_image', 
-                                    blank=True, null=True)
+    credit = models.ManyToManyField('Author', related_name='news_image',
+                                    blank=True)
 
     def get_image_at_resolution(self, resolution):
         return get_thumbnail(self.image, resolution).url
@@ -342,7 +342,7 @@ class Image(Media):
         return float(self.image.width) / self.image.height
 
     def __unicode__(self):
-        return self.image.name 
+        return self.image.name
 
 
 class Video(Media):
@@ -358,10 +358,10 @@ class Audio(Media):
     mp3 = models.FileField(upload_to='news/audio/%Y/%m/%d/mp3/')
     ogg = models.FileField(upload_to='news/audio/%Y/%m/%d/ogg/')
     credit = models.ManyToManyField('Author', related_name='news_audio', 
-                                    blank=True, null=True)
+                                    blank=True)
 
     class Meta:
-        verbose_name_plural = "Audio" 
+        verbose_name_plural = "Audio"
 
     def __unicode__(self):
         return self.title
