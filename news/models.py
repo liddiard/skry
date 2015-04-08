@@ -29,13 +29,16 @@ CARD_CROP_CHOICES = (
 
 
 class Author(models.Model):
+    """A distinct person or group of people which creates a piece of
+    content."""
+
     user = models.ForeignKey(User, null=True, blank=True)
     first_name = models.CharField(max_length=32, blank=True)
     last_name = models.CharField(max_length=32, blank=True)
     organization = models.CharField(max_length=32,
                                     default=settings.DEFAULT_ORGANIZATION,
                                     blank=True)
-    # title = models.CharField(max_length=32, blank=True)
+    title = models.CharField(max_length=32, blank=True)
     email = models.EmailField(blank=True)
     twitter = models.CharField(max_length=15, blank=True)
                                # current max handle length
@@ -55,40 +58,44 @@ class Author(models.Model):
             return self.organization
 
 
-class Article(models.Model):
-    DRAFT = 1
-    FIRST_EDITING = 2
-    SECOND_EDITING = 3
-    RIMMING = 4
-    SLOTTING = 5
-    PROOFING = 6
-    READY_TO_PUBLISH = 7
-    STATUS_CHOICES = (
-        (DRAFT, 'Draft'),
-        (FIRST_EDITING, 'First editing'),
-        (SECOND_EDITING, 'Second editing'),
-        (RIMMING, 'Rimming'),
-        (SLOTTING, 'Slotting'),
-        (PROOFING, 'Proofing'),
-        (READY_TO_PUBLISH, 'Ready to publish')
-    )
+class Status(models.Model):
+    """A Story's current state in workflow."""
+
+    name = models.CharField(max_length=32, unique=True)
+    position = models.PositiveSmallIntegerField(unique=True)
+
+    def __unicode(self):
+        return self.name
+
+
+class Story(models.Model):
+    """A standalone piece of content that conveys a message to a consumer.
+
+    Stories can include or be composed entirely of text, an Image, a Video, an
+    Audio piece, a Poll, etc.
+    """
 
     # primary content
-    assignment_slug = models.CharField(max_length=128)
-    status = models.PositiveIntegerField(choices=STATUS_CHOICES, default=DRAFT)
+    assignment_slug = models.CharField(max_length=64)
+    status = models.ForeignKey('Status')
     title = models.CharField(max_length=128, blank=True)
     url_slug = models.SlugField(max_length=128, blank=True)
-    author = models.ManyToManyField('Author', related_name='news_article',
+    author = models.ManyToManyField('Author', related_name='news_story',
                                     blank=True)
     teaser = models.CharField(max_length=128, blank=True)
     subhead = models.CharField(max_length=128, blank=True)
     body = models.TextField(blank=True)
     alternate_template = models.ForeignKey('Template', blank=True, null=True)
 
+    # planning
+    summary = models.TextField(blank=True)
+    angle = models.TextField(blank=True)
+    sources = models.TextField(blank=True)
+
     # organization
     position = models.PositiveIntegerField(unique=True, db_index=True)
-    category = models.ForeignKey('Category')
-    tag = models.ForeignKey('Tag', null=True, blank=True)
+    categories = models.ManyToManyField('Category', blank=True)
+    tags = models.ManyToManyField('Tag', blank=True)
     series = models.BooleanField(default=False)
 
     # card
@@ -119,21 +126,23 @@ class Article(models.Model):
         ordering = ['-position']
 
     def get_featured_image(self):
+        """Custom accessor for featured image.
+
+        Needed because the `feature_card_image` field determines whether the
+        image stored in the `card` field or the image stored in
+        `featured_image` field should be displayed as the 'featured image'
+        for an article.
         """
-        Custom accessor for featured image. Needed because the
-        `feature_card_image` field determines whether the image stored in the
-        `card` field or the image stored in `featured_image` field should be
-        displayed as the 'featured image' for an article.
-        """
+
         if self.card and self.feature_card_image:
             return self.card
         else:
             return self.featured_image
 
     def card_html(self):
-        """
-        Returns a JSON object containing the HTML for the card. NOT a public
-        API method.
+        """Returns a JSON object containing the HTML for the card.
+
+        NOT a public API method.
         """
         context = Context({'article': self, 'MEDIA_URL': settings.MEDIA_URL})
         template = get_template('news/inc/card.html')
@@ -142,52 +151,76 @@ class Article(models.Model):
         return response_dict
 
     def is_published(self):
-        """
-        Returns True if the article's status is 'Ready to publish' and the
+        """Returns True if the article's status is 'Ready to publish' and the
         current time is greater than (later than) the publish time.
         """
+
         return (self.status == self.READY_TO_PUBLISH and
                 self.publish_time < django_now())
 
     def is_breaking(self):
-        """
-        Whether or not the article is currently breaking news
-        """
+        """Whether or not the article is currently breaking news"""
+
         return (self.publish_time + timedelta(hours=self.breaking_duration) >
                 django_now())
 
     def get_path(self):
-        """
-        Get the URL path to the article from the website root.
-        """
+        """Get the URL path to the article from the website root."""
+
         return "/%s/%s/" % (self.publish_time.strftime("%Y/%m/%d"),
                             self.url_slug)
 
     def get_pretty_authors(self):
+        """Creates a comma/'and'-separated list of names for multiple authors
+        in AP style format.
         """
-        Creates a comma/'and'-separated list of names for multiple authors in
-        AP style format.
-        """
+
         return utils.pretty_list_from_queryset(self.author.all())
 
     def save(self, *args, **kwargs):
         if self.position is None:
-            self.position = Article.objects.first().position + 1
-        super(Article, self).save(*args, **kwargs)
+            self.position = Story.objects.first().position + 1
+        super(Story, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.assignment_slug
 
 
 def get_published_articles(): # TODO: cache
-    return (Article.objects.filter(status=7)
+    return (Story.objects.filter(status=7)
             .filter(publish_time__lt=django_now()))
 
 
-class InternalArticleComment(models.Model):
+class ArtRequest(models.Model):
+    """A request for a piece of art to accompany a Story."""
+
+    KIND_CHOICES = (
+        ('p', 'photo'),
+        ('g', 'graphic'),
+        ('i', 'illustration')
+    )
+
+    story = models.ForeignKey('Story')
+    kind = models.CharField(max_length=1, choices=KIND_CHOICES)
+    location = models.TextField(blank=True)
+    time = models.DateTimeField(null=True, blank=True)
+    instructions = models.TextField(blank=True)
+    external_link = models.URLField(blank=True)
+    images = models.ManyToManyField('Image', blank=True)
+
+    def __unicode__(self):
+        return self.get_kind_display() + " for " + self.story
+
+
+class InternalStoryComment(models.Model):
+    """An internal (not public facing) comment about a Story.
+
+    Can be used to inquire about an aspect of the Story.
+    """
+
     user = models.ForeignKey(User)
     time_posted = models.DateTimeField(auto_now_add=True)
-    article = models.ForeignKey('Article')
+    story = models.ForeignKey('Story')
     text = models.TextField()
 
     def __unicode__(self):
@@ -195,6 +228,9 @@ class InternalArticleComment(models.Model):
 
 
 class CardSize(models.Model):
+    """A preset dimension choice for a Story's Card image."""
+
+
     width = models.PositiveIntegerField()
     height = models.PositiveIntegerField()
 
@@ -209,6 +245,12 @@ class CardSize(models.Model):
 
 
 class Category(models.Model):
+    """A distinct, recurring classification for a group of Stories.
+
+    It is recommended that Categories bear resemblance to internal departments
+    and/or beats which regularly create Stories.
+    """
+
     parent = models.ForeignKey('self', null=True, blank=True)
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
@@ -236,20 +278,20 @@ class Category(models.Model):
         return "/" + "/".join(path_components[::-1]) + "/"
 
     def get_top_level_parent(self):
-        """
-        Get the highest category in the hierarchy under which this category
+        """Get the highest category in the hierarchy under which this category
         resides. If the category has no parent, return self.
         """
+
         category = self
         while category.parent is not None:
             category = category.parent
         return category
 
     def hierarchy_level(self):
-        """
-        Returns the number of levels deep the category is nested, where zero
+        """Returns the number of levels deep the category is nested, where zero
         is the top level.
         """
+
         level = 0
         category = self
         while category.parent is not None:
@@ -262,6 +304,13 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
+    """A distinct classification for groups of Stories around a theme.
+
+    Tags may be used for groups of stories for a one-time event or for
+    recurring coverage around a theme which is not prominent enough to warrant
+    a Category.
+    """
+
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
     description = models.TextField(blank=True)
@@ -270,22 +319,39 @@ class Tag(models.Model):
         return self.name
 
 
+class IncludeCSS(models.Model):
+    """A CSS file, which may be a library, to include in a Template.
+
+    A common use case is to support Templates that use either Twitter
+    Bootstrap or Zurb Foundation, or to include another common stylesheet
+    shared among a group of pages.
+    """
+
+    name = models.CharField(max_length=32, unique=True)
+    filename = models.CharField(max_length=64, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Template(models.Model):
-    INCLUDE_CSS_CHOICES = (
-        ('fd5', 'Foundation 5'),
-        ('bs3.1.1', 'Bootstrap 3.1.1'),
-        ('bs2.3.2', 'Bootstrap 2.3.2'),
-    )
+    """A reusable layout for Pages."""
+
     filename = models.CharField(max_length=64, unique=True)
     verbose_name = models.CharField(max_length=64, unique=True)
-    include_css = models.CharField(max_length=8, choices=INCLUDE_CSS_CHOICES,
-                                   blank=True, unique=True)
+    include_css = models.ManyToManyField('IncludeCSS', blank=True)
 
     def __unicode__(self):
         return "%s (%s)" % (self.verbose_name, self.filename)
 
 
 class Page(models.Model):
+    """A single web page which is completely unrelated to a Story.
+
+    Examples include an about page, a staff page, and an opinion submission
+    page.
+    """
+
     parent = models.ForeignKey('self', null=True, blank=True)
     title = models.CharField(max_length=128, blank=True)
     slug = models.SlugField(max_length=128)
@@ -299,6 +365,9 @@ class Page(models.Model):
 # abstract base class
 # https://docs.djangoproject.com/en/1.7/topics/db/models/#abstract-base-classes
 class Media(models.Model):
+    """A piece of content which has a main component and may have associated
+    Authors and a caption."""
+
     caption = models.TextField(blank=True)
 
     class Meta:
@@ -325,6 +394,8 @@ class Media(models.Model):
 
 
 class Image(Media):
+    """An image of any type, including photos, illustrations, and graphics."""
+
     image = models.ImageField(upload_to='news/image/%Y/%m/%d/original/')
     credit = models.ManyToManyField('Author', related_name='news_image',
                                     blank=True)
@@ -346,18 +417,24 @@ class Image(Media):
 
 
 class Video(Media):
+    """A video from YouTube with associated metadata."""
+
     title = models.CharField(max_length=128)
     youtube_id = models.CharField(max_length=16)
+    credit = models.ManyToManyField('Author', related_name='news_video',
+                                    blank=True)
 
     def __unicode__(self):
         return self.title
 
 
 class Audio(Media):
+    """A self-hosted audio piece with associated metadata."""
+
     title = models.CharField(max_length=128)
     mp3 = models.FileField(upload_to='news/audio/%Y/%m/%d/mp3/')
     ogg = models.FileField(upload_to='news/audio/%Y/%m/%d/ogg/')
-    credit = models.ManyToManyField('Author', related_name='news_audio', 
+    credit = models.ManyToManyField('Author', related_name='news_audio',
                                     blank=True)
 
     class Meta:
@@ -368,6 +445,11 @@ class Audio(Media):
 
 
 class Review(models.Model):
+    """An editorial rating.
+
+    Examples include movies, albums, and restaurants.
+    """
+
     item = models.CharField(max_length=64)
     line_1 = models.CharField(max_length=128, blank=True)
     line_2 = models.CharField(max_length=128, blank=True)
@@ -378,6 +460,8 @@ class Review(models.Model):
 
 
 class Poll(models.Model):
+    """A poll question for consumer interaction."""
+
     question = models.CharField(max_length=128)
     is_open = models.BooleanField(default=True)
 
@@ -386,6 +470,8 @@ class Poll(models.Model):
 
 
 class PollChoice(models.Model):
+    """A selection option for a Poll."""
+
     question = models.ForeignKey('Poll')
     choice = models.CharField(max_length=128)
     votes = models.PositiveIntegerField(default=0)
