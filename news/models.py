@@ -15,7 +15,9 @@ from sorl.thumbnail import get_thumbnail
 from . import utils
 
 
-CARD_CROP_CHOICES = (
+# Primary focal region of an image. Used when an image need to be cropped to
+# fit available space.
+IMAGE_FOCUS_CHOICES = (
     ('cc', 'center center'),
     ('cl', 'center left'),
     ('cr', 'center right'),
@@ -102,8 +104,8 @@ class Story(models.Model):
     card = models.ForeignKey('Image', null=True, blank=True,
                              related_name='news_article_card')
     card_size = models.ForeignKey('CardSize')
-    card_crop = models.CharField(max_length=2, choices=CARD_CROP_CHOICES,
-                                 default='cc')
+    card_focus = models.CharField(max_length=2, choices=IMAGE_FOCUS_CHOICES,
+                                  default='cc')
     feature_card_image = models.BooleanField(default=True)
 
     # dates and times
@@ -256,9 +258,9 @@ class Category(models.Model):
     slug = models.SlugField(max_length=32, unique=True)
     description = models.CharField(max_length=128, blank=True)
     default_card = models.ImageField(upload_to='news/category/default_card/')
-    default_card_crop = models.CharField(max_length=1,
-                                         choices=CARD_CROP_CHOICES,
-                                         default='c')
+    default_card_focus = models.CharField(max_length=1,
+                                          choices=IMAGE_FOCUS_CHOICES,
+                                          default='c')
     twitter = models.CharField(max_length=15, blank=True)
     facebook = models.CharField(max_length=32, blank=True)
     profile_image = models.ImageField(upload_to='news/category/profile/',
