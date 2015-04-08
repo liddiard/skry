@@ -21,3 +21,6 @@ python-memcached==1.53
 
 # Thumbnail library. Requires Pillow and memcached (for current implementation). 
 sorl-thumbnail==12.2
+
+# Framework for building RESTful APIs.
+djangorestframework==3.1.1
