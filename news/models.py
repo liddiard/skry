@@ -30,6 +30,10 @@ IMAGE_FOCUS_CHOICES = (
 )
 
 
+class UserProfile(models.Model):
+    pass
+
+
 class Author(models.Model):
     """A distinct person or group of people which creates a piece of
     content."""
@@ -196,37 +200,84 @@ def get_published_articles(): # TODO: cache
 class ArtRequest(models.Model):
     """A request for a piece of art to accompany a Story."""
 
-    KIND_CHOICES = (
-        ('p', 'photo'),
-        ('g', 'graphic'),
-        ('i', 'illustration')
-    )
-
     story = models.ForeignKey('Story')
-    kind = models.CharField(max_length=1, choices=KIND_CHOICES)
-    location = models.TextField(blank=True)
-    time = models.DateTimeField(null=True, blank=True)
-    instructions = models.TextField(blank=True)
-    external_link = models.URLField(blank=True)
+    assignees = models.ManyToManyField('Author', blank=True)
     images = models.ManyToManyField('Image', blank=True)
 
+    class Meta:
+        abstract = True
+
     def __unicode__(self):
-        return self.get_kind_display() + " for " + self.story
+        return "Art request for " + self.story
 
 
-class InternalStoryComment(models.Model):
-    """An internal (not public facing) comment about a Story.
+class PhotoRequest(ArtRequest):
+    location = models.TextField(blank=True)
+    time = models.DateTimeField(null=True, blank=True)
 
-    Can be used to inquire about an aspect of the Story.
+    def __unicode__(self):
+        return "Photo for " + self.story
+
+
+class GraphicRequest(ArtRequest):
+    instructions = models.TextField(blank=True)
+    external_link = models.URLField(blank=True)
+
+    def __unicode__(self):
+        return "Graphic for " + self.story
+
+
+class IllustrationRequest(ArtRequest):
+    instructions = models.TextField(blank=True)
+    external_link = models.URLField(blank=True)
+
+    def __unicode__(self):
+        return "Graphic for " + self.story
+
+
+class InternalComment(models.Model):
+    """An internal (not public facing) comment.
+
+    Can be used to inquire about an aspect of a piece of content.
     """
 
     user = models.ForeignKey(User)
     time_posted = models.DateTimeField(auto_now_add=True)
-    story = models.ForeignKey('Story')
     text = models.TextField()
 
+    class Meta:
+        abstract = True
+
     def __unicode__(self):
-        return "%s on %s at %s" % (self.user, self.article, self.time_posted)
+        return "%s at %s" % (self.user, self.time_posted)
+
+
+class StoryComment(InternalComment):
+    story = models.ForeignKey('Story')
+
+    def __unicode__(self):
+        return "%s on %s at %s" % (self.user, self.story, self.time_posted)
+
+
+class PhotoRequestComment(InternalComment):
+    request = models.ForeignKey('PhotoRequest')
+
+    def __unicode__(self):
+        return "%s on %s at %s" % (self.user, self.request, self.time_posted)
+
+
+class GraphicRequestComment(InternalComment):
+    request = models.ForeignKey('GraphicRequest')
+
+    def __unicode__(self):
+        return "%s on %s at %s" % (self.user, self.request, self.time_posted)
+
+
+class IllustrationRequestComment(InternalComment):
+    request = models.ForeignKey('IllustrationRequest')
+
+    def __unicode__(self):
+        return "%s on %s at %s" % (self.user, self.request, self.time_posted)
 
 
 class CardSize(models.Model):
