@@ -100,7 +100,7 @@ class Story(models.Model):
 
     # organization
     position = models.PositiveIntegerField(unique=True, db_index=True)
-    categories = models.ManyToManyField('Category', blank=True)
+    sections = models.ManyToManyField('Section', blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
     series = models.BooleanField(default=False)
 
@@ -297,10 +297,10 @@ class CardSize(models.Model):
         return "%dx%d" % (self.width, self.height)
 
 
-class Category(models.Model):
+class Section(models.Model):
     """A distinct, recurring classification for a group of Stories.
 
-    It is recommended that Categories bear resemblance to internal departments
+    It is recommended that Sections bear resemblance to internal departments
     and/or beats which regularly create Stories.
     """
 
@@ -308,48 +308,47 @@ class Category(models.Model):
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
     description = models.CharField(max_length=128, blank=True)
-    default_card = models.ImageField(upload_to='news/category/default_card/')
+    default_card = models.ImageField(upload_to='news/section/default_card/')
     default_card_focus = models.CharField(max_length=1,
                                           choices=IMAGE_FOCUS_CHOICES,
                                           default='c')
     twitter = models.CharField(max_length=15, blank=True)
     facebook = models.CharField(max_length=32, blank=True)
-    profile_image = models.ImageField(upload_to='news/category/profile/',
+    profile_image = models.ImageField(upload_to='news/section/profile/',
                                       null=True, blank=True)
     position = models.PositiveIntegerField()
 
     class Meta:
-        verbose_name_plural = "Categories"
         ordering = ['-position']
 
     def get_path(self):
         path_components = []
-        category = self
-        while category is not None:
-            path_components.append(category.slug)
-            category = category.parent
+        section = self
+        while section is not None:
+            path_components.append(section.slug)
+            section = section.parent
         return "/" + "/".join(path_components[::-1]) + "/"
 
     def get_top_level_parent(self):
-        """Get the highest category in the hierarchy under which this category
-        resides. If the category has no parent, return self.
+        """Get the highest section in the hierarchy under which this section
+        resides. If the section has no parent, return self.
         """
 
-        category = self
-        while category.parent is not None:
-            category = category.parent
-        return category
+        section = self
+        while section.parent is not None:
+            section = section.parent
+        return section
 
     def hierarchy_level(self):
-        """Returns the number of levels deep the category is nested, where zero
+        """Returns the number of levels deep the section is nested, where zero
         is the top level.
         """
 
         level = 0
-        category = self
-        while category.parent is not None:
+        section = self
+        while section.parent is not None:
             level += 1
-            category = category.parent
+            section = section.parent
         return level
 
     def __unicode__(self):
@@ -361,7 +360,7 @@ class Tag(models.Model):
 
     Tags may be used for groups of stories for a one-time event or for
     recurring coverage around a theme which is not prominent enough to warrant
-    a Category.
+    a Section.
     """
 
     name = models.CharField(max_length=32, unique=True)
