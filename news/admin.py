@@ -4,13 +4,13 @@ from . import models
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'organization', 'email', 
+    list_display = ['first_name', 'last_name', 'organization', 'email',
                     'twitter', 'user']
 
 admin.site.register(models.Author, AuthorAdmin)
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class StoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'url_slug': ('title',)}
     readonly_fields = ('created', 'last_updated', 'position')
     list_display = ['assignment_slug', 'title', 'publish_time', 'status']
@@ -27,19 +27,19 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ('Organization', {
             'fields': (
-                ('category', 'position'), 
+                ('section', 'position'),
                 ('tag', 'series'),
             )
         }),
         ('Card', {
             'fields': (
-                ('card', 'card_size', 'card_crop', 'feature_card_image'), 
+                ('card', 'card_size', 'card_crop', 'feature_card_image'),
             )
         }),
         ('Dates and times', {
             'fields': (
-                ('publish_time', 'breaking_duration'), 
-                ('created', 'last_updated'), 
+                ('publish_time', 'breaking_duration'),
+                ('created', 'last_updated'),
             )
         }),
         ('Linked media', {
@@ -50,13 +50,13 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
     )
 
-admin.site.register(models.Article, ArticleAdmin)
+admin.site.register(models.Story, StoryAdmin)
 
 
-class InternalArticleCommentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'article', 'time_posted']
+class StoryCommentAdmin(admin.ModelAdmin):
+    list_display = ['user', 'story', 'time_posted']
 
-admin.site.register(models.InternalArticleComment, InternalArticleCommentAdmin)
+admin.site.register(models.StoryComment, StoryCommentAdmin)
 
 
 class CardSizeAdmin(admin.ModelAdmin):
@@ -65,11 +65,11 @@ class CardSizeAdmin(admin.ModelAdmin):
 admin.site.register(models.CardSize, CardSizeAdmin)
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class SectionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ['name', 'parent', 'position']
 
-admin.site.register(models.Category, CategoryAdmin)
+admin.site.register(models.Section, SectionAdmin)
 
 
 class TagAdmin(admin.ModelAdmin):
