@@ -1,8 +1,0 @@
-{% load thumbnail %}
-
-<figure>
-    <a class="popup image" href="{{ image.image.url }}" title="{{ image.caption }}">
-        <img src="{% thumbnail image.image "960" %}"/>
-    </a>
-    <figcaption>{{ image.caption }}</figcaption>
-</figure>
