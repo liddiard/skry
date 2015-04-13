@@ -1,13 +1,13 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from rest_framework import routers
 
-from news import api
+from news.api import auth, core
 
 
 router = routers.DefaultRouter()
-router.register(r'users', api.auth.UserViewSet)
-router.register(r'groups', api.auth.GroupViewSet)
-router.register(r'stories', api.core.StoryViewSet)
+router.register(r'users', auth.UserViewSet)
+router.register(r'groups', auth.GroupViewSet)
+router.register(r'stories', core.StoryViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
