@@ -107,24 +107,12 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
-}
-
-IMAGE_DIMENSIONS = {
-    'full': {
-        'width': 640,
-    },
-    'float': {
-        'width': 320,
-    },
-    'card_1': {
-        'width': 300,
-        'height': 300
-    },
-    'card_2': {
-        'width': 610,
-        'height': 610
-    },
+    ],
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    )
 }
 
 # default organization for authors and possibly other things
