@@ -43,9 +43,9 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'news',
-    'prime',
-    'music',
-    'research'
+    # 'prime',
+    # 'music',
+    # 'research'
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
