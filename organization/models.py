@@ -15,9 +15,9 @@ class Section(models.Model):
     slug = models.SlugField(max_length=32, unique=True)
     description = models.CharField(max_length=128, blank=True)
     default_card = models.ImageField(upload_to='news/section/default_card/')
-    default_card_focus = models.CharField(max_length=1,
+    default_card_focus = models.CharField(max_length=2,
                                           choices=settings.IMAGE_FOCUS_CHOICES,
-                                          default='c')
+                                          default='cc')
     twitter = models.CharField(max_length=15, blank=True)
     facebook = models.CharField(max_length=32, blank=True)
     profile_image = models.ImageField(upload_to='news/section/profile/',
