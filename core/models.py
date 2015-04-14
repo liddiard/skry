@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from django.utils.timezone import now as django_now
 
 
@@ -82,6 +83,7 @@ class Story(models.Model):
     position = models.PositiveIntegerField(unique=True, db_index=True)
     sections = models.ManyToManyField('organization.Section', blank=True)
     tags = models.ManyToManyField('organization.Tag', blank=True)
+    sites = models.ManyToManyField(Site)
 
     # card
     card = models.ForeignKey('attachment.Image', null=True, blank=True,
@@ -180,6 +182,7 @@ class Page(models.Model):
     alternate_template = models.ForeignKey('display.Template', null=True,
                                            blank=True)
     body = models.TextField(blank=True)
+    site = models.ForeignKey(Site)
 
     def __unicode__(self):
         return self.title

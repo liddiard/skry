@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 
 class Section(models.Model):
@@ -22,6 +23,7 @@ class Section(models.Model):
     profile_image = models.ImageField(upload_to='news/section/profile/',
                                       null=True, blank=True)
     position = models.PositiveIntegerField()
+    sites = models.ManyToManyField(Site)
 
     class Meta:
         ordering = ['-position']
@@ -72,6 +74,7 @@ class Tag(models.Model):
     slug = models.SlugField(max_length=32, unique=True)
     description = models.TextField(blank=True)
     series = models.BooleanField(default=False)
+    sites = models.ManyToManyField(Site)
 
     def __unicode__(self):
         return self.name

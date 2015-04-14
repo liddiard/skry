@@ -33,7 +33,8 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize'
+    'django.contrib.humanize',
+    'django.contrib.sites'
 )
 
 THIRD_PARTY_APPS = (
@@ -103,6 +104,10 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211'
     }
 }
+
+SITE_ID = 1 # required for Django Sites Framework, but not used exactly per
+            # the Django docs' description. This id should represent the id of
+            # your default/primary site.
 
 # Django Rest Framework
 REST_FRAMEWORK = {
