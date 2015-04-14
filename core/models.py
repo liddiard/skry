@@ -15,7 +15,7 @@ class Author(models.Model):
     """A distinct person or group of people which creates a piece of
     content."""
 
-    user = models.ForeignKey(User, null=True, blank=True)
+    user = models.OneToOneField(User, null=True, blank=True)
     first_name = models.CharField(max_length=32, blank=True)
     last_name = models.CharField(max_length=32, blank=True)
     organization = models.CharField(max_length=32,
