@@ -71,6 +71,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
     description = models.TextField(blank=True)
+    series = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name

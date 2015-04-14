@@ -5,8 +5,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.timezone import now as django_now
 
-from . import constants
-
 
 class UserProfile(models.Model):
     pass
@@ -64,10 +62,10 @@ class Story(models.Model):
 
     # primary content
     assignment_slug = models.CharField(max_length=64)
-    status = models.ForeignKey('core.Status')
+    status = models.ForeignKey('Status')
     title = models.CharField(max_length=128, blank=True)
     url_slug = models.SlugField(max_length=128, blank=True)
-    author = models.ManyToManyField('core.Author', related_name='news_story',
+    author = models.ManyToManyField('Author', related_name='news_story',
                                     blank=True)
     teaser = models.CharField(max_length=128, blank=True)
     subhead = models.CharField(max_length=128, blank=True)
@@ -84,14 +82,13 @@ class Story(models.Model):
     position = models.PositiveIntegerField(unique=True, db_index=True)
     sections = models.ManyToManyField('organization.Section', blank=True)
     tags = models.ManyToManyField('organization.Tag', blank=True)
-    series = models.BooleanField(default=False)
 
     # card
     card = models.ForeignKey('attachment.Image', null=True, blank=True,
                              related_name='news_article_card')
     card_size = models.ForeignKey('display.CardSize')
     card_focus = models.CharField(max_length=2,
-                                  choices=constants.IMAGE_FOCUS_CHOICES,
+                                  choices=settings.IMAGE_FOCUS_CHOICES,
                                   default='cc')
     feature_card_image = models.BooleanField(default=True)
 
@@ -180,7 +177,8 @@ class Page(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
     title = models.CharField(max_length=128, blank=True)
     slug = models.SlugField(max_length=128)
-    alternate_template = models.ForeignKey('Template', null=True, blank=True)
+    alternate_template = models.ForeignKey('display.Template', null=True,
+                                           blank=True)
     body = models.TextField(blank=True)
 
     def __unicode__(self):
