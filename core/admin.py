@@ -34,8 +34,7 @@ class StoryAdmin(admin.ModelAdmin):
         }),
         ('Organization', {
             'fields': (
-                ('sections', 'position'),
-                ('tags', 'series'),
+                ('sections', 'tags', 'position'),
             )
         }),
         ('Card', {
