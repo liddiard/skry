@@ -49,6 +49,7 @@ class Status(models.Model):
 
     class Meta:
         verbose_name_plural = "Statuses"
+        ordering = ['position']
 
     def __unicode__(self):
         return self.name
