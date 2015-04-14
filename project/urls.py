@@ -16,6 +16,7 @@ router.register(r'groups', access_views.GroupViewSet)
 router.register(r'authors', core_views.AuthorViewSet)
 router.register(r'statuses', core_views.StatusViewSet)
 router.register(r'stories', core_views.StoryViewSet)
+router.register(r'pages', core_views.PageViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
