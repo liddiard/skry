@@ -164,11 +164,6 @@ class Story(models.Model):
         return self.assignment_slug
 
 
-def get_published_articles(): # TODO: cache
-    return (Story.objects.filter(status=7)
-            .filter(publish_time__lt=django_now()))
-
-
 class Page(models.Model):
     """A single web page which is completely unrelated to a Story.
 
