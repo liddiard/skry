@@ -2,18 +2,24 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
 
-from access import api as access_api
-from core import api as core_api
+from access import views as access_views
+from core import views as core_views
 
 
 router = routers.DefaultRouter()
-router.register(r'users', access_api.UserViewSet)
-router.register(r'groups', access_api.GroupViewSet)
-router.register(r'stories', core_api.StoryViewSet)
+
+# access
+router.register(r'users', access_views.UserViewSet)
+router.register(r'groups', access_views.GroupViewSet)
+
+# core
+router.register(r'authors', core_views.AuthorViewSet)
+router.register(r'statuses', core_views.StatusViewSet)
+router.register(r'stories', core_views.StoryViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
-    url(r'^', include(router.urls)) # main api
+    url(r'^v1/', include(router.urls, namespace='v1')) # main api
 ]
