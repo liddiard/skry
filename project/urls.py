@@ -1,20 +1,17 @@
-from django.conf.urls import patterns, include, url
-from django.conf import settings
-from django.conf.urls.static import static
-from django.contrib import admin
+from django.conf.urls import url, include
+from rest_framework import routers
+
+from auth import api as auth_api
+from core import api as core_api
 
 
-urlpatterns = patterns('',
+router = routers.DefaultRouter()
+router.register(r'users', auth_api.UserViewSet)
+router.register(r'groups', auth_api.GroupViewSet)
+router.register(r'stories', core_api.StoryViewSet)
 
-    # admin
-    url(r'^admin/', include(admin.site.urls)),
-
-    # other apps
-    url(r'^prime/', include('prime.urls')),
-    url(r'^research/', include('research.urls')),
-    url(r'^music/', include('music.urls')),
-
-    # news api
-    url(r'^', include('news.urls')),
-
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = [
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework'))
+]

@@ -42,22 +42,16 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    'news',
-    # 'prime',
-    # 'music',
-    # 'research'
+    'art_request',
+    'attachment',
+    'auth',
+    'core',
+    'display',
+    'internal_comment',
+    'organization'
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
 
 ROOT_URLCONF = 'project.urls'
 
@@ -118,3 +112,17 @@ REST_FRAMEWORK = {
 # default organization for authors and possibly other things
 # TODO: make this description actually descriptive
 DEFAULT_ORGANIZATION = "Daily Bruin"
+
+# Primary focal region of an image. Used when an image need to be cropped to
+# fit available space.
+IMAGE_FOCUS_CHOICES = (
+    ('cc', 'center center'),
+    ('cl', 'center left'),
+    ('cr', 'center right'),
+    ('tl', 'top left'),
+    ('tc', 'top center'),
+    ('tr', 'top right'),
+    ('bl', 'bottom left'),
+    ('bc', 'bottom center'),
+    ('br', 'bottom right'),
+)
