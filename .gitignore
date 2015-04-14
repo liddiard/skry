@@ -5,3 +5,4 @@
 *.sass-cache/
 media/
 project/settings/secret.py
+migrations/
