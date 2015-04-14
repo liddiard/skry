@@ -42,9 +42,9 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    'access',
     'art_request',
     'attachment',
-    'auth',
     'core',
     'display',
     'internal_comment',
