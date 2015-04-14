@@ -65,7 +65,7 @@ class Tag(models.Model):
 
     Tags may be used for groups of stories for a one-time event or for
     recurring coverage around a theme which is not prominent enough to warrant
-    a Section.
+    its own Section.
     """
 
     name = models.CharField(max_length=32, unique=True)
