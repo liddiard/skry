@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from sorl.thumbnail import get_thumbnail
 
 
@@ -18,6 +20,19 @@ class Image(Media):
     image = models.ImageField(upload_to='news/image/%Y/%m/%d/original/')
     credit = models.ManyToManyField('core.Author', related_name='news_image',
                                     blank=True)
+
+    # ForeignKey to multiple requests models
+    # cf. http://stackoverflow.com/a/6336509
+    request_models = models.Q(app_label='requests', model='PhotoRequest') | \
+                     models.Q(app_label='requests',
+                              model='GraphicRequest') | \
+                     models.Q(app_label='requests',
+                              model='IllustrationRequest')
+    request_type = models.ForeignKey(ContentType,
+                                     limit_choices_to=request_models,
+                                     null=True, blank=True)
+    request_id = models.PositiveIntegerField(null=True, blank=True)
+    request_object = GenericForeignKey('request_type', 'request_id')
 
     def get_image_at_resolution(self, resolution):
         return get_thumbnail(self.image, resolution).url

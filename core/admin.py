@@ -11,7 +11,7 @@ admin.site.register(models.Author, AuthorAdmin)
 
 
 class StatusAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['position', 'name']
 
 
 admin.site.register(models.Status, StatusAdmin)

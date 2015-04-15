@@ -44,11 +44,11 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'access',
-    'art_request',
-    'attachment',
+    'requests',
+    'attachments',
     'core',
     'display',
-    'internal_comment',
+    'comments',
     'organization'
 )
 

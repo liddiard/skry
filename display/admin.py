@@ -9,6 +9,11 @@ class CardSizeAdmin(admin.ModelAdmin):
 admin.site.register(models.CardSize, CardSizeAdmin)
 
 
+class IncludeCSSAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(models.IncludeCSS, IncludeCSSAdmin)
+
 
 class TemplateAdmin(admin.ModelAdmin):
     pass

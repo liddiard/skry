@@ -87,7 +87,7 @@ class Story(models.Model):
     sites = models.ManyToManyField(Site)
 
     # card
-    card = models.ForeignKey('attachment.Image', null=True, blank=True,
+    card = models.ForeignKey('attachments.Image', null=True, blank=True,
                              related_name='news_article_card')
     card_size = models.ForeignKey('display.CardSize')
     card_focus = models.CharField(max_length=2,
@@ -102,15 +102,15 @@ class Story(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
 
     # linked media
-    featured_image = models.ForeignKey('attachment.Image', null=True,
+    featured_image = models.ForeignKey('attachments.Image', null=True,
                                        blank=True,
                                     related_name='news_article_featured_image')
-    featured_video = models.ForeignKey('attachment.Video', null=True,
+    featured_video = models.ForeignKey('attachments.Video', null=True,
                                        blank=True)
-    featured_audio = models.ForeignKey('attachment.Audio', null=True,
+    featured_audio = models.ForeignKey('attachments.Audio', null=True,
                                        blank=True)
-    review = models.ForeignKey('attachment.Review', null=True, blank=True)
-    poll = models.ForeignKey('attachment.Poll', null=True, blank=True)
+    review = models.ForeignKey('attachments.Review', null=True, blank=True)
+    poll = models.ForeignKey('attachments.Poll', null=True, blank=True)
     # social_media_post = models.OneToOneField('scheduler.SMPost', null=True,
     #                                          blank=True)
 
