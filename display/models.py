@@ -25,7 +25,7 @@ class Stylesheet(models.Model):
     """
 
     name = models.CharField(max_length=32, unique=True)
-    file = models.FileField(upload_to='stylesheets')
+    file = models.FileField(upload_to='display/stylesheet')
 
     def __unicode__(self):
         return self.name
@@ -39,7 +39,7 @@ class Script(models.Model):
     """
 
     name = models.CharField(max_length=32, unique=True)
-    file = models.FileField(upload_to='scripts')
+    file = models.FileField(upload_to='display/script')
 
     def __unicode__(self):
         return self.name

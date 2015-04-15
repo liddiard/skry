@@ -25,7 +25,7 @@ class Author(models.Model):
     email = models.EmailField(blank=True)
     twitter = models.CharField(max_length=15, blank=True)
                                # current max handle length
-    mug = models.ImageField(upload_to='news/mug/%Y', null=True, blank=True)
+    mug = models.ImageField(upload_to='core/author/mug/%Y', blank=True)
     bio = models.TextField(blank=True)
 
     def full_name(self):

@@ -14,14 +14,15 @@ class Section(models.Model):
     name = models.CharField(max_length=32, unique=True)
     slug = models.SlugField(max_length=32, unique=True)
     description = models.CharField(max_length=128, blank=True)
-    default_card = models.ImageField(upload_to='news/section/default_card/')
+    default_card = models.ImageField(upload_to='organization/section/'
+                                     'default_card')
     default_card_focus = models.CharField(max_length=2,
                                           choices=settings.IMAGE_FOCUS_CHOICES,
                                           default='cc')
     twitter = models.CharField(max_length=15, blank=True)
     facebook = models.CharField(max_length=32, blank=True)
-    profile_image = models.ImageField(upload_to='news/section/profile/',
-                                      null=True, blank=True)
+    profile_image = models.ImageField(upload_to='organization/section/'
+                                      'profile_image', blank=True)
     position = models.PositiveIntegerField()
     sites = models.ManyToManyField(Site)
 

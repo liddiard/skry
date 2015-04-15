@@ -17,7 +17,7 @@ class Media(models.Model):
 class Image(Media):
     """An image of any type, including photos, illustrations, and graphics."""
 
-    image = models.ImageField(upload_to='news/image/%Y/%m/%d/original/')
+    file = models.ImageField(upload_to='attachments/image/%Y/%m/%d')
     credit = models.ManyToManyField('core.Author', related_name='news_image',
                                     blank=True)
 
@@ -60,8 +60,7 @@ class Audio(Media):
     """A self-hosted audio piece with associated metadata."""
 
     title = models.CharField(max_length=128)
-    mp3 = models.FileField(upload_to='news/audio/%Y/%m/%d/mp3/')
-    ogg = models.FileField(upload_to='news/audio/%Y/%m/%d/ogg/')
+    file = models.FileField(upload_to='attachments/audio/%Y/%m/%d')
     credit = models.ManyToManyField('core.Author', related_name='news_audio',
                                     blank=True)
 
