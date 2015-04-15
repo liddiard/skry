@@ -16,6 +16,7 @@ class StatusSerializer(serializers.ModelSerializer):
 class StorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Story
+        depth = 1
 
 
 class PageSerializer(serializers.ModelSerializer):
