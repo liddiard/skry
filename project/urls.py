@@ -37,8 +37,8 @@ router.register(r'illustration_requests',
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^api-auth/', include('rest_framework.urls',
+    url(r'^auth/token/', include('rest_auth.urls')),
+    url(r'^auth/web/', include('rest_framework.urls',
                                namespace='rest_framework')),
     url(r'^v1/', include(router.urls, namespace='v1')) # main api
 ]
