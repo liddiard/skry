@@ -19,7 +19,7 @@ class ArtRequest(models.Model):
 class PhotoRequest(ArtRequest):
     time = models.DateTimeField(null=True, blank=True)
     location = models.CharField(max_length=64, blank=True)
-    subject_info = models.CharField(max_length=64)
+    subject_info = models.CharField(max_length=64, blank=True)
 
     def __unicode__(self):
         return "Photo for " + self.story
