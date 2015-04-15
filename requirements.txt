@@ -10,16 +10,13 @@ markdown2==2.1.0
 # PostgreSQL database driver for Python. Requires postgresql-server to be installed on the system.
 psycopg2==2.5.1
 
-# Python timezone library.
-pytz==2014.3
-
 # WSGI (Web Server Gateway Interface) utilities.
 wsgiref==0.1.2
 
 # Super-fast, widely used memory caching framework. Requires memcached to be installed on the system.
 python-memcached==1.53
 
-# Thumbnail library. Requires Pillow and memcached (for current implementation). 
+# Thumbnail library. Requires Pillow and memcached (for current implementation).
 sorl-thumbnail==12.2
 
 # Framework for building RESTful APIs.
