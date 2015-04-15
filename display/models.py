@@ -17,7 +17,7 @@ class CardSize(models.Model):
         return "%dx%d" % (self.width, self.height)
 
 
-class IncludeCSS(models.Model):
+class Stylesheet(models.Model):
     """A CSS file, which may be a library, to include in a Template.
 
     A common use case is to support Templates that use either Twitter
