@@ -20,13 +20,26 @@ class CardSize(models.Model):
 class Stylesheet(models.Model):
     """A CSS file, which may be a library, to include in a Template.
 
-    A common use case is to support Templates that use either Twitter
-    Bootstrap or Zurb Foundation, or to include another common stylesheet
-    shared among a group of pages.
+    A common use case is to support Templates that use libraries like Twitter
+    Bootstrap or Zurb Foundation.
     """
 
     name = models.CharField(max_length=32, unique=True)
-    filename = models.CharField(max_length=64, unique=True)
+    file = models.FileField(upload_to='stylesheets')
+
+    def __unicode__(self):
+        return self.name
+
+
+class Script(models.Model):
+    """A JavaScript file, which may be a library, to include in a Template.
+
+    A common use case is to support Templates that use libraries like
+    AngularJS, React, or jQuery plugins.
+    """
+
+    name = models.CharField(max_length=32, unique=True)
+    file = models.FileField(upload_to='scripts')
 
     def __unicode__(self):
         return self.name
@@ -37,7 +50,8 @@ class Template(models.Model):
 
     filename = models.CharField(max_length=64, unique=True)
     verbose_name = models.CharField(max_length=64, unique=True)
-    include_css = models.ManyToManyField('IncludeCSS', blank=True)
+    stylesheets = models.ManyToManyField('Stylesheet', blank=True)
+    scripts = models.ManyToManyField('Script', blank=True)
 
     def __unicode__(self):
         return "%s (%s)" % (self.verbose_name, self.filename)
