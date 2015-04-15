@@ -8,9 +8,14 @@ class CardSizeSerializer(serializers.ModelSerializer):
         model = models.CardSize
 
 
-class IncludeCSSSerializer(serializers.ModelSerializer):
+class StylesheetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.IncludeCSS
+        model = models.Stylesheet
+
+
+class ScriptSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Script
 
 
 class TemplateSerializer(serializers.ModelSerializer):
