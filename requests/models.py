@@ -7,6 +7,7 @@ class ArtRequest(models.Model):
     story = models.ForeignKey('core.Story')
     assignees = models.ManyToManyField('core.Author', blank=True)
     images = models.ManyToManyField('attachments.Image', blank=True)
+    instructions = models.TextField(blank=True)
 
     class Meta:
         abstract = True
@@ -16,15 +17,15 @@ class ArtRequest(models.Model):
 
 
 class PhotoRequest(ArtRequest):
-    location = models.TextField(blank=True)
     time = models.DateTimeField(null=True, blank=True)
+    location = models.CharField(max_length=64, blank=True)
+    subject_info = models.CharField(max_length=64)
 
     def __unicode__(self):
         return "Photo for " + self.story
 
 
 class GraphicRequest(ArtRequest):
-    instructions = models.TextField(blank=True)
     external_link = models.URLField(blank=True)
 
     def __unicode__(self):
@@ -32,7 +33,6 @@ class GraphicRequest(ArtRequest):
 
 
 class IllustrationRequest(ArtRequest):
-    instructions = models.TextField(blank=True)
     external_link = models.URLField(blank=True)
 
     def __unicode__(self):

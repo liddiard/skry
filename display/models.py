@@ -24,7 +24,7 @@ class Stylesheet(models.Model):
     Bootstrap or Zurb Foundation.
     """
 
-    name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=64, unique=True)
     file = models.FileField(upload_to='display/stylesheet')
 
     def __unicode__(self):
@@ -38,7 +38,7 @@ class Script(models.Model):
     AngularJS, React, or jQuery plugins.
     """
 
-    name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=64, unique=True)
     file = models.FileField(upload_to='display/script')
 
     def __unicode__(self):
@@ -48,8 +48,8 @@ class Script(models.Model):
 class Template(models.Model):
     """A reusable layout for Pages."""
 
-    filename = models.CharField(max_length=64, unique=True)
-    verbose_name = models.CharField(max_length=64, unique=True)
+    name = models.CharField(max_length=64, unique=True)
+    file = models.FileField(upload_to='display/template')
     stylesheets = models.ManyToManyField('Stylesheet', blank=True)
     scripts = models.ManyToManyField('Script', blank=True)
 
