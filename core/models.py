@@ -23,7 +23,7 @@ class Author(models.Model):
                                     blank=True)
     title = models.CharField(max_length=32, blank=True)
     email = models.EmailField(blank=True)
-    phone = models.CharField(max_length=12)
+    phone = models.CharField(max_length=12, blank=True)
     twitter = models.CharField(max_length=15, blank=True)
                                # current max handle length
     mug = models.ImageField(upload_to='core/author/mug/%Y', blank=True)
