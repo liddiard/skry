@@ -16,8 +16,14 @@ wsgiref==0.1.2
 # Super-fast, widely used memory caching framework. Requires memcached to be installed on the system.
 python-memcached==1.53
 
-# Thumbnail library. Requires Pillow and memcached (for current implementation).
+# Thumbnail library. Requires Pillow and memcached for current implementation.
 sorl-thumbnail==12.2
 
 # Framework for building RESTful APIs.
 djangorestframework==3.1.1
+
+# Pluggable token authentication for Django Rest Framework. Requires six.
+django-rest-auth==0.3.4
+
+# Python 2 and 3 compatibility library.
+six==1.9.0
