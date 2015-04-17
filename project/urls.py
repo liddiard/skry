@@ -6,6 +6,7 @@ from access import views as access_views
 from attachments import views as attachments_views
 from comments import views as comments_views
 from core import views as core_views
+from display import views as display_views
 from organization import views as organization_views
 from requests import views as requests_views
 
@@ -20,6 +21,7 @@ router.register(r'groups', access_views.GroupViewSet)
 router.register(r'images', attachments_views.ImageViewSet)
 router.register(r'videos', attachments_views.VideoViewSet)
 router.register(r'audio', attachments_views.AudioViewSet)
+router.register(r'reviews', attachments_views.ReviewViewSet)
 router.register(r'polls', attachments_views.PollViewSet)
 router.register(r'poll_choices', attachments_views.PollChoiceViewSet)
 
@@ -31,6 +33,12 @@ router.register(r'authors', core_views.AuthorViewSet)
 router.register(r'statuses', core_views.StatusViewSet)
 router.register(r'stories', core_views.StoryViewSet)
 router.register(r'pages', core_views.PageViewSet)
+
+# display
+router.register(r'card_sizes', display_views.CardSizeViewSet)
+router.register(r'stylesheets', display_views.StylesheetViewSet)
+router.register(r'scripts', display_views.ScriptViewSet)
+router.register(r'templates', display_views.TemplateViewSet)
 
 # organization
 router.register(r'sections', organization_views.SectionViewSet)
