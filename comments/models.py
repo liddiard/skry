@@ -16,13 +16,13 @@ class InternalComment(models.Model):
 
     # ForeignKey to multiple commentable models
     # cf. http://stackoverflow.com/a/6336509
-    commentable_models = models.Q(app_label='core', model='Story') | \
+    commentable_models = models.Q(app_label='core', model='story') | \
                          models.Q(app_label='requests',
-                                  model='PhotoRequest') | \
+                                  model='photorequest') | \
                          models.Q(app_label='requests',
-                                  model='GraphicRequest') | \
+                                  model='graphicrequest') | \
                          models.Q(app_label='requests',
-                                  model='IllustrationRequest')
+                                  model='illustrationrequest')
     content_type = models.ForeignKey(ContentType,
                                      limit_choices_to=commentable_models)
     object_id = models.PositiveIntegerField()

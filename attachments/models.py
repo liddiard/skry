@@ -23,11 +23,11 @@ class Image(Media):
 
     # ForeignKey to multiple requests models
     # cf. http://stackoverflow.com/a/6336509
-    request_models = models.Q(app_label='requests', model='PhotoRequest') | \
+    request_models = models.Q(app_label='requests', model='photorequest') | \
                      models.Q(app_label='requests',
-                              model='GraphicRequest') | \
+                              model='graphicrequest') | \
                      models.Q(app_label='requests',
-                              model='IllustrationRequest')
+                              model='illustrationrequest')
     request_type = models.ForeignKey(ContentType,
                                      limit_choices_to=request_models,
                                      null=True, blank=True)
@@ -41,7 +41,7 @@ class Image(Media):
         return float(self.image.width) / self.image.height
 
     def __unicode__(self):
-        return self.image.name
+        return self.file.name
 
 
 class Video(Media):
