@@ -100,7 +100,7 @@ class PollChoice(models.Model):
     """A selection option for a Poll."""
 
     question = models.ForeignKey('Poll')
-    choice = models.CharField(max_length=128)
+    text = models.CharField(max_length=128)
     votes = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):

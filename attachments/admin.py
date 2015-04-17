@@ -52,7 +52,7 @@ admin.site.register(models.Poll, PollAdmin)
 
 
 class PollChoiceAdmin(admin.ModelAdmin):
-    list_display = ['choice', 'votes', 'question']
+    list_display = ['text', 'votes', 'question']
 
 
 admin.site.register(models.PollChoice, PollChoiceAdmin)
