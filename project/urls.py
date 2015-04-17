@@ -3,6 +3,7 @@ from django.contrib import admin
 from rest_framework import routers
 
 from access import views as access_views
+from attachments import views as attachments_views
 from comments import views as comments_views
 from core import views as core_views
 from organization import views as organization_views
@@ -14,6 +15,13 @@ router = routers.DefaultRouter()
 # access
 router.register(r'users', access_views.UserViewSet)
 router.register(r'groups', access_views.GroupViewSet)
+
+# attachments
+router.register(r'images', attachments_views.ImageViewSet)
+router.register(r'videos', attachments_views.VideoViewSet)
+router.register(r'audio', attachments_views.AudioViewSet)
+router.register(r'polls', attachments_views.PollViewSet)
+router.register(r'poll_choices', attachments_views.PollChoiceViewSet)
 
 # comments
 router.register(r'internal_comments', comments_views.InternalCommentViewSet)
