@@ -13,7 +13,7 @@ class ArtRequest(models.Model):
         abstract = True
 
     def __unicode__(self):
-        return "Art request for " + self.story
+        return "art for " + str(self.story)
 
 
 class PhotoRequest(ArtRequest):
@@ -22,18 +22,18 @@ class PhotoRequest(ArtRequest):
     subject_info = models.CharField(max_length=64, blank=True)
 
     def __unicode__(self):
-        return "Photo for " + self.story
+        return "photo for " + str(self.story)
 
 
 class GraphicRequest(ArtRequest):
     external_link = models.URLField(blank=True)
 
     def __unicode__(self):
-        return "Graphic for " + self.story
+        return "graphic for " + str(self.story)
 
 
 class IllustrationRequest(ArtRequest):
     external_link = models.URLField(blank=True)
 
     def __unicode__(self):
-        return "Graphic for " + self.story
+        return "illustration for " + str(self.story)
