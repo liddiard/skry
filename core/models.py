@@ -68,8 +68,8 @@ class Story(models.Model):
     status = models.ForeignKey('Status')
     title = models.CharField(max_length=128, blank=True)
     url_slug = models.SlugField(max_length=128, blank=True)
-    author = models.ManyToManyField('Author', related_name='news_story',
-                                    blank=True)
+    authors = models.ManyToManyField('Author', related_name='news_story',
+                                     blank=True)
     teaser = models.CharField(max_length=128, blank=True)
     subhead = models.CharField(max_length=128, blank=True)
     body = models.TextField(blank=True)
