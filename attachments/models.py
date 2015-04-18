@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.validators import MaxValueValidator
 from sorl.thumbnail import get_thumbnail
 
 
@@ -80,7 +81,9 @@ class Review(models.Model):
     item = models.CharField(max_length=64)
     line_1 = models.CharField(max_length=128, blank=True)
     line_2 = models.CharField(max_length=128, blank=True)
-    rating = models.PositiveIntegerField(null=True, blank=True) # TODO: limit to range
+    rating = models.PositiveSmallIntegerField(validators=
+                                              [MaxValueValidator(10)],
+                                              null=True, blank=True)
 
     def __unicode__(self):
         return self.item
