@@ -19,5 +19,8 @@ class ScriptSerializer(serializers.ModelSerializer):
 
 
 class TemplateSerializer(serializers.ModelSerializer):
+    stylesheets = StylesheetSerializer(many=True)
+    scripts = ScriptSerializer(many=True)
+
     class Meta:
         model = models.Template

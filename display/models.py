@@ -54,4 +54,4 @@ class Template(models.Model):
     scripts = models.ManyToManyField('Script', blank=True)
 
     def __unicode__(self):
-        return "%s (%s)" % (self.verbose_name, self.file)
+        return self.name

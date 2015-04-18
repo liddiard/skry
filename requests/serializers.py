@@ -1,18 +1,23 @@
 from rest_framework import serializers
 
+from attachments import serializers as attachments_serializers
 from . import models
 
 
-class PhotoRequestSerializer(serializers.ModelSerializer):
+class ArtRequestSerializer(serializers.ModelSerializer):
+    images = attachments_serializers.ImageSerializer(many=True)
+
+
+class PhotoRequestSerializer(ArtRequestSerializer):
     class Meta:
         model = models.PhotoRequest
 
 
-class GraphicRequestSerializer(serializers.ModelSerializer):
+class GraphicRequestSerializer(ArtRequestSerializer):
     class Meta:
         model = models.GraphicRequest
 
 
-class IllustrationRequestSerializer(serializers.ModelSerializer):
+class IllustrationRequestSerializer(ArtRequestSerializer):
     class Meta:
         model = models.PhotoRequest

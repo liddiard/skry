@@ -1,19 +1,24 @@
 from rest_framework import serializers
 
+from core import serializers as core_serializers
 from . import models
 
 
-class ImageSerializer(serializers.ModelSerializer):
+class MediaSerializer(serializers.ModelSerializer):
+    credit = core_serializers.AuthorSerializer(many=True)
+
+
+class ImageSerializer(MediaSerializer):
     class Meta:
         model = models.Image
 
 
-class VideoSerializer(serializers.ModelSerializer):
+class VideoSerializer(MediaSerializer):
     class Meta:
         model = models.Video
 
 
-class AudioSerializer(serializers.ModelSerializer):
+class AudioSerializer(MediaSerializer):
     class Meta:
         model = models.Audio
 

@@ -18,7 +18,7 @@ admin.site.register(models.Image, ImageAdmin)
 class VideoAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('title', 'youtube_id', 'caption')
+            'fields': ('title', 'youtube_id', 'credit', 'caption')
         }),
     )
 
