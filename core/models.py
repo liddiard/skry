@@ -80,6 +80,7 @@ class Story(models.Model):
     summary = models.TextField(blank=True)
     angle = models.TextField(blank=True)
     sources = models.TextField(blank=True)
+    late_run = models.BooleanField(default=False)
 
     # organization
     position = models.PositiveIntegerField(unique=True, db_index=True)
@@ -98,7 +99,7 @@ class Story(models.Model):
 
     # dates and times
     publish_time = models.DateTimeField()
-    breaking_duration = models.PositiveIntegerField(default=0)
+    breaking_duration = models.PositiveSmallIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
 
