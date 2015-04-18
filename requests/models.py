@@ -6,7 +6,6 @@ class ArtRequest(models.Model):
 
     story = models.ForeignKey('core.Story')
     assignees = models.ManyToManyField('core.Author', blank=True)
-    images = models.ManyToManyField('attachments.Image', blank=True)
     instructions = models.TextField(blank=True)
 
     class Meta:
