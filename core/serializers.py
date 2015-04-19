@@ -1,17 +1,10 @@
 from rest_framework import serializers
 
-from access import serializers as access_serializers
 from attachments import serializers as attachments_serializers
+from authors import serializers as authors_serializers
 from display import serializers as display_serializers
 from organization import serializers as organization_serializers
 from . import models
-
-
-class AuthorSerializer(serializers.ModelSerializer):
-    user = access_serializers.UserSerializer()
-
-    class Meta:
-        model = models.Author
 
 
 class StatusSerializer(serializers.ModelSerializer):
@@ -21,7 +14,7 @@ class StatusSerializer(serializers.ModelSerializer):
 
 class StorySerializer(serializers.ModelSerializer):
     status = StatusSerializer()
-    authors = AuthorSerializer(many=True)
+    authors = authors_serializers.AuthorSerializer(many=True)
     alternate_template = display_serializers.TemplateSerializer()
     sections = organization_serializers.SectionSerializer(many=True)
     tags = organization_serializers.TagSerializer(many=True)

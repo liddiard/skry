@@ -46,12 +46,13 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'access',
-    'requests',
     'attachments',
+    'authors',
     'core',
-    'display',
     'comments',
-    'organization'
+    'display',
+    'organization',
+    'requests'
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

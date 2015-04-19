@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -10,7 +9,6 @@ class Migration(migrations.Migration):
     dependencies = [
         ('sites', '0001_initial'),
         ('display', '0001_initial'),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('core', '0001_initial'),
         ('organization', '0001_initial'),
     ]
@@ -50,10 +48,5 @@ class Migration(migrations.Migration):
             model_name='page',
             name='site',
             field=models.ForeignKey(to='sites.Site'),
-        ),
-        migrations.AddField(
-            model_name='author',
-            name='user',
-            field=models.OneToOneField(null=True, blank=True, to=settings.AUTH_USER_MODEL),
         ),
     ]

@@ -19,7 +19,7 @@ class Image(Media):
     """An image of any type, including photos, illustrations, and graphics."""
 
     file = models.ImageField(upload_to='attachments/image/%Y/%m/%d')
-    credit = models.ManyToManyField('core.Author', related_name='news_image',
+    credit = models.ManyToManyField('authors.Author', related_name='news_image',
                                     blank=True)
 
     # ForeignKey to multiple requests models
@@ -50,7 +50,7 @@ class Video(Media):
 
     title = models.CharField(max_length=128)
     youtube_id = models.CharField(max_length=16)
-    credit = models.ManyToManyField('core.Author', related_name='news_video',
+    credit = models.ManyToManyField('authors.Author', related_name='news_video',
                                     blank=True)
 
     def __unicode__(self):
@@ -62,7 +62,7 @@ class Audio(Media):
 
     title = models.CharField(max_length=128)
     file = models.FileField(upload_to='attachments/audio/%Y/%m/%d')
-    credit = models.ManyToManyField('core.Author', related_name='news_audio',
+    credit = models.ManyToManyField('authors.Author', related_name='news_audio',
                                     blank=True)
 
     class Meta:

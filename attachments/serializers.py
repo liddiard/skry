@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from core import serializers as core_serializers
+from authors import serializers as authors_serializers
 from . import models
 
 
 class MediaSerializer(serializers.ModelSerializer):
-    credit = core_serializers.AuthorSerializer(many=True)
+    credit = authors_serializers.AuthorSerializer(many=True)
 
 
 class ImageSerializer(MediaSerializer):

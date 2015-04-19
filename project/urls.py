@@ -4,6 +4,7 @@ from rest_framework import routers
 
 from access import views as access_views
 from attachments import views as attachments_views
+from authors import views as authors_views
 from comments import views as comments_views
 from core import views as core_views
 from display import views as display_views
@@ -25,11 +26,13 @@ router.register(r'reviews', attachments_views.ReviewViewSet)
 router.register(r'polls', attachments_views.PollViewSet)
 router.register(r'poll_choices', attachments_views.PollChoiceViewSet)
 
+# authors
+router.register(r'authors', authors_views.AuthorViewSet)
+
 # comments
 router.register(r'internal_comments', comments_views.InternalCommentViewSet)
 
 # core
-router.register(r'authors', core_views.AuthorViewSet)
 router.register(r'statuses', core_views.StatusViewSet)
 router.register(r'stories', core_views.StoryViewSet)
 router.register(r'pages', core_views.PageViewSet)

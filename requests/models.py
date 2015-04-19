@@ -5,7 +5,7 @@ class ArtRequest(models.Model):
     """A request for a piece of art to accompany a Story."""
 
     story = models.ForeignKey('core.Story')
-    assignees = models.ManyToManyField('core.Author', blank=True)
+    assignees = models.ManyToManyField('authors.Author', blank=True)
     instructions = models.TextField(blank=True)
 
     class Meta:
