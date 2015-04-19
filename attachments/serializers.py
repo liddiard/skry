@@ -28,11 +28,16 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = models.Review
 
 
-class PollSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Poll
-
-
 class PollChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PollChoice
+
+
+class PollSerializer(serializers.ModelSerializer):
+    pollchoice_set = PollChoiceSerializer(many=True)
+        # TODO: figure out how to change this field name to something nicer,
+        # like "choices"
+
+    class Meta:
+        model = models.Poll
+        fields = ('question', 'is_open', 'pollchoice_set')
