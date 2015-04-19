@@ -107,4 +107,4 @@ class PollChoice(models.Model):
     votes = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
-        return "[%s...] %s" % (self.question.question[:20], self.choice)
+        return "[%s...] %s" % (self.question.question[:20], self.text)
