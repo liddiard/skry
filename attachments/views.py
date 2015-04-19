@@ -1,3 +1,4 @@
+import django_filters
 from rest_framework import viewsets
 
 from . import serializers
@@ -28,10 +29,19 @@ class AudioViewSet(viewsets.ModelViewSet):
     ordering_fields = "__all__"
 
 
+class ReviewFilter(django_filters.FilterSet):
+    min_rating = django_filters.NumberFilter(name='rating', lookup_type='gte')
+    max_rating = django_filters.NumberFilter(name='rating', lookup_type='lte')
+
+    class Meta:
+        model = models.Review
+        fields = ['rating', 'min_rating', 'max_rating']
+
+
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = models.Review.objects.all()
     serializer_class = serializers.ReviewSerializer
-    filter_fields = ('rating',)
+    filter_class = ReviewFilter
     search_fields = ('item', 'line_1', 'line_2')
     ordering_fields = "__all__"
 
