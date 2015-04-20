@@ -1,10 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 from . import serializers
 from . import models
 
 
 class SectionViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Section.objects.all()
     serializer_class = serializers.SectionSerializer
     filter_fields = ('parent', 'sites')
@@ -13,6 +14,7 @@ class SectionViewSet(viewsets.ModelViewSet):
 
 
 class TagViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Tag.objects.all()
     serializer_class = serializers.TagSerializer
     filter_fields = ('series', 'sites')

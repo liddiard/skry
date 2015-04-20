@@ -1,10 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 from . import serializers
 from . import models
 
 
 class CardSizeViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.CardSize.objects.all()
     serializer_class = serializers.CardSizeSerializer
     filter_fields = ('width', 'height')
@@ -13,6 +14,7 @@ class CardSizeViewSet(viewsets.ModelViewSet):
 
 
 class StylesheetViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Stylesheet.objects.all()
     serializer_class = serializers.StylesheetSerializer
     filter_fields = ()
@@ -21,6 +23,7 @@ class StylesheetViewSet(viewsets.ModelViewSet):
 
 
 class ScriptViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Script.objects.all()
     serializer_class = serializers.ScriptSerializer
     filter_fields = ()
@@ -29,6 +32,7 @@ class ScriptViewSet(viewsets.ModelViewSet):
 
 
 class TemplateViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Template.objects.all()
     serializer_class = serializers.TemplateSerializer
     filter_fields = ('stylesheets', 'scripts')

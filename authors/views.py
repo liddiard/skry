@@ -1,10 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 from . import serializers
 from . import models
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Author.objects.all()
     serializer_class = serializers.AuthorSerializer
     filter_fields = ()
