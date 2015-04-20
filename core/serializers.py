@@ -26,9 +26,13 @@ class StorySerializer(serializers.ModelSerializer):
     review = attachments_serializers.ReviewSerializer()
     poll = attachments_serializers.PollSerializer()
     is_published = serializers.SerializerMethodField()
+    is_breaking = serializers.SerializerMethodField()
 
     def get_is_published(self, obj):
         return obj.is_published()
+
+    def get_is_breaking(self, obj):
+        return obj.is_breaking()
 
     class Meta:
         model = models.Story
