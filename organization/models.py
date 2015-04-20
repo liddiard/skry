@@ -59,6 +59,9 @@ class Section(models.Model):
             section = section.parent
         return level
 
+    class Meta:
+        unique_together = ('parent', 'slug')
+
     def __unicode__(self):
         return self.name
 

@@ -151,5 +151,8 @@ class Page(models.Model):
     body = models.TextField(blank=True)
     site = models.ForeignKey(Site)
 
+    class Meta:
+        unique_together = ('parent', 'slug')
+
     def __unicode__(self):
         return self.title
