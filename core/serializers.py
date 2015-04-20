@@ -25,6 +25,10 @@ class StorySerializer(serializers.ModelSerializer):
     featured_audio = attachments_serializers.AudioSerializer()
     review = attachments_serializers.ReviewSerializer()
     poll = attachments_serializers.PollSerializer()
+    is_published = serializers.SerializerMethodField()
+
+    def get_is_published(self, obj):
+        return obj.is_published()
 
     class Meta:
         model = models.Story

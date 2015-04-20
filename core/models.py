@@ -108,7 +108,7 @@ class Story(models.Model):
         current time is greater than (later than) the publish time.
         """
 
-        return (self.status == self.READY_TO_PUBLISH and
+        return (self.status == Status.objects.last() and
                 self.publish_time < django_now())
 
     def is_breaking(self):
