@@ -19,7 +19,7 @@ class StoryAdmin(admin.ModelAdmin):
             'fields': (
                 ('assignment_slug', 'status'),
                 ('title', 'url_slug'),
-                ('author'),
+                ('authors'),
                 ('teaser', 'subhead'),
                 ('body'),
                 ('alternate_template'),
