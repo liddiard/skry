@@ -5,6 +5,12 @@ from . import models
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Author
+        exclude = ('user',)
+
+
+class AuthenticatedAuthorSerializer(AuthorSerializer):
     user = access_serializers.UserSerializer()
 
     class Meta:
