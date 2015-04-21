@@ -13,7 +13,6 @@ class StatusSerializer(serializers.ModelSerializer):
 
 
 class StorySerializer(serializers.ModelSerializer):
-    status = StatusSerializer()
     authors = authors_serializers.AuthorSerializer(many=True)
     alternate_template = display_serializers.TemplateSerializer()
     sections = organization_serializers.SectionSerializer(many=True)
@@ -30,16 +29,20 @@ class StorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Story
-        private_fields = ['assignment_slug', 'status', 'summary', 'angle',
-                          'sources', 'late_run', 'created']
+        exclude = ('assignment_slug', 'status', 'summary', 'angle', 'sources',
+                   'late_run', 'created')
 
     def __init__(self, *args, **kwargs):
         super(StorySerializer, self).__init__(*args, **kwargs)
         request = self.context.get('request')
-        # remove private fields from response if user is not authenticated
-        if request and request.user.is_anonymous():
-            for field in self.Meta.private_fields:
-                self.fields.pop(field)
+        if request and request.user.is_authenticated():
+            self.fields['assignment_slug'] = serializers.CharField()
+            self.fields['status'] = StatusSerializer()
+            self.fields['summary'] = serializers.CharField()
+            self.fields['angle'] = serializers.CharField()
+            self.fields['sources'] = serializers.CharField()
+            self.fields['late_run'] = serializers.BooleanField()
+            self.fields['created'] = serializers.DateTimeField()
 
     def get_is_published(self, obj):
         return obj.is_published()
