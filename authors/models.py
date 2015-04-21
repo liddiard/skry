@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from datetime import date
 
 
 class Author(models.Model):
@@ -61,3 +63,27 @@ class Job(models.Model):
     position = models.ForeignKey('Position')
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
+
+    def is_current(self):
+        """Does the Author currently hold this job?"""
+
+        if (self.start_date and self.end_date):
+            return (self.start_date < date.today()
+                    and self.end_date > date.today())
+            # there is a start and end date, return whether or not
+            # the current date is between the two
+        elif self.start_date:
+            return self.start_date < date.today()
+            # there a start date without and end date, return whether or not
+            # the current date is after the start date, in which case we
+            # assume the job is current
+        else:
+            return False
+
+    def clean(self):
+        if (self.start_date and self.end_date and
+            self.start_date > self.end_date):
+            raise ValidationError('Job start date cannot be after end date.')
+
+    def __unicode__(self):
+        return self.position.name + " " + str(self.author)

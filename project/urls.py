@@ -29,6 +29,8 @@ router.register(r'poll_choices', attachments_views.PollChoiceViewSet)
 
 # authors
 router.register(r'authors', authors_views.AuthorViewSet)
+router.register(r'organizations', authors_views.OrganizationViewSet)
+router.register(r'positions', authors_views.PositionViewSet)
 
 # comments
 router.register(r'internal_comments', comments_views.InternalCommentViewSet)
