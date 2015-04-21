@@ -45,6 +45,7 @@ class Position(models.Model):
     """A position of employment that can be held by an Author."""
 
     name = models.CharField(max_length=32)
+    description = models.CharField(max_length=128, blank=True)
 
     def __unicode__(self):
         return self.name
