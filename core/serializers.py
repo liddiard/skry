@@ -4,6 +4,7 @@ from attachments import serializers as attachments_serializers
 from authors import serializers as authors_serializers
 from display import serializers as display_serializers
 from organization import serializers as organization_serializers
+from sports import serializers as sports_serializers
 from . import models
 
 
@@ -24,6 +25,7 @@ class StorySerializer(serializers.ModelSerializer):
     featured_audio = attachments_serializers.AudioSerializer()
     review = attachments_serializers.ReviewSerializer()
     poll = attachments_serializers.PollSerializer()
+    game = sports_serializers.GameSerializer()
     is_published = serializers.SerializerMethodField()
     is_breaking = serializers.SerializerMethodField()
 

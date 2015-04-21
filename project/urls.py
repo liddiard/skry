@@ -10,6 +10,7 @@ from core import views as core_views
 from display import views as display_views
 from organization import views as organization_views
 from requests import views as requests_views
+from sports import views as sports_views
 
 
 router = routers.DefaultRouter()
@@ -56,6 +57,10 @@ router.register(r'graphic_requests', requests_views.GraphicRequestViewSet)
 router.register(r'illustration_requests',
                 requests_views.IllustrationRequestViewSet)
 
+# sports
+router.register(r'sports', sports_views.SportViewSet)
+router.register(r'schools', sports_views.SchoolViewSet)
+router.register(r'games', sports_views.GameViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),

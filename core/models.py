@@ -82,6 +82,7 @@ class Story(models.Model):
                                        blank=True)
     review = models.ForeignKey('attachments.Review', null=True, blank=True)
     poll = models.ForeignKey('attachments.Poll', null=True, blank=True)
+    game = models.ForeignKey('sports.Game', null=True, blank=True)
     # social_media_post = models.OneToOneField('scheduler.SMPost', null=True,
     #                                          blank=True)
 
