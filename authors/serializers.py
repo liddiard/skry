@@ -5,13 +5,13 @@ from . import models
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = models.Author
         exclude = ('user',)
 
-
-class AuthenticatedAuthorSerializer(AuthorSerializer):
-    user = access_serializers.UserSerializer()
-
-    class Meta:
-        model = models.Author
+    def __init__(self, *args, **kwargs):
+        super(AuthorSerializer, self).__init__(*args, **kwargs)
+        request = self.context.get('request')
+        if request and request.user.is_authenticated():
+            self.fields['user'] = access_serializers.UserSerializer()

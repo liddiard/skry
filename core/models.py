@@ -4,7 +4,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.utils.timezone import now as django_now
+from django.utils.timezone import now
 
 
 class UserProfile(models.Model):
@@ -29,7 +29,7 @@ class Story(models.Model):
     """A standalone piece of content that conveys a message to a consumer.
 
     Stories can include or be composed entirely of text, an Image, a Video, an
-    Audio piece, a Poll, etc.
+    Audio piece, a Poll, etc. or any combination of the aforementioned.
     """
 
     # primary content
@@ -109,13 +109,13 @@ class Story(models.Model):
         """
 
         return (self.status == Status.objects.last() and
-                self.publish_time < django_now())
+                self.publish_time < now())
 
     def is_breaking(self):
         """Whether or not the article is currently breaking news"""
 
         return (self.publish_time + timedelta(hours=self.breaking_duration) >
-                django_now())
+                now())
 
     def get_path(self):
         """Get the URL path to the article from the website root."""

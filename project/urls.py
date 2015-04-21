@@ -17,6 +17,7 @@ router = routers.DefaultRouter()
 # access
 router.register(r'users', access_views.UserViewSet)
 router.register(r'groups', access_views.GroupViewSet)
+router.register(r'permissions', access_views.PermissionViewSet)
 
 # attachments
 router.register(r'images', attachments_views.ImageViewSet)

@@ -1,14 +1,22 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, Permission
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.ModelSerializer):
+class PermissionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
+        model = Permission
 
 
 class GroupSerializer(serializers.ModelSerializer):
+    permissions = PermissionSerializer(many=True)
+
     class Meta:
         model = Group
-        fields = ('url', 'name')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    groups = GroupSerializer(many=True)
+
+    class Meta:
+        model = User
+        exclude = ('password',)

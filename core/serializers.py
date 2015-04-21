@@ -28,14 +28,24 @@ class StorySerializer(serializers.ModelSerializer):
     is_published = serializers.SerializerMethodField()
     is_breaking = serializers.SerializerMethodField()
 
+    class Meta:
+        model = models.Story
+        private_fields = ['assignment_slug', 'status', 'summary', 'angle',
+                          'sources', 'late_run', 'created']
+
+    def __init__(self, *args, **kwargs):
+        super(StorySerializer, self).__init__(*args, **kwargs)
+        request = self.context.get('request')
+        # remove private fields from response if user is not authenticated
+        if request and request.user.is_anonymous():
+            for field in self.Meta.private_fields:
+                self.fields.pop(field)
+
     def get_is_published(self, obj):
         return obj.is_published()
 
     def get_is_breaking(self, obj):
         return obj.is_breaking()
-
-    class Meta:
-        model = models.Story
 
 
 class PageSerializer(serializers.ModelSerializer):
