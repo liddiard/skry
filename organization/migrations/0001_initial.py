@@ -27,9 +27,6 @@ class Migration(migrations.Migration):
                 ('parent', models.ForeignKey(blank=True, to='organization.Section', null=True)),
                 ('sites', models.ManyToManyField(to='sites.Site')),
             ],
-            options={
-                'ordering': ['-position'],
-            },
         ),
         migrations.CreateModel(
             name='Tag',
@@ -41,5 +38,9 @@ class Migration(migrations.Migration):
                 ('series', models.BooleanField(default=False)),
                 ('sites', models.ManyToManyField(to='sites.Site')),
             ],
+        ),
+        migrations.AlterUniqueTogether(
+            name='section',
+            unique_together=set([('parent', 'slug')]),
         ),
     ]

@@ -10,10 +10,8 @@ class Author(models.Model):
     user = models.OneToOneField(User, null=True, blank=True)
     first_name = models.CharField(max_length=32, blank=True)
     last_name = models.CharField(max_length=32, blank=True)
-    organization = models.CharField(max_length=32,
-                                    default=settings.DEFAULT_ORGANIZATION,
-                                    blank=True)
-    title = models.CharField(max_length=32, blank=True)
+    organization = models.ForeignKey('Organization', null=True, blank=True)
+    positions = models.ManyToManyField('Position', through='Job', blank=True)
     email = models.EmailField(blank=True)
     phone = models.CharField(max_length=12, blank=True)
     twitter = models.CharField(max_length=15, blank=True)
@@ -32,3 +30,33 @@ class Author(models.Model):
             return self.full_name()
         else:
             return self.organization
+
+
+class Organization(models.Model):
+    """A group of people under a single name."""
+
+    name = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Position(models.Model):
+    """A position of employment that can be held by an Author."""
+
+    name = models.CharField(max_length=32)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Job(models.Model):
+    """A specific instance of an Author holding a Position for a period of
+    time.
+
+    Custom through model for Author.positions."""
+
+    author = models.ForeignKey('Author')
+    position = models.ForeignKey('Position')
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)

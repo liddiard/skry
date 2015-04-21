@@ -49,4 +49,8 @@ class Migration(migrations.Migration):
             name='site',
             field=models.ForeignKey(to='sites.Site'),
         ),
+        migrations.AlterUniqueTogether(
+            name='page',
+            unique_together=set([('parent', 'slug')]),
+        ),
     ]
