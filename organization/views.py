@@ -1,3 +1,4 @@
+from django.contrib.sites.models import Site
 from rest_framework import viewsets, permissions
 
 from . import serializers
@@ -19,4 +20,13 @@ class TagViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.TagSerializer
     filter_fields = ('series', 'sites')
     search_fields = ('name', 'description')
+    ordering_fields = "__all__"
+
+
+class SiteViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
+    queryset = Site.objects.all()
+    serializer_class = serializers.SiteSerializer
+    filter_fields = ()
+    search_fields = ('domain', 'name')
     ordering_fields = "__all__"

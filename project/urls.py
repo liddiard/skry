@@ -50,6 +50,7 @@ router.register(r'templates', display_views.TemplateViewSet)
 # organization
 router.register(r'sections', organization_views.SectionViewSet)
 router.register(r'tags', organization_views.TagViewSet)
+router.register(r'sites', organization_views.SiteViewSet)
 
 # requests
 router.register(r'photo_requests', requests_views.PhotoRequestViewSet)
