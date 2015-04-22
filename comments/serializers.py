@@ -4,7 +4,7 @@ from access import serializers as access_serializers
 from . import models
 
 
-class InternalCommentSerializer(serializers.ModelSerializer):
+class InternalCommentSerializer(serializers.HyperlinkedModelSerializer):
     user = access_serializers.UserSerializer()
 
     class Meta:

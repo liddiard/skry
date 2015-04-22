@@ -4,7 +4,7 @@ from attachments import serializers as attachments_serializers
 from . import models
 
 
-class ArtRequestSerializer(serializers.ModelSerializer):
+class ArtRequestSerializer(serializers.HyperlinkedModelSerializer):
     images = attachments_serializers.ImageSerializer(many=True)
 
 

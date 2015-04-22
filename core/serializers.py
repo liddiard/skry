@@ -8,12 +8,12 @@ from sports import serializers as sports_serializers
 from . import models
 
 
-class StatusSerializer(serializers.ModelSerializer):
+class StatusSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Status
 
 
-class StorySerializer(serializers.ModelSerializer):
+class StorySerializer(serializers.HyperlinkedModelSerializer):
     authors = authors_serializers.AuthorSerializer(many=True)
     alternate_template = display_serializers.TemplateSerializer()
     sections = organization_serializers.SectionSerializer(many=True)
@@ -53,7 +53,7 @@ class StorySerializer(serializers.ModelSerializer):
         return obj.is_breaking()
 
 
-class PageSerializer(serializers.ModelSerializer):
+class PageSerializer(serializers.HyperlinkedModelSerializer):
     alternate_template = display_serializers.TemplateSerializer()
 
     class Meta:

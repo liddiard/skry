@@ -4,7 +4,7 @@ from authors import serializers as authors_serializers
 from . import models
 
 
-class MediaSerializer(serializers.ModelSerializer):
+class MediaSerializer(serializers.HyperlinkedModelSerializer):
     credit = authors_serializers.AuthorSerializer(many=True)
 
 
@@ -23,17 +23,17 @@ class AudioSerializer(MediaSerializer):
         model = models.Audio
 
 
-class ReviewSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Review
 
 
-class PollChoiceSerializer(serializers.ModelSerializer):
+class PollChoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.PollChoice
 
 
-class PollSerializer(serializers.ModelSerializer):
+class PollSerializer(serializers.HyperlinkedModelSerializer):
     pollchoice_set = PollChoiceSerializer(many=True)
         # TODO: figure out how to change this field name to something nicer,
         # like "choices"

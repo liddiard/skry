@@ -4,17 +4,17 @@ from access import serializers as access_serializers
 from . import models
 
 
-class OrganizationSerializer(serializers.ModelSerializer):
+class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Organization
 
 
-class PositionSerializer(serializers.ModelSerializer):
+class PositionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Position
 
 
-class JobSerializer(serializers.ModelSerializer):
+class JobSerializer(serializers.HyperlinkedModelSerializer):
     position = PositionSerializer()
     is_current = serializers.SerializerMethodField()
 
@@ -23,10 +23,10 @@ class JobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Job
-        exclude = ('author',)
+        exclude = ('author', 'url')
 
 
-class AuthorSerializer(serializers.ModelSerializer):
+class AuthorSerializer(serializers.HyperlinkedModelSerializer):
     organization = OrganizationSerializer()
     positions = JobSerializer(source='job_set', many=True)
 
