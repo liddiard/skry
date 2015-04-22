@@ -1,10 +1,9 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.utils.timezone import now
 
 
 class UserProfile(models.Model):
@@ -110,13 +109,13 @@ class Story(models.Model):
         """
 
         return (self.status == Status.objects.last() and
-                self.publish_time < now())
+                self.publish_time < datetime.now())
 
     def is_breaking(self):
         """Whether or not the article is currently breaking news"""
 
         return (self.publish_time + timedelta(hours=self.breaking_duration) >
-                now())
+                datetime.now())
 
     def get_path(self):
         """Get the URL path to the article from the website root."""

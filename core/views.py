@@ -1,4 +1,4 @@
-from django.utils.timezone import now
+from datetime import datetime
 import django_filters
 from rest_framework import viewsets, permissions
 
@@ -42,7 +42,7 @@ class StoryViewSet(viewsets.ModelViewSet):
             # restrict viewable stories to those which are published
             final_status = models.Status.objects.last()
             return models.Story.objects.filter(status=final_status,
-                                               publish_time__lte=now())
+                                             publish_time__lte=datetime.now())
 
 
 class PageViewSet(viewsets.ModelViewSet):
