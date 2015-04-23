@@ -68,5 +68,6 @@ urlpatterns = [
     url(r'^auth/token/', include('rest_auth.urls')),
     url(r'^auth/web/', include('rest_framework.urls',
                                namespace='rest_framework')),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^v1/', include(router.urls, namespace='v1')) # main api
 ]
