@@ -1,5 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework import routers
 
 from access import views as access_views
@@ -70,4 +72,5 @@ urlpatterns = [
                                namespace='rest_framework')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^v1/', include(router.urls, namespace='v1')) # main api
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # serve user-uploaded media in development environment

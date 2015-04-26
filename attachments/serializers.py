@@ -9,8 +9,21 @@ class MediaSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ImageSerializer(MediaSerializer):
+    resized = serializers.SerializerMethodField()
+
     class Meta:
         model = models.Image
+
+    def get_resized(self, obj):
+        request = self.context['request']
+        resolution = request.GET.get('resolution')
+        crop = request.GET.get('crop')
+        if resolution and crop:
+            return obj.get_image_at_resolution(resolution, crop=crop)
+        elif resolution:
+            return obj.get_image_at_resolution(resolution)
+        else:
+            return None
 
 
 class VideoSerializer(MediaSerializer):

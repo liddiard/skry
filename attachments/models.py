@@ -35,8 +35,9 @@ class Image(Media):
     request_id = models.PositiveIntegerField(null=True, blank=True)
     request_object = GenericForeignKey('request_type', 'request_id')
 
-    def get_image_at_resolution(self, resolution):
-        return get_thumbnail(self.image, resolution).url
+    def get_image_at_resolution(self, resolution, crop='center', quality=90):
+        return get_thumbnail(self.file, resolution, crop=crop,
+                             quality=quality).url
 
     def aspect_ratio(self):
         return float(self.image.width) / self.image.height
