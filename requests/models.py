@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
+
+from attachments import models as attachments_models
 
 
 class ArtRequest(models.Model):
@@ -7,6 +10,7 @@ class ArtRequest(models.Model):
     story = models.ForeignKey('core.Story')
     assignees = models.ManyToManyField('authors.Author', blank=True)
     instructions = models.TextField(blank=True)
+    images = GenericRelation(attachments_models.Image)
 
     class Meta:
         abstract = True

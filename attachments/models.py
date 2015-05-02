@@ -29,11 +29,11 @@ class Image(Media):
                               model='graphicrequest') | \
                      models.Q(app_label='requests',
                               model='illustrationrequest')
-    request_type = models.ForeignKey(ContentType,
+    content_type = models.ForeignKey(ContentType,
                                      limit_choices_to=request_models,
                                      null=True, blank=True)
-    request_id = models.PositiveIntegerField(null=True, blank=True)
-    request_object = GenericForeignKey('request_type', 'request_id')
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     def get_image_at_resolution(self, resolution, crop='center', quality=90):
         return get_thumbnail(self.file, resolution, crop=crop,

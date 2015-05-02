@@ -13,6 +13,7 @@ class ImageSerializer(MediaSerializer):
 
     class Meta:
         model = models.Image
+        exclude = ('content_type', 'object_id')
 
     def get_resized(self, obj):
         request = self.context['request']
