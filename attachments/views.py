@@ -9,7 +9,7 @@ class ImageViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Image.objects.all()
     serializer_class = serializers.ImageSerializer
-    filter_fields = ('credit', 'request_type', 'request_id')
+    filter_fields = ('credit', 'content_type', 'object_id')
     search_fields = ('file', 'caption')
     ordering_fields = "__all__"
 
