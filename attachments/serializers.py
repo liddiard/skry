@@ -19,6 +19,9 @@ class ImageSerializer(MediaSerializer):
         exclude = ('content_type', 'object_id')
 
     def get_resized(self, obj):
+        """Provides the ability to specify optional resolution and crop
+        parameters to return a URL to a resized version."""
+
         request = self.context['request']
         resolution = request.GET.get('resolution')
         crop = request.GET.get('crop')
@@ -30,6 +33,8 @@ class ImageSerializer(MediaSerializer):
             return None
 
     def get_request(self, obj):
+        """Returns the URL to the ArtRequest associated with this Image if
+        one exists."""
         # check if the Image has both components for a GenericForeignKey
         if obj.content_type and obj.object_id:
 
