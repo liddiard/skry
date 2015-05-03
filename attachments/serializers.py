@@ -35,6 +35,7 @@ class ImageSerializer(MediaSerializer):
     def get_art_request(self, obj):
         """Returns the URL to the ArtRequest associated with this Image if
         one exists."""
+        
         # check if the Image has both components for a GenericForeignKey
         if obj.content_type and obj.object_id:
 
