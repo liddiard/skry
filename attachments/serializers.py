@@ -12,7 +12,7 @@ class MediaSerializer(serializers.HyperlinkedModelSerializer):
 
 class ImageSerializer(MediaSerializer):
     resized = serializers.SerializerMethodField()
-    request = serializers.SerializerMethodField()
+    art_request = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Image
@@ -32,7 +32,7 @@ class ImageSerializer(MediaSerializer):
         else:
             return None
 
-    def get_request(self, obj):
+    def get_art_request(self, obj):
         """Returns the URL to the ArtRequest associated with this Image if
         one exists."""
         # check if the Image has both components for a GenericForeignKey
