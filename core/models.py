@@ -32,56 +32,99 @@ class Story(models.Model):
     """
 
     # primary content
-    assignment_slug = models.CharField(max_length=64)
-    status = models.ForeignKey('Status')
-    title = models.CharField(max_length=128, blank=True)
-    url_slug = models.SlugField(max_length=128, blank=True)
+    assignment_slug = models.CharField(max_length=64,
+                                       help_text='Succinct, quasi-unique '
+                                       'identifier for this story. Should '
+                                       'NOT contain a date, section, or any '
+                                       'other information already stored on '
+                                       'another story field.')
+    status = models.ForeignKey('Status',
+                               help_text='Current state in workflow.')
+    title = models.CharField(max_length=128, blank=True, help_text='Publicly'
+                            'displayed headline.')
+    url_slug = models.SlugField(max_length=128, blank=True,
+                                help_text='Forms a part of the URL for this '
+                                          'story.')
     authors = models.ManyToManyField('authors.Author',
-                                     related_name='news_story', blank=True)
-    teaser = models.CharField(max_length=128, blank=True)
-    subhead = models.CharField(max_length=128, blank=True)
+                                     related_name='core_story_authors',
+                                     blank=True)
+    teaser = models.CharField(max_length=128, blank=True, help_text='Short '
+                              'subtext related to the story to encourage '
+                              'readers to read the story.')
+    subhead = models.CharField(max_length=128, blank=True,
+                               help_text='Addtional title that suplements '
+                                         'the primary title.')
     body = models.TextField(blank=True)
     alternate_template = models.ForeignKey('display.Template', blank=True,
-                                           null=True)
+                                           null=True, help_text='Optional '
+                                           'alternate template to use for '
+                                           'this story.')
 
     # planning
     summary = models.TextField(blank=True)
     angle = models.TextField(blank=True)
     sources = models.TextField(blank=True)
-    late_run = models.BooleanField(default=False)
+    late_run = models.BooleanField(default=False, help_text='Whether or '
+                                   'not the story is planned to come in '
+                                   'later than stories in the section '
+                                   'typically do.')
 
     # organization
-    position = models.PositiveIntegerField(unique=True, db_index=True)
+    position = models.PositiveIntegerField(unique=True, db_index=True,
+                                           help_text='How this story is '
+                                           'ordered relative to other '
+                                           'stories.')
     sections = models.ManyToManyField('organization.Section', blank=True)
     tags = models.ManyToManyField('organization.Tag', blank=True)
     sites = models.ManyToManyField(Site)
 
     # card
     card = models.ForeignKey('attachments.Image', null=True, blank=True,
-                             related_name='news_article_card')
-    card_size = models.ForeignKey('display.CardSize')
+                             related_name='core_story_card',
+                             help_text='Image to display with this story in '
+                                       'a story list view.')
+    card_size = models.ForeignKey('display.CardSize', help_text='The aspect '
+                                  'ratio in which the card should be '
+                                  'displayed.')
     card_focus = models.CharField(max_length=2,
                                   choices=settings.IMAGE_FOCUS_CHOICES,
-                                  default='cc')
-    feature_card_image = models.BooleanField(default=True)
+                                  default='cc', help_text='Location of the '
+                                  'focal point of the card image.')
+    feature_card_image = models.BooleanField(default=True,
+                                             help_text='Whether or not the '
+                                             'card image should also be '
+                                             'displayed as the story\'s '
+                                             'featured image.')
 
     # dates and times
     publish_time = models.DateTimeField()
-    breaking_duration = models.PositiveSmallIntegerField(default=0)
+    breaking_duration = models.PositiveSmallIntegerField(default=0,
+                                                         help_text='How long '
+                                                         'the story should be '
+                                                         'displayed as '
+                                                         'breaking news.')
     created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
 
     # linked media
     featured_image = models.ForeignKey('attachments.Image', null=True,
                                        blank=True,
-                                    related_name='news_article_featured_image')
+                                     related_name='core_story_featured_image',
+                                       help_text='The most prominent image '
+                                       'associated with this story.')
     featured_video = models.ForeignKey('attachments.Video', null=True,
-                                       blank=True)
+                                       blank=True, help_text='The most '
+                                       'prominent video associated with this '
+                                       'story.')
     featured_audio = models.ForeignKey('attachments.Audio', null=True,
-                                       blank=True)
+                                       blank=True, help_text='The most '
+                                       'prominent audio associated with this '
+                                       'story.')
     review = models.ForeignKey('attachments.Review', null=True, blank=True)
     poll = models.ForeignKey('attachments.Poll', null=True, blank=True)
-    game = models.ForeignKey('sports.Game', null=True, blank=True)
+    game = models.ForeignKey('sports.Game', null=True, blank=True,
+                             help_text='Sports game associated with this '
+                                       'story.')
     # social_media_post = models.OneToOneField('scheduler.SMPost', null=True,
     #                                          blank=True)
 
@@ -145,9 +188,12 @@ class Page(models.Model):
 
     parent = models.ForeignKey('self', null=True, blank=True)
     title = models.CharField(max_length=128, blank=True)
-    slug = models.SlugField(max_length=128)
+    slug = models.SlugField(max_length=128, help_text='Forms part of the '
+                                                      'URL for this story.')
     alternate_template = models.ForeignKey('display.Template', null=True,
-                                           blank=True)
+                                           blank=True, help_text='Optional '
+                                           'alternate template to use for '
+                                           'this story.')
     body = models.TextField(blank=True)
     site = models.ForeignKey(Site)
 

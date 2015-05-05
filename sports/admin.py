@@ -18,8 +18,8 @@ admin.site.register(models.School, SchoolAdmin)
 
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ['date', 'sport', 'home', 'opposing', 'home_score',
-                    'opposing_score']
+    list_display = ['date', 'sport', 'home_team', 'opposing_team',
+                    'home_score', 'opposing_score']
 
 
 admin.site.register(models.Game, GameAdmin)

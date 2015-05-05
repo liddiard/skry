@@ -10,7 +10,7 @@ class InternalComment(models.Model):
     Can be used to inquire about an aspect of a piece of content.
     """
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, help_text='User who posted this comment.')
     time_posted = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
 

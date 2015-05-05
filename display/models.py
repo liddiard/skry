@@ -50,8 +50,12 @@ class Template(models.Model):
 
     name = models.CharField(max_length=64, unique=True)
     file = models.FileField(upload_to='display/template')
-    stylesheets = models.ManyToManyField('Stylesheet', blank=True)
-    scripts = models.ManyToManyField('Script', blank=True)
+    stylesheets = models.ManyToManyField('Stylesheet', blank=True,
+                                         help_text='Stylesheets to include '
+                                                   'with this template.')
+    scripts = models.ManyToManyField('Script', blank=True,
+                                     help_text='Stylesheets to include with '
+                                               'this template.')
 
     def __unicode__(self):
         return self.name

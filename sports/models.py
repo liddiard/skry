@@ -25,9 +25,10 @@ class Game(models.Model):
     """A meeting of two Schools to play a game of a Sport."""
 
     sport = models.ForeignKey('Sport')
-    home = models.ForeignKey('School', related_name="home")
-    opposing = models.ForeignKey('School', related_name="opposing")
-    date = models.DateField()
+    home_team = models.ForeignKey('School', related_name="home")
+    opposing_team = models.ForeignKey('School', related_name="opposing")
+    date = models.DateField(help_text='Date on which the game happened or '
+                                      'will happen.')
     home_score = models.PositiveSmallIntegerField(null=True, blank=True)
     opposing_score = models.PositiveSmallIntegerField(null=True, blank=True)
 

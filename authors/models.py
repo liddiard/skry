@@ -16,7 +16,8 @@ class Author(models.Model):
     positions = models.ManyToManyField('Position', through='Job', blank=True)
     email = models.EmailField(blank=True)
     phone = models.CharField(max_length=12, blank=True)
-    twitter = models.CharField(max_length=15, blank=True)
+    twitter = models.CharField(max_length=15, blank=True, help_text='Twitter '
+                               'handle, without an "@" symbol.')
                                # current max handle length
     mug = models.ImageField(upload_to='core/author/mug/%Y', blank=True)
     bio = models.TextField(blank=True)
@@ -47,7 +48,9 @@ class Position(models.Model):
     """A position of employment that can be held by an Author."""
 
     name = models.CharField(max_length=32)
-    description = models.CharField(max_length=128, blank=True)
+    description = models.CharField(max_length=128, blank=True,
+                                  help_text='What the individual in this '
+                                  'position is responsible for.')
 
     def __unicode__(self):
         return self.name

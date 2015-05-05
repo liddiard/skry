@@ -12,18 +12,32 @@ class Section(models.Model):
 
     parent = models.ForeignKey('self', null=True, blank=True)
     name = models.CharField(max_length=32, unique=True)
-    slug = models.SlugField(max_length=32, unique=True)
-    description = models.CharField(max_length=128, blank=True)
+    slug = models.SlugField(max_length=32, unique=True, help_text='Used as '
+                            'part of the URL for this section.')
+    description = models.TextField(blank=True, help_text='Short description '
+                                   'of what this section covers/is about.')
     default_card = models.ImageField(upload_to='organization/section/'
-                                     'default_card')
+                                     'default_card', help_text='Default card '
+                                     'for stories in this section that '
+                                     'don\'t specify their own card.')
     default_card_focus = models.CharField(max_length=2,
                                           choices=settings.IMAGE_FOCUS_CHOICES,
-                                          default='cc')
-    twitter = models.CharField(max_length=15, blank=True)
-    facebook = models.CharField(max_length=32, blank=True)
+                                          default='cc', help_text='Location '
+                                          'of the focal point for this '
+                                          'section\'s card image.')
+    twitter = models.CharField(max_length=15, blank=True, help_text='Twitter '
+                               'handle for this section, without an "@" '
+                               'symbol.')
+    facebook = models.CharField(max_length=32, blank=True,
+                                help_text='Facebook username for this '
+                                          'section. Can be found in the URL.')
     profile_image = models.ImageField(upload_to='organization/section/'
-                                      'profile_image', blank=True)
-    position = models.PositiveIntegerField()
+                                      'profile_image', blank=True,
+                                      help_text='Social media profile image '
+                                                'for this section.')
+    position = models.PositiveIntegerField(help_text='Ordering of this '
+                                           'section relative to other '
+                                           'sections.')
     sites = models.ManyToManyField(Site)
 
     class Meta:
@@ -75,9 +89,12 @@ class Tag(models.Model):
     """
 
     name = models.CharField(max_length=32, unique=True)
-    slug = models.SlugField(max_length=32, unique=True)
-    description = models.TextField(blank=True)
-    series = models.BooleanField(default=False)
+    slug = models.SlugField(max_length=32, unique=True, help_text='Used as '
+                            'part of the URL for this tag.')
+    description = models.TextField(blank=True, help_text='Short description '
+                                   'of what this tag is about.')
+    series = models.BooleanField(default=False, help_text='Whether or not '
+                                 'this tag is forms a series.')
     sites = models.ManyToManyField(Site)
 
     def __unicode__(self):

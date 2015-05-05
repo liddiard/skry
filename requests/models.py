@@ -29,14 +29,18 @@ class PhotoRequest(ArtRequest):
 
 
 class GraphicRequest(ArtRequest):
-    external_link = models.URLField(blank=True)
+    external_link = models.URLField(blank=True, help_text='Link to an '
+                                    'external website for planning associated '
+                                    'with this request.')
 
     def __unicode__(self):
         return "graphic for " + str(self.story)
 
 
 class IllustrationRequest(ArtRequest):
-    external_link = models.URLField(blank=True)
+    external_link = models.URLField(blank=True, help_text='Link to an '
+                                    'external website for planning associated '
+                                    'with this request.')
 
     def __unicode__(self):
         return "illustration for " + str(self.story)

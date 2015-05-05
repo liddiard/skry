@@ -50,7 +50,11 @@ class Video(Media):
     """A video from YouTube with associated metadata."""
 
     title = models.CharField(max_length=128)
-    youtube_id = models.CharField(max_length=16)
+    youtube_id = models.CharField(max_length=16,
+                                  help_text='The unique ID of this video on '
+                                  'YouTube, found in the URL, probably around '
+                                  'eleven characters and composed of numbers '
+                                  'and letters.')
     credit = models.ManyToManyField('authors.Author', related_name='news_video',
                                     blank=True)
 
@@ -79,12 +83,15 @@ class Review(models.Model):
     Examples include movies, albums, and restaurants.
     """
 
-    item = models.CharField(max_length=64)
+    item = models.CharField(max_length=64, help_text='The item being '
+                                                     'reviewed.')
     line_1 = models.CharField(max_length=128, blank=True)
     line_2 = models.CharField(max_length=128, blank=True)
     rating = models.PositiveSmallIntegerField(validators=
                                               [MaxValueValidator(10)],
-                                              null=True, blank=True)
+                                              null=True, blank=True,
+                                              help_text='Rating between '
+                                                        'zero and ten.')
 
     def __unicode__(self):
         return self.item
@@ -94,7 +101,9 @@ class Poll(models.Model):
     """A poll question for consumer interaction."""
 
     question = models.CharField(max_length=128)
-    is_open = models.BooleanField(default=True)
+    is_open = models.BooleanField(default=True, help_text='Whether or not '
+                                                'the poll is currently '
+                                                'accepting new responses.')
 
     def __unicode__(self):
         return self.question
