@@ -22,7 +22,7 @@ class Image(Media):
     credit = models.ManyToManyField('authors.Author', related_name='news_image',
                                     blank=True)
 
-    # ForeignKey to multiple requests models
+    # ForeignKey to multiple types of ArtRequest models
     # cf. http://stackoverflow.com/a/6336509
     request_models = models.Q(app_label='requests', model='photorequest') | \
                      models.Q(app_label='requests',
