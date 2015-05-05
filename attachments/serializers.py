@@ -26,16 +26,18 @@ class ImageSerializer(MediaSerializer):
         resolution = request.GET.get('resolution')
         crop = request.GET.get('crop')
         if resolution and crop:
-            return obj.get_image_at_resolution(resolution, crop=crop)
+            path =  obj.get_image_at_resolution(resolution, crop=crop)
         elif resolution:
-            return obj.get_image_at_resolution(resolution)
+            path = obj.get_image_at_resolution(resolution)
         else:
             return None
+        # return an absolute link, including protocol, hostname, and path
+        return request.build_absolute_uri(path)
 
     def get_art_request(self, obj):
         """Returns the URL to the ArtRequest associated with this Image if
         one exists."""
-        
+
         # check if the Image has both components for a GenericForeignKey
         if obj.content_type and obj.object_id:
 
@@ -53,12 +55,12 @@ class ImageSerializer(MediaSerializer):
             # and the view type, 'detail', which Django Rest Framework uses
             # to specify a detail view versus a list view
             # (http://www.django-rest-framework.org/api-guide/routers/#usage)
-            detail_url = "v1:%s-detail" % obj.content_type.model
+            detail_name = "v1:%s-detail" % obj.content_type.model
 
             # return the absolute url of the associated art request, using
             # Django Rest Framework's own reverse() function
             # (http://www.django-rest-framework.org/api-guide/reverse/#reverse)
-            return reverse(detail_url, kwargs={'pk': art_request_obj.pk},
+            return reverse(detail_name, kwargs={'pk': art_request_obj.pk},
                            request=self.context['request'])
 
         else: # this Image isn't linked to a request
