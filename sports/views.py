@@ -43,8 +43,9 @@ class GameFilter(django_filters.FilterSet):
 
     class Meta:
         model = models.Game
-        fields = ['sport', 'home', 'opposing', 'date', 'date_on_or_after',
-                  'date_on_or_before', 'home_score_greater_than_or_equal_to',
+        fields = ['sport', 'home_team', 'opposing_team', 'date',
+                  'date_on_or_after', 'date_on_or_before',
+                  'home_score_greater_than_or_equal_to',
                   'opposing_score_greater_than_or_equal_to',
                   'home_score_less_than_or_equal_to',
                   'opposing_score_less_than_or_equal_to']
