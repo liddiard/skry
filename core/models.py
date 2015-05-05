@@ -40,7 +40,7 @@ class Story(models.Model):
                                        'another story field.')
     status = models.ForeignKey('Status',
                                help_text='Current state in workflow.')
-    title = models.CharField(max_length=128, blank=True, help_text='Publicly'
+    title = models.CharField(max_length=128, blank=True, help_text='Publicly '
                             'displayed headline.')
     url_slug = models.SlugField(max_length=128, blank=True,
                                 help_text='Forms a part of the URL for this '
