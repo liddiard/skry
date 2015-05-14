@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.sites.models import Site
 
 
 class CardSize(models.Model):
@@ -56,6 +57,7 @@ class Template(models.Model):
     scripts = models.ManyToManyField('Script', blank=True,
                                      help_text='Stylesheets to include with '
                                                'this template.')
+    sites = models.ManyToManyField(Site)
 
     def __unicode__(self):
         return self.name
