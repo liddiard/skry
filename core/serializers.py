@@ -18,13 +18,15 @@ class BodyTextSerializer(serializers.HyperlinkedModelSerializer):
     """Abstract base class which strips internal comments from an object's
     'body' field and adds a 'body_unsanitized' field for authenticated users.
     """
-    
+
     body = serializers.SerializerMethodField()
 
     def __init__(self, *args, **kwargs):
         super(BodyTextSerializer, self).__init__(*args, **kwargs)
         request = self.context.get('request')
         if request and request.user.is_authenticated():
+            # sometimes a serializer is initialized without a request, so we
+            # must check for its existence first
             self.fields['body_unsanitized'] = serializers.\
                                               SerializerMethodField()
 
@@ -60,6 +62,8 @@ class StorySerializer(BodyTextSerializer):
         super(StorySerializer, self).__init__(*args, **kwargs)
         request = self.context.get('request')
         if request and request.user.is_authenticated():
+            # sometimes a serializer is initialized without a request, so we
+            # must check for its existence first
             self.fields['assignment_slug'] = serializers.CharField()
             self.fields['status'] = StatusSerializer()
             self.fields['summary'] = serializers.CharField()
