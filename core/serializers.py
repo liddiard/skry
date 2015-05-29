@@ -14,7 +14,28 @@ class StatusSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Status
 
 
-class StorySerializer(serializers.HyperlinkedModelSerializer):
+class BodyTextSerializer(serializers.HyperlinkedModelSerializer):
+    """Abstract base class which strips internal comments from an object's
+    'body' field and adds a 'body_unsanitized' field for authenticated users.
+    """
+    
+    body = serializers.SerializerMethodField()
+
+    def __init__(self, *args, **kwargs):
+        super(BodyTextSerializer, self).__init__(*args, **kwargs)
+        request = self.context.get('request')
+        if request and request.user.is_authenticated():
+            self.fields['body_unsanitized'] = serializers.\
+                                              SerializerMethodField()
+
+    def get_body(self, obj):
+        return utils.strip_internal_comments(obj.body)
+
+    def get_body_unsanitized(self, obj):
+        return obj.body
+
+
+class StorySerializer(BodyTextSerializer):
     authors = authors_serializers.AuthorSerializer(many=True)
     alternate_template = display_serializers.TemplateSerializer()
     sections = organization_serializers.SectionSerializer(many=True)
@@ -29,7 +50,6 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
     game = sports_serializers.GameSerializer()
     is_published = serializers.SerializerMethodField()
     is_breaking = serializers.SerializerMethodField()
-    body = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Story
@@ -47,8 +67,6 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             self.fields['sources'] = serializers.CharField()
             self.fields['late_run'] = serializers.BooleanField()
             self.fields['created'] = serializers.DateTimeField()
-            self.fields['body_unsanitized'] = serializers.\
-                                              SerializerMethodField()
 
     def get_is_published(self, obj):
         return obj.is_published()
@@ -56,14 +74,8 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
     def get_is_breaking(self, obj):
         return obj.is_breaking()
 
-    def get_body(self, obj):
-        return utils.strip_internal_comments(obj.body)
 
-    def get_body_unsanitized(self, obj):
-        return obj.body
-
-
-class PageSerializer(serializers.HyperlinkedModelSerializer):
+class PageSerializer(BodyTextSerializer):
     alternate_template = display_serializers.TemplateSerializer()
 
     class Meta:
