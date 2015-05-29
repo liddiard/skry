@@ -1,7 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
@@ -152,13 +153,13 @@ class Story(models.Model):
         """
 
         return (self.status == Status.objects.last() and
-                self.publish_time < datetime.now())
+                self.publish_time < timezone.now())
 
     def is_breaking(self):
         """Whether or not the article is currently breaking news"""
 
         return (self.publish_time + timedelta(hours=self.breaking_duration) >
-                datetime.now())
+                timezone.now())
 
     def get_path(self):
         """Get the URL path to the article from the website root."""
