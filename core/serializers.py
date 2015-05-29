@@ -6,6 +6,7 @@ from display import serializers as display_serializers
 from organization import serializers as organization_serializers
 from sports import serializers as sports_serializers
 from . import models
+from . import utils
 
 
 class StatusSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,6 +29,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
     game = sports_serializers.GameSerializer()
     is_published = serializers.SerializerMethodField()
     is_breaking = serializers.SerializerMethodField()
+    body = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Story
@@ -45,12 +47,20 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             self.fields['sources'] = serializers.CharField()
             self.fields['late_run'] = serializers.BooleanField()
             self.fields['created'] = serializers.DateTimeField()
+            self.fields['body_unsanitized'] = serializers.\
+                                              SerializerMethodField()
 
     def get_is_published(self, obj):
         return obj.is_published()
 
     def get_is_breaking(self, obj):
         return obj.is_breaking()
+
+    def get_body(self, obj):
+        return utils.strip_internal_comments(obj.body)
+
+    def get_body_unsanitized(self, obj):
+        return obj.body
 
 
 class PageSerializer(serializers.HyperlinkedModelSerializer):
