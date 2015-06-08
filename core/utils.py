@@ -39,6 +39,7 @@ def reverse_url(model, request):
     If URL reversal fails, returns None. 'model' argument should be in the
     lowercased, no-underscore format of the contenttypes framework.
     """
+    
     try:
         return reverse('v1:%s-list' % model, request=request)
     except NoReverseMatch:
@@ -97,6 +98,8 @@ def project_schema_to_dict(request):
                 # camel-cased name of the model
                 # http://stackoverflow.com/a/6572002/2487925
                 'name': model._meta.object_name,
+                'verbose_name': model._meta.verbose_name.title(),
+                'verbose_name_plural': model._meta.verbose_name_plural.title(),
                 'url': reverse_url(model_name, request),
                 'permissions': {
                     'add': has_perm(user, app_name, model_name, 'add'),
