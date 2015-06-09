@@ -1,3 +1,5 @@
+[![Requirements Status](https://requires.io/github/liddiard/appletini/requirements.svg?branch=master)](https://requires.io/github/liddiard/appletini/requirements/?branch=master)
+
 ![Appletinis make me feel fancy.](http://i.imgur.com/ENFVTr5.gif)
 
 # Token auth example
