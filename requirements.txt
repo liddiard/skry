@@ -1,8 +1,8 @@
 # The one. The only. The web framework for perfectionists with deadlines.
-Django==1.8
+Django==1.8.2
 
 # Image processing library, formerly known as and backwards compatible with PIL. May require extra system dependencies.
-Pillow==2.4.0
+Pillow==2.8.2
 
 # http://daringfireball.net/projects/markdown/ - used for parsing markdown in templates.
 markdown2==2.1.0
@@ -33,6 +33,9 @@ django-filter==0.9.2
 
 # Auto-generates API documentation using code introspection.
 django-rest-swagger==0.2.9
+
+# Model history, rollback, recover deleted models, etc.
+django-reversion==1.8.7
 
 # Packages for docs (ReST)
 Babel==1.3

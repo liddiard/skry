@@ -42,7 +42,8 @@ THIRD_PARTY_APPS = (
     'rest_framework.authtoken',
     'rest_auth',
     'rest_framework_swagger',
-    'sorl.thumbnail'
+    'sorl.thumbnail',
+    'reversion'
 )
 
 LOCAL_APPS = (
