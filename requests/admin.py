@@ -1,23 +1,24 @@
+import reversion
 from django.contrib import admin
 
 from . import models
 
 
-class PhotoRequestAdmin(admin.ModelAdmin):
+class PhotoRequestAdmin(reversion.VersionAdmin):
     list_display = ['story', 'location', 'time']
 
 
 admin.site.register(models.PhotoRequest, PhotoRequestAdmin)
 
 
-class GraphicRequestAdmin(admin.ModelAdmin):
+class GraphicRequestAdmin(reversion.VersionAdmin):
     list_display = ['story']
 
 
 admin.site.register(models.GraphicRequest, GraphicRequestAdmin)
 
 
-class IllustrationRequestAdmin(admin.ModelAdmin):
+class IllustrationRequestAdmin(reversion.VersionAdmin):
     list_display = ['story']
 
 
