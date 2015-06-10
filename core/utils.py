@@ -22,7 +22,7 @@ def get_related_field_model(field):
         model = field.rel.to
         return {
             'app': model._meta.app_label,
-            'name': model._meta.object_name
+            'model': model._meta.object_name
         }
     else:
         return None
