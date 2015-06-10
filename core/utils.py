@@ -1,7 +1,7 @@
 import re
 
-from django.core.urlresolvers import NoReverseMatch
 from rest_framework.reverse import reverse
+from django.core.urlresolvers import NoReverseMatch
 
 
 def strip_internal_comments(text):
