@@ -2,21 +2,23 @@ import json
 
 import django_filters
 from rest_framework import viewsets, permissions
+from rest_framework.response import Response
 from django.utils import timezone
-from django.http import HttpResponse
 
 from . import serializers
 from . import models
-from . import utils
 
 
-def structure_view(request):
+class SchemaViewSet(viewsets.ViewSet):
     """Returns a JSON document representing the entire project's apps, models,
     and model fields and the requesting user's permissions to perform actions
     on models.
     """
-    return HttpResponse(json.dumps(utils.project_schema_to_dict(request)),
-                        content_type='application/json')
+
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def list(self, request):
+        return Response(serializers.schema_serializer(request))
 
 
 class StatusViewSet(viewsets.ModelViewSet):

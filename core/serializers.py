@@ -1,4 +1,8 @@
+import inspect
+
 from rest_framework import serializers
+from django.db.models.fields import Field
+from django.contrib.contenttypes.models import ContentType
 
 from attachments import serializers as attachments_serializers
 from authors import serializers as authors_serializers
@@ -7,6 +11,95 @@ from organization import serializers as organization_serializers
 from sports import serializers as sports_serializers
 from . import models
 from . import utils
+
+
+def schema_serializer(request):
+    """Serializes the current Django project's schema (apps, models, and model
+    fields) into a Python dictionary suitable for JSON serialization and
+    checks which models the passed user can create/update/delete.
+    """
+
+    apps = []
+    # iterate through a list of all installed apps once. the content
+    # types table is structured like so:
+    #
+    #  id |  app_label   |        model
+    # ----+--------------+---------------------
+    #   1 | admin        | logentry
+    #   2 | auth         | permission
+    #   3 | auth         | group
+    #   4 | auth         | user
+    #
+    # so the code below selects rows with a distinct app label and forms
+    # a list of the app label names and a models list which will be
+    # populated later. NOTE: the line below only works with a PostgreSQL
+    # backend; cf.
+    # https://docs.djangoproject.com/en/1.8/ref/models/querysets/#distinct
+    for content_type in ContentType.objects.distinct('app_label'):
+        apps.append({
+            'name': content_type.app_label,
+            'models': []
+        })
+
+    for app in apps:
+        app_name = app['name']
+        # get the content types associated with this app
+        app_content_types = ContentType.objects\
+                                       .filter(app_label=app_name)
+
+        for content_type in app_content_types:
+            # get the model object represented by this content type
+            # https://docs.djangoproject.com/en/1.8/ref/contrib/contenttypes/#django.contrib.contenttypes.models.ContentType.model_class
+            model_name = content_type.model
+            model = content_type.model_class()
+            user = request.user
+            app['models'].append({
+                # camel-cased name of the model
+                # http://stackoverflow.com/a/6572002/2487925
+                'name': model._meta.object_name,
+                'verbose_name': model._meta.verbose_name.title(),
+                'verbose_name_plural': model._meta.verbose_name_plural.title(),
+                'url': utils.reverse_url(model_name, request),
+                'permissions': {
+                    'add': utils.has_perm(user, app_name, model_name, 'add'),
+                    'change': utils.has_perm(user, app_name, model_name,
+                                             'change'),
+                    'delete': utils.has_perm(user, app_name, model_name,
+                                             'delete')
+                },
+                'fields': []
+            })
+
+            # iterate through all fields, including relations
+            # https://docs.djangoproject.com/en/1.8/ref/models/meta/#django.db.models.options.Options.get_fields
+            for field in model._meta.get_fields():
+                # 'fields' key of the last-appended model
+                model_fields = app['models'][-1]['fields']
+
+                # check if field is a regular field (NOT a reverse relation)
+                if isinstance(field, Field):
+                    model_fields.append({
+                        # some fields below follow the pattern
+                        # "inspect.isclass([field]) or None".
+                        # this is because these fields are sometimes
+                        # objects, not strings, and thus can't be JSON
+                        # serialized without custom serialization.
+                        # if a field is an object, we leave it None (null)
+                        'name': field.name,
+                        'blank': field.blank,
+                        'help_text': inspect.isclass(field.help_text) or None,
+                        'is_relation': field.is_relation,
+                        'relation': utils.get_related_field_model(field),
+                        'null': field.null,
+                        'primary_key': field.primary_key,
+                        'max_length': field.max_length,
+                        'verbose_name': field.verbose_name.title(),
+                        'choices': field._choices,
+                        'editable': field.editable,
+                        'type': field.get_internal_type()
+                    })
+
+    return apps
 
 
 class StatusSerializer(serializers.HyperlinkedModelSerializer):
