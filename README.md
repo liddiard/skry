@@ -9,4 +9,7 @@
 # Invariants
 
 - Model names must be unique across the entire project namespace. E.g., you can't have an 'authors' app with an Author model and a 'reviews' app with an Author model.
+
+# Design patterns
+
 - API URLs for resources must be a pluralized, lowercased, and underscore-separated representation of the model name. E.g., an Author model should be accessible at /authors, and an InternalComment model should be available at /internal_comments.
