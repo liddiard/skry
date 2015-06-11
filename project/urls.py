@@ -62,9 +62,6 @@ router.register(r'graphic_requests', requests_views.GraphicRequestViewSet)
 router.register(r'illustration_requests',
                 requests_views.IllustrationRequestViewSet)
 
-# revisions
-router.register(r'versions', revisions_views.VersionViewSet)
-
 # sports
 router.register(r'sports', sports_views.SportViewSet)
 router.register(r'schools', sports_views.SchoolViewSet)
