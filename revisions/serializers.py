@@ -11,12 +11,13 @@ class RevisionSerializer(serializers.ModelSerializer):
 
 class VersionSerializer(serializers.ModelSerializer):
     revision = RevisionSerializer()
-    serialized_data = serializers.SerializerMethodField()
+    snapshot = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Version
+        exclude = ('serialized_data',)
 
-    def get_serialized_data(self, obj):
+    def get_snapshot(self, obj):
         # TODO: This is inefficent. We de-serialize the data and then the
         # Django Rest Framework serializer re-seraializes it. It really
         # shouldn't get serialized because it's already stored in a
