@@ -5,6 +5,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from django.utils import timezone
 
+from revisions.views import VersionableModelViewSetMixin
 from . import serializers
 from . import models
 
@@ -42,7 +43,7 @@ class StoryFilter(django_filters.FilterSet):
                   'publish_at_or_before']
 
 
-class StoryViewSet(viewsets.ModelViewSet):
+class StoryViewSet(VersionableModelViewSetMixin, viewsets.ModelViewSet):
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Story.objects.all()
     serializer_class = serializers.StorySerializer
@@ -60,7 +61,7 @@ class StoryViewSet(viewsets.ModelViewSet):
                                              publish_time__lte=timezone.now())
 
 
-class PageViewSet(viewsets.ModelViewSet):
+class PageViewSet(VersionableModelViewSetMixin, viewsets.ModelViewSet):
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Page.objects.all()
     serializer_class = serializers.PageSerializer
