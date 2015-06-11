@@ -12,6 +12,7 @@ from core import views as core_views
 from display import views as display_views
 from organization import views as organization_views
 from requests import views as requests_views
+from revisions import views as revisions_views
 from sports import views as sports_views
 
 
@@ -60,6 +61,9 @@ router.register(r'photo_requests', requests_views.PhotoRequestViewSet)
 router.register(r'graphic_requests', requests_views.GraphicRequestViewSet)
 router.register(r'illustration_requests',
                 requests_views.IllustrationRequestViewSet)
+
+# revisions
+router.register(r'versions', revisions_views.VersionViewSet)
 
 # sports
 router.register(r'sports', sports_views.SportViewSet)
