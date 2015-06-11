@@ -57,6 +57,7 @@ def schema_serializer(request):
                 # camel-cased name of the model
                 # http://stackoverflow.com/a/6572002/2487925
                 'name': model._meta.object_name,
+                'content_type_id': content_type.id,
                 'verbose_name': model._meta.verbose_name.title(),
                 'verbose_name_plural': model._meta.verbose_name_plural.title(),
                 'url': utils.reverse_url(model_name, request),
