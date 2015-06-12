@@ -107,9 +107,12 @@ MEDIA_ROOT = BASE_DIR + "/../media"
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211'
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/0", # using database 0 (zero)
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     }
 }
 
@@ -134,9 +137,11 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 }
 
+
 # default organization for authors and possibly other things
 # TODO: make this description actually descriptive
 DEFAULT_ORGANIZATION = "Daily Bruin"
+
 
 # Primary focal region of an image. Used when an image need to be cropped to
 # fit available space.
@@ -151,3 +156,18 @@ IMAGE_FOCUS_CHOICES = (
     ('bc', 'bottom center'),
     ('br', 'bottom right'),
 )
+
+
+# cacheops
+
+CACHEOPS_REDIS = {
+    'host': 'localhost', # redis-server is on same machine
+    'port': 6379,        # default redis port
+    'db': 1,             # SELECT non-default redis database
+                         # using separate redis db or redis instance
+                         # is highly recommended
+}
+
+CACHEOPS = {
+    '*.*': {'ops': 'all', 'timeout': 60*60}
+}

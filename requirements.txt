@@ -46,6 +46,9 @@ redis==2.10.3
 # Collection of functional programming tools for Python (django-cacheops dependency)
 funcy==1.5
 
+# Django cache backend for Redis
+django-redis==4.0.0
+
 # Packages for docs (ReST)
 Babel==1.3
 Jinja2==2.7.3

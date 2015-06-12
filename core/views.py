@@ -4,6 +4,8 @@ import django_filters
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from revisions.views import VersionableModelViewSetMixin
 from . import serializers
@@ -18,6 +20,7 @@ class SchemaViewSet(viewsets.ViewSet):
 
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60*60)) # cache view for one hour
     def list(self, request):
         return Response(serializers.schema_serializer(request))
 
