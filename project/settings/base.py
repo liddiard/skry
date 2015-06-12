@@ -43,7 +43,8 @@ THIRD_PARTY_APPS = (
     'rest_auth',
     'rest_framework_swagger',
     'sorl.thumbnail',
-    'reversion'
+    'reversion',
+    'cacheops'
 )
 
 LOCAL_APPS = (
@@ -112,9 +113,6 @@ CACHES = {
     }
 }
 
-SITE_ID = 1 # required for Django Sites Framework, but not used exactly per
-            # the Django docs' description. This id should represent the id of
-            # your default/primary site.
 
 # Django Rest Framework
 REST_FRAMEWORK = {
