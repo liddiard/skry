@@ -8,6 +8,10 @@ from . import models
 
 class MediaSerializer(serializers.HyperlinkedModelSerializer):
     credit = authors_serializers.AuthorSerializer(many=True)
+    is_courtesy = serializers.SerializerMethodField()
+
+    def get_is_courtesy(self, obj):
+        return obj.is_courtesy()
 
 
 class ImageSerializer(MediaSerializer):

@@ -9,6 +9,7 @@
 # Invariants
 
 - Model names must be unique across the entire project namespace. E.g., you can't have an 'authors' app with an Author model and a 'reviews' app with an Author model.
+- The authors.Organization with primary key 1 is the organization for which this instance of the CMS is being used.
 
 # Design patterns
 

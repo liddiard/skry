@@ -4,12 +4,35 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxValueValidator
 from sorl.thumbnail import get_thumbnail
 
+from authors.models import Organization
+
 
 class Media(models.Model):
     """A piece of content which has a main component and may have associated
     Authors and a caption."""
 
     caption = models.TextField(blank=True)
+
+    @property
+    def credit(self):
+        """Forces child classes to define a "credit" attribute."""
+
+        raise NotImplementedError('Models which inherit from this class must '
+                                  'define a "credit" attribute which is a '
+                                  'ManyToManyField of authors.Author.')
+
+    def is_courtesy(self):
+        """Checks if this Media is courtesy of another organization.
+
+        Returns True if any of the Authors of the Media is not a member of
+        this organization."""
+
+        this_organization = Organization.objects.get(pk=1)
+        for author in self.credit.all():
+            if author.organization != this_organization:
+                return True
+        return False
+
 
     class Meta:
         abstract = True
