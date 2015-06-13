@@ -15,9 +15,9 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dailybruin',
-        'USER': 'dailybruin',
-        'PASSWORD': 'bruin111',
+        'NAME': 'skry',
+        'USER': 'skry',
+        'PASSWORD': 'skry',
         'HOST': 'localhost',
         'PORT': '',
     }
