@@ -1,11 +1,11 @@
 """
-Django settings for dailybruin project.
+Django settings for skry project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
+https://docs.djangoproject.com/en/1.8/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
+https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -21,7 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '.dailybruin.com']
+ALLOWED_HOSTS = ['localhost']
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ['SECRET_KEY']
 
 
 # Application definition
@@ -138,11 +141,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
-
-
-# default organization for authors and possibly other things
-# TODO: make this description actually descriptive
-DEFAULT_ORGANIZATION = "Daily Bruin"
 
 
 # Primary focal region of an image. Used when an image need to be cropped to

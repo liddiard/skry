@@ -1,5 +1,4 @@
 from .base import *
-from .secret import SECRET_KEY
 
 DEBUG = False
 
@@ -9,10 +8,10 @@ DEBUG = False
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'dailybruin', 
-        'USER': 'dailybruin',
-        'PASSWORD': 'bruin111',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'skry',
+        'USER': 'skry',
+        'PASSWORD': 'skry',
         'HOST': 'localhost',
         'PORT': '',
     }
