@@ -6,8 +6,8 @@ from . import models
 class ImageAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('file', 'credit', 'caption', 'request_type',
-                       'request_id')
+            'fields': ('file', 'credit', 'caption', 'content_type',
+                       'object_id')
         }),
     )
 
