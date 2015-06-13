@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
@@ -166,6 +167,28 @@ class Story(models.Model):
 
         return "/%s/%s/" % (self.publish_time.strftime("%Y/%m/%d"),
                             self.url_slug)
+
+    def validate_unique(self, *args, **kwargs):
+        super(Story, self).validate_unique(*args, **kwargs)
+
+        # validate that this story does not have the same publish date
+        # (publish_time field) and url slug as any other story. this constraint
+        # is necessary because story URL patterns are anticipated to follow
+        # the format: /year/month/day/story-url-slug, and the above case would
+        # result in multiple stories mapping to the same URL.
+        stories_on_same_day = self.__class__.objects.filter(
+                                   publish_time__year=self.publish_time.year,
+                                   publish_time__month=self.publish_time.month,
+                                   publish_time__day=self.publish_time.day
+        ).exclude(pk=self.pk)
+        for story in stories_on_same_day:
+            if story.url_slug == self.url_slug:
+                raise ValidationError({
+                        NON_FIELD_ERRORS: [
+                            'Two stories with the same url_slug cannot be'\
+                            'set to publish on the same day.'
+                        ]
+                    })
 
     def save(self, *args, **kwargs):
         if self.position is None:
