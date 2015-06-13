@@ -116,6 +116,8 @@ CACHES = {
     }
 }
 
+SITE_ID = 1 # unused in project, but required by Django sites framework
+
 
 # Django Rest Framework
 REST_FRAMEWORK = {
