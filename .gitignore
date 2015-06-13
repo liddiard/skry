@@ -4,4 +4,4 @@
 *.DS_Store
 *.sass-cache/
 media/
-project/settings/secret.py
+dump.rdb
