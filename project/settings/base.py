@@ -47,7 +47,8 @@ THIRD_PARTY_APPS = (
     'rest_framework_swagger',
     'sorl.thumbnail',
     'reversion',
-    'cacheops'
+    'cacheops',
+    "django_hstore",
 )
 
 LOCAL_APPS = (

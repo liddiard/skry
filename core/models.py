@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django_hstore import hstore
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -32,6 +33,10 @@ class Story(models.Model):
     Stories can include or be composed entirely of text, an Image, a Video, an
     Audio piece, a Poll, etc. or any combination of the aforementioned.
     """
+
+    # override the default manager to provide hstore (arbitrary key/value)
+    # support
+    objects = hstore.HStoreManager()
 
     # primary content
     assignment_slug = models.CharField(max_length=64,
@@ -127,6 +132,11 @@ class Story(models.Model):
     game = models.ForeignKey('sports.Game', null=True, blank=True,
                              help_text='Sports game associated with this '
                                        'story.')
+
+    # extra data
+    data = hstore.SerializedDictionaryField() # holds arbitrary key/value pairs
+
+    # social media
     # social_media_post = models.OneToOneField('scheduler.SMPost', null=True,
     #                                          blank=True)
 
@@ -209,6 +219,10 @@ class Page(models.Model):
     Examples include an about page, a staff page, and an opinion submission
     page.
     """
+    
+    # override the default manager to provide hstore (arbitrary key/value)
+    # support
+    objects = hstore.HStoreManager()
 
     parent = models.ForeignKey('self', null=True, blank=True)
     title = models.CharField(max_length=128, blank=True)
@@ -220,6 +234,7 @@ class Page(models.Model):
                                            'this story.')
     body = models.TextField(blank=True)
     site = models.ForeignKey(Site)
+    data = hstore.SerializedDictionaryField() # holds arbitrary key/value pairs
 
     class Meta:
         unique_together = ('parent', 'slug')
