@@ -96,6 +96,7 @@ def schema_serializer(request):
                         'max_length': field.max_length,
                         'verbose_name': field.verbose_name.title(),
                         'choices': field._choices,
+                        'limit_choices_to': utils.get_limit_chocies_to(field),
                         'editable': field.editable,
                         'type': field.get_internal_type()
                     })

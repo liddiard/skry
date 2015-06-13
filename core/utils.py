@@ -27,6 +27,50 @@ def get_related_field_model(field):
     else:
         return None
 
+def get_limit_chocies_to(field):
+    """Get the limited choices of models to which this field can refer.
+
+    limit_choices_to is used with GenericForeignKeys among other things.
+    Returns an empty list if choices are not limited on this field or not
+    applicable to this field. More info:
+    https://docs.djangoproject.com/en/1.8/ref/models/fields/#django.db.models.ForeignKey.limit_choices_to
+    """
+
+    choices = []
+
+    # have to check that both of these attributes are present, in this order
+    if field.rel and field.rel.limit_choices_to:
+
+        # This is really confusing, but basically "limit_choices_to" is a Q
+        # object
+        # (https://docs.djangoproject.com/en/1.8/topics/db/queries/#complex-lookups-with-q-objects).
+        # It looks something like this (obtained from the "__dict__"
+        # attribute):
+        #
+        # {'connector': u'OR', 'negated': False, 'children': [<Q: (AND:
+        # ('model', 'story'), ('app_label', 'core'))>, <Q: (AND: ('model',
+        # 'photorequest'), ('app_label', 'requests'))>, <Q: (AND: ('model',
+        # 'graphicrequest'), ('app_label', 'requests'))>, <Q: (AND: ('model',
+        # 'illustrationrequest'), ('app_label', 'requests'))>]}
+        #
+        # We don't really care about this top level; as you can see, all the
+        # choices are in the "children" attribute. "children" is a list of Q
+        # objects. A single element of it looks like this:
+        #
+        # {'connector': u'AND', 'negated': False, 'children': [('model',
+        # 'story'), ('app_label', 'core')]}
+        #
+        # Once again, we need to access the "children" attribute to get to
+        # the information we care about. This second "children" attribute is
+        # a list of regular Python tuples, so we can access individual
+        # elements of it using bracket syntax.
+        for q_object in field.rel.limit_choices_to.children:
+            choices.append({
+                'app': q_object.children[1][1],
+                'model': q_object.children[0][1]
+            })
+    return choices
+
 def reverse_url(model, request):
     """Attempts to reverse a URL using Django Rest Framework's URL reverse
     function.
