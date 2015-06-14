@@ -222,6 +222,7 @@ class Page(models.Model):
     site = models.ForeignKey(Site)
 
     class Meta:
+        # ensure that no two Pages can map to the same URL
         unique_together = ('parent', 'slug')
 
     def __unicode__(self):

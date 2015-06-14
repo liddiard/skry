@@ -11,9 +11,9 @@ class Section(models.Model):
     """
 
     parent = models.ForeignKey('self', null=True, blank=True)
-    name = models.CharField(max_length=32, unique=True)
-    slug = models.SlugField(max_length=32, unique=True, help_text='Used as '
-                            'part of the URL for this section.')
+    name = models.CharField(max_length=32)
+    slug = models.SlugField(max_length=32, help_text='Used as part of the URL '
+                                                     'for this section.')
     description = models.TextField(blank=True, help_text='Short description '
                                    'of what this section covers/is about.')
     default_card = models.ImageField(upload_to='organization/section/'
@@ -38,12 +38,13 @@ class Section(models.Model):
     position = models.PositiveIntegerField(help_text='Ordering of this '
                                            'section relative to other '
                                            'sections.')
-    sites = models.ManyToManyField(Site)
+    site = models.ForeignKey(Site)
 
     class Meta:
         ordering = ['-position']
 
     def get_path(self):
+        # TODO: remove if unused
         path_components = []
         section = self
         while section is not None:
@@ -52,6 +53,7 @@ class Section(models.Model):
         return "/" + "/".join(path_components[::-1]) + "/"
 
     def get_top_level_parent(self):
+        # TODO: remove if unused
         """Get the highest section in the hierarchy under which this section
         resides. If the section has no parent, return self.
         """
@@ -62,6 +64,7 @@ class Section(models.Model):
         return section
 
     def hierarchy_level(self):
+        # TODO: remove if unused
         """Returns the number of levels deep the section is nested, where zero
         is the top level.
         """
@@ -74,6 +77,7 @@ class Section(models.Model):
         return level
 
     class Meta:
+        # ensure that no two Sections can map to the same URL
         unique_together = ('parent', 'slug')
 
     def __unicode__(self):
