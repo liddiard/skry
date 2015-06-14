@@ -4,11 +4,23 @@ from rest_framework import viewsets
 from . import serializers
 
 
+class UserFilter(django_filters.FilterSet):
+    class Meta:
+        model = User
+        fields = {'groups': ['exact'],
+                  'user_permissions': ['exact'],
+                  'is_staff': ['exact'],
+                  'is_active': ['exact'],
+                  'is_superuser': ['exact'],
+                  'last_login': ['exact', 'gt', 'lt'],
+                  'date_joined': ['exact', 'gt', 'lt']
+                 }
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
-    filter_fields = ('groups', 'user_permissions', 'is_staff', 'is_active',
-                     'is_superuser')
+    filter_class = UserFilter
     search_fields = ('username', 'first_name', 'last_name', 'email')
     ordering_fields = ('username', 'first_name', 'last_name', 'email',
                        'last_login', 'date_joined', 'is_staff', 'is_active',

@@ -34,16 +34,16 @@ class StatusViewSet(viewsets.ModelViewSet):
 
 
 class StoryFilter(django_filters.FilterSet):
-    publish_at_or_after = django_filters.NumberFilter(name='publish_time',
-                                                      lookup_type='gte')
-    publish_at_or_before = django_filters.NumberFilter(name='publish_time',
-                                                       lookup_type='lte')
-
     class Meta:
         model = models.Story
-        fields = ['status', 'authors', 'position', 'sections', 'tags', 'sites',
-                  'publish_time', 'publish_at_or_after',
-                  'publish_at_or_before']
+        fields = {'status': ['exact', 'lt', 'gt'],
+                  'authors': ['exact'],
+                  'position': ['exact', 'lt', 'gt'],
+                  'sections': ['exact'],
+                  'tags': ['exact'],
+                  'sites': ['exact'],
+                  'publish_time': ['exact', 'lt', 'gt']
+                 }
 
 
 class StoryViewSet(VersionableModelViewSetMixin, viewsets.ModelViewSet):

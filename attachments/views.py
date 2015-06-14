@@ -33,12 +33,9 @@ class AudioViewSet(viewsets.ModelViewSet):
 
 
 class ReviewFilter(django_filters.FilterSet):
-    min_rating = django_filters.NumberFilter(name='rating', lookup_type='gte')
-    max_rating = django_filters.NumberFilter(name='rating', lookup_type='lte')
-
     class Meta:
         model = models.Review
-        fields = ['rating', 'min_rating', 'max_rating']
+        fields = {'rating': ['exact', 'gt', 'lt']}
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
