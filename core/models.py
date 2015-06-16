@@ -190,17 +190,38 @@ class Story(models.Model):
                         ]
                     })
 
+    def clean(self):
+        # ensure that stories in the last state of the workflow have a URL
+        # slug. this is necessary because the last state of the workflow is
+        # assumed to be "ready to publish" (i.e. the story may be publicly
+        # accessible), and it is assumed that the url_slug will form part of
+        # the public URL.
+        if self.status == Status.objects.last() and not self.url_slug:
+            raise ValidationError('Stories which have the final workflow '
+                                  'status must have a URL slug.')
+
     def save(self, *args, **kwargs):
+        # the clean() method is not called automatically, so we do it manually.
+        # cf.
+        # https://docs.djangoproject.com/en/1.8/ref/models/instances/#django.db.models.Model.clean
+        self.clean()
+
+        # automatically set the story's position if unspecified
         if self.position is None:
+            # by default, stories are sorted by position in decending order,
+            # so the "first story" is the story with the highest position
+            # value.
             first_story = Story.objects.first()
             if first_story:
                 self.position = first_story.position + 1
             else:
+                # this is the first story ever created, so it gets a position
+                # of zero
                 self.position = 0
         super(Story, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return self.assignment_slug
+        return "%s.%s" % (self.sections.first(), self.assignment_slug)
 
 
 class Page(models.Model):
