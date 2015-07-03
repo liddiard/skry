@@ -1,5 +1,7 @@
 [![Requirements Status](https://requires.io/github/liddiard/appletini/requirements.svg?branch=master)](https://requires.io/github/liddiard/appletini/requirements/?branch=master)
 
+**Full readme (and docs!) coming before release – for now this is just a jumbled collection of notes.**
+
 # Token auth example
 `curl --data "username=value1&password=value2" https://localhost:8000/auth/token/login/`
 `curl -X GET http://localhost:8000/v1/users/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'`
