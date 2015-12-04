@@ -1,4 +1,4 @@
-[![Requirements Status](https://requires.io/github/liddiard/skry/requirements.svg?branch=master)](https://requires.io/github/liddiard/appletini/requirements/?branch=master)
+[![Requirements Status](https://requires.io/github/liddiard/skry/requirements.svg?branch=master)](https://requires.io/github/liddiard/skry/requirements/?branch=master)
 
 **Full readme (and docs!) coming before release – for now this is just a jumbled collection of notes.**
 
