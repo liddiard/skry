@@ -1,8 +1,8 @@
-# skry
+# Skry
 
 ![Skry logo](http://i.imgur.com/vo1NjSk.png)
 
-The extendable decoupled CMS for small-to-medium-sized news organizations.
+The extendable, decoupled CMS for small-to-medium-sized news organizations.
 
 [![Requirements Status](https://requires.io/github/liddiard/skry/requirements.svg?branch=master)](https://requires.io/github/liddiard/skry/requirements/?branch=master)
 
