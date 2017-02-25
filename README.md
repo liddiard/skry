@@ -18,11 +18,13 @@ The Daily Bruin's current workflow is split among at least five seperate systems
 4. [WordPress](http://wordpress.com): needs no introduction. Well-maintined, huge community, but gross and difficult to develop anything custom with (ugly PHP, mixing logic and presentation, etc, etc).
 5. [meow](https://github.com/daily-bruin/meow): Daily Bruin's homegrown social media poster, also a Django app. It's great but also doesn't integrate with anything else in the workflow.
 
-Skry is an attempt to bring this *stuff* – all of which ultimately revolves around **stories** we produce, from the pitch, to the writing and editing, to the art and multimedia that might be associated with it, to its display on the website and its promotion on social media – into one system. Less copying and pasting, less mentally trying keeping track of where things are as you switch between several systems that don't talk to each other, less prone to errors in communication when the systems do try to talk with one another, easier to develop and customize. That's the dream.
+Skry is an attempt to bring this *stuff* – all of which ultimately revolves around **stories** we produce, from the pitch, to the writing and editing, to the art and multimedia that might be associated with it, to its display on the website and its promotion on social media – into one system.
+
+Less copying and pasting, less mentally trying keeping track of where things are as you switch between several systems that don't talk to each other, less prone to errors in communication when the systems do try to talk with one another, easier to develop and customize. That's the dream.
 
 ### Decoupled design
 
-Sounding monolithic? Skry adheres to a separation of concerns in a different way, following the [decoupled CMS paradigm](http://decoupledcms.org), concepts of which major CMSs like WordPress and Drupal have begun to adopt. The website describes the difference between a "monolithic" CMS approach vs a "decoupled" CMS approach best:
+Sounding monolithic? Skry adheres to a separation of concerns in a different way, following the [decoupled CMS paradigm](http://decoupledcms.org), concepts of which major CMSs like WordPress and Drupal have begun to adopt. The [decoupled CMS website](http://decoupledcms.org) describes the difference between a "monolithic" CMS approach vs a "decoupled" CMS approach best:
 
 #### Monolithic
 
