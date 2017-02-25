@@ -91,7 +91,7 @@ Read through the short [DRF quickstart tutorial](http://www.django-rest-framewor
 
 ### Applications
 
-Below is a description of each of the apps in Skry. Apps correspond to the top-level directories in the repo with the execption of the `project` directory which contains configuration for the entire project.
+Below is a description of each of the apps in Skry. Apps correspond to the top-level directories in the repo with the execption of the `project` directory which contains configuration for the entire CMS.
 
 #### Access
 
