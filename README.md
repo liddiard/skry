@@ -66,7 +66,7 @@ Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
 - pip
 - virtualenv (install it with `pip install virtualenv`)
 - PostgreSQL ([Postgres.app](https://postgresapp.com) is great if you're on macOS)
-- Redis: required for production, optional in development (used for caching). [Get it here.](https://redis.io/download))
+- Redis: required for production, optional in development (used for caching). [Get it here.](https://redis.io/download)
 
 ### Instructions
 
