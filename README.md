@@ -1,10 +1,10 @@
-# Skry
-
-[![Requirements Status](https://requires.io/github/liddiard/skry/requirements.svg?branch=master)](https://requires.io/github/liddiard/skry/requirements/?branch=master)
-
 ![Skry logo](http://i.imgur.com/vo1NjSk.png)
 
 The extendable, decoupled CMS for small-to-medium-sized news organizations.
+
+# Skry
+
+[![Requirements Status](https://requires.io/github/liddiard/skry/requirements.svg?branch=master)](https://requires.io/github/liddiard/skry/requirements/?branch=master)
 
 ## Overview
 
