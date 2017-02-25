@@ -132,7 +132,7 @@ The comments app, for now, just contains *internal* comments, intended for peopl
 
 Contains the core models of the Skry CMS. The core of Skry is a story model which is used from the story pitch all the way through the editing process to the publishing of the story. A story is always in a workflow status.
 
-Pages are also in core. Pages are unrelated from stories. They're one-off pages on your public-facing website that don't really fit into any particular model. Examples include an "about us" page or a public secure submission page.
+Pages are also in core. Pages are unrelated to stories. They're one-off pages on your public-facing website that don't really fit into any particular model. Examples include an "about us" page or a public secure submission page.
 
 #### Display
 
