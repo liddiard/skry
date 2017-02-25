@@ -105,8 +105,8 @@ The attachments app contains "attachments" to stories, including images, video, 
 
 The authors app contains definitions for authors (big surprise). In Skry, authors are intented to be associated with any type of content that has a creator, including stories, photos, videos, etc. An author can be:
 
-- a person associated with an organization, e.g. Joe Bruin who works at the Daily Bruin at takes photos for them),
-- a person not associated with an organization, e.g. Josephine Bruin who lives in Westwood and wrote a letter to the editor)
+- a person associated with an organization, e.g. Joe Bruin who works at the Daily Bruin at takes photos for them
+- a person not associated with an organization, e.g. Josephine Bruin who lives in Westwood and wrote a letter to the editor
 - an organization not associated with a specific person, e.g. Getty Images (who let us use their photo) or a group with lots of members that wrote an open letter
 
 Authors can optionally be associated with users, but authors and users are **not** the same thing. This is an important distinction. 
