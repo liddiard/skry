@@ -95,11 +95,11 @@ Below is a description of each of the apps in Skry. Apps correspond to the top-l
 
 #### Access
 
-Handles the authentication and management of CMS users. It doesn't define any of its own models but instead uses the models provided by [Django's built-in and very full-featured user authentication system](https://docs.djangoproject.com/en/1.10/topics/auth/).
+The access app handles the authentication and management of CMS users. It doesn't define any of its own models but instead uses the models provided by [Django's built-in and very full-featured user authentication system](https://docs.djangoproject.com/en/1.10/topics/auth/).
 
 #### Attachments
 
-Contains "attachments" to stories, including images, video, audio, reviews (i.e. of a movie or restaurant), and polls. The image model has a method to get a resized image at any specified resolution.
+The attachments app contains "attachments" to stories, including images, video, audio, reviews (i.e. of a movie or restaurant), and polls. The image model has a method to get a resized image at any specified resolution.
 
 #### Authors
 
