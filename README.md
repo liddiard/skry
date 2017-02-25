@@ -83,9 +83,9 @@ Skry is built on Django Rest Framework (DRF). If you're not familiar with it, Sk
 
 The basic concept is each app has three main files: 
 
-1. a `models.py` file that defines the database tables an rows (i.e. what data can be stored)
-2. a `serializers.py` file that defines how the data in the database is serialized into JSON when it's passed to the client
-3. a `view.py` file that defines how a client can request the serialized data (e.g. what fields can be filtered and sorted by)
+1. `models.py` defines the database tables and rows (i.e. what data can be stored)
+2. `serializers.py` defines how the data in the database is serialized into JSON when it's passed to the client
+3. `view.py` defines how a client can request the serialized data (e.g. what fields can be filtered and sorted by)
 
 Complete or at least read through the [DRF quickstart tutorial](http://www.django-rest-framework.org/tutorial/quickstart/) and you'll understand what's going on a lot better.
 
