@@ -89,7 +89,7 @@ The basic concept is each app has three main files:
 
 1. `models.py` defines the database tables and rows (i.e. what data can be stored)
 2. `serializers.py` defines how the data in the database is serialized into JSON when it's passed to the client
-3. `view.py` defines how a client can request the serialized data (e.g. what fields can be filtered and sorted by)
+3. `views.py` defines how a client can request the serialized data (e.g. what fields can be filtered and sorted by)
 
 Read through the short [DRF quickstart tutorial](http://www.django-rest-framework.org/tutorial/quickstart/) and you'll understand what's going on a lot better.
 
