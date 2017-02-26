@@ -24,7 +24,7 @@ Less copying and pasting, less mentally trying keeping track of where things are
 
 ### Decoupled design
 
-Sounding monolithic? Skry adheres to a separation of concerns in a different way, following the [decoupled CMS paradigm](http://decoupledcms.org), concepts of which major CMSs like WordPress and Drupal have begun to adopt. The [decoupled CMS website](http://decoupledcms.org) describes the difference between a "monolithic" CMS approach vs a "decoupled" CMS approach best:
+Sounding monolithic? Skry adheres to a separation of concerns in a different way, following the [decoupled CMS paradigm](http://decoupledcms.org), concepts of which major CMSs like WordPress and Drupal have begun to adopt. The [decoupled CMS website](http://decoupledcms.org) describes the difference between a "monolithic" CMS approach vs. a "decoupled" CMS approach best:
 
 #### Monolithic
 
@@ -52,6 +52,10 @@ Request an image of any dimensions and Skry will deliver it dynamically, caching
 
 Skry has full-featured model revision history thanks to [django-reversion](https://github.com/etianen/django-reversion). List, view, and restore previous versions all through the API.
 
+### Auto-generated API browser
+
+Skry uses [Django REST Swagger](http://www.django-rest-framework.org/topics/documenting-your-api/#django-rest-swagger) to provide interactive API documentation in your browser. See how to format requests, execute them, and examine the results right from the generated API docs.
+
 ### Extendability
 
 Skry's component-based application architecture makes it easy to add your own applications, mixing and matching with what Skry provides currently.
@@ -71,7 +75,7 @@ Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
 ### Instructions
 
 1. Create and activate a virtualenv for the project: `virtualenv skry && cd skry && source bin/activate`
-2. Clone the repo: `git clone https://github.com/liddiard/skry.git repo`
+2. Clone the repo and enter it: `git clone https://github.com/liddiard/skry.git repo && cd repo`
 3. Install the requirements: `pip install -r requirements.txt`
 4. Start Postgres (just launch the app if you're on macOS)
 5. Sync the database and apply migrations: `python manage.py syncdb && python manage.py migrate`
@@ -156,7 +160,7 @@ The revisions app provides simple verision control and the ability to view or ro
 
 #### Sports
 
-The sports app stores data specific to sporting events. It contains models for sports (e.g. Football, Basketball), schools (e.g. UCLA, Stanford), and games (e.g. a UCLA v. Stanford football game on x date). It's intended to be used to display game information along with a sports game preview story or to display the previous/upcoming games in a particular sport.
+The sports app stores data specific to sporting events. It contains models for sports (e.g. Football, Basketball), schools (e.g. UCLA, Stanford), and games (e.g. a UCLA vs. Stanford football game on x date). It's intended to be used to display game information along with a sports game preview story or to display the previous/upcoming games in a particular sport.
 
 ## Development notes
 
