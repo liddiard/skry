@@ -1,51 +1,42 @@
 # The one. The only. The web framework for perfectionists with deadlines.
-Django==1.8.2
+Django==1.10.5
 
 # Image processing library, formerly known as and backwards compatible with PIL. May require extra system dependencies.
-Pillow==2.8.2
+Pillow==4.0.0
 
 # http://daringfireball.net/projects/markdown/ - used for parsing markdown in templates.
-markdown2==2.1.0
+markdown2==2.3.3
 
 # PostgreSQL database driver for Python. Requires postgresql-server to be installed on the system.
-psycopg2==2.5.1
-
-# WSGI (Web Server Gateway Interface) utilities.
-wsgiref==0.1.2
+psycopg2==2.6.2
 
 # Super-fast, widely used memory caching framework. Requires memcached to be installed on the system.
-python-memcached==1.53
+python-memcached==1.58
 
 # Thumbnail library. Requires Pillow and memcached for current implementation.
-sorl-thumbnail==12.2
+sorl-thumbnail==12.3
 
 # Framework for building RESTful APIs.
-djangorestframework==3.1.1
+djangorestframework==3.5.4
 
 # Pluggable token authentication for Django Rest Framework. Requires six.
-django-rest-auth==0.3.4
+django-rest-auth==0.9.0
 
 # Python 2 and 3 compatibility library.
-six==1.9.0
+six==1.10.0
 
 # Smart filtering/ordering/searching for Django Rest Framework.
-django-filter==0.9.2
+django-filter==1.0.1
 
 # Auto-generates API documentation using code introspection.
-django-rest-swagger==0.2.9
+django-rest-swagger==2.1.1
 
 # Model history, rollback, recover deleted models, etc.
-django-reversion==1.8.7
+django-reversion==2.0.8
 
 # ORM cache with "automatic granular event-driven invalidation"
-django-cacheops==2.3.2
-
-# Python support for Redis, an advanced key-value store used for caching (django-cacheops dependency)
-redis==2.10.3
-
-# Collection of functional programming tools for Python (django-cacheops dependency)
-funcy==1.5
+django-cacheops==3.1.2
 
 # Django cache backend for Redis
-django-redis==4.0.0
+django-redis==4.7.0
 
