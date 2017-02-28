@@ -1,4 +1,5 @@
 import reversion
+from reversion.admin import VersionAdmin
 from django.contrib import admin
 
 from . import models
@@ -11,7 +12,7 @@ class StatusAdmin(admin.ModelAdmin):
 admin.site.register(models.Status, StatusAdmin)
 
 
-class StoryAdmin(reversion.VersionAdmin):
+class StoryAdmin(VersionAdmin):
     prepopulated_fields = {'url_slug': ('title',)}
     readonly_fields = ('created', 'last_updated', 'position')
     list_display = ['assignment_slug', 'title', 'publish_time', 'status']
@@ -53,7 +54,7 @@ class StoryAdmin(reversion.VersionAdmin):
 admin.site.register(models.Story, StoryAdmin)
 
 
-class PageAdmin(reversion.VersionAdmin):
+class PageAdmin(VersionAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(models.Page, PageAdmin)
