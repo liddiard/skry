@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
+from rest_framework_swagger.views import get_swagger_view
 
 from access import views as access_views
 from attachments import views as attachments_views
@@ -17,6 +18,9 @@ from sports import views as sports_views
 
 
 router = routers.DefaultRouter()
+
+# get the view for auto-generated API docs from Swagger
+docs_view = get_swagger_view(title='docs')
 
 # access
 router.register(r'users', access_views.UserViewSet)
@@ -72,7 +76,7 @@ urlpatterns = [
     url(r'^auth/token/', include('rest_auth.urls')),
     url(r'^auth/web/', include('rest_framework.urls',
                                namespace='rest_framework')),
-    url(r'^docs/', include('rest_framework_swagger.urls')),
+    url(r'^docs/', docs_view),
     url(r'^v1/', include(router.urls, namespace='v1')) # main api
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # serve user-uploaded media in development environment
