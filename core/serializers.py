@@ -107,6 +107,7 @@ def schema_serializer(request):
 class StatusSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Status
+        fields = "__all__"
 
 
 class BodyTextSerializer(serializers.HyperlinkedModelSerializer):
@@ -179,3 +180,4 @@ class PageSerializer(BodyTextSerializer):
 
     class Meta:
         model = models.Page
+        fields = "__all__"

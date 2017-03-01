@@ -9,3 +9,4 @@ class InternalCommentSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.InternalComment
+        fields = "__all__"

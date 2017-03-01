@@ -5,6 +5,7 @@ from rest_framework import serializers
 class PermissionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Permission
+        fields = "__all__"
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -12,6 +13,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Group
+        fields = "__all__"
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

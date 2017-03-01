@@ -7,6 +7,7 @@ from reversion import models
 class RevisionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Revision
+        fields = "__all__"
 
 
 class VersionSerializer(serializers.ModelSerializer):

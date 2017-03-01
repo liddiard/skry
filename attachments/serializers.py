@@ -74,21 +74,25 @@ class ImageSerializer(MediaSerializer):
 class VideoSerializer(MediaSerializer):
     class Meta:
         model = models.Video
+        fields = "__all__"
 
 
 class AudioSerializer(MediaSerializer):
     class Meta:
         model = models.Audio
+        fields = "__all__"
 
 
 class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Review
+        fields = "__all__"
 
 
 class PollChoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.PollChoice
+        fields = "__all__"
 
 
 class PollSerializer(serializers.HyperlinkedModelSerializer):

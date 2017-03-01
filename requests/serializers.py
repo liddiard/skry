@@ -13,13 +13,16 @@ class ArtRequestSerializer(serializers.HyperlinkedModelSerializer):
 class PhotoRequestSerializer(ArtRequestSerializer):
     class Meta:
         model = models.PhotoRequest
+        fields = "__all__"
 
 
 class GraphicRequestSerializer(ArtRequestSerializer):
     class Meta:
         model = models.GraphicRequest
+        fields = "__all__"
 
 
 class IllustrationRequestSerializer(ArtRequestSerializer):
     class Meta:
         model = models.PhotoRequest
+        fields = "__all__"

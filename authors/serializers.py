@@ -7,11 +7,13 @@ from . import models
 class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Organization
+        fields = "__all__"
 
 
 class PositionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Position
+        fields = "__all__"
 
 
 class JobSerializer(serializers.HyperlinkedModelSerializer):
