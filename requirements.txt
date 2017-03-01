@@ -1,5 +1,8 @@
+# IMPORTANT! This file is pretty and commented and curated to only describe the project's immediate dependencies. Please edit it manually; do not overwrite with the output of `pip freeze`.
+
+
 # The one. The only. The web framework for perfectionists with deadlines.
-Django==1.10.5
+Django==1.10.6
 
 # Image processing library, formerly known as and backwards compatible with PIL. May require extra system dependencies.
 Pillow==4.0.0
