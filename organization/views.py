@@ -9,7 +9,7 @@ class SectionViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
     queryset = models.Section.objects.all()
     serializer_class = serializers.SectionSerializer
-    filter_fields = ('parent', 'sites')
+    filter_fields = ('parent', 'site')
     search_fields = ('name', 'description', 'twitter', 'facebook')
     ordering_fields = "__all__"
 
