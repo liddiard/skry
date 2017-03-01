@@ -152,6 +152,18 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 }
 
+# REST Framework Swagger
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+}
+
 
 # Primary focal region of an image. Used when an image need to be cropped to
 # fit available space.
