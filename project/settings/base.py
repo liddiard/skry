@@ -76,8 +76,6 @@ MIDDLEWARE_CLASSES = (
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = False
