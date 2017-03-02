@@ -8,7 +8,7 @@ Pillow==4.0.0
 markdown2==2.3.3
 
 # PostgreSQL database driver for Python. Requires postgresql-server to be installed on the system.
-psycopg2==2.6.2
+psycopg2==2.7
 
 # Super-fast, widely used memory caching framework. Requires memcached to be installed on the system.
 python-memcached==1.58
