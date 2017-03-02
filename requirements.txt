@@ -19,11 +19,8 @@ sorl-thumbnail==12.3
 # Framework for building RESTful APIs.
 djangorestframework==3.5.4
 
-# Pluggable token authentication for Django Rest Framework. Requires six.
+# Pluggable token authentication for Django Rest Framework.
 django-rest-auth==0.9.0
-
-# Python 2 and 3 compatibility library.
-six==1.10.0
 
 # Smart filtering/ordering/searching for Django Rest Framework.
 django-filter==1.0.1
