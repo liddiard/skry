@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
+from rest_framework.authtoken import views as rest_framework_views
 from rest_framework_swagger.views import get_swagger_view
 
 from access import views as access_views
@@ -73,7 +74,7 @@ router.register(r'games', sports_views.GameViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^auth/token/', include('rest_auth.urls')),
+    url(r'^auth/token/', rest_framework_views.obtain_auth_token),
     url(r'^auth/web/', include('rest_framework.urls',
                                namespace='rest_framework')),
     url(r'^docs/', docs_view),

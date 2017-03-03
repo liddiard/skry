@@ -34,7 +34,6 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
     'rest_framework_swagger',
     'sorl.thumbnail',
     'reversion',
