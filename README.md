@@ -78,7 +78,7 @@ Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
 2. Clone the repo and enter it: `git clone https://github.com/liddiard/skry.git repo && cd repo`
 3. Install the requirements: `pip install -r requirements.txt`
 4. Start Postgres (just launch the app if you're on macOS)
-5. Sync the database and apply migrations: `python manage.py syncdb && python manage.py migrate`
+5. Apply database migrations: `python manage.py migrate`
 6. Start the server! `python manage.py runserver`
 
 ## Code layout
