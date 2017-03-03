@@ -14,7 +14,6 @@ from core import views as core_views
 from display import views as display_views
 from organization import views as organization_views
 from requests import views as requests_views
-from revisions import views as revisions_views
 from sports import views as sports_views
 
 
