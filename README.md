@@ -66,7 +66,7 @@ Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
 
 ### Prerequisites
 
-- Python 2.7
+- Python 3.5+
 - pip
 - virtualenv (install it with `pip install virtualenv`)
 - PostgreSQL ([Postgres.app](https://postgresapp.com) is great if you're on macOS)
@@ -74,7 +74,7 @@ Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
 
 ### Instructions
 
-1. Create and activate a virtualenv for the project: `virtualenv skry && cd skry && source bin/activate`
+1. Create and activate a virtualenv for the project: `virtualenv -p python3 skry && cd skry && source bin/activate`
 2. Clone the repo and enter it: `git clone https://github.com/liddiard/skry.git repo && cd repo`
 3. Install the requirements: `pip install -r requirements.txt`
 4. Start Postgres (just launch the app if you're on macOS)
