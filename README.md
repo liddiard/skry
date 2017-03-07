@@ -72,7 +72,7 @@ Note: The instructions below are **not** suitable for production deployment.
 - pip
 - virtualenv: install it with `pip install virtualenv`
 - PostgreSQL: If you're on macOS, install [Postgres.app](https://postgresapp.com) **and** use [Homebrew](https://brew.sh/) to `brew install postgresql` because Postgres.app lacks some libraries and command line utilities needed to set up and run Skry.
-- Redis: required for production, optional in development (used for caching). [Get it here.](https://redis.io/download)
+- Redis: `brew install redis` or [download it here](https://redis.io/download).
 
 ### Instructions
 
@@ -80,10 +80,14 @@ Note: The instructions below are **not** suitable for production deployment.
 2. Clone the repo and enter it: `git clone https://github.com/liddiard/skry.git repo && cd repo`
 3. Install the requirements: `pip install -r requirements.txt`
 4. Start Postgres (just launch the app if you're on macOS)
+5. Start redis: run `redis-server` in the command line
 5. Create the database user and the database itself: `createuser --superuser skry && createdb --owner=skry --username=skry --password skry`.
 6. Enter the password "skry" when prompted.
 7. Apply database migrations: `python manage.py migrate`
-8. Start the server! `python manage.py runserver`
+8. Create with any username and password you want so you can log in to the admin: `python manage.py createsuperuser`
+9. Start the server! `python manage.py runserver`
+
+What next? Log in to the admin at http://localhost:8000/admin/ or browse the auto-generated API docs at http://localhost:8000/docs/.
 
 ## Code layout
 
