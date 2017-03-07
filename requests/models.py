@@ -15,7 +15,7 @@ class ArtRequest(models.Model):
     class Meta:
         abstract = True
 
-    def __unicode__(self):
+    def __str__(self):
         return "art for " + str(self.story)
 
 
@@ -24,7 +24,7 @@ class PhotoRequest(ArtRequest):
     location = models.CharField(max_length=64, blank=True)
     subject_info = models.CharField(max_length=64, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "photo for " + str(self.story)
 
 
@@ -33,7 +33,7 @@ class GraphicRequest(ArtRequest):
                                     'external website for planning associated '
                                     'with this request.')
 
-    def __unicode__(self):
+    def __str__(self):
         return "graphic for " + str(self.story)
 
 
@@ -42,5 +42,5 @@ class IllustrationRequest(ArtRequest):
                                     'external website for planning associated '
                                     'with this request.')
 
-    def __unicode__(self):
+    def __str__(self):
         return "illustration for " + str(self.story)

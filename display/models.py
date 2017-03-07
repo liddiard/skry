@@ -14,7 +14,7 @@ class CardSize(models.Model):
     def aspect_ratio(self):
         return float(self.width) / self.height
 
-    def __unicode__(self):
+    def __str__(self):
         return "%dx%d" % (self.width, self.height)
 
 
@@ -28,7 +28,7 @@ class Stylesheet(models.Model):
     name = models.CharField(max_length=64, unique=True)
     file = models.FileField(upload_to='display/stylesheet')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -42,7 +42,7 @@ class Script(models.Model):
     name = models.CharField(max_length=64, unique=True)
     file = models.FileField(upload_to='display/script')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -59,5 +59,5 @@ class Template(models.Model):
                                                'this template.')
     sites = models.ManyToManyField(Site)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

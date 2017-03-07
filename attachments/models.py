@@ -65,7 +65,7 @@ class Image(Media):
     def aspect_ratio(self):
         return float(self.image.width) / self.image.height
 
-    def __unicode__(self):
+    def __str__(self):
         return self.file.name
 
 
@@ -81,7 +81,7 @@ class Video(Media):
     credit = models.ManyToManyField('authors.Author', related_name='news_video',
                                     blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -96,7 +96,7 @@ class Audio(Media):
     class Meta:
         verbose_name_plural = "Audio"
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -116,7 +116,7 @@ class Review(models.Model):
                                               help_text='Rating between '
                                                         'zero and ten.')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.item
 
 
@@ -128,7 +128,7 @@ class Poll(models.Model):
                                                 'the poll is currently '
                                                 'accepting new responses.')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.question
 
 
@@ -139,5 +139,5 @@ class PollChoice(models.Model):
     text = models.CharField(max_length=128)
     votes = models.PositiveIntegerField(default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return "[%s...] %s" % (self.question.question[:20], self.text)

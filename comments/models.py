@@ -28,6 +28,6 @@ class InternalComment(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s on %s at %s" % (self.user, self.content_object,
                                    self.time_posted)

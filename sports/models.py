@@ -8,7 +8,7 @@ class Sport(models.Model):
 
     name = models.CharField(max_length=32, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -17,7 +17,7 @@ class School(models.Model):
 
     name = models.CharField(max_length=32, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -32,6 +32,6 @@ class Game(models.Model):
     home_score = models.PositiveSmallIntegerField(null=True, blank=True)
     opposing_score = models.PositiveSmallIntegerField(null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s vs. %s on %s" % (self.home_team, self.opposing_team,
                                     strftime('%a, %b %d, %Y'))

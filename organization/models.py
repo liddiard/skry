@@ -80,7 +80,7 @@ class Section(models.Model):
         # ensure that no two Sections can map to the same URL
         unique_together = ('parent', 'slug')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -101,5 +101,5 @@ class Tag(models.Model):
                                  'this tag is forms a series.')
     sites = models.ManyToManyField(Site)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

@@ -22,7 +22,7 @@ class Status(models.Model):
         verbose_name_plural = "Statuses"
         ordering = ['position']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -220,7 +220,7 @@ class Story(models.Model):
                 self.position = 0
         super(Story, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s.%s" % (self.sections.first(), self.assignment_slug)
 
 
@@ -246,5 +246,5 @@ class Page(models.Model):
         # ensure that no two Pages can map to the same URL
         unique_together = ('parent', 'slug')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title

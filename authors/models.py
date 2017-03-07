@@ -28,7 +28,7 @@ class Author(models.Model):
         else:
             return ""
 
-    def __unicode__(self):
+    def __str__(self):
         if self.full_name():
             return self.full_name()
         else:
@@ -40,7 +40,7 @@ class Organization(models.Model):
 
     name = models.CharField(max_length=64)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -52,7 +52,7 @@ class Position(models.Model):
                                   help_text='What the individual in this '
                                   'position is responsible for.')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -88,5 +88,5 @@ class Job(models.Model):
             self.start_date > self.end_date):
             raise ValidationError('Job start date cannot be after end date.')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.position.name + " " + str(self.author)
