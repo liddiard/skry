@@ -60,7 +60,7 @@ Skry uses [Django REST Swagger](http://www.django-rest-framework.org/topics/docu
 
 Skry's component-based application architecture makes it easy to add your own applications, mixing and matching with what Skry provides currently.
 
-## Development Setup
+## Development setup
 
 Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
 
@@ -71,7 +71,7 @@ Note: The instructions below are **not** suitable for production deployment.
 - Python 3.5+
 - pip
 - virtualenv: install it with `pip install virtualenv`
-- PostgreSQL: If you're on macOS, install [Postgres.app](https://postgresapp.com) **and** use [Homebrew](https://brew.sh/) to `brew install postgresql` because Postgres.app lacks some libraries and command line utilities needed to set up and run Skry
+- PostgreSQL: If you're on macOS, install [Postgres.app](https://postgresapp.com) **and** use [Homebrew](https://brew.sh/) to `brew install postgresql` because Postgres.app lacks some libraries and command line utilities needed to set up and run Skry.
 - Redis: required for production, optional in development (used for caching). [Get it here.](https://redis.io/download)
 
 ### Instructions
