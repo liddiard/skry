@@ -60,16 +60,18 @@ Skry uses [Django REST Swagger](http://www.django-rest-framework.org/topics/docu
 
 Skry's component-based application architecture makes it easy to add your own applications, mixing and matching with what Skry provides currently.
 
-## Setup
+## Development Setup
 
 Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
+
+Note: The instructions below are **not** suitable for production deployment.
 
 ### Prerequisites
 
 - Python 3.5+
 - pip
-- virtualenv (install it with `pip install virtualenv`)
-- PostgreSQL ([Postgres.app](https://postgresapp.com) is great if you're on macOS)
+- virtualenv: install it with `pip install virtualenv`
+- PostgreSQL: If you're on macOS, install [Postgres.app](https://postgresapp.com) **and** use [Homebrew](https://brew.sh/) to `brew install postgresql` because Postgres.app lacks some libraries and command line utilities needed to set up and run Skry
 - Redis: required for production, optional in development (used for caching). [Get it here.](https://redis.io/download)
 
 ### Instructions
@@ -78,8 +80,10 @@ Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
 2. Clone the repo and enter it: `git clone https://github.com/liddiard/skry.git repo && cd repo`
 3. Install the requirements: `pip install -r requirements.txt`
 4. Start Postgres (just launch the app if you're on macOS)
-5. Apply database migrations: `python manage.py migrate`
-6. Start the server! `python manage.py runserver`
+5. Create the database user and the database itself: `createuser skry && createdb --owner=skry --username=skry --password skry`.
+6. Enter the password "skry" when prompted.
+7. Apply database migrations: `python manage.py migrate`
+8. Start the server! `python manage.py runserver`
 
 ## Code layout
 
