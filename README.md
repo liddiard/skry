@@ -60,17 +60,19 @@ Skry uses [Django REST Swagger](http://www.django-rest-framework.org/topics/docu
 
 Skry's component-based application architecture makes it easy to add your own applications, mixing and matching with what Skry provides currently.
 
-## Setup
+## Development setup
 
 Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
+
+Note: The instructions below are **not** suitable for production deployment.
 
 ### Prerequisites
 
 - Python 3.5+
 - pip
-- virtualenv (install it with `pip install virtualenv`)
-- PostgreSQL ([Postgres.app](https://postgresapp.com) is great if you're on macOS)
-- Redis: required for production, optional in development (used for caching). [Get it here.](https://redis.io/download)
+- virtualenv: install it with `pip install virtualenv`
+- PostgreSQL: If you're on macOS, install [Postgres.app](https://postgresapp.com) **and** use [Homebrew](https://brew.sh/) to `brew install postgresql` because Postgres.app lacks some libraries and command line utilities needed to set up and run Skry.
+- Redis: `brew install redis` or [download it here](https://redis.io/download).
 
 ### Instructions
 
@@ -78,8 +80,14 @@ Sold? Want to try it out? Follow the (hopefully) simple(ish) setup instructions!
 2. Clone the repo and enter it: `git clone https://github.com/liddiard/skry.git repo && cd repo`
 3. Install the requirements: `pip install -r requirements.txt`
 4. Start Postgres (just launch the app if you're on macOS)
-5. Apply database migrations: `python manage.py migrate`
-6. Start the server! `python manage.py runserver`
+5. Start Redis: run `redis-server` in the command line
+5. Create the database user and the database itself: `createuser --superuser skry && createdb --owner=skry --username=skry --password skry`
+6. Enter the password "skry" when prompted.
+7. Apply database migrations: `python manage.py migrate`
+8. Create with any username and password you want so you can log in to the admin: `python manage.py createsuperuser`
+9. Start the server! `python manage.py runserver`
+
+Next steps: Log in to the admin at [http://localhost:8000/admin/](http://localhost:8000/admin/) or browse the auto-generated API docs at [http://localhost:8000/docs/](http://localhost:8000/docs/).
 
 ## Code layout
 
