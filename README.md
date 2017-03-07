@@ -80,7 +80,7 @@ Note: The instructions below are **not** suitable for production deployment.
 2. Clone the repo and enter it: `git clone https://github.com/liddiard/skry.git repo && cd repo`
 3. Install the requirements: `pip install -r requirements.txt`
 4. Start Postgres (just launch the app if you're on macOS)
-5. Create the database user and the database itself: `createuser skry && createdb --owner=skry --username=skry --password skry`.
+5. Create the database user and the database itself: `createuser --superuser skry && createdb --owner=skry --username=skry --password skry`.
 6. Enter the password "skry" when prompted.
 7. Apply database migrations: `python manage.py migrate`
 8. Start the server! `python manage.py runserver`
